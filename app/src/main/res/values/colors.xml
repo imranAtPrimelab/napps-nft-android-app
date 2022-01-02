@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="yellow_bg">#FFCE20</color>
+    <color name="hint_color">#828282</color>
+    <color name="text_selected">#4F4F4F</color>
+    <color name="box_selected_bg">#F2F2F2</color>
+    <color name="stroke_color">#F9F9F9</color>
+    <color name="btndisabled_color">#BDBDBD</color>
+    <color name="blue">#2F80ED</color>
+    <color name="light_black">#565656</color>
+
 </resources>

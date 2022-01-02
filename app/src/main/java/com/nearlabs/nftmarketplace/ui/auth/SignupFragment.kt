@@ -6,4 +6,5 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignupFragment : BaseFragment(R.layout.fragment_signup) {
+
 }
