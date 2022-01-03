@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomSettingItemView">
+        <attr name="csiv_title" format="string" />
+        <attr name="csiv_value" format="string" />
+    </declare-styleable>
+    <declare-styleable name="CustomSettingWalletView">
+        <attr name="cswv_name" format="string" />
+    </declare-styleable>
+</resources>

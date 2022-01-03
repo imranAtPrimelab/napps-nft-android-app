@@ -1,6 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvTitle"
+        app:srcCompat="@drawable/ic_arrow_back"
+        app:tint="@color/blue" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTitle"
+        style="@style/Toolbar.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="@string/setting_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/stroke_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvConnectedWallet"
+        style="@style/Setting.Category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="22dp"
+        android:gravity="start"
+        android:text="@string/setting_connected_wallet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider" />
+
+    <com.nearlabs.nftmarketplace.ui.custom.CustomSettingWalletView
+        android:id="@+id/cswv_wallet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_round_rectangle_stroke"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="24dp"
+        app:cswv_name="john.near"
+        app:layout_constraintEnd_toEndOf="@id/tvConnectedWallet"
+        app:layout_constraintStart_toStartOf="@id/tvConnectedWallet"
+        app:layout_constraintTop_toBottomOf="@id/tvConnectedWallet" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvProfile"
+        style="@style/Setting.Category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:gravity="start"
+        android:text="@string/setting_profile"
+        app:layout_constraintEnd_toEndOf="@id/tvConnectedWallet"
+        app:layout_constraintStart_toStartOf="@id/tvConnectedWallet"
+        app:layout_constraintTop_toBottomOf="@id/cswv_wallet" />
+
+    <LinearLayout
+        android:id="@+id/layout_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_round_rectangle_stroke"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="24dp"
+        app:layout_constraintEnd_toEndOf="@id/tvProfile"
+        app:layout_constraintStart_toStartOf="@id/tvProfile"
+        app:layout_constraintTop_toBottomOf="@id/tvProfile">
+
+        <com.nearlabs.nftmarketplace.ui.custom.CustomSettingItemView
+            android:id="@+id/csiv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:csiv_title="Name"
+            app:csiv_value="John Doe" />
+
+        <com.nearlabs.nftmarketplace.ui.custom.CustomSettingItemView
+            android:id="@+id/csiv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            app:csiv_title="Email Address"
+            app:csiv_value="johndoe@gmail.com" />
+
+        <com.nearlabs.nftmarketplace.ui.custom.CustomSettingItemView
+            android:id="@+id/csiv_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:csiv_title="Phone number"
+            app:csiv_value="+1 748 485 9494" />
+    </LinearLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvSecurity"
+        style="@style/Setting.Category"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="start"
+        android:text="@string/setting_security"
+        app:layout_constraintEnd_toEndOf="@id/tvConnectedWallet"
+        app:layout_constraintStart_toStartOf="@id/tvConnectedWallet"
+        app:layout_constraintTop_toBottomOf="@id/layout_profile" />
+
+    <com.nearlabs.nftmarketplace.ui.custom.CustomSettingItemView
+        android:id="@+id/csiv_security"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_round_rectangle_stroke"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="24dp"
+        app:csiv_value="@string/setting_add_2fa_auth"
+        app:layout_constraintEnd_toEndOf="@id/tvSecurity"
+        app:layout_constraintStart_toStartOf="@id/tvSecurity"
+        app:layout_constraintTop_toBottomOf="@id/tvSecurity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
