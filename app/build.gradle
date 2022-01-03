@@ -1,0 +1,92 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk compile_sdk
+
+    defaultConfig {
+        applicationId "com.nearlabs.nftmarketplace"
+        minSdk min_sdk
+        targetSdk target_sdk
+        versionCode version_code
+        versionName version_name
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility java_source_version
+        targetCompatibility java_target_version
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Kotlin
+    implementation rootProject.deps.coroutine
+    implementation rootProject.deps.coroutine_core
+
+    // AndroidX
+    implementation rootProject.deps.core_ktx
+    implementation rootProject.deps.material
+    implementation rootProject.deps.appcompat
+
+    // Navigation Components
+    implementation rootProject.deps.navFragment
+    implementation rootProject.deps.navUi
+
+    // Retrofit
+    implementation rootProject.deps.gson
+    implementation rootProject.deps.okHttpLogging
+    implementation rootProject.deps.retrofitGson
+    implementation rootProject.deps.retrofit
+
+    // Lifecycle
+    implementation rootProject.deps.lifecycle_runtime
+    implementation rootProject.deps.lifecycle_extension
+    implementation rootProject.deps.lifecycle_viewmodel
+
+    // Logging
+    implementation rootProject.deps.timber_log
+
+    // Hilt
+    implementation rootProject.deps.hilt
+    kapt rootProject.deps.hilt_compiler
+
+    // Glide
+    implementation rootProject.deps.glide
+    kapt rootProject.deps.kaptGlide
+
+}
+
+kapt {
+    correctErrorTypes true
+}
