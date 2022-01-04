@@ -17,5 +17,6 @@
     <color name="btndisabled_color">#BDBDBD</color>
     <color name="blue">#2F80ED</color>
     <color name="light_black">#565656</color>
+    <color name="light_grey">#EBEDF0</color>
 
 </resources>
