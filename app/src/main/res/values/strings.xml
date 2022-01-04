@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="send_nft">Send NFT</string>
     <string name="gift_nft">Gift NFT</string>
-    <string name="create_nft">Create NFT</string>
+    <string name="create_nft_title">Create NFT</string>
     <string name="share_app">Shared app</string>
     <string name="next">Next</string>
     <string name="upload_files">Upload Files</string>
@@ -25,4 +25,5 @@
     <string name="setting_add_new_wallet">Add new wallet</string>
     <string name="setting_change_name_wallet">Change name</string>
     <string name="setting_hint_name">Name</string>
+    <string name="create_nft">Start Creating your <b>NFTs</b> Today</string>
 </resources>
