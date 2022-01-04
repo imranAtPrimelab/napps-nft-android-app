@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/white"
+            android:layout_alignParentTop="true">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="89.5dp"
+                    android:text="@string/create_nft"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_close"
+                    android:layout_marginStart="105dp"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/fg_close" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/gray"
+        android:text="@string/preview"
+        android:fontFamily="@font/inter_regular"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        android:layout_above="@id/preview_card"
+        />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/preview_card"
+            android:layout_width="match_parent"
+            android:layout_height="298dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="22dp"
+            app:cardCornerRadius="7dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:weightSum="2"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:id="@+id/preview_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/vecotry_preview" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Digital Art"
+                        android:background="@drawable/bg_round_shape"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter_semibold"
+                        app:cornerRadius="7dp"
+                        android:textSize="14sp"
+                        android:paddingRight="9dp"
+                        android:paddingLeft="9dp"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"/>
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/nft_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="Vecotry Illustration"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter_regular"/>
+
+                    <TextView
+                        android:id="@+id/nft_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="#17372"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="15dp"
+                        android:textColor="#808080"
+                        android:fontFamily="@font/inter_regular"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_default_profile"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="11dp"
+                            android:id="@+id/profile_pic"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Creator"
+                            android:layout_toRightOf="@id/profile_pic"
+                            android:layout_marginStart="9dp"
+                            android:paddingBottom="15dp"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/inter_regular"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/creator_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="9dp"
+                            android:layout_toRightOf="@id/profile_pic"
+                            android:fontFamily="@font/inter_semibold"
+                            android:paddingTop="25dp"
+                            android:text="john_doe"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="25dp"
+            app:cornerRadius="5dp"
+            android:backgroundTint="@color/blue"
+            app:icon="@drawable/ic_arrow_forward"
+            android:text="@string/mint_nft"
+            app:iconGravity="textEnd"
+            android:fontFamily="@font/inter_medium"
+            android:layout_marginBottom="72dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            />
+
+</RelativeLayout>
+
+

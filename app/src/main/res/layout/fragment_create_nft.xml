@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="89.5dp"
+                android:text="@string/create_nft_title"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/black"
+                android:textSize="21sp" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_close"
+                android:layout_marginStart="105dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/fg_close" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:text="@string/upload_files"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="17dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="185dp"
+        android:background="@drawable/bg_dashed_rectangle"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="23dp">
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/choose_file_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:cornerRadius="5dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/choose_file"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/black_2"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/black"
+            android:layout_centerInParent="true"
+            android:text="PNG, GIF, WEBP, MP4 or MP3. Max 100mb."
+            android:fontFamily="@font/inter_regular"
+            android:layout_below="@id/choose_file_button"
+            android:layout_marginTop="19dp"/>
+
+    </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/blue"
+        android:text="@string/title"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginBottom="11dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/input_field_bg"
+        android:fontFamily="@font/inter_semibold"
+        android:hint="Ex. Redeemable Art"
+        android:paddingHorizontal="14dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hint_color"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/gray"
+        android:text="@string/description"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="11dp"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/description_text"
+        android:layout_width="match_parent"
+        android:layout_height="117dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/input_field_bg"
+        android:fontFamily="@font/inter_semibold"
+        android:hint="Ex. Redeemable Art"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="16dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hint_color"
+        android:gravity="start"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/gray"
+        android:text="@string/properties"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="11dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp">
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/properties_name"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="46dp"
+        android:background="@drawable/input_field_bg"
+        android:fontFamily="@font/inter_regular"
+        android:hint="Ex. Size"
+        android:paddingHorizontal="14dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hint_color"
+        android:layout_marginEnd="6.5dp"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/properties_value"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="46dp"
+        android:background="@drawable/input_field_bg"
+        android:fontFamily="@font/inter_regular"
+        android:hint="Ex. 40"
+        android:paddingHorizontal="14dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hint_color"
+        android:layout_marginStart="6.5dp"/>
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/blue"
+        android:text="@string/add_more"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="20dp"
+        />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="23dp"
+        app:cornerRadius="5dp"
+        android:backgroundTint="@color/blue"
+        app:icon="@drawable/ic_arrow_forward"
+        android:text="@string/next"
+        app:iconGravity="textEnd"
+        android:fontFamily="@font/inter_medium"
+        android:layout_marginBottom="60dp"
+        />
+
+</LinearLayout>
+
+</ScrollView>
