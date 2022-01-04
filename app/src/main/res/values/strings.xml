@@ -16,6 +16,15 @@
     <string name="mint_nft">Mint NFT</string>
     <string name="preview">Preview</string>
 
+    <string name="send">Send</string>
+    <string name="descriptions">Descriptions</string>
+    <string name="nft_info">NFT Info</string>
+    <string name="token_id">Token ID</string>
+    <string name="contact_address">Contact Address</string>
+    <string name="claim">Claim</string>
+    <string name="digital_art">Digital Art</string>
+
+
     <string name="setting_title">Settings</string>
     <string name="setting_connected_wallet">Connected Wallet</string>
     <string name="setting_profile">Profile Setting</string>
