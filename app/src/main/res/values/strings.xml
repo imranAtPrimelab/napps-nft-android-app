@@ -11,4 +11,5 @@
     <string name="setting_add_new_wallet">Add new wallet</string>
     <string name="setting_change_name_wallet">Change name</string>
     <string name="setting_hint_name">Name</string>
+    <string name="send_nft">Send NFT</string>
 </resources>
