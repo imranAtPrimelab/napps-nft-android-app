@@ -18,5 +18,9 @@ class HomeFragment: BaseFragment(R.layout.fragment_home) {
         binding.username.setOnClickListener{
             findNavController().navigate(R.id.nav_setting)
         }
+
+        binding.seeAllNFTs.setOnClickListener {
+            findNavController().navigate(R.id.toMyNFTs)
+        }
     }
 }
