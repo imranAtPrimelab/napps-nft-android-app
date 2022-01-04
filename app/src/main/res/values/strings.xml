@@ -4,7 +4,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="send_nft">Send NFT</string>
     <string name="gift_nft">Gift NFT</string>
+    <string name="create_nft">Create NFT</string>
     <string name="share_app">Shared app</string>
+    <string name="next">Next</string>
+    <string name="upload_files">Upload Files</string>
+    <string name="choose_file">Choose File</string>
+    <string name="title">TITLE</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="properties">PROPERTIES</string>
+    <string name="add_more">Add More</string>
+    <string name="mint_nft">Mint NFT</string>
+    <string name="preview">Preview</string>
+
     <string name="setting_title">Settings</string>
     <string name="setting_connected_wallet">Connected Wallet</string>
     <string name="setting_profile">Profile Setting</string>
