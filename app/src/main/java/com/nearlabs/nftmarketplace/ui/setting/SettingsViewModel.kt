@@ -19,4 +19,8 @@ class SettingsViewModel @Inject constructor(private val settingsRepository: Sett
     fun selectWallet(wallet: Wallet) = resultFlow {
         settingsRepository.changeWallet(wallet.toRequest())
     }
+
+    fun addWallet(name: String) = resultFlow {
+        settingsRepository.addWallet(name)
+    }
 }

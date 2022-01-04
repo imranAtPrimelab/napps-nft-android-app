@@ -25,6 +25,10 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
         binding.cswvWallet.setOnClickListener {
             findNavController().navigate(R.id.toChangeWallet)
         }
+
+        binding.csivName.setOnClickListener {
+            findNavController().navigate(R.id.toChangeName)
+        }
     }
 
     private fun initObserve() {}

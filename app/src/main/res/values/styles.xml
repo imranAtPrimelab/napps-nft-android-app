@@ -34,6 +34,7 @@
         <item name="android:windowIsFloating">false</item>
         <item name="bottomSheetStyle">@style/BottomSheetTransparentStyle</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
     <style name="BottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
