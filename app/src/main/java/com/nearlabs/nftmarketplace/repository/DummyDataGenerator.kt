@@ -1,5 +1,7 @@
 package com.nearlabs.nftmarketplace.repository
 
+import com.nearlabs.nftmarketplace.data.networks.response.DtoWallet
+import com.nearlabs.nftmarketplace.data.networks.response.DtoWalletResponse
 import com.nearlabs.nftmarketplace.domain.model.User
 import com.nearlabs.nftmarketplace.domain.model.nft.NFT
 import com.nearlabs.nftmarketplace.domain.model.nft.NFTAuthor
@@ -90,5 +92,14 @@ object DummyDataGenerator {
                 timestamp = System.currentTimeMillis()
             )
         }
+    }
+
+    fun wallets(): DtoWalletResponse {
+        return DtoWalletResponse(
+            listOf(
+                DtoWallet(1, "johndoe.near", "johndoe.near.address", true),
+                DtoWallet(2, "demo.near", "demo.near.address", false)
+            )
+        )
     }
 }
