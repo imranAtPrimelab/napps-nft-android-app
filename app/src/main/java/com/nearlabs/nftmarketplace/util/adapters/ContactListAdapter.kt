@@ -22,9 +22,9 @@ class ContactListAdapter(private val items: List<Contact>, private val context :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.nameShort.text = items[position].getNameShort()
-        holder.binding.nameLong.text = items[position].getNameLong()
-        holder.binding.username.text = items[position].getUsername()
+        holder.binding.nameShort.text = items[position].nameShort
+        holder.binding.nameLong.text = items[position].nameLong
+        holder.binding.username.text = items[position].username
         //holder.binding.checkStatus.setImageDrawable(text)
 
     }
