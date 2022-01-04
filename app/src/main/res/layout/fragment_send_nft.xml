@@ -134,7 +134,7 @@
                     android:backgroundTint="@color/blue"
                     android:text="@string/send"
                     android:fontFamily="@font/inter_medium"
-                    app:icon="@drawable/ic_send"
+                    app:icon="@drawable/ic_send_white"
                     app:iconGravity="end"
                     android:id="@+id/nft_send_button"
                     />

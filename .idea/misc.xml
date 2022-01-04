@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/layout/fragment_create_nft.xml" value="0.19520734408893986" />
         <entry key="app/src/main/res/layout/fragment_create_nft_preview.xml" value="0.26846582856794005" />
         <entry key="app/src/main/res/layout/fragment_gift_nft.xml" value="0.19122954864736086" />
+        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1640625" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/fragment_send_nft.xml" value="0.25" />
