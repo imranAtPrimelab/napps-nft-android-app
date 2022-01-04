@@ -19,17 +19,19 @@ import android.os.Build
 import androidx.core.app.ActivityCompat.requestPermissions
 
 import android.content.DialogInterface
-
-
+import android.view.View
+import com.nearlabs.nftmarketplace.common.extensions.viewBinding
+import com.nearlabs.nftmarketplace.databinding.FragmentLoginBinding
 
 
 @AndroidEntryPoint
 class GiftFragment : BaseFragment(R.layout.fragment_gift_nft)  {
-    lateinit var binding : FragmentGiftNftBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = FragmentGiftNftBinding.inflate(layoutInflater)
-        binding.contactList.adapter //= ContactListAdapter(,context)
+
+    private val binding by viewBinding(FragmentLoginBinding::bind)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //TO-DO
     }
 
 

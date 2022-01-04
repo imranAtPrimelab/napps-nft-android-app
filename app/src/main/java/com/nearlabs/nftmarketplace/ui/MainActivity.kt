@@ -21,14 +21,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private val navController by lazy { findNavController(R.id.nav_host) }
     private val authViewModel by viewModels<AuthViewModel>()
 
-    val PERMISSION_REQUEST_CONTACT = 101
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ActivityCompat.requestPermissions(this@MainActivity,
-            listOf(Manifest.permission.READ_EXTERNAL_STORAGE).toTypedArray(),
-            1);
-        askForContactPermission()
         initNavGraph()
     }
 
@@ -41,39 +35,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             navGraph.startDestination = R.id.nav_auth
             navController.graph = navGraph
         }
-    }
-
-    private fun showDialog() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setTitle("Contacts access needed")
-        builder.setPositiveButton(android.R.string.ok, null)
-        builder.setMessage("please confirm Contacts access")
-        builder.setOnDismissListener(DialogInterface.OnDismissListener { // Only call the permission request api on Android M
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(
-                    arrayOf(Manifest.permission.READ_CONTACTS),
-                    PERMISSION_REQUEST_CONTACT
-                )
-            }
-        })
-        builder.show()
-    }
-
-    fun askForContactPermission() {
-            if (ContextCompat.checkSelfPermission(
-                    this@MainActivity,
-                    Manifest.permission.READ_CONTACTS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        this,
-                        Manifest.permission.READ_CONTACTS
-                    )
-                ) {
-                    showDialog()
-                }
-            }
-
     }
 
 }
