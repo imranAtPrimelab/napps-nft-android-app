@@ -7,4 +7,6 @@
     <string name="setting_profile">Profile Setting</string>
     <string name="setting_security">Security</string>
     <string name="setting_add_2fa_auth">Add 2FA authentication</string>
+    <string name="setting_select_wallet">Select connected wallet</string>
+    <string name="setting_add_new_wallet">Add new wallet</string>
 </resources>

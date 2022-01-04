@@ -10,6 +10,10 @@ sealed class State<out T> {
 
     object Loading : State<Nothing>()
 
+    object Empty : State<Nothing>()
+
+    data class HttpError(val errorBody: ErrorBody? = null) : State<Nothing>()
+
     @Throws(Exception::class)
     fun takeValueOrThrow(): T {
         return when (this) {
