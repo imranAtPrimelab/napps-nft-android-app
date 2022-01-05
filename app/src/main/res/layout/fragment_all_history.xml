@@ -9,6 +9,6 @@
         android:id="@+id/rvallhistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/layout_history_tabs"/>
+        tools:listitem="@layout/list_item_transaction"/>
 
 </RelativeLayout>

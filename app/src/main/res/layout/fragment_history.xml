@@ -3,100 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:paddingTop="12dp">
 
-   <androidx.appcompat.widget.AppCompatTextView
-       android:id="@+id/username"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_centerHorizontal="true"
-       android:background="@drawable/input_field_bg"
-       android:drawableLeft="@drawable/ic_user"
-       android:drawablePadding="10dp"
-       android:fontFamily="@font/inter_semibold"
-       android:padding="7dp"
-       android:text="john.near"
-       android:textColor="@color/black"
-       android:textSize="16sp" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/input_field_bg"
+        android:drawableStart="@drawable/ic_user"
+        android:drawablePadding="10dp"
+        android:fontFamily="@font/inter_semibold"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:text="john.near"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
 
-   <androidx.appcompat.widget.LinearLayoutCompat
-       android:id="@+id/llHistory"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_below="@+id/username"
-       android:layout_marginHorizontal="12dp"
-       android:layout_marginTop="12dp"
-       android:gravity="center_vertical">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/username"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical">
 
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:fontFamily="@font/inter_bold"
-          android:text="History"
-          android:textColor="@color/black"
-          android:textSize="30sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="History"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
-      <TextView
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:drawableRight="@drawable/ic_send"
-          android:drawablePadding="8dp"
-          android:fontFamily="@font/inter_regular"
-          android:gravity="right"
-          android:text="Send NFT"
-          android:textColor="@color/blue"
-          android:textSize="16sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter_regular"
+            android:gravity="end"
+            android:text="Send NFT"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            app:drawableEndCompat="@drawable/ic_sent"
+            app:drawableTint="@color/blue" />
 
-   </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-   <androidx.appcompat.widget.LinearLayoutCompat
-       android:id="@+id/llviewpager"
-       android:padding="2dp"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_below="@+id/llHistory"
-       android:layout_marginHorizontal="12dp"
-       android:background="@drawable/btn_bg_curve"
-       android:orientation="horizontal">
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        app:tabTextColor="@color/gray"
+        app:tabSelectedTextColor="@color/blue"
+        app:tabIndicatorColor="@color/blue"
+        app:tabIndicatorFullWidth="false"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llHistory"
+        android:layout_marginTop="16dp" />
 
-      <androidx.appcompat.widget.AppCompatButton
-          android:id="@+id/btnall"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:background="@drawable/btn_bg_curve"
-
-          android:text="All History"
-          android:textColor="@color/black" />
-
-      <androidx.appcompat.widget.AppCompatButton
-          android:id="@+id/btnsent"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:background="@drawable/bg_white_round_corner"
-          android:text="Sent"
-          android:textColor="@color/black" />
-
-      <androidx.appcompat.widget.AppCompatButton
-          android:id="@+id/btnrecieved"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:background="@drawable/bg_white_round_corner"
-          android:text="Recieved"
-          android:textColor="@color/black" />
-
-   </androidx.appcompat.widget.LinearLayoutCompat>
-
-   <androidx.fragment.app.FragmentContainerView
-       android:id="@+id/historyFragmentContainer"
-       android:layout_below="@+id/llviewpager"
-       android:name="androidx.navigation.fragment.NavHostFragment"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       app:defaultNavHost="true"
-       app:navGraph="@navigation/nav_history_view_pager" />
-
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabLayout" />
 
 </RelativeLayout>

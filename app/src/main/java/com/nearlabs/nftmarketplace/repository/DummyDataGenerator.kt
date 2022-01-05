@@ -10,6 +10,7 @@ import com.nearlabs.nftmarketplace.domain.model.nft.NFTType
 import com.nearlabs.nftmarketplace.domain.model.transaction.Transaction
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionAddress
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionDirection
+import org.threeten.bp.LocalDateTime
 import kotlin.random.Random
 
 
@@ -54,7 +55,7 @@ object DummyDataGenerator {
         return (17720L..17820L).map {
             val assetName = names[it.toInt() % names.size]
             NFT(
-                id = it,
+                id = it.toString(),
                 name = assetName,
                 type = when (it % 4) {
                     0L -> NFTType.DigitalArt
@@ -79,7 +80,7 @@ object DummyDataGenerator {
     fun transactions(): List<Transaction> {
         return (17720L..17820L).map {
             Transaction(
-                id = it,
+                id = it.toString(),
                 sender = TransactionAddress(
                     name = "michael.near",
                     address = "0xa6f79B60359f141df90A0C745125B131cAAfFD12".lowercase()
@@ -89,7 +90,7 @@ object DummyDataGenerator {
                     address = "0xa6f79B60359f141df90A0C745125B131cAAfFD12".lowercase()
                 ),
                 direction = if (Random.nextBoolean()) TransactionDirection.Incoming else TransactionDirection.Outgoing,
-                timestamp = System.currentTimeMillis()
+                timestamp = LocalDateTime.now()
             )
         }
     }

@@ -12,4 +12,8 @@ class NFTViewModel @Inject constructor(private val repository: Repository) : Vie
     fun getNFTs() = resultFlow {
         repository.getDummyNFTs()
     }
+
+    fun getAllNFTCollection() = resultFlow {
+        repository.getAllNFTCollection()
+    }
 }
