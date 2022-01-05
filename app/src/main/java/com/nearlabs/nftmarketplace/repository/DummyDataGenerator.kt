@@ -3,6 +3,7 @@ package com.nearlabs.nftmarketplace.repository
 import com.nearlabs.nftmarketplace.data.networks.response.DtoWallet
 import com.nearlabs.nftmarketplace.data.networks.response.DtoWalletResponse
 import com.nearlabs.nftmarketplace.domain.model.Contact
+
 import com.nearlabs.nftmarketplace.domain.model.nft.NFT
 import com.nearlabs.nftmarketplace.domain.model.nft.NFTAuthor
 import com.nearlabs.nftmarketplace.domain.model.nft.NFTInfo
@@ -12,7 +13,7 @@ import com.nearlabs.nftmarketplace.domain.model.transaction.CounterParty
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionDirection
 import org.threeten.bp.LocalDateTime
 import kotlin.random.Random
-import com.nearlabs.nftmarketplace.util.models.Contact
+
 
 
 /**
@@ -99,14 +100,18 @@ object DummyDataGenerator {
         )
     }
 
-    fun peoples(): List<Contact> {
+    fun peoples(): List<com.nearlabs.nftmarketplace.util.models.Contact> {
         return listOf(
-            Contact("DR", "Darlene Robertson", "@johndoe"),
-            Contact("JJ", "Jacob Jones", "@johndoe"),
-            Contact("JW", "Jenny Wilson", "@johndoe"),
-            Contact("CW", "Cameron Williamson", "@johndoe"),
-            Contact("DS", "Darrell Steward", "@johndoe"),
-            Contact("CH", "Courtney Henry", "@johndoe")
+//            com.nearlabs.nftmarketplace.domain.model.Contact("DR", "Darlene Robertson", "@johndoe"),
+//            com.nearlabs.nftmarketplace.domain.model.Contact("JJ", "Jacob Jones", "@johndoe"),
+//            com.nearlabs.nftmarketplace.domain.model.Contact("JW", "Jenny Wilson", "@johndoe"),
+//            com.nearlabs.nftmarketplace.domain.model.Contact(
+//                "CW",
+//                "Cameron Williamson",
+//                "@johndoe"
+//            ),
+//            com.nearlabs.nftmarketplace.domain.model.Contact("DS", "Darrell Steward", "@johndoe"),
+//            com.nearlabs.nftmarketplace.domain.model.Contact("CH", "Courtney Henry", "@johndoe")
         )
     }
 }
