@@ -63,4 +63,11 @@
         <item name="backgroundTint">@color/blue</item>
     </style>
 
+
+    <style name="ButtonGray.Dialog" parent="Button">
+        <item name="textAllCaps">false</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="backgroundTint">@color/box_selected_bg</item>
+    </style>
+
 </resources>

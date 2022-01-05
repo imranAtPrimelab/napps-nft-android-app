@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.databinding.DialogSendSelectPeopleNtfBinding
@@ -64,7 +66,7 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
 
         binding.btnNext.setOnClickListener {
             val items = peopleAdapter.selectedPosition.map { peopleAdapter.getItemAtPosition(it) }
-
+            findNavController().navigate(R.id.toConsent)
         }
     }
 

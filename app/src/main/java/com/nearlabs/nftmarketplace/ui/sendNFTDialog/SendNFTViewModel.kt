@@ -16,4 +16,8 @@ class SendNFTViewModel @Inject constructor(private val repository: Repository) :
     fun getPeople() = resultFlow {
         repository.getDummyPeoples()
     }
+
+    fun getWallets() = resultFlow {
+        repository.getDummyWallets()
+    }
 }
