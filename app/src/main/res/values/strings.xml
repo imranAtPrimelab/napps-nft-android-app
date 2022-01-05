@@ -2,9 +2,45 @@
     <string name="app_name">NearLabs</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="send_nft">Send NFT</string>
+    <string name="gift_nft">Gift NFT</string>
+    <string name="create_nft_title">Create NFT</string>
+    <string name="share_app">Shared app</string>
+    <string name="next">Next</string>
+    <string name="upload_files">Upload Files</string>
+    <string name="choose_file">Choose File</string>
+    <string name="title">TITLE</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="properties">PROPERTIES</string>
+    <string name="add_more">Add More</string>
+    <string name="mint_nft">Mint NFT</string>
+    <string name="preview">Preview</string>
+
+    <string name="send">Send</string>
+    <string name="descriptions">Descriptions</string>
+    <string name="nft_info">NFT Info</string>
+    <string name="token_id">Token ID</string>
+    <string name="contact_address">Contact Address</string>
+    <string name="claim">Claim</string>
+    <string name="digital_art">Digital Art</string>
+
+    <string name="consent">Consent</string>
+    <string name="request_access">NEAR Labs is requesting to access your account.</string>
+    <string name="does_not_allow_app">This does not allow the app to transfer any tokens.</string>
+    <string name="more_info">More Info</string>
+    <string name="deny">Allow</string>
+    <string name="allow">Deny</string>
+
+
     <string name="setting_title">Settings</string>
     <string name="setting_connected_wallet">Connected Wallet</string>
     <string name="setting_profile">Profile Setting</string>
     <string name="setting_security">Security</string>
     <string name="setting_add_2fa_auth">Add 2FA authentication</string>
+    <string name="setting_select_wallet">Select connected wallet</string>
+    <string name="setting_add_new_wallet">Add new wallet</string>
+    <string name="setting_change_name_wallet">Change name</string>
+    <string name="setting_hint_name">Name</string>
+    <string name="create_nft">Start Creating your <b>NFTs</b> Today</string>
+    <string name="send_nft_desc">Select NFT you want to send</string>
 </resources>

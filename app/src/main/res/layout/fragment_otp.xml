@@ -69,14 +69,16 @@
                     android:textColor="@color/blue"
                     android:textSize="20sp" />
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etOtp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/inter_regular"
                     android:gravity="center"
-                    android:text="Enter Verification code"
-                    android:textColor="#808080"
+                    android:hint="Enter Verification code"
+                    android:textColor="@color/black"
+                    android:textColorHint="#808080"
                     android:textSize="14sp" />
 
 

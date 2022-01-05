@@ -8,8 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#808080</color>
-
-
+    <color name="black_2">#323232</color>
     <color name="border">#DEDEDE</color>
     <color name="yellow_bg">#FFCE20</color>
     <color name="hint_color">#828282</color>
@@ -19,5 +18,6 @@
     <color name="btndisabled_color">#BDBDBD</color>
     <color name="blue">#2F80ED</color>
     <color name="light_black">#565656</color>
+    <color name="light_grey">#EBEDF0</color>
 
 </resources>

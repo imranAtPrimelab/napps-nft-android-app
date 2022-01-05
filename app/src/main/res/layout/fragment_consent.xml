@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black">
+
+        <ImageView
+            android:id="@+id/claim_nft_image"
+            android:layout_width="match_parent"
+            android:layout_height="390dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_pattern_consent" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="264dp"
+            app:cardCornerRadius="17dp"
+            android:id="@+id/claim_nft_main"
+            >
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+                 <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/bg_close"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="16dp"
+                            >
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/fg_close"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="16dp"
+                                />
+                        </RelativeLayout>
+
+                     <androidx.appcompat.widget.AppCompatTextView
+                         android:id="@+id/textConsent"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_centerHorizontal="true"
+                         android:layout_marginTop="12dp"
+                         android:fontFamily="@font/inter_semibold"
+                         android:text="@string/consent"
+                         android:textColor="@color/black"
+                         android:textSize="21sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_opposing_arrows"
+                            android:layout_marginTop="55dp"
+                            android:layout_below="@id/textConsent"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/consentIcon"/>
+
+                     <androidx.appcompat.widget.AppCompatTextView
+                         android:id="@+id/NFTrequestText"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_below="@id/consentIcon"
+                         android:layout_marginStart="70dp"
+                         android:layout_marginTop="36dp"
+                         android:layout_marginEnd="73dp"
+                         android:fontFamily="@font/inter_semibold"
+                         android:gravity="center"
+                         android:text="@string/request_access"
+                         android:textColor="@color/black"
+                         android:textSize="22sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/NFT_disclaimer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/NFTrequestText"
+                            android:layout_marginTop="36dp"
+                            android:gravity="center_horizontal"
+                            android:text="@string/does_not_allow_app"
+                            android:textColor="@color/gray"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/inter_regular"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/more_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/NFT_disclaimer"
+                            android:layout_marginTop="30dp"
+                            android:gravity="center_horizontal"
+                            android:text="@string/more_info"
+                            android:textColor="@color/blue"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/inter_regular"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="?actionBarSize"
+                            android:layout_below="@id/more_info"
+                            android:layout_marginStart="47dp"
+                            android:layout_marginTop="29dp"
+                            android:layout_marginEnd="47dp"
+                            android:background="@drawable/bg_round_rectangle_stroke">
+
+                             <androidx.appcompat.widget.AppCompatTextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_centerVertical="true"
+                                 android:layout_marginStart="16.93dp"
+                                 android:letterSpacing="-0.02"
+                                 android:text="Johndoe.near"
+                                 android:textColor="@color/black"
+                                 android:textSize="18sp"
+                                 android:translationY="-0.02dp" />
+
+                             <ImageView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_alignParentEnd="true"
+                                 android:layout_centerVertical="true"
+                                 android:layout_marginEnd="23dp"
+                                 android:src="@drawable/ic_arrow_down" />
+                        </RelativeLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="109dp"
+                            android:layout_below="@id/more_info"
+                            android:layout_marginHorizontal="58dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_marginBottom="93dp"
+                            >
+                               <com.google.android.material.button.MaterialButton
+                                   android:layout_width="0dp"
+                                   android:layout_height="wrap_content"
+                                   android:layout_weight="1"
+                                   android:text="@string/deny"
+                                   android:textAllCaps="false"
+                                   android:textSize="16sp"
+                                   android:fontFamily="@font/inter_semibold"
+                                   android:layout_marginEnd="4.5dp"
+                                   android:backgroundTint="@color/light_grey"
+                                   android:textColor="@color/black"
+                                   app:cornerRadius="7dp"/>
+
+                               <com.google.android.material.button.MaterialButton
+                                   android:layout_width="0dp"
+                                   android:layout_height="wrap_content"
+                                   android:layout_weight="1"
+                                   android:layout_marginStart="4.5dp"
+                                   android:text="@string/allow"
+                                   android:textAllCaps="false"
+                                   android:textSize="16sp"
+                                   android:fontFamily="@font/inter_semibold"
+                                   android:backgroundTint="@color/blue"
+                                   app:cornerRadius="7dp"
+                                   />
+
+                            </LinearLayout>
+
+                    </RelativeLayout>
+
+            </ScrollView>
+
+        </androidx.cardview.widget.CardView>
+</RelativeLayout>

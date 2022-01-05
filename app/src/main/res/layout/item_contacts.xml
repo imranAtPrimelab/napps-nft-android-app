@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:weightSum="8"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="33dp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_contact"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DR"
+                android:textColor="#8C000000"
+                android:textSize="14sp"
+                android:layout_centerInParent="true"
+                android:id="@+id/name_short"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:weightSum="2"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:text="Darlene Robertson"
+                android:gravity="bottom"
+                android:paddingStart="9dp"
+                android:id="@+id/name_long"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textColor="#808080"
+                android:textSize="12sp"
+                android:text="\@johndoe"
+                android:paddingStart="9dp"
+                android:id="@+id/username"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="0dp"
+            android:id="@+id/check_status"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_checked"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"/>
+
+
+</LinearLayout>

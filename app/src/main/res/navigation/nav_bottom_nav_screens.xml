@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bottom_nav_screens"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.nearlabs.nftmarketplace.ui.main.HomeFragment"
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/toMyNFTs"
+            app:destination="@id/myNFTsFragment"/>
+    </fragment>
+
+    <dialog
+        android:id="@+id/createNFTDialog"
+        android:name="com.nearlabs.nftmarketplace.ui.create.dialog.CreateNFTDialog"
+        android:label="Create NFT"
+        />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.nearlabs.nftmarketplace.ui.main.HistoryFragment"
+        android:label="HistoryFragment" />
+
+
+    <fragment
+        android:id="@+id/myNFTsFragment"
+        android:name="com.nearlabs.nftmarketplace.ui.mynfts.MyNFTsFragment"
+        android:label="MyNFTsFragment">
+    </fragment>
+
+    <action
+        android:id="@+id/toSettings"
+        app:destination="@+id/nav_setting" />
+
+
+    <action
+        android:id="@+id/toCreateNFTDialog"
+        app:destination="@+id/createNFTDialog"/>
+
+    <include app:graph="@navigation/nav_setting" />
+</navigation>

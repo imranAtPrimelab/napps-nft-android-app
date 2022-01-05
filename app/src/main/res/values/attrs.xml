@@ -4,6 +4,14 @@
         <attr name="csiv_title" format="string" />
         <attr name="csiv_value" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="CustomNFTsItemView">
+        <attr name="cnftiv_title" format="string" />
+        <attr name="cnftiv_nft_type" format="string" />
+        <attr name="cnftiv_uid" format="string" />
+        <attr name="cnftiv_thumbnail" format="string" />
+    </declare-styleable>
+
     <declare-styleable name="CustomSettingWalletView">
         <attr name="cswv_name" format="string" />
     </declare-styleable>
