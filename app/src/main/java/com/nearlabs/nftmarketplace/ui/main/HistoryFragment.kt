@@ -1,43 +1,57 @@
 package com.nearlabs.nftmarketplace.ui.main
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.fragment.NavHostFragment
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentHistoryBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.ui.main.transaction.TransactionFragment
+import com.nearlabs.nftmarketplace.ui.main.transaction.adapter.TransactionPagerAdapter
 
 class HistoryFragment : BaseFragment(R.layout.fragment_history) {
-    val binding by viewBinding(FragmentHistoryBinding::bind)
+
+    private val binding by viewBinding(FragmentHistoryBinding::bind)
+    private var tabLayoutMediator: TabLayoutMediator? = null
+    private var viewPager: ViewPager2? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
+    }
 
-        val navHostFragment =childFragmentManager.findFragmentById(R.id.historyFragmentContainer) as NavHostFragment
+    private fun initViews() {
+        val types = listOf(
+            TransactionFragment.ALL,
+            TransactionFragment.SENT,
+            TransactionFragment.RECV
+        )
 
-        val navController = navHostFragment.navController
-
-        binding.btnall.setOnClickListener{
-            binding.btnall.setBackgroundResource(R.drawable.btn_bg_curve)
-            binding.btnsent.setBackgroundResource(R.drawable.bg_white_round_corner)
-            binding.btnrecieved.setBackgroundResource(R.drawable.bg_white_round_corner)
-
-            navController.navigate(R.id.toAllHistory)
-        }
-        binding.btnrecieved.setOnClickListener{
-            binding.btnrecieved.setBackgroundResource(R.drawable.btn_bg_curve)
-            binding.btnsent.setBackgroundResource(R.drawable.bg_white_round_corner)
-            binding.btnall.setBackgroundResource(R.drawable.bg_white_round_corner)
-            navController.navigate(R.id.toRecievedHistory)
-        }
-        binding.btnsent.setOnClickListener{
-            binding.btnsent.setBackgroundResource(R.drawable.btn_bg_curve)
-            binding.btnall.setBackgroundResource(R.drawable.bg_white_round_corner)
-            binding.btnrecieved.setBackgroundResource(R.drawable.bg_white_round_corner)
-            navController.navigate(R.id.toSentHistory)
+        val fragments = types.map { TransactionFragment.newInstance(it) }
+        val titles = types.map {
+            when (it) {
+                TransactionFragment.ALL -> getString(R.string.transaction_all)
+                TransactionFragment.SENT -> getString(R.string.transaction_sent)
+                TransactionFragment.RECV -> getString(R.string.transaction_recv)
+                else -> ""
+            }
         }
 
+        viewPager = binding.viewPager.apply {
+            adapter = TransactionPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle, fragments)
+        }
+        tabLayoutMediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = titles[position]
+        }.apply { attach() }
+    }
+
+    override fun onDestroyView() {
+        tabLayoutMediator?.detach()
+        tabLayoutMediator = null
+
+        viewPager?.adapter = null
+        super.onDestroyView()
     }
 }
