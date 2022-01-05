@@ -9,11 +9,14 @@ android {
     compileSdk compile_sdk
 
     defaultConfig {
-        applicationId "com.nearlabs.nftmarketplace"
+//        applicationId "com.nearlabs.nftmarketplace"
+        applicationId "com.nearlabs.nftmarketplace.test"
+
         minSdk min_sdk
         targetSdk target_sdk
         versionCode version_code
         versionName version_name
+        buildConfigField 'String', 'AppsFlyer_Dev_Key', "\"nMiy3CHGxo75uXwXRHReBQ\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -84,6 +87,9 @@ dependencies {
     // Glide
     implementation rootProject.deps.glide
     kapt rootProject.deps.kaptGlide
+
+    // For Apps Flyer
+    implementation rootProject.deps.appsflyer
 
 }
 

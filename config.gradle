@@ -40,6 +40,7 @@ rootProject.ext.firebaseBom = '29.0.0'
 rootProject.ext.glide = '4.12.0'
 rootProject.ext.timber_log = '4.7.1'
 rootProject.ext.gson = '2.8.8'
+rootProject.ext.appsflyer = '6.3.2'
 
 rootProject.ext.deps = [
 
@@ -97,4 +98,7 @@ rootProject.ext.deps = [
         firebaseAuthFacebook   : 'com.facebook.android:facebook-android-sdk:9.1.1',
         firebaseDynamicLink    : 'com.google.firebase:firebase-dynamic-links-ktx',
         firebaseMessage        : 'com.google.firebase:firebase-messaging',
+
+        // For Apps Flyer
+        appsflyer              : "com.appsflyer:af-android-sdk:$appsflyer"
 ]
