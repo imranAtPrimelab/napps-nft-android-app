@@ -43,4 +43,8 @@
     <string name="setting_hint_name">Name</string>
     <string name="create_nft">Start Creating your <b>NFTs</b> Today</string>
     <string name="send_nft_desc">Select NFT you want to send</string>
+    <string name="recent_transactions">Recent Transactions</string>
+    <string name="see_all">See All</string>
+    <string name="my_nft">My NFT</string>
+    <string name="create_an_nft">Create an NFT</string>
 </resources>

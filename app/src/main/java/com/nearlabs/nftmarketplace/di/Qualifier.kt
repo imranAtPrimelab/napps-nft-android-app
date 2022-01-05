@@ -8,4 +8,8 @@ annotation class BaseUrl
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
+annotation class TransactionUrl
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
 annotation class PreferenceName

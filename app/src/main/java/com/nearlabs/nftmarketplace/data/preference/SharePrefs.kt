@@ -5,6 +5,7 @@ import com.nearlabs.nftmarketplace.common.extensions.boolean
 
 class SharePrefs(private val sharePrefs: SharedPreferences) {
 
+
     var isLoggedIn by sharePrefs.boolean()
 
     fun registerKeyChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
@@ -17,5 +18,9 @@ class SharePrefs(private val sharePrefs: SharedPreferences) {
 
     fun clear() {
         sharePrefs.edit().clear().apply()
+    }
+
+    fun getUserId(): String {
+        return "h315j-3kn1i5-315j3"
     }
 }

@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.common.extensions
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -126,3 +127,28 @@ fun <T> ViewModel.pagingFlow(
         }
     }
 }
+
+fun <T> Fragment.observeResultFlow(
+    stateFlow: StateFlow<State<T>>,
+    errorHandler: ErrorHandler = { },
+    successHandler: SuccessHandler<T>
+) {
+    lifecycleScope.collect(
+        stateFlow,
+        successHandler = { result ->
+            result?.let {
+                successHandler.invoke(it)
+            }
+        },
+        errorHandler = {
+            errorHandler.invoke(it)
+        },
+        httpErrorHandler = {
+
+        },
+        loadingHandler = {
+
+        }
+    )
+}
+

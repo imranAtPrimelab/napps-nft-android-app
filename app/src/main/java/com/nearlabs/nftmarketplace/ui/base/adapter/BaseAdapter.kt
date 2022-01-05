@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 abstract class BaseAdapter<DATA, VH : RecyclerView.ViewHolder>(
-    val items: MutableList<DATA?> = mutableListOf(),
+    private val items: MutableList<DATA?> = mutableListOf(),
 ) : RecyclerView.Adapter<VH>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return createViewHolderInternal(parent, viewType)

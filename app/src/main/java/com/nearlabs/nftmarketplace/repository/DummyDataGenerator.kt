@@ -54,7 +54,7 @@ object DummyDataGenerator {
         return (17720L..17820L).map {
             val assetName = names[it.toInt() % names.size]
             NFT(
-                id = it,
+                id = it.toString(),
                 name = assetName,
                 type = when (it % 4) {
                     0L -> NFTType.DigitalArt

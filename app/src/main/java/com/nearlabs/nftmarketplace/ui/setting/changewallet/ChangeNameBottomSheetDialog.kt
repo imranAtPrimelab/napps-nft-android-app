@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.nearlabs.nftmarketplace.R
+import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.common.extensions.showKeyboard
 import com.nearlabs.nftmarketplace.databinding.DialogChangeNameBinding

@@ -24,5 +24,4 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
             findNavController().navigate(R.id.toMain)
         }
     }
-
 }

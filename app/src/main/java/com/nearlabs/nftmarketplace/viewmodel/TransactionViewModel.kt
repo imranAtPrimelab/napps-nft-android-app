@@ -7,13 +7,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class NFTViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class TransactionViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    fun getNFTs() = resultFlow {
-        repository.getDummyNFTs()
-    }
-
-    fun getAllNFTCollection() = resultFlow {
-        repository.getAllNFTCollection()
+    fun getTransactions() = resultFlow {
+        repository.getDummyTransactions()
     }
 }
