@@ -100,24 +100,24 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginTop="14dp"
                         android:layout_marginEnd="14dp"
-                        android:paddingHorizontal="14dp"
                         android:background="@drawable/input_field_bg"
                         android:fontFamily="@font/inter_regular"
                         android:hint="Ex. (373) 378 8383"
+                        android:paddingHorizontal="14dp"
                         android:textColor="@color/black"
                         android:textColorHint="@color/hint_color" />
 
                     <RelativeLayout
                         android:id="@+id/btnGetStarted"
                         android:layout_width="wrap_content"
-                        android:paddingHorizontal="46dp"
                         android:layout_height="46dp"
-                        android:layout_centerHorizontal="true"
                         android:layout_below="@+id/etEmailPhone"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="14dp"
                         android:background="@drawable/box_selected_bg"
                         android:backgroundTint="@color/btndisabled_color"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:paddingHorizontal="46dp">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
@@ -161,10 +161,10 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginTop="14dp"
                         android:layout_marginEnd="14dp"
-                        android:paddingHorizontal="14dp"
                         android:background="@drawable/input_field_bg"
                         android:fontFamily="@font/inter_regular"
-                        android:hint="Ex. (373) 378 8383"
+                        android:hint="walletName.near"
+                        android:paddingHorizontal="14dp"
                         android:textColor="@color/black"
                         android:textColorHint="@color/hint_color" />
 

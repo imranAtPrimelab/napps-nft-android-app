@@ -1,4 +1,4 @@
-package com.nearlabs.nftmarketplace.data.networks
+package com.nearlabs.nftmarketplace.data.networks.api
 
 import com.google.gson.JsonObject
 import com.nearlabs.nftmarketplace.data.networks.request.DtoAddWalletRequest

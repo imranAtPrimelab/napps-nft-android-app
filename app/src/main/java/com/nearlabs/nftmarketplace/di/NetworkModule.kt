@@ -1,6 +1,6 @@
 package com.nearlabs.nftmarketplace.di
 
-import com.nearlabs.nftmarketplace.data.networks.Api
+import com.nearlabs.nftmarketplace.data.networks.api.Api
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

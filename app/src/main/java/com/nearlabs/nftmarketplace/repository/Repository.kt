@@ -1,7 +1,7 @@
 package com.nearlabs.nftmarketplace.repository
 
 import com.nearlabs.nftmarketplace.common.extensions.safeCall
-import com.nearlabs.nftmarketplace.data.networks.Api
+import com.nearlabs.nftmarketplace.data.networks.api.Api
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.domain.model.toDomainModel
 
