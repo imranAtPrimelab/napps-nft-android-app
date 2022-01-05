@@ -6,6 +6,7 @@ import org.threeten.bp.ZoneId
 
 import java.util.*
 import com.nearlabs.nftmarketplace.data.networks.response.DtoTransactionResponse
+import org.threeten.bp.Instant
 
 
 data class Transaction(
@@ -16,11 +17,13 @@ data class Transaction(
     val timestamp: LocalDateTime
 ) {
     fun identifier() = "#$id"
-    fun getPrettyTime() : String {
+    fun getPrettyTime(): String {
         return PrettyTime().format(
-            Date(timestamp.atZone(ZoneId.systemDefault())
-                .toInstant()
-                .toEpochMilli())
+            Date(
+                timestamp.atZone(ZoneId.systemDefault())
+                    .toInstant()
+                    .toEpochMilli()
+            )
         )
     }
 }
@@ -35,6 +38,8 @@ fun DtoTransactionResponse.toDomainModel() = Transaction(
         address = "",
         name = ""
     ),
-    direction = if(sender == true)  TransactionDirection.Outgoing else TransactionDirection.Incoming,
-    timestamp = LocalDateTime.now()
+    direction = if (sender == true) TransactionDirection.Outgoing else TransactionDirection.Incoming,
+    timestamp = Instant.ofEpochMilli(created ?: System.currentTimeMillis())
+        .atZone(ZoneId.systemDefault())
+        .toLocalDateTime()
 )

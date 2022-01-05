@@ -8,7 +8,7 @@ data class DtoTransactionResponse(
     @SerializedName("blockchain_status")
     val blockchainStatus: String?,
     @SerializedName("created")
-    val created: String?,
+    val created: Long?,
     @SerializedName("updated")
     val updated: String?,
     @SerializedName("transaction_id")
