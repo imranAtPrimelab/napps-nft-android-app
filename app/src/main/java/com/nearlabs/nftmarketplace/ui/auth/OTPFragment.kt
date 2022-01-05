@@ -53,5 +53,4 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
             }
         }
     }
-
 }
