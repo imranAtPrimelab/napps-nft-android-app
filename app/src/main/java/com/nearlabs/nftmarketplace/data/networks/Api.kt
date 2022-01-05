@@ -18,9 +18,6 @@ interface Api {
     @GET("api/users")
     suspend fun sampleGet(): JsonObject
 
-    @GET("api/users")
-    suspend fun getUsers(): List<DtoUserResponse>
-
     @GET("api/wallets")
     suspend fun getWallets(): DtoWalletResponse
 

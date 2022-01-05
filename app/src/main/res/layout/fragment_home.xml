@@ -59,28 +59,18 @@
                     android:textColor="@color/black"
                     android:textSize="25sp" />
 
-                <RelativeLayout
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCreateNft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/box_selected_bg"
-                    android:backgroundTint="@color/blue"
-                    android:padding="10dp">
+                    android:layout_alignStart="@id/createnfttxt"
+                    android:layout_below="@id/createnfttxt"
+                    android:text="Create an NFT"
+                    app:backgroundTint="@color/blue"
+                    app:icon="@drawable/ic_arrow_forward"
+                    app:iconGravity="end"
+                    app:iconSize="12dp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_arrow_forward"
-                        android:fontFamily="@font/inter_medium"
-                        android:gravity="center"
-                        android:text="@string/create_an_nft"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-
-
-                </RelativeLayout>
 
             </RelativeLayout>
 

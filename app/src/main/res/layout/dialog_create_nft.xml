@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/ic_bg_create_nft_dialog"
+        android:background="@color/black"
         android:padding="8dp">
 
         <com.google.android.material.textview.MaterialTextView

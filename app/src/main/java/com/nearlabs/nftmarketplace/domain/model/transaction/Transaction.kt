@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.domain.model.transaction
 
+import com.nearlabs.nftmarketplace.data.networks.response.DtoCounterParty
 import org.ocpsoft.prettytime.PrettyTime
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
@@ -11,8 +12,7 @@ import org.threeten.bp.Instant
 
 data class Transaction(
     val id: String,
-    val sender: TransactionAddress,
-    val receiver: TransactionAddress,
+    val counterParty: CounterParty?,
     val direction: TransactionDirection,
     val timestamp: LocalDateTime
 ) {
@@ -30,16 +30,14 @@ data class Transaction(
 
 fun DtoTransactionResponse.toDomainModel() = Transaction(
     id = transactionId,
-    sender = TransactionAddress(
-        address = "",
-        name = "",
-    ),
-    receiver = TransactionAddress(
-        address = "",
-        name = ""
-    ),
+    counterParty = counterParty?.toDomainModel(),
     direction = if (sender == true) TransactionDirection.Outgoing else TransactionDirection.Incoming,
     timestamp = Instant.ofEpochMilli(created ?: System.currentTimeMillis())
         .atZone(ZoneId.systemDefault())
         .toLocalDateTime()
+)
+
+fun DtoCounterParty.toDomainModel() = CounterParty(
+    walletId = walletId,
+    name = fullName
 )
