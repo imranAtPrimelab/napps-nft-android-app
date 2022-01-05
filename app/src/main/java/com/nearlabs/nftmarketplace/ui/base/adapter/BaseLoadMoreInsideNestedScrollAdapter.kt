@@ -1,4 +1,4 @@
-package com.nearlabs.nftmarketplace.common
+package com.nearlabs.nftmarketplace.ui.base.adapter
 
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView

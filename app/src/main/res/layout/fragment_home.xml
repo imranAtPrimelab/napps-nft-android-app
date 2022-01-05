@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="12dp"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:paddingTop="12dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -158,10 +158,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/llRecentTransactions"
-            android:layout_marginStart="12dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="12dp"
+            android:paddingHorizontal="12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="3"
-            tools:listitem="@layout/fragment_history"
-            android:layout_marginTop="12dp" />
+            tools:listitem="@layout/list_item_transaction" />
 
 
     </RelativeLayout>

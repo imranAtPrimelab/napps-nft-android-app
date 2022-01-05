@@ -29,6 +29,26 @@ class Repository(
         dtoTransactions.map { it.toDomainModel() }
     }
 
+    suspend fun getSentTransactions() = safeCall {
+        val dtoTransactions = transactionApi.getTransaction()
+        dtoTransactions
+            .map { it.toDomainModel() }
+            .filter { it.direction == TransactionDirection.Outgoing }
+    }
+
+    suspend fun getRecvTransactions() = safeCall {
+        val dtoTransactions = transactionApi.getTransaction()
+        dtoTransactions
+            .map { it.toDomainModel() }
+            .filter { it.direction == TransactionDirection.Incoming }
+    }
+
+    suspend fun getRecentTransactions() = safeCall {
+        val dtoTransactions = transactionApi.getTransaction().take(20)
+        dtoTransactions.map { it.toDomainModel() }
+    }
+
+
     suspend fun getDummyTransactions() = safeCall {
         DummyDataGenerator.transactions()
     }

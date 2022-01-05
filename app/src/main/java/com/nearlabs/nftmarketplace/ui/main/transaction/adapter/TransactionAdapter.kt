@@ -1,12 +1,9 @@
 package com.nearlabs.nftmarketplace.ui.main.transaction.adapter
 
-import android.net.Uri
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nearlabs.nftmarketplace.R
-import com.nearlabs.nftmarketplace.common.BaseLoadMoreInsideNestedScrollAdapter
+import com.nearlabs.nftmarketplace.ui.base.adapter.BaseLoadMoreInsideNestedScrollAdapter
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.ListItemTransactionBinding
 import com.nearlabs.nftmarketplace.domain.model.transaction.Transaction

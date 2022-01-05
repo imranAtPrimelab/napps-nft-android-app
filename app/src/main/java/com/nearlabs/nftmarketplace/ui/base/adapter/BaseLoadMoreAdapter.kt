@@ -1,4 +1,4 @@
-package com.nearlabs.nftmarketplace.common
+package com.nearlabs.nftmarketplace.ui.base.adapter
 
 import android.util.Log
 import android.view.LayoutInflater

@@ -9,15 +9,19 @@ import javax.inject.Inject
 @HiltViewModel
 class TransactionViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
+    fun getRecentTransactions() = resultFlow {
+        repository.getRecentTransactions()
+    }
+
     fun getTransactions() = resultFlow {
-        repository.getDummyTransactions()
+        repository.getTransactions()
     }
 
     fun getSentTransactions() = resultFlow {
-        repository.getDummySentTransactions()
+        repository.getSentTransactions()
     }
 
     fun getRecvTransactions() = resultFlow {
-        repository.getDummyRecvTransactions()
+        repository.getRecvTransactions()
     }
 }
