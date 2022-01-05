@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent=".9"
+        android:layout_height="160dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="12dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="6dp"
+        android:layout_marginHorizontal="8dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivThumbnailSendNFT"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/nft_img"/>
+
+                    <TextView
+                        android:id="@+id/tvTypeSendNFT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@drawable/input_field_bg"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/inter_semibold"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="Digital Art"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+
+                </RelativeLayout>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_alignParentStart="true"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTitleSendNFT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:text="Vecotry Illustration"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/inter_regular"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvUIDSendNFT"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="#173123"
+                        android:textColor="#808080"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_regular"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_checked"/>
+
+            </RelativeLayout>
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
