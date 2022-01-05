@@ -1,11 +1,7 @@
 package com.nearlabs.nftmarketplace.di
 
-import android.content.SharedPreferences
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.nearlabs.nftmarketplace.data.networks.Api
-import com.nearlabs.nftmarketplace.data.networks.ContactApi
-import com.nearlabs.nftmarketplace.data.networks.NFTApi
-import com.nearlabs.nftmarketplace.data.networks.TransactionApi
+import com.nearlabs.nftmarketplace.data.networks.*
 import com.nearlabs.nftmarketplace.data.networks.interceptor.TokenInterceptor
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import dagger.Module
@@ -16,7 +12,6 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -113,5 +108,19 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ContactApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserService(
+        @BaseUrl url: String,
+        httpClient: OkHttpClient
+    ): UserApi {
+        return Retrofit.Builder()
+            .client(httpClient)
+            .baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(UserApi::class.java)
     }
 }

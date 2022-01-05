@@ -71,6 +71,7 @@
                     android:textSize="12sp" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/fullName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="26dp"
@@ -94,6 +95,7 @@
                     android:textSize="12sp" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/walletId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="26dp"
