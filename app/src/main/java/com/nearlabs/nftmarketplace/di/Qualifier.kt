@@ -12,4 +12,8 @@ annotation class TransactionUrl
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
+annotation class NFTUrl
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
 annotation class PreferenceName

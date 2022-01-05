@@ -1,14 +1,21 @@
 package com.nearlabs.nftmarketplace.di
 
+import android.content.SharedPreferences
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.nearlabs.nftmarketplace.data.networks.Api
+import com.nearlabs.nftmarketplace.data.networks.NFTApi
 import com.nearlabs.nftmarketplace.data.networks.TransactionApi
+import com.nearlabs.nftmarketplace.data.networks.interceptor.TokenInterceptor
+import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -26,11 +33,23 @@ class NetworkModule {
     @Provides
     fun provideTransactionUrl() = "https://oj472d2cb3.execute-api.us-west-1.amazonaws.com"
 
+    @NFTUrl
+    @Singleton
+    @Provides
+    fun provideNFTUrl() = "https://nvwbysudac.execute-api.us-east-1.amazonaws.com"
+
+    @Singleton
+    @Provides
+    fun provideTokenInterceptor(sharedPreferences: SharePrefs): Interceptor {
+        return TokenInterceptor(sharedPreferences)
+    }
 
     @Provides
     @Singleton
-    fun provideHttpClient(): OkHttpClient {
+    fun provideHttpClient(tokenInterceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
+            .addNetworkInterceptor(tokenInterceptor)
+            .addNetworkInterceptor(StethoInterceptor())
             .build()
     }
 
@@ -50,12 +69,29 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideTransactionService(@BaseUrl transactionUrl: String, httpClient: OkHttpClient) : TransactionApi {
+    fun provideTransactionService(
+        @BaseUrl transactionUrl: String,
+        httpClient: OkHttpClient
+    ): TransactionApi {
         return Retrofit.Builder()
             .client(httpClient)
             .baseUrl(transactionUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(TransactionApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNftService(
+        @NFTUrl url: String,
+        httpClient: OkHttpClient
+    ): NFTApi {
+        return Retrofit.Builder()
+            .client(httpClient)
+            .baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(NFTApi::class.java)
     }
 }

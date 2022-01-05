@@ -29,7 +29,4 @@ interface Api {
 
     @POST("api/add_wallet")
     suspend fun addWallet(@Body request: DtoAddWalletRequest): Response<ResponseBody>
-
-    @GET("nfts")
-    suspend fun getAllNFTCollections(@Query("user_id") userId : String) : DtoBaseResponse<List<DtoNFTResponse>>
 }

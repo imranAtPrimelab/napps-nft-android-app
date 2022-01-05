@@ -85,6 +85,10 @@ dependencies {
     implementation rootProject.deps.glide
     kapt rootProject.deps.kaptGlide
 
+    // Stetho
+    implementation rootProject.deps.stetho
+    implementation rootProject.deps.stethoOkttp
+
 }
 
 kapt {
