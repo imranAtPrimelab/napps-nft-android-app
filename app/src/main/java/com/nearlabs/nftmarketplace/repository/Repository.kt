@@ -69,6 +69,10 @@ class Repository(
         DummyDataGenerator.peoples()
     }
 
+    suspend fun getDummyWallets() = safeCall {
+        DummyDataGenerator.wallets().wallets?.map { it.toDomainModel() } ?: emptyList()
+    }
+
     suspend fun getAllNFTCollection() = safeCall {
         val userId = sharePrefs.getUserId()
         val dtoNft = nftApi.getAllNFTCollections(userId)
