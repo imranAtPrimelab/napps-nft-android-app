@@ -80,7 +80,7 @@ object DummyDataGenerator {
     fun transactions(): List<Transaction> {
         return (17720L..17820L).map {
             Transaction(
-                id = it,
+                id = it.toString(),
                 sender = TransactionAddress(
                     name = "michael.near",
                     address = "0xa6f79B60359f141df90A0C745125B131cAAfFD12".lowercase()
