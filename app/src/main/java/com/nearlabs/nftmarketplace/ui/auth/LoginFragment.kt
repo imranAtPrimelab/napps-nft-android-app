@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
@@ -25,6 +26,14 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     private fun initListeners() {
         binding.btnLogin.setOnClickListener {
             findNavController().navigate(R.id.toOtp)
+        }
+
+        binding.btnGetStarted.setOnClickListener {
+            findNavController().navigate(R.id.signupFragment)
+        }
+
+        binding.tvPhoneLogin.setOnClickListener {
+            Toast.makeText(requireContext(),"Phone Click", Toast.LENGTH_SHORT).show()
         }
     }
 }

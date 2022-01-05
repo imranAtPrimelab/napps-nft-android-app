@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/white"
-        >
+        android:background="@color/white">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginStart="89.5dp"
-                android:text="@string/gift_nft"
                 android:fontFamily="@font/inter_semibold"
+                android:text="@string/gift_nft"
                 android:textColor="@color/black"
                 android:textSize="21sp" />
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
+                android:layout_marginStart="105dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/bg_close"
-                android:layout_marginStart="105dp"
-                >
+                android:background="@drawable/bg_close">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -58,67 +57,67 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            app:cardCornerRadius="10dp"
             android:layout_marginStart="20dp"
-            >
+            android:layout_weight="4"
+            app:cardCornerRadius="10dp">
+
             <androidx.appcompat.widget.SearchView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:defaultQueryHint="Search People"
-                app:queryHint="Search People"
-                android:paddingStart="9dp"
                 android:layout_gravity="center"
                 android:background="@color/light_grey"
-                />
+                android:paddingStart="9dp"
+                app:defaultQueryHint="Search People"
+                app:queryHint="Search People" />
         </androidx.cardview.widget.CardView>
 
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="19dp"
             android:layout_weight="1"
+            android:gravity="bottom"
+            android:paddingStart="19dp"
             android:text="Import"
             android:textColor="#2F80ED"
-            android:textSize="17sp"
-            android:layout_gravity="center_vertical"
-            android:paddingStart="19dp"
-            android:gravity="bottom"
-            android:layout_marginEnd="19dp"
-            />
+            android:textSize="17sp" />
     </LinearLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/contact_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_contacts"
-        android:id="@+id/contact_list"/>
+        tools:listitem="@layout/item_contacts" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/sendGift"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        app:cornerRadius="5dp"
+        android:layout_marginTop="36dp"
         android:backgroundTint="@color/blue"
-        app:icon="@drawable/ic_arrow_forward"
-        android:text="@string/send_nft"
-        app:iconGravity="textEnd"
         android:fontFamily="@font/inter_medium"
-        android:layout_marginTop="36dp"/>
+        android:text="@string/send_nft"
+        app:cornerRadius="5dp"
+        app:icon="@drawable/ic_arrow_forward"
+        app:iconGravity="textEnd" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="17sp"
-        android:fontFamily="@font/inter_medium"
-        android:layout_marginTop="20dp"
-        android:text="@string/share_app"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/blue"
+        android:layout_marginTop="20dp"
         android:drawablePadding="7dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/share_app"
+        android:textColor="@color/blue"
+        android:textSize="17sp"
         app:drawableRightCompat="@drawable/ic_share_app" />
 
 </LinearLayout>
