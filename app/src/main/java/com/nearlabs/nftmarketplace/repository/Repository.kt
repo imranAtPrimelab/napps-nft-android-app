@@ -65,6 +65,10 @@ class Repository(
         DummyDataGenerator.NFTs()
     }
 
+    suspend fun getDummyPeoples() = safeCall {
+        DummyDataGenerator.peoples()
+    }
+
     suspend fun getAllNFTCollection() = safeCall {
         val userId = sharePrefs.getUserId()
         val dtoNft = nftApi.getAllNFTCollections(userId)

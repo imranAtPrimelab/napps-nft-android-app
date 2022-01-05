@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,15 +12,29 @@
         android:padding="8dp">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="@string/send_nft_back"
+            android:textColor="@color/blue"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvTitleSendNFT"
             style="@style/SendNFT.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/send_nft"
+            app:layout_constraintBottom_toBottomOf="@id/btnBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/btnBack" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnClose"
@@ -30,46 +44,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvDescSendNFT"
-            style="@style/SendNFT.Description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/tvTitleSendNFT"
-            android:text="@string/send_nft_desc"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
             android:layout_marginTop="22dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="12dp"
             android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
+            android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/btnNext"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvDescSendNFT"
-            tools:listitem="@layout/item_layout_send_nft_cell" />
+            app:layout_constraintTop_toBottomOf="@id/btnBack"
+            tools:listitem="@layout/item_sent_nft_people" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNext"
             style="@style/Button.Dialog"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="@string/send"
             app:icon="@drawable/ic_arrow_forward"
             app:iconGravity="textEnd"
-            android:layout_marginTop="18dp"
-            android:text="@string/next"
             app:iconSize="12dp"
-            app:layout_constraintTop_toBottomOf="@id/recyclerView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
