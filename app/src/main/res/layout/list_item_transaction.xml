@@ -36,10 +36,15 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDesc"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
+        android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tvOrderNumber"
         app:layout_constraintStart_toStartOf="@id/tvOrderNumber"
         app:layout_constraintTop_toBottomOf="@id/tvOrderNumber"
         tools:text="Sent to john.near" />

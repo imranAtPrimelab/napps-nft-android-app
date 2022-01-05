@@ -89,6 +89,10 @@ dependencies {
     implementation rootProject.deps.stetho
     implementation rootProject.deps.stethoOkttp
 
+    // Pretty Time
+    implementation rootProject.deps.prettyTime
+    implementation rootProject.deps.threeTenTime
+
 }
 
 kapt {

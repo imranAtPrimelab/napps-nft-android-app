@@ -47,4 +47,8 @@
     <string name="see_all">See All</string>
     <string name="my_nft">My NFT</string>
     <string name="create_an_nft">Create an NFT</string>
+
+    <string name="transaction_all">All</string>
+    <string name="transaction_sent">Sent</string>
+    <string name="transaction_recv">Recv</string>
 </resources>

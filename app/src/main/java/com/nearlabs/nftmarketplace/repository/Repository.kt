@@ -7,6 +7,7 @@ import com.nearlabs.nftmarketplace.data.networks.TransactionApi
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.domain.model.nft.toDomainModel
 import com.nearlabs.nftmarketplace.domain.model.toDomainModel
+import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionDirection
 import com.nearlabs.nftmarketplace.domain.model.transaction.toDomainModel
 
 class Repository(
@@ -30,6 +31,14 @@ class Repository(
 
     suspend fun getDummyTransactions() = safeCall {
         DummyDataGenerator.transactions()
+    }
+
+    suspend fun getDummySentTransactions() = safeCall {
+        DummyDataGenerator.transactions().filter { it.direction == TransactionDirection.Outgoing }
+    }
+
+    suspend fun getDummyRecvTransactions() = safeCall {
+        DummyDataGenerator.transactions().filter { it.direction == TransactionDirection.Incoming }
     }
 
     suspend fun getDummyNFTs() = safeCall {

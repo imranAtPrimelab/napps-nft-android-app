@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:paddingTop="12dp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/username"
@@ -14,7 +15,8 @@
         android:drawableStart="@drawable/ic_user"
         android:drawablePadding="10dp"
         android:fontFamily="@font/inter_semibold"
-        android:padding="7dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
         android:text="john.near"
         android:textColor="@color/black"
         android:textSize="16sp" />
@@ -45,13 +47,18 @@
             android:text="Send NFT"
             android:textColor="@color/blue"
             android:textSize="16sp"
-            app:drawableEndCompat="@drawable/ic_send" />
+            app:drawableEndCompat="@drawable/ic_sent"
+            app:drawableTint="@color/blue" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <TableLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
+        app:tabTextColor="@color/gray"
+        app:tabSelectedTextColor="@color/blue"
+        app:tabIndicatorColor="@color/blue"
+        app:tabIndicatorFullWidth="false"
         android:layout_height="wrap_content"
         android:layout_below="@id/llHistory"
         android:layout_marginTop="16dp" />
@@ -59,6 +66,7 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabLayout" />
 
 </RelativeLayout>

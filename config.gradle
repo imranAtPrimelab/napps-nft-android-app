@@ -102,6 +102,10 @@ rootProject.ext.deps = [
 
         // Stetho
         stetho                 : "com.facebook.stetho:stetho:$stetho",
-        stethoOkttp            : "com.facebook.stetho:stetho-okhttp3:$stetho"
+        stethoOkttp            : "com.facebook.stetho:stetho-okhttp3:$stetho",
+
+        // PrettyTime
+        prettyTime             : 'org.ocpsoft.prettytime:prettytime:4.0.4.Final',
+        threeTenTime           : 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
 ]

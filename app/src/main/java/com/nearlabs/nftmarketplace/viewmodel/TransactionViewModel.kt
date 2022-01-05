@@ -12,4 +12,12 @@ class TransactionViewModel @Inject constructor(private val repository: Repositor
     fun getTransactions() = resultFlow {
         repository.getDummyTransactions()
     }
+
+    fun getSentTransactions() = resultFlow {
+        repository.getDummySentTransactions()
+    }
+
+    fun getRecvTransactions() = resultFlow {
+        repository.getDummyRecvTransactions()
+    }
 }

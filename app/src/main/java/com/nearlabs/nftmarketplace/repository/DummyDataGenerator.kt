@@ -10,6 +10,7 @@ import com.nearlabs.nftmarketplace.domain.model.nft.NFTType
 import com.nearlabs.nftmarketplace.domain.model.transaction.Transaction
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionAddress
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionDirection
+import org.threeten.bp.LocalDateTime
 import kotlin.random.Random
 
 
@@ -89,7 +90,7 @@ object DummyDataGenerator {
                     address = "0xa6f79B60359f141df90A0C745125B131cAAfFD12".lowercase()
                 ),
                 direction = if (Random.nextBoolean()) TransactionDirection.Incoming else TransactionDirection.Outgoing,
-                timestamp = System.currentTimeMillis()
+                timestamp = LocalDateTime.now()
             )
         }
     }
