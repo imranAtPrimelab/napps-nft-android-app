@@ -1,15 +1,15 @@
 package com.nearlabs.nftmarketplace.domain.model.transaction
 
-import com.nearlabs.nftmarketplace.data.networks.response.DtoTransaction
 import org.ocpsoft.prettytime.PrettyTime
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 
 import java.util.*
+import com.nearlabs.nftmarketplace.data.networks.response.DtoTransactionResponse
 
 
 data class Transaction(
-    val id: Long,
+    val id: String,
     val sender: TransactionAddress,
     val receiver: TransactionAddress,
     val direction: TransactionDirection,
@@ -25,8 +25,8 @@ data class Transaction(
     }
 }
 
-fun DtoTransaction.toDomainModel() = Transaction(
-    id = 0L,
+fun DtoTransactionResponse.toDomainModel() = Transaction(
+    id = transactionId,
     sender = TransactionAddress(
         address = "",
         name = "",
@@ -35,6 +35,6 @@ fun DtoTransaction.toDomainModel() = Transaction(
         address = "",
         name = ""
     ),
-    direction = TransactionDirection.Incoming,
+    direction = if(sender == true)  TransactionDirection.Outgoing else TransactionDirection.Incoming,
     timestamp = LocalDateTime.now()
 )
