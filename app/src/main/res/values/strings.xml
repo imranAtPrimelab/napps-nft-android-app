@@ -30,6 +30,7 @@
     <string name="more_info">More Info</string>
     <string name="deny">Deny</string>
     <string name="allow">Allow</string>
+    <string name="ntf_sent_success">NFT Vecotry Illustartion sent successfully to</string>
 
 
     <string name="setting_title">Settings</string>
@@ -52,4 +53,5 @@
     <string name="transaction_sent">Sent</string>
     <string name="transaction_recv">Recv</string>
     <string name="send_nft_back">Back</string>
+    <string name="open_history">Open History</string>
 </resources>
