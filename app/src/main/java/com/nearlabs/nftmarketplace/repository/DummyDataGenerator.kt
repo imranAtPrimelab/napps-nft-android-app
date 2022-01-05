@@ -12,6 +12,7 @@ import com.nearlabs.nftmarketplace.domain.model.transaction.CounterParty
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionDirection
 import org.threeten.bp.LocalDateTime
 import kotlin.random.Random
+import com.nearlabs.nftmarketplace.util.models.Contact
 
 
 /**
@@ -95,6 +96,17 @@ object DummyDataGenerator {
                 DtoWallet(1, "johndoe.near", "johndoe.near.address", true),
                 DtoWallet(2, "demo.near", "demo.near.address", false)
             )
+        )
+    }
+
+    fun peoples(): List<Contact> {
+        return listOf(
+            Contact("DR", "Darlene Robertson", "@johndoe"),
+            Contact("JJ", "Jacob Jones", "@johndoe"),
+            Contact("JW", "Jenny Wilson", "@johndoe"),
+            Contact("CW", "Cameron Williamson", "@johndoe"),
+            Contact("DS", "Darrell Steward", "@johndoe"),
+            Contact("CH", "Courtney Henry", "@johndoe")
         )
     }
 }
