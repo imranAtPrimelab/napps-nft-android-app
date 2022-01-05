@@ -15,7 +15,6 @@ import org.threeten.bp.LocalDateTime
 import kotlin.random.Random
 
 
-
 /**
  * This is the dummy data generator for testing purpose.
  * It will be removed once integrated with API from backend.
