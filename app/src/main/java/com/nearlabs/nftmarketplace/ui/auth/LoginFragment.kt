@@ -1,8 +1,6 @@
 package com.nearlabs.nftmarketplace.ui.auth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,7 +9,6 @@ import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentLoginBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
-import com.nearlabs.nftmarketplace.ui.create.RootCreateNFTFragment
 
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
