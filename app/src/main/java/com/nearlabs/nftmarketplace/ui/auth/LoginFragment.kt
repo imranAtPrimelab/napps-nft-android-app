@@ -10,6 +10,7 @@ import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentLoginBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.ui.create.RootCreateNFTFragment
 
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
 

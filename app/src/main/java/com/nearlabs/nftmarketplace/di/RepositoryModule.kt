@@ -1,6 +1,7 @@
 package com.nearlabs.nftmarketplace.di
 
 import com.nearlabs.nftmarketplace.data.networks.Api
+import com.nearlabs.nftmarketplace.data.networks.ContactApi
 import com.nearlabs.nftmarketplace.data.networks.NFTApi
 import com.nearlabs.nftmarketplace.data.networks.TransactionApi
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
@@ -22,11 +23,13 @@ class RepositoryModule {
         api: Api,
         transactionApi: TransactionApi,
         nftApi: NFTApi,
+        contactApi: ContactApi,
         sharePrefs: SharePrefs
     ) =
         Repository(
             api,
             transactionApi,
+            contactApi,
             nftApi,
             sharePrefs
         )

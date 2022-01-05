@@ -2,6 +2,7 @@ package com.nearlabs.nftmarketplace.repository
 
 import com.nearlabs.nftmarketplace.common.extensions.safeCall
 import com.nearlabs.nftmarketplace.data.networks.Api
+import com.nearlabs.nftmarketplace.data.networks.ContactApi
 import com.nearlabs.nftmarketplace.data.networks.NFTApi
 import com.nearlabs.nftmarketplace.data.networks.TransactionApi
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
@@ -13,15 +14,17 @@ import com.nearlabs.nftmarketplace.domain.model.transaction.toDomainModel
 class Repository(
     private val api: Api,
     private val transactionApi: TransactionApi,
+    private val contactApi: ContactApi,
     private val nftApi: NFTApi,
     private val sharePrefs: SharePrefs
 ) {
 
     fun isLoggedIn() = sharePrefs.isLoggedIn
 
-    suspend fun getUsers() = safeCall {
-        val dtoUsers = api.getUsers()
-        dtoUsers.map { it.toDomainModel() }
+    suspend fun getContacts() = safeCall {
+        // TODO: need to pass owner id
+        val dtoContacts = contactApi.getContacts("")
+        dtoContacts.map { it.toDomainModel() }
     }
 
     suspend fun getTransactions() = safeCall {

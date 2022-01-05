@@ -7,9 +7,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class UserViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class ContactViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    fun getUsers() = resultFlow {
-        repository.getUsers()
+    fun getContacts() = resultFlow {
+        repository.getContacts()
     }
 }

@@ -12,6 +12,10 @@ annotation class TransactionUrl
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
+annotation class ContactUrl
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
 annotation class NFTUrl
 
 @Qualifier
