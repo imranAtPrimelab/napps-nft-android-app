@@ -2,16 +2,21 @@ package com.nearlabs.nftmarketplace.domain.model
 
 import com.nearlabs.nftmarketplace.data.networks.response.DtoUserResponse
 
+
 data class User(
-    val id: Int,
+    val id: String,
+    val walletId: String,
     val name: String,
-    val nick: String,
-    val image: String
+    val email: String,
+    val phone: String,
+    val verified: Boolean
 )
 
-fun DtoUserResponse.toDomainModel() = User(
+fun DtoUserResponse.toDomain() = User(
     id = id,
-    name = name.toString(),
-    nick = nick.toString(),
-    image = image.toString()
+    walletId = walletId,
+    name = fullName.orEmpty(),
+    email = email.orEmpty(),
+    phone = phone.orEmpty(),
+    verified = verified ?: false
 )

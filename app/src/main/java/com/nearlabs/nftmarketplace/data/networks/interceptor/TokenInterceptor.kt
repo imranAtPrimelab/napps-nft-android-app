@@ -6,7 +6,7 @@ import okhttp3.Response
 
 class TokenInterceptor(private val sharePrefsRepository: SharePrefs) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val idToken = sharePrefsRepository.accessToken()
+        val idToken = sharePrefsRepository.accessToken
         val requestBuilder = chain.request().newBuilder()
         if (idToken.isNotEmpty()) {
             requestBuilder.header("Authorization", "Bearer $idToken")

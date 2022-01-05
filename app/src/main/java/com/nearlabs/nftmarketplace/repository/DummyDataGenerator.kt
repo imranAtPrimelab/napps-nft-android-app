@@ -2,16 +2,17 @@ package com.nearlabs.nftmarketplace.repository
 
 import com.nearlabs.nftmarketplace.data.networks.response.DtoWallet
 import com.nearlabs.nftmarketplace.data.networks.response.DtoWalletResponse
-import com.nearlabs.nftmarketplace.domain.model.User
+import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.domain.model.nft.NFT
 import com.nearlabs.nftmarketplace.domain.model.nft.NFTAuthor
 import com.nearlabs.nftmarketplace.domain.model.nft.NFTInfo
 import com.nearlabs.nftmarketplace.domain.model.nft.NFTType
 import com.nearlabs.nftmarketplace.domain.model.transaction.Transaction
-import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionAddress
+import com.nearlabs.nftmarketplace.domain.model.transaction.CounterParty
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionDirection
 import org.threeten.bp.LocalDateTime
 import kotlin.random.Random
+import com.nearlabs.nftmarketplace.util.models.Contact
 
 
 /**
@@ -38,14 +39,12 @@ object DummyDataGenerator {
         "Courtney Henry"
     )
 
-    fun contacts(): List<User> {
+    fun contacts(): List<Contact> {
         val names = contactNames()
         return (0..100).map {
-            User(
-                id = it,
+            Contact(
                 name = names[it % names.size],
                 nick = "@johndoe",
-                image = ""
             )
         }
     }
@@ -81,13 +80,9 @@ object DummyDataGenerator {
         return (17720L..17820L).map {
             Transaction(
                 id = it.toString(),
-                sender = TransactionAddress(
+                counterParty = CounterParty(
                     name = "michael.near",
-                    address = "0xa6f79B60359f141df90A0C745125B131cAAfFD12".lowercase()
-                ),
-                receiver = TransactionAddress(
-                    name = "michael.near",
-                    address = "0xa6f79B60359f141df90A0C745125B131cAAfFD12".lowercase()
+                    walletId = "0xa6f79B60359f141df90A0C745125B131cAAfFD12".lowercase()
                 ),
                 direction = if (Random.nextBoolean()) TransactionDirection.Incoming else TransactionDirection.Outgoing,
                 timestamp = LocalDateTime.now()
@@ -101,6 +96,17 @@ object DummyDataGenerator {
                 DtoWallet(1, "johndoe.near", "johndoe.near.address", true),
                 DtoWallet(2, "demo.near", "demo.near.address", false)
             )
+        )
+    }
+
+    fun peoples(): List<Contact> {
+        return listOf(
+            Contact("DR", "Darlene Robertson", "@johndoe"),
+            Contact("JJ", "Jacob Jones", "@johndoe"),
+            Contact("JW", "Jenny Wilson", "@johndoe"),
+            Contact("CW", "Cameron Williamson", "@johndoe"),
+            Contact("DS", "Darrell Steward", "@johndoe"),
+            Contact("CH", "Courtney Henry", "@johndoe")
         )
     }
 }

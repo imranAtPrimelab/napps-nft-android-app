@@ -8,8 +8,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+    var currentEmail: String = ""
+    var currentPhone: String = ""
 
-    fun getUsers() = resultFlow {
-        repository.getUsers()
+    fun createUser(name: String, walletId: String) = resultFlow {
+        repository.createUser(name, walletId, currentPhone, currentEmail)
     }
 }

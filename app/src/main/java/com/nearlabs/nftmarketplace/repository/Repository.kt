@@ -1,11 +1,11 @@
 package com.nearlabs.nftmarketplace.repository
 
 import com.nearlabs.nftmarketplace.common.extensions.safeCall
-import com.nearlabs.nftmarketplace.data.networks.Api
-import com.nearlabs.nftmarketplace.data.networks.NFTApi
-import com.nearlabs.nftmarketplace.data.networks.TransactionApi
+import com.nearlabs.nftmarketplace.data.networks.*
+import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.domain.model.nft.toDomainModel
+import com.nearlabs.nftmarketplace.domain.model.toDomain
 import com.nearlabs.nftmarketplace.domain.model.toDomainModel
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionDirection
 import com.nearlabs.nftmarketplace.domain.model.transaction.toDomainModel
@@ -13,15 +13,18 @@ import com.nearlabs.nftmarketplace.domain.model.transaction.toDomainModel
 class Repository(
     private val api: Api,
     private val transactionApi: TransactionApi,
+    private val contactApi: ContactApi,
     private val nftApi: NFTApi,
+    private val userApi: UserApi,
     private val sharePrefs: SharePrefs
 ) {
 
-    fun isLoggedIn() = sharePrefs.isLoggedIn
+    fun isLoggedIn() = sharePrefs.idToken.isNotEmpty()
 
-    suspend fun getUsers() = safeCall {
-        val dtoUsers = api.getUsers()
-        dtoUsers.map { it.toDomainModel() }
+    suspend fun getContacts() = safeCall {
+        // TODO: need to pass owner id
+        val dtoContacts = contactApi.getContacts("")
+        dtoContacts.map { it.toDomainModel() }
     }
 
     suspend fun getTransactions() = safeCall {
@@ -65,9 +68,33 @@ class Repository(
         DummyDataGenerator.NFTs()
     }
 
+    suspend fun getDummyPeoples() = safeCall {
+        DummyDataGenerator.peoples()
+    }
+
+    suspend fun getDummyWallets() = safeCall {
+        DummyDataGenerator.wallets().wallets?.map { it.toDomainModel() } ?: emptyList()
+    }
+
     suspend fun getAllNFTCollection() = safeCall {
-        val userId = sharePrefs.getUserId()
-        val dtoNft = nftApi.getAllNFTCollections(userId)
+        val dtoNft = nftApi.getAllNFTCollections(sharePrefs.userId)
         dtoNft.data.map { it.toDomainModel() }
     }
+
+    suspend fun createUser(name: String, walletId: String, phone: String, email: String) =
+        safeCall {
+            val request = DtoUserCreateRequest(
+                fullName = name,
+                walletName = walletId,
+                phone = phone,
+                email = email
+            )
+            val dtoResponse = userApi.createUser(request).apply {
+                sharePrefs.userId = userInfo.id
+                sharePrefs.accessToken = accessToken
+                sharePrefs.idToken = idToken
+                sharePrefs.refreshToken = refreshToken
+            }
+            dtoResponse.userInfo.toDomain()
+        }
 }
