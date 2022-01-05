@@ -12,6 +12,7 @@ import com.nearlabs.nftmarketplace.ui.base.BaseFragment
 import com.nearlabs.nftmarketplace.ui.create.CreateNftFragment
 import com.nearlabs.nftmarketplace.ui.main.transaction.TransactionFragment
 import com.nearlabs.nftmarketplace.ui.main.transaction.adapter.TransactionPagerAdapter
+import com.nearlabs.nftmarketplace.ui.sendNFTDialog.SendNFTBottomSheetDialog
 
 class HistoryFragment : BaseFragment(R.layout.fragment_history) {
 
@@ -52,7 +53,8 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
 
     private fun initListeners() {
         binding.btnSendNft.setOnClickListener {
-
+            val sendNft = SendNFTBottomSheetDialog()
+            sendNft.show(childFragmentManager, sendNft.tag)
         }
     }
 

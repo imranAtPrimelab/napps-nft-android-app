@@ -10,6 +10,7 @@ import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.databinding.DialogSendSelectPeopleNtfBinding
+import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.PeopleAdapter

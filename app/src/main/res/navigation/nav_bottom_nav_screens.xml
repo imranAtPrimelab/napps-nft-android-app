@@ -19,14 +19,14 @@
         android:label="Create NFT"
         />
 
-    <dialog
+    <fragment
         android:id="@+id/historyFragment"
-        android:name="com.nearlabs.nftmarketplace.ui.sendNFTDialog.SendNFTBottomSheetDialog"
+        android:name="com.nearlabs.nftmarketplace.ui.main.HistoryFragment"
         android:label="HistoryFragment">
         <action
             android:id="@+id/toSelectPeople"
             app:destination="@id/selectPeopleBottomSheetDialog" />
-    </dialog>
+    </fragment>
 
 
     <fragment

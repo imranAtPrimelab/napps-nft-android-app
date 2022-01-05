@@ -12,7 +12,6 @@ import com.nearlabs.nftmarketplace.domain.model.transaction.CounterParty
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionDirection
 import org.threeten.bp.LocalDateTime
 import kotlin.random.Random
-import com.nearlabs.nftmarketplace.util.models.Contact
 
 
 /**
@@ -101,12 +100,11 @@ object DummyDataGenerator {
 
     fun peoples(): List<Contact> {
         return listOf(
-            Contact("DR", "Darlene Robertson", "@johndoe"),
-            Contact("JJ", "Jacob Jones", "@johndoe"),
-            Contact("JW", "Jenny Wilson", "@johndoe"),
-            Contact("CW", "Cameron Williamson", "@johndoe"),
-            Contact("DS", "Darrell Steward", "@johndoe"),
-            Contact("CH", "Courtney Henry", "@johndoe")
+            Contact("DR", "Darlene Robertson"),
+            Contact("JW", "Jenny Wilson"),
+            Contact("CW", "Cameron Williamson"),
+            Contact("DS", "Darrell Steward"),
+            Contact("CH", "Courtney Henry")
         )
     }
 }
