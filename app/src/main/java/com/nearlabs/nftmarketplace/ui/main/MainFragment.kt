@@ -2,6 +2,7 @@ package com.nearlabs.nftmarketplace.ui.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -29,6 +30,5 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         val navController = navHostFragment.navController
 
         binding.bottomNavBar.setupWithNavController(navController)
-
     }
 }
