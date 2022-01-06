@@ -65,7 +65,7 @@ class SendNFTBottomSheetDialog : BaseBottomSheetDialogFragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(SEND_NFT_DIALOG_NEXT_EVENT_NAME, requireContext())
+            AppConstants.logAppsFlyerEvent(SEND_NFT_DIALOG_NEXT_EVENT_NAME, it.context)
             val items = nftAdapter.selectedPosition.map { nftAdapter.getItemAtPosition(it) }
             findNavController().navigate(R.id.toSelectPeople)
         }

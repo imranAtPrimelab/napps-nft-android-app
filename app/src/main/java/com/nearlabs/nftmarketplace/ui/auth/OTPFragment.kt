@@ -23,7 +23,7 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
 
     private fun initListeners() {
         binding.btnContinue.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(OTP_VERIFICATION_EVENT_NAME,requireContext())
+            AppConstants.logAppsFlyerEvent(OTP_VERIFICATION_EVENT_NAME,it.context)
             findNavController().navigate(R.id.toMain)
         }
     }

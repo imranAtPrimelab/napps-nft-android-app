@@ -43,7 +43,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
 
 
         binding.btnCreateAccount.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(SIGN_UP_CREATE_ACCOUNT_EVENT_NAME,requireContext())
+            AppConstants.logAppsFlyerEvent(SIGN_UP_CREATE_ACCOUNT_EVENT_NAME,it.context)
 
             observeResultFlow(
                 userViewModel.createUser(

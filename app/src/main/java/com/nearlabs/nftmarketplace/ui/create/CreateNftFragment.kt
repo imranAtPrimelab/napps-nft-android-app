@@ -48,7 +48,7 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
 
     private fun initListeners() {
         binding.btnAction.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(CREATE_NFT_NEXT_BUTTON_EVENT_NAME,requireContext())
+            AppConstants.logAppsFlyerEvent(CREATE_NFT_NEXT_BUTTON_EVENT_NAME,it.context)
 
             viewModel.nextStep()
         }
