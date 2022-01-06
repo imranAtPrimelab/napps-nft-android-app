@@ -15,18 +15,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 interface UserApi {
-    @GET("users/id")//
-    suspend fun getUser(): JsonObject
+    @GET("{user_id}")//
+    suspend fun getUser(@Path("user_id") userId: String): DtoUserInfoResponse
 
-    @PUT("users/h315j-3kn1i5-315j3")
-    suspend fun modifyUser(): JSONObject
+    @PUT("{user_id}")
+    suspend fun modifyUser(@Path("user_id") userId: String): DtoUserInfoResponse
 
-    @DELETE("users/h315j-3kn1i5-315j3")
-    suspend fun deleteUser(): JSONObject
+    @DELETE("{user_id}")
+    suspend fun deleteUser(@Path("user_id") userId: String): DtoUserInfoResponse
 
     @GET("user/{user_id}/resend_code")
-    suspend fun resendCode(@Path("user_id") userId: String): JSONObject
+    suspend fun resendCode(@Path("user_id") userId: String): DtoUserInfoResponse
 
     @POST("user/create")
     suspend fun createUser(@Body request: DtoUserCreateRequest): DtoUserInfoResponse
+
+    @POST("user/suggest/?walletName=moisesmarques.near&suggestionCount=10")
+    suspend fun suggestWalletName(@Body request: DtoUserCreateRequest): DtoUserInfoResponse
 }

@@ -16,6 +16,27 @@
     <string name="mint_nft">Mint NFT</string>
     <string name="preview">Preview</string>
 
+
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="phone_example">Ex. (373) 378 8383</string>
+    <string name="email_example">Ex. abc@yourmail.org</string>
+    <string name="get_started">Get Started</string>
+    <string name="already_have_account">Already have a near account?</string>
+
+
+    <string name="verification">Verification</string>
+    <string name="enter_verification_code">Enter verification code</string>
+    <string name="didnt_receive_code">Didn\'t receive your code?</string>
+    <string name="resend_code">Resend your code</string>
+    <string name="continueBtn">Continue</string>
+    <string name="sent_code_email">We have sent a 6-digit verification code to the email address</string>
+    <string name="sent_code_phone">We have sent a 6-digit verification code to your phone</string>
+    <string name="send_different_email">Send to a different email address</string>
+    <string name="send_different_phone">Send to a different phone number</string>
+
+
     <string name="send">Send</string>
     <string name="descriptions">Descriptions</string>
     <string name="nft_info">NFT Info</string>

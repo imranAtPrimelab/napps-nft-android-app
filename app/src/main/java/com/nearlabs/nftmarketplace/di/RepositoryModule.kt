@@ -22,6 +22,7 @@ class RepositoryModule {
         nftApi: NFTApi,
         contactApi: ContactApi,
         userApi: UserApi,
+        loginApi: LoginApi,
         sharePrefs: SharePrefs
     ) =
         Repository(
@@ -30,6 +31,7 @@ class RepositoryModule {
             contactApi,
             nftApi,
             userApi,
+            loginApi,
             sharePrefs
         )
 

@@ -130,4 +130,18 @@ class NetworkModule {
             .build()
             .create(UserApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideLoginService(
+        @BaseUrl url: String,
+        httpClient: OkHttpClient
+    ): LoginApi {
+        return Retrofit.Builder()
+            .client(httpClient)
+            .baseUrl(url)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(LoginApi::class.java)
+    }
 }

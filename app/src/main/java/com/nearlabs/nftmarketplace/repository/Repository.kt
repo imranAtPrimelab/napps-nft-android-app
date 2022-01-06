@@ -1,7 +1,9 @@
 package com.nearlabs.nftmarketplace.repository
 
+import com.google.gson.JsonObject
 import com.nearlabs.nftmarketplace.common.extensions.safeCall
 import com.nearlabs.nftmarketplace.data.networks.*
+import com.nearlabs.nftmarketplace.data.networks.request.DtoLoginRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.domain.model.nft.toDomainModel
@@ -16,6 +18,7 @@ class Repository(
     private val contactApi: ContactApi,
     private val nftApi: NFTApi,
     private val userApi: UserApi,
+    private val loginApi: LoginApi,
     private val sharePrefs: SharePrefs
 ) {
 
@@ -97,4 +100,30 @@ class Repository(
             }
             dtoResponse.userInfo.toDomain()
         }
+
+    suspend fun login(walletName: String) =
+        safeCall {
+            val request = DtoLoginRequest(
+                walletName = walletName
+            )
+
+            val dtoResponse = loginApi.login(request).apply {
+                sharePrefs.loginType = type
+                sharePrefs.walletName = walletName
+            }
+
+    }
+
+    suspend fun verifyLogin(walletName: String, nonce : String) =
+        safeCall {
+            val request = DtoLoginRequest(
+                walletName = walletName,
+                nonce = nonce
+            )
+            val dtoResponse = loginApi.verifyLogin(request).apply {
+
+            }
+
+        }
+
 }
