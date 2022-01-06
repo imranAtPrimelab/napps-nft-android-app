@@ -9,9 +9,7 @@ android {
     compileSdk compile_sdk
 
     defaultConfig {
-        //applicationId "com.nft.maker"
-//        applicationId "com.nearlabs.nftmarketplace"
-        applicationId "com.nearlabs.nftmarketplace.test"
+        applicationId "com.nft.maker"
 
         minSdk min_sdk
         targetSdk target_sdk
