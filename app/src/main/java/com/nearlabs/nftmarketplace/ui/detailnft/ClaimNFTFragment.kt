@@ -19,7 +19,9 @@ class ClaimNFTFragment : BaseFragment(R.layout.fragment_claim_nft) {
     }
 
     private fun initListeners() {
-        binding.nftClaimButton.setOnClickListener { }
+        binding.nftClaimButton.setOnClickListener {
+            // TODO AppsFlyer 10
+        }
     }
 
     private fun initObserve() {}

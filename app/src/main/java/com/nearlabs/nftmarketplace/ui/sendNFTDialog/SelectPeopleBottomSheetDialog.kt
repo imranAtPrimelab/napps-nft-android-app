@@ -1,9 +1,11 @@
 package com.nearlabs.nftmarketplace.ui.sendNFTDialog
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
@@ -18,6 +20,16 @@ import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.PeopleAdapter
 class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private lateinit var binding: DialogSendSelectPeopleNtfBinding
     private val viewModel by activityViewModels<SendNFTViewModel>()
+
+    private val requestPermissionCallback = mutableMapOf<String, () -> Unit>()
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) {
+            // TODO AppsFlyer 7
+        }
+    }
 
     private val peopleAdapter by lazy {
         PeopleAdapter { contact, position ->
@@ -47,6 +59,7 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
         initAdapter()
         initListeners()
         initObserve()
+        requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
     }
 
     private fun initAdapter() {

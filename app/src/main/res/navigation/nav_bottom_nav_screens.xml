@@ -14,6 +14,12 @@
     </fragment>
 
     <dialog
+        android:id="@+id/addFragment"
+        android:name="com.nearlabs.nftmarketplace.ui.main.AddFragment"
+        android:label="AddFragment">
+    </dialog>
+
+    <dialog
         android:id="@+id/createNFTDialog"
         android:name="com.nearlabs.nftmarketplace.ui.create.dialog.CreateNFTDialog"
         android:label="Create NFT"

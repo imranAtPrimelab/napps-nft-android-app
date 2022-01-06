@@ -21,7 +21,9 @@ class SendNFTFragment : BaseFragment(R.layout.fragment_send_nft) {
 
     private fun initListeners() {
         binding.btnClose.setOnClickListener { popBack() }
-        binding.nftSendButton.setOnClickListener { }
+        binding.nftSendButton.setOnClickListener {
+            // TODO AppsFlyer 16
+        }
     }
 
     private fun initObserve() {}

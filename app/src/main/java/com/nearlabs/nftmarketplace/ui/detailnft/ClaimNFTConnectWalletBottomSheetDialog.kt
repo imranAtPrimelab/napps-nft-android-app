@@ -39,9 +39,12 @@ class ClaimNFTConnectWalletBottomSheetDialog : BaseBottomSheetDialogFragment() {
         }
 
         binding.btnCreateNewWallet.setOnClickListener {
+            // TODO AppsFlyer 11
 
         }
 
-        binding.btnLogin.setOnClickListener { }
+        binding.btnLogin.setOnClickListener {
+            // TODO AppsFlyer 12
+        }
     }
 }
