@@ -47,19 +47,24 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         binding.btnGetStarted.setOnClickListener {
             AppConstants.logAppsFlyerEvent(GET_STARTED_EVENT_NAME,it.context)
-            userViewModel.currentPhone = binding.etEmailPhone.text.toString()
-            userViewModel.currentEmail = binding.etEmailPhone.text.toString()
+            if(userViewModel.usesPhone){
+                userViewModel.currentPhone = binding.etEmailPhone.text.toString()
+            }else{
+                userViewModel.currentEmail = binding.etEmailPhone.text.toString()
+            }
             findNavController().navigate(R.id.signupFragment)
         }
 
         binding.tvPhoneLogin.setOnClickListener {
             AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
             binding.etEmailPhone.hint = requireActivity().getString(R.string.phone_example)
+            userViewModel.usesPhone = true
         }
 
         binding.tvEmailLogin.setOnClickListener {
             AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
             binding.etEmailPhone.hint = requireActivity().getString(R.string.email_example)
+            userViewModel.usesPhone = false
 
         }
 
