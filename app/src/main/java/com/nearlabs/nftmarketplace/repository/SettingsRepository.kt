@@ -5,6 +5,7 @@ import com.nearlabs.nftmarketplace.data.networks.Api
 import com.nearlabs.nftmarketplace.data.networks.request.DtoAddWalletRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoChangeWalletRequest
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
+import com.nearlabs.nftmarketplace.domain.model.toDomain
 import com.nearlabs.nftmarketplace.domain.model.toDomainModel
 
 class SettingsRepository(private val api: Api, private val sharePrefs: SharePrefs) {
@@ -24,5 +25,9 @@ class SettingsRepository(private val api: Api, private val sharePrefs: SharePref
 //        val response = api.addWallet(DtoAddWalletRequest(name))
 //        response.isSuccessful
         true
+    }
+    suspend fun getUserProfile(userId: String) = safeCall {
+        val dtoResponse = api.getUserProfile(userId)
+        dtoResponse.dtoUserInfo.toDomain()
     }
 }

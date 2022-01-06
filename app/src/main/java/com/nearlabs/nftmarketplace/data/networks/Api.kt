@@ -3,16 +3,10 @@ package com.nearlabs.nftmarketplace.data.networks
 import com.google.gson.JsonObject
 import com.nearlabs.nftmarketplace.data.networks.request.DtoAddWalletRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoChangeWalletRequest
-import com.nearlabs.nftmarketplace.data.networks.response.DtoBaseResponse
-import com.nearlabs.nftmarketplace.data.networks.response.DtoNFTResponse
-import com.nearlabs.nftmarketplace.data.networks.response.DtoUserResponse
-import com.nearlabs.nftmarketplace.data.networks.response.DtoWalletResponse
+import com.nearlabs.nftmarketplace.data.networks.response.*
 import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface Api {
     @GET("api/users")
@@ -26,4 +20,10 @@ interface Api {
 
     @POST("api/add_wallet")
     suspend fun addWallet(@Body request: DtoAddWalletRequest): Response<ResponseBody>
+
+    //https://api.nearlogin.io/users/2slqFE0gPeySpwnPKHn00
+
+    @GET("users/{user_id}")
+    suspend fun getUserProfile(@Path("user_id") userId: String): DtoUserProfileResponse
+
 }
