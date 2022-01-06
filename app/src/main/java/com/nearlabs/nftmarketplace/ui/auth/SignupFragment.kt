@@ -15,6 +15,8 @@ import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentOtpBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentSignupBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.util.AppConstants
+import com.nearlabs.nftmarketplace.util.AppConstants.SIGN_UP_CREATE_ACCOUNT_EVENT_NAME
 import com.nearlabs.nftmarketplace.viewmodel.TransactionViewModel
 import com.nearlabs.nftmarketplace.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,6 +43,8 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
 
 
         binding.btnCreateAccount.setOnClickListener {
+            AppConstants.logAppsFlyerEvent(SIGN_UP_CREATE_ACCOUNT_EVENT_NAME,requireContext())
+
             observeResultFlow(
                 userViewModel.createUser(
                     binding.fullName.text.toString(),

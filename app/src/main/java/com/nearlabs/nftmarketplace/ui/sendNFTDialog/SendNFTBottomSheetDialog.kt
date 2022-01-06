@@ -14,6 +14,8 @@ import com.nearlabs.nftmarketplace.domain.model.nft.NFT
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.SendNFTAdapter
+import com.nearlabs.nftmarketplace.util.AppConstants
+import com.nearlabs.nftmarketplace.util.AppConstants.SEND_NFT_DIALOG_NEXT_EVENT_NAME
 import dagger.hilt.android.AndroidEntryPoint
 
 class SendNFTBottomSheetDialog : BaseBottomSheetDialogFragment() {
@@ -62,6 +64,7 @@ class SendNFTBottomSheetDialog : BaseBottomSheetDialogFragment() {
         }
 
         binding.btnNext.setOnClickListener {
+            AppConstants.logAppsFlyerEvent(SEND_NFT_DIALOG_NEXT_EVENT_NAME, requireContext())
             val items = nftAdapter.selectedPosition.map { nftAdapter.getItemAtPosition(it) }
             findNavController().navigate(R.id.toSelectPeople)
         }

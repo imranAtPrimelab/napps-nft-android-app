@@ -12,13 +12,9 @@ class NftApplication : Application() {
         super.onCreate()
         AndroidThreeTen.init(this)
         Stetho.initializeWithDefaults(this)
-
-    }
-
-    override fun onCreate() {
-        super.onCreate()
         AppsFlyerLib.getInstance().setDebugLog(true)
         AppsFlyerLib.getInstance().init(BuildConfig.AppsFlyer_Dev_Key, null, this)
         AppsFlyerLib.getInstance().start(this,BuildConfig.AppsFlyer_Dev_Key)
+
     }
 }

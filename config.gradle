@@ -107,7 +107,7 @@ rootProject.ext.deps = [
 
         // PrettyTime
         prettyTime             : 'org.ocpsoft.prettytime:prettytime:4.0.4.Final',
-        threeTenTime           : 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+        threeTenTime           : 'com.jakewharton.threetenabp:threetenabp:1.2.1',
 
 
         // For Apps Flyer

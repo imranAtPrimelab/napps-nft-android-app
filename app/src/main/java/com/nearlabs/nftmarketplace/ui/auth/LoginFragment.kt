@@ -12,6 +12,10 @@ import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentLoginBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.util.AppConstants
+import com.nearlabs.nftmarketplace.util.AppConstants.CLICK_LOGIN_WITH_PHONE_EVENT_NAME
+import com.nearlabs.nftmarketplace.util.AppConstants.GET_STARTED_EVENT_NAME
+import com.nearlabs.nftmarketplace.util.AppConstants.LOGIN_WITH_PHONE_EVENT_NAME
 import com.nearlabs.nftmarketplace.viewmodel.UserViewModel
 
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
@@ -27,16 +31,19 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private fun initListeners() {
         binding.btnLogin.setOnClickListener {
+            AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME,requireContext())
             findNavController().navigate(R.id.toOtp)
         }
 
         binding.btnGetStarted.setOnClickListener {
+            AppConstants.logAppsFlyerEvent(GET_STARTED_EVENT_NAME,requireContext())
             userViewModel.currentPhone = binding.etEmailPhone.text.toString()
             userViewModel.currentEmail = binding.etEmailPhone.text.toString()
             findNavController().navigate(R.id.signupFragment)
         }
 
         binding.tvPhoneLogin.setOnClickListener {
+            AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,requireContext())
             Toast.makeText(requireContext(), "Phone Click", Toast.LENGTH_SHORT).show()
         }
 

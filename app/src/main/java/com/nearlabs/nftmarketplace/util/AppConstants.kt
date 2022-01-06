@@ -14,7 +14,12 @@ object AppConstants {
     const val NFT_EVENT_EMAIL_NAME = "email"
 
     const val CLICK_LOGIN_WITH_PHONE_EVENT_NAME ="click_continue_with_phone"
-    const val LOGIN_WITH_PHONE_EMAIL_EVENT_NAME ="simple_continue_with_phone_email"
+    const val LOGIN_WITH_PHONE_EVENT_NAME ="simple_continue_with_phone"
+    const val GET_STARTED_EVENT_NAME ="get_started_with_phone_email"
+    const val OTP_VERIFICATION_EVENT_NAME ="otp_verification"
+    const val SIGN_UP_CREATE_ACCOUNT_EVENT_NAME ="otp_verification"
+    const val SEND_GIFT_NFT_EVENT_NAME ="send_gift_nft"
+    const val SEND_NFT_DIALOG_NEXT_EVENT_NAME = "send_nft_dialog_next"
     const val LOGIN_WITH_NEAR_EVENT_NAME = "login_with_near"
     const val CREATE_NEW_ACCOUNT_EVENT_NAME = "create_new_account"
     const val CONTACTS_PERMISSION_GRANTED_EVENT_NAME = "contacts_permission_granted"

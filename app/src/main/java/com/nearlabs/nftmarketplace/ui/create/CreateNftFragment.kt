@@ -15,6 +15,8 @@ import com.nearlabs.nftmarketplace.databinding.FragmentCreateNftBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentHistoryBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.util.AppConstants
+import com.nearlabs.nftmarketplace.util.AppConstants.CREATE_NFT_NEXT_BUTTON_EVENT_NAME
 import com.nearlabs.nftmarketplace.viewmodel.CreateNftViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -45,7 +47,11 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
     }
 
     private fun initListeners() {
-        binding.btnAction.setOnClickListener { viewModel.nextStep() }
+        binding.btnAction.setOnClickListener {
+            AppConstants.logAppsFlyerEvent(CREATE_NFT_NEXT_BUTTON_EVENT_NAME,requireContext())
+
+            viewModel.nextStep()
+        }
         binding.btnClose.setOnClickListener {
             dismiss()
         }

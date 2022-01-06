@@ -2,7 +2,6 @@ package com.nearlabs.nftmarketplace.repository
 
 import com.nearlabs.nftmarketplace.data.networks.response.DtoWallet
 import com.nearlabs.nftmarketplace.data.networks.response.DtoWalletResponse
-import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.domain.model.nft.NFT
 import com.nearlabs.nftmarketplace.domain.model.nft.NFTAuthor
 import com.nearlabs.nftmarketplace.domain.model.nft.NFTInfo
@@ -39,15 +38,15 @@ object DummyDataGenerator {
         "Courtney Henry"
     )
 
-    fun contacts(): List<Contact> {
-        val names = contactNames()
-        return (0..100).map {
-            Contact(
-                name = names[it % names.size],
-                nick = "@johndoe",
-            )
-        }
-    }
+//    fun contacts(): List<Contact> {
+//        val names = contactNames()
+//        return (0..100).map {
+//            Contact(
+//                name = names[it % names.size],
+//                nick = "@johndoe",
+//            )
+//        }
+//    }
 
     fun NFTs(): List<NFT> {
         val names = assetNames()
