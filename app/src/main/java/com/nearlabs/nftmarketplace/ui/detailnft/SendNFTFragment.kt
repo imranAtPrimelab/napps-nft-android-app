@@ -7,6 +7,7 @@ import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentSendNftBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.util.AppConstants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +24,7 @@ class SendNFTFragment : BaseFragment(R.layout.fragment_send_nft) {
         binding.btnClose.setOnClickListener { popBack() }
         binding.nftSendButton.setOnClickListener {
             // TODO AppsFlyer 16
+            AppConstants.logAppsFlyerEvent(AppConstants.SEND_NFT_BUTTON_EVENT_NAME,it.context)
         }
     }
 

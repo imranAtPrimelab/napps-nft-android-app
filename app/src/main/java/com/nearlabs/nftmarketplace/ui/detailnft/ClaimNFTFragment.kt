@@ -6,6 +6,8 @@ import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentClaimNftBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.util.AppConstants
+import com.nearlabs.nftmarketplace.util.AppConstants.CLAIM_NFT_EVENT_NAME
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +23,7 @@ class ClaimNFTFragment : BaseFragment(R.layout.fragment_claim_nft) {
     private fun initListeners() {
         binding.nftClaimButton.setOnClickListener {
             // TODO AppsFlyer 10
+            AppConstants.logAppsFlyerEvent(CLAIM_NFT_EVENT_NAME,it.context)
         }
     }
 
