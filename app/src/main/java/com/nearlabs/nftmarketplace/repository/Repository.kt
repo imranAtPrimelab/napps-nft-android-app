@@ -71,10 +71,6 @@ class Repository(
         DummyDataGenerator.NFTs()
     }
 
-    suspend fun getDummyPeoples() = safeCall {
-        DummyDataGenerator.peoples()
-    }
-
     suspend fun getDummyWallets() = safeCall {
         DummyDataGenerator.wallets().wallets?.map { it.toDomainModel() } ?: emptyList()
     }
