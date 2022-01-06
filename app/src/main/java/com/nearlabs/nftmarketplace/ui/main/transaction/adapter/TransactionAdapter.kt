@@ -39,8 +39,8 @@ class TransactionViewHolder(
         binding.tvOrderNumber.text = item?.identifier()
         binding.tvTimestamp.text = item?.getPrettyTime()
         binding.tvDesc.text = when (item?.direction) {
-            is TransactionDirection.Incoming -> "Receive from ${item.sender.address}"
-            is TransactionDirection.Outgoing -> "Sent to ${item.receiver.name}"
+            is TransactionDirection.Incoming -> "Receive from ${item.counterParty?.name}"
+            is TransactionDirection.Outgoing -> "Sent to ${item.counterParty?.name}"
             else -> ""
         }
     }

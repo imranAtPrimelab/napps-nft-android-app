@@ -3,43 +3,64 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable-v24/bg_close.xml" value="0.15092592592592594" />
-        <entry key="app/src/main/res/drawable-v24/foreground_closewallet.xml" value="0.15092592592592594" />
-        <entry key="app/src/main/res/drawable/background_bottom_sheet.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/bg_bottom_dialog_round.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/bg_contact.xml" value="0.153125" />
-        <entry key="app/src/main/res/drawable/bg_dashed_rectangle.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/bg_edittext_stroke.xml" value="0.15092592592592594" />
-        <entry key="app/src/main/res/drawable/bg_nft_label.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/bg_round_rectangle_stroke.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/bg_round_shape.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/ic_arrow_down.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/ic_arrow_forward.xml" value="0.15092592592592594" />
-        <entry key="app/src/main/res/drawable/ic_arrow_up.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/ic_checked.xml" value="0.153125" />
-        <entry key="app/src/main/res/drawable/ic_default_profile.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/ic_opposing_arrows.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/ic_pattern_consent.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/ic_send.xml" value="0.16458333333333333" />
-        <entry key="app/src/main/res/drawable/semi_curved_bg.xml" value="0.15092592592592594" />
+        <entry key="../../../../layout/custom_preview.xml" value="0.578125" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/activity_main.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/dialog_create_nft.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/dialog_send_consent_ntf.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/dialog_send_nft.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_claim_nft.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_create_nft.xml" value="0.16304347826086957" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_create_nft_preview.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_gift_nft.xml" value="0.16304347826086957" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_home.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_nft_minted.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_send_nft.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_signup.xml" value="0.23777173913043478" />
+        <entry key="app/src/main/res/drawable/background_bottom_sheet.xml" value="0.5692708333333333" />
+        <entry key="app/src/main/res/drawable/background_dash_rectangle.xml" value="0.7361111111111112" />
+        <entry key="app/src/main/res/drawable/bg_bottom_dialog_round.xml" value="0.5692708333333333" />
+        <entry key="app/src/main/res/drawable/bg_edittext_fill_selected.xml" value="0.14166666666666666" />
+        <entry key="app/src/main/res/drawable/bg_edittext_small.xml" value="0.14166666666666666" />
+        <entry key="app/src/main/res/drawable/bg_edittext_stroke.xml" value="0.14166666666666666" />
+        <entry key="app/src/main/res/drawable/bg_round_rectangle_stroke.xml" value="0.5692708333333333" />
+        <entry key="app/src/main/res/drawable/bg_stroke_circle.xml" value="0.891726251276813" />
+        <entry key="app/src/main/res/drawable/box_selected_bg.xml" value="0.11875" />
+        <entry key="app/src/main/res/drawable/ic_arrow_back.xml" value="0.3148148148148148" />
+        <entry key="app/src/main/res/drawable/ic_arrow_forward.xml" value="0.42777777777777776" />
+        <entry key="app/src/main/res/drawable/ic_bg_create_nft_dialog.xml" value="0.5692708333333333" />
+        <entry key="app/src/main/res/drawable/ic_flower.xml" value="0.5692708333333333" />
+        <entry key="app/src/main/res/drawable/ic_opposing_arrows.xml" value="0.5692708333333333" />
+        <entry key="app/src/main/res/drawable/ic_selected.xml" value="0.5692708333333333" />
+        <entry key="app/src/main/res/drawable/ic_share_app.xml" value="0.5692708333333333" />
+        <entry key="app/src/main/res/drawable/ic_wallet.xml" value="0.5692708333333333" />
+        <entry key="app/src/main/res/drawable/input_field_bg.xml" value="0.891726251276813" />
+        <entry key="app/src/main/res/drawable/semi_curved_bg.xml" value="0.5692708333333333" />
+        <entry key="app/src/main/res/drawable/tablayout_border.xml" value="0.5692708333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19630192502532928" />
-        <entry key="app/src/main/res/layout/dialog_change_name.xml" value="0.14322916666666666" />
-        <entry key="app/src/main/res/layout/dialog_change_wallet.xml" value="0.14322916666666666" />
-        <entry key="app/src/main/res/layout/dialog_successful_nft.xml" value="0.3602485479162864" />
-        <entry key="app/src/main/res/layout/fragment_claim_nft.xml" value="0.1484375" />
-        <entry key="app/src/main/res/layout/fragment_consent.xml" value="0.19878105642994243" />
-        <entry key="app/src/main/res/layout/fragment_create_nft.xml" value="0.19520734408893986" />
-        <entry key="app/src/main/res/layout/fragment_create_nft_preview.xml" value="0.26846582856794005" />
-        <entry key="app/src/main/res/layout/fragment_gift_nft.xml" value="0.19122954864736086" />
-        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.11510416666666666" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1640625" />
+        <entry key="app/src/main/res/layout/custom_setting_item.xml" value="0.5442708333333334" />
+        <entry key="app/src/main/res/layout/custom_setting_item_view.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/custom_setting_wallet_view.xml" value="0.5489583333333333" />
+        <entry key="app/src/main/res/layout/dialog_change_name.xml" value="0.4306256306760848" />
+        <entry key="app/src/main/res/layout/dialog_create_nft.xml" value="0.5489583333333333" />
+        <entry key="app/src/main/res/layout/fragment_create_nft.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_gift_nft.xml" value="0.12552083333333333" />
+        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.4306256306760848" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.31238095238095237" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.21822916666666667" />
-        <entry key="app/src/main/res/layout/fragment_send_nft.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_sent_history.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/fragment_nft_minted.xml" value="0.4233576642335766" />
+        <entry key="app/src/main/res/layout/fragment_otp.xml" value="0.2345389554446723" />
+        <entry key="app/src/main/res/layout/fragment_sent_history.xml" value="0.8890625" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.21822916666666667" />
-        <entry key="app/src/main/res/layout/ic_pattern_consent.xml" value="0.14722222222222223" />
-        <entry key="app/src/main/res/layout/item_contacts.xml" value="2.3241820708129413" />
+        <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.4306256306760848" />
+        <entry key="app/src/main/res/layout/inc_nft_preview.xml" value="0.4306256306760848" />
+        <entry key="app/src/main/res/layout/inc_nft_upload.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_history_tabs.xml" value="0.8890625" />
+        <entry key="app/src/main/res/layout/list_item_progress.xml" value="0.4306256306760848" />
+        <entry key="app/src/main/res/layout/list_item_transaction.xml" value="0.4306256306760848" />
+        <entry key="app/src/main/res/menu/main_bottom_nav.xml" value="0.8718079673135853" />
       </map>
     </option>
   </component>

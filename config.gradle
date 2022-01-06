@@ -40,6 +40,7 @@ rootProject.ext.firebaseBom = '29.0.0'
 rootProject.ext.glide = '4.12.0'
 rootProject.ext.timber_log = '4.7.1'
 rootProject.ext.gson = '2.8.8'
+rootProject.ext.appsflyer = '6.3.2'
 
 rootProject.ext.stetho = '1.6.0'
 
@@ -106,6 +107,9 @@ rootProject.ext.deps = [
 
         // PrettyTime
         prettyTime             : 'org.ocpsoft.prettytime:prettytime:4.0.4.Final',
-        threeTenTime           : 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+        threeTenTime           : 'com.jakewharton.threetenabp:threetenabp:1.2.1',
 
+
+        // For Apps Flyer
+        appsflyer              : "com.appsflyer:af-android-sdk:$appsflyer"
 ]
