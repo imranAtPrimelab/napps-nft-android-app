@@ -11,7 +11,7 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(private val repository: Repository,private val sharePrefsRepository: SharePrefs) : ViewModel() {
     var currentEmail: String = ""
     var currentPhone: String = ""
-    var usesPhone: Boolean = false
+    var usesPhone: Boolean = true
     var walletName = sharePrefsRepository.walletName
     val loginType = sharePrefsRepository.loginType
 
