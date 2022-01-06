@@ -2,6 +2,8 @@ package com.nearlabs.nftmarketplace.repository
 
 import com.nearlabs.nftmarketplace.data.networks.response.DtoWallet
 import com.nearlabs.nftmarketplace.data.networks.response.DtoWalletResponse
+import com.nearlabs.nftmarketplace.domain.model.Contact
+
 import com.nearlabs.nftmarketplace.domain.model.nft.NFT
 import com.nearlabs.nftmarketplace.domain.model.nft.NFTAuthor
 import com.nearlabs.nftmarketplace.domain.model.nft.NFTInfo
@@ -11,7 +13,6 @@ import com.nearlabs.nftmarketplace.domain.model.transaction.CounterParty
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionDirection
 import org.threeten.bp.LocalDateTime
 import kotlin.random.Random
-import com.nearlabs.nftmarketplace.util.models.Contact
 
 
 /**
@@ -38,15 +39,15 @@ object DummyDataGenerator {
         "Courtney Henry"
     )
 
-//    fun contacts(): List<Contact> {
-//        val names = contactNames()
-//        return (0..100).map {
-//            Contact(
-//                name = names[it % names.size],
-//                nick = "@johndoe",
-//            )
-//        }
-//    }
+    fun contacts(): List<Contact> {
+        val names = contactNames()
+        return (0..100).map {
+            Contact(
+                name = names[it % names.size],
+                nick = "@johndoe",
+            )
+        }
+    }
 
     fun NFTs(): List<NFT> {
         val names = assetNames()
@@ -100,12 +101,11 @@ object DummyDataGenerator {
 
     fun peoples(): List<Contact> {
         return listOf(
-            Contact("DR", "Darlene Robertson", "@johndoe"),
-            Contact("JJ", "Jacob Jones", "@johndoe"),
-            Contact("JW", "Jenny Wilson", "@johndoe"),
-            Contact("CW", "Cameron Williamson", "@johndoe"),
-            Contact("DS", "Darrell Steward", "@johndoe"),
-            Contact("CH", "Courtney Henry", "@johndoe")
+            Contact("DR", "Darlene Robertson"),
+            Contact("JW", "Jenny Wilson"),
+            Contact("CW", "Cameron Williamson"),
+            Contact("DS", "Darrell Steward"),
+            Contact("CH", "Courtney Henry")
         )
     }
 }

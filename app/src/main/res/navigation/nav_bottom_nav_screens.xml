@@ -19,14 +19,14 @@
         android:label="Create NFT"
         />
 
-    <dialog
+    <fragment
         android:id="@+id/historyFragment"
-        android:name="com.nearlabs.nftmarketplace.ui.sendNFTDialog.SendNFTBottomSheetDialog"
+        android:name="com.nearlabs.nftmarketplace.ui.main.HistoryFragment"
         android:label="HistoryFragment">
         <action
             android:id="@+id/toSelectPeople"
             app:destination="@id/selectPeopleBottomSheetDialog" />
-    </dialog>
+    </fragment>
 
 
     <fragment
@@ -56,5 +56,13 @@
     <dialog
         android:id="@+id/consentBottomSheetDialog"
         android:name="com.nearlabs.nftmarketplace.ui.sendNFTDialog.ConsentBottomSheetDialog"
-        android:label="ConsentBottomSheetDialog" />
+        android:label="ConsentBottomSheetDialog" >
+        <action
+            android:id="@+id/toResultSendNft"
+            app:destination="@id/sentNFTResultBottomSheetDialog" />
+    </dialog>
+    <dialog
+        android:id="@+id/sentNFTResultBottomSheetDialog"
+        android:name="com.nearlabs.nftmarketplace.ui.sendNFTDialog.SentNFTResultBottomSheetDialog"
+        android:label="SentNFTResultBottomSheetDialog" />
 </navigation>

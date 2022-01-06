@@ -18,6 +18,7 @@ import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.SEND_NFT_DIALOG_NEXT_EVENT_NAME
 import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SendNFTBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private lateinit var binding: DialogSendNftBinding
     private val viewModel by activityViewModels<SendNFTViewModel>()

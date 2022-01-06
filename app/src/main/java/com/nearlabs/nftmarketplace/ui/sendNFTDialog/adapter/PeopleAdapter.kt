@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.ItemSentNftPeopleBinding
+import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.ui.base.adapter.BaseSelectionAdapter
-import com.nearlabs.nftmarketplace.util.models.Contact
 
 class PeopleAdapter(private val onItemClicked: ((Contact, Int) -> Unit)? = null) :
     BaseSelectionAdapter<Contact, ItemPeopleAdapterViewHolder>() {
@@ -33,9 +33,9 @@ class ItemPeopleAdapterViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(data: Contact, selected: Boolean) {
-        binding.tvNameShort.text = data.nameShort
-        binding.tvName.text = data.nameLong
-        binding.tvDesc.text = data.username
+        binding.tvNameShort.text = data.name.take(2)
+        binding.tvName.text = data.name
+        binding.tvDesc.text = data.name
 
         binding.imageSelected.setImageResource(if (selected) R.drawable.ic_selected else R.drawable.ic_un_select)
 
