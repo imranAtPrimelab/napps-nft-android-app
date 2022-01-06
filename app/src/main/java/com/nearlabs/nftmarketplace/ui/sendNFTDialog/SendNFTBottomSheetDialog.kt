@@ -12,7 +12,6 @@ import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.databinding.DialogSendNftBinding
 import com.nearlabs.nftmarketplace.domain.model.nft.NFT
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
-import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.SendNFTAdapter
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.SEND_NFT_DIALOG_NEXT_EVENT_NAME
@@ -27,7 +26,6 @@ class SendNFTBottomSheetDialog : BaseBottomSheetDialogFragment() {
         SendNFTAdapter { ntf, position ->
             selectNTF(ntf, position)
         }
-            .setMode(MULTI)
     }
 
     private fun selectNTF(ntf: NFT, position: Int) {
@@ -66,7 +64,15 @@ class SendNFTBottomSheetDialog : BaseBottomSheetDialogFragment() {
 
         binding.btnNext.setOnClickListener {
             AppConstants.logAppsFlyerEvent(SEND_NFT_DIALOG_NEXT_EVENT_NAME, it.context)
-            val items = nftAdapter.selectedPosition.map { nftAdapter.getItemAtPosition(it) }
+
+            val selectedNFt = nftAdapter.selectedPosition.mapNotNull { position ->
+                nftAdapter.getItemAtPosition(
+                    position
+                )
+            }.firstOrNull() ?: return@setOnClickListener
+
+            viewModel.transactionItem = selectedNFt
+
             findNavController().navigate(R.id.toSelectPeople)
         }
     }
