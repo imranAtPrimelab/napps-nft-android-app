@@ -1,31 +1,46 @@
 package com.nearlabs.nftmarketplace.ui.create
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.nearlabs.nftmarketplace.R
-import com.nearlabs.nftmarketplace.common.extensions.collect
-import com.nearlabs.nftmarketplace.common.extensions.pagingCollect
+import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentCreateNftBinding
-import com.nearlabs.nftmarketplace.databinding.FragmentHistoryBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
-import com.nearlabs.nftmarketplace.ui.base.BaseFragment
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.CREATE_NFT_NEXT_BUTTON_EVENT_NAME
 import com.nearlabs.nftmarketplace.viewmodel.CreateNftViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import me.rosuh.filepicker.config.FilePickerManager
+import timber.log.Timber
+import java.io.File
 
 @AndroidEntryPoint
 class CreateNftFragment : BaseBottomSheetDialogFragment() {
 
     private val binding by viewBinding(FragmentCreateNftBinding::bind)
     private val viewModel by activityViewModels<CreateNftViewModel>()
+    private var selectedFile: File? = null
+
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (granted) {
+            FilePickerManager
+                .from(this)
+                .maxSelectable(1)
+                .showCheckBox(false)
+                .forResult(FilePickerManager.REQUEST_CODE)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,18 +64,42 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
     private fun initListeners() {
         binding.btnAction.setOnClickListener {
             when (viewModel.currentStep) {
-                CreateNftViewModel.STEP_UPLOAD -> AppConstants.logAppsFlyerEvent(
-                    CREATE_NFT_NEXT_BUTTON_EVENT_NAME,
-                    it.context
-                )
+                CreateNftViewModel.STEP_UPLOAD -> {
+                    AppConstants.logAppsFlyerEvent(
+                        CREATE_NFT_NEXT_BUTTON_EVENT_NAME,
+                        it.context
+                    )
+                    viewModel.nextStep()
+                }
                 CreateNftViewModel.STEP_PREVIEW -> {
-                    // TODO AppsFlyer 9
+                    selectedFile?.let { file ->
+                        observeResultFlow(
+                            viewModel.createNft(
+                                file,
+                                binding.rootUpload.titleEditText.text.toString(),
+                                binding.rootUpload.descriptionEditText.text.toString(),
+                                binding.rootUpload.attributeNameEditText.text.toString(),
+                                binding.rootUpload.attributeValueEditText.text.toString()
+                            ), successHandler = {
+                                viewModel.nextStep()
+                            }, errorHandler = {
+                                Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                            }
+                        )
+                    } ?: run {
+                        Toast.makeText(requireContext(), "Please select file!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
-            viewModel.nextStep()
         }
         binding.btnClose.setOnClickListener {
             dismiss()
+        }
+        binding.rootUpload.selectFileButtonView.setOnClickListener {
+            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+        viewModel.userNameObservable.observeForever {
+            binding.rootPreview.tvAuthor.text = it
         }
     }
 
@@ -76,10 +115,33 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
         binding.rootUpload.root.visibility =
             if (step == CreateNftViewModel.STEP_UPLOAD) View.VISIBLE else View.GONE
         binding.rootPreview.root.visibility =
-            if (step == CreateNftViewModel.STEP_PREVIEW) View.VISIBLE else View.GONE
+            if (step == CreateNftViewModel.STEP_PREVIEW) {
+                binding.rootPreview.tvNftName.text = binding.rootUpload.titleEditText.text.toString()
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
 
         if (viewModel.isFinalStep()) {
             dismiss()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            FilePickerManager.REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val list = FilePickerManager.obtainData()
+                    list.firstOrNull()?.let { filePath ->
+                        Timber.i("File %s", filePath)
+                        binding.rootUpload.selectedFilePath.text = filePath
+                        selectedFile = File(filePath)
+                    }
+                } else {
+                    Toast.makeText(requireActivity(), "You didn't choose anything~", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }

@@ -1,17 +1,24 @@
 package com.nearlabs.nftmarketplace.repository
 
 import com.google.gson.JsonObject
+import com.google.gson.Gson
+import com.nearlabs.nftmarketplace.common.extensions.getMimeType
 import com.nearlabs.nftmarketplace.common.extensions.safeCall
 import com.nearlabs.nftmarketplace.data.networks.*
 import com.nearlabs.nftmarketplace.data.networks.request.DtoLoginRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoSendTransactionRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
+import com.nearlabs.nftmarketplace.data.networks.request.NftCreateRequest
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.domain.model.nft.toDomainModel
 import com.nearlabs.nftmarketplace.domain.model.toDomain
 import com.nearlabs.nftmarketplace.domain.model.toDomainModel
 import com.nearlabs.nftmarketplace.domain.model.transaction.TransactionDirection
 import com.nearlabs.nftmarketplace.domain.model.transaction.toDomainModel
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class Repository(
     private val api: Api,
@@ -90,9 +97,11 @@ class Repository(
             )
             val dtoResponse = userApi.createUser(request).apply {
                 sharePrefs.userId = userInfo.id
+                sharePrefs.userName = userInfo.fullName ?: ""
                 sharePrefs.accessToken = accessToken
                 sharePrefs.idToken = idToken
                 sharePrefs.refreshToken = refreshToken
+                sharePrefs.userInfo = Gson().toJson(userInfo)
             }
             dtoResponse.userInfo.toDomain()
         }
@@ -127,5 +136,16 @@ class Repository(
     suspend fun sendTransaction(request: DtoSendTransactionRequest) = safeCall {
         val response = transactionApi.sendTransaction(request)
         response.isSuccessful
+    }
+
+    suspend fun createNft(nftCreateRequest: NftCreateRequest) = safeCall {
+        val filePart = MultipartBody.Part.createFormData(
+            "file",
+            nftCreateRequest.file.name,
+            nftCreateRequest.file.asRequestBody(nftCreateRequest.file.getMimeType().toMediaTypeOrNull())
+        )
+        val nftInfoJsonString = Gson().toJson(nftCreateRequest.nftInformation)
+        val dtoResponse = nftApi.createNft(nftInfoJsonString.toRequestBody(), filePart)
+        dtoResponse.message
     }
 }

@@ -98,6 +98,9 @@ dependencies {
     // For Apps Flyer
     implementation rootProject.deps.appsflyer
 
+    // For File Picker
+    implementation rootProject.deps.filePicker
+
 }
 
 kapt {

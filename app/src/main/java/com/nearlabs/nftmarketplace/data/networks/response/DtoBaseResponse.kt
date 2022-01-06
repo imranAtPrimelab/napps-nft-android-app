@@ -8,3 +8,8 @@ data class DtoBaseResponse<T>(
     @SerializedName("data")
     val data: T
 )
+
+data class DtoMessageResponse (
+    @SerializedName("message")
+    val message: String,
+)
