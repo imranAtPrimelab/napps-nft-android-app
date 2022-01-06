@@ -15,7 +15,6 @@ import org.threeten.bp.LocalDateTime
 import kotlin.random.Random
 
 
-
 /**
  * This is the dummy data generator for testing purpose.
  * It will be removed once integrated with API from backend.
@@ -100,18 +99,13 @@ object DummyDataGenerator {
         )
     }
 
-    fun peoples(): List<com.nearlabs.nftmarketplace.util.models.Contact> {
+    fun peoples(): List<Contact> {
         return listOf(
-//            com.nearlabs.nftmarketplace.domain.model.Contact("DR", "Darlene Robertson", "@johndoe"),
-//            com.nearlabs.nftmarketplace.domain.model.Contact("JJ", "Jacob Jones", "@johndoe"),
-//            com.nearlabs.nftmarketplace.domain.model.Contact("JW", "Jenny Wilson", "@johndoe"),
-//            com.nearlabs.nftmarketplace.domain.model.Contact(
-//                "CW",
-//                "Cameron Williamson",
-//                "@johndoe"
-//            ),
-//            com.nearlabs.nftmarketplace.domain.model.Contact("DS", "Darrell Steward", "@johndoe"),
-//            com.nearlabs.nftmarketplace.domain.model.Contact("CH", "Courtney Henry", "@johndoe")
+            Contact("DR", "Darlene Robertson"),
+            Contact("JW", "Jenny Wilson"),
+            Contact("CW", "Cameron Williamson"),
+            Contact("DS", "Darrell Steward"),
+            Contact("CH", "Courtney Henry")
         )
     }
 }
