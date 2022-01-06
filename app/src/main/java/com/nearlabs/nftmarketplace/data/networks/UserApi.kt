@@ -3,7 +3,9 @@ package com.nearlabs.nftmarketplace.data.networks
 import com.google.gson.JsonObject
 import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
 import com.nearlabs.nftmarketplace.data.networks.response.DtoContact
+import com.nearlabs.nftmarketplace.data.networks.response.DtoTransactionResponse
 import com.nearlabs.nftmarketplace.data.networks.response.DtoUserInfoResponse
+import com.nearlabs.nftmarketplace.data.networks.response.DtoUserProfileResponse
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
