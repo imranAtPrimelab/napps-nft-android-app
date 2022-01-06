@@ -1,12 +1,18 @@
 package com.nearlabs.nftmarketplace.ui.setting
 
+import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
+import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
+import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentSettingBinding
+import com.nearlabs.nftmarketplace.domain.model.User
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +35,22 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
         binding.csivName.setOnClickListener {
             findNavController().navigate(R.id.toChangeName)
         }
+
+        binding.btnBack.setOnClickListener {
+            popBack()
+        }
     }
 
-    private fun initObserve() {}
+    private fun initObserve() {
+        observeResultFlow(
+            viewModel.getUserProfile(), successHandler = {
+                binding.cswvWallet.setWalletName(it.walletId)
+                binding.csivName.setValue(it.name)
+                binding.csivEmail.setValue(it.email)
+                binding.csivPhone.setValue(it.phone)
+            }, errorHandler = {
+                Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
+                    .show()
+            })
+    }
 }

@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"
+        android:id="@+id/btnBack"
         app:layout_constraintBottom_toBottomOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvTitle"
@@ -57,7 +58,7 @@
         android:background="@drawable/bg_round_rectangle_stroke"
         android:paddingHorizontal="16dp"
         android:paddingVertical="24dp"
-        app:cswv_name="john.near"
+        tools:cswv_name="john.near"
         app:layout_constraintEnd_toEndOf="@id/tvConnectedWallet"
         app:layout_constraintStart_toStartOf="@id/tvConnectedWallet"
         app:layout_constraintTop_toBottomOf="@id/tvConnectedWallet" />
@@ -92,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:csiv_title="Name"
-            app:csiv_value="John Doe" />
+            tools:csiv_value="John Doe" />
 
         <com.nearlabs.nftmarketplace.ui.custom.CustomSettingItemView
             android:id="@+id/csiv_email"
@@ -100,14 +101,14 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="12dp"
             app:csiv_title="Email Address"
-            app:csiv_value="johndoe@gmail.com" />
+            tools:csiv_value="johndoe@gmail.com" />
 
         <com.nearlabs.nftmarketplace.ui.custom.CustomSettingItemView
             android:id="@+id/csiv_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:csiv_title="Phone number"
-            app:csiv_value="+1 748 485 9494" />
+            tools:csiv_value="+1 748 485 9494" />
     </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
