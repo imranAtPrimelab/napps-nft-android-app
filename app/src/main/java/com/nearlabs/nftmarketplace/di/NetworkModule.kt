@@ -1,6 +1,7 @@
 package com.nearlabs.nftmarketplace.di
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.nearlabs.nftmarketplace.BuildConfig
 import com.nearlabs.nftmarketplace.data.networks.*
 import com.nearlabs.nftmarketplace.data.networks.interceptor.TokenInterceptor
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
@@ -10,6 +11,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -48,10 +50,15 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideHttpClient(tokenInterceptor: Interceptor): OkHttpClient {
-        return OkHttpClient.Builder()
+        val builder =  OkHttpClient.Builder()
             .addNetworkInterceptor(tokenInterceptor)
             .addNetworkInterceptor(StethoInterceptor())
-            .build()
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor()
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            builder.addInterceptor(loggingInterceptor)
+        }
+        return builder.build()
     }
 
     @Provides
