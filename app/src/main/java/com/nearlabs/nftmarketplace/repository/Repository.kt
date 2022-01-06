@@ -4,6 +4,7 @@ import com.google.gson.JsonObject
 import com.nearlabs.nftmarketplace.common.extensions.safeCall
 import com.nearlabs.nftmarketplace.data.networks.*
 import com.nearlabs.nftmarketplace.data.networks.request.DtoLoginRequest
+import com.nearlabs.nftmarketplace.data.networks.request.DtoSendTransactionRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.domain.model.nft.toDomainModel
@@ -26,8 +27,8 @@ class Repository(
 
     suspend fun getContacts() = safeCall {
         // TODO: need to pass owner id
-        val dtoContacts = contactApi.getContacts("")
-        dtoContacts.map { it.toDomainModel() }
+        val dtoContacts = contactApi.getContacts("").data
+        dtoContacts.mapNotNull { it.toDomainModel() }
     }
 
     suspend fun getTransactions() = safeCall {
@@ -126,4 +127,10 @@ class Repository(
 
         }
 
+
+
+    suspend fun sendTransaction(request: DtoSendTransactionRequest) = safeCall {
+        val response = transactionApi.sendTransaction(request)
+        response.isSuccessful
+    }
 }
