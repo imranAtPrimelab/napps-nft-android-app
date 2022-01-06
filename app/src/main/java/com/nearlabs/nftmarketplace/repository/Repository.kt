@@ -26,8 +26,7 @@ class Repository(
     fun isLoggedIn() = sharePrefs.idToken.isNotEmpty()
 
     suspend fun getContacts() = safeCall {
-        // TODO: need to pass owner id
-        val dtoContacts = contactApi.getContacts("").data
+        val dtoContacts = contactApi.getContacts(sharePrefs.userId).data
         dtoContacts.mapNotNull { it.toDomainModel() }
     }
 
