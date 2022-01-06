@@ -1,29 +1,32 @@
-package com.nearlabs.nftmarketplace.ui.create.dialog
+package com.nearlabs.nftmarketplace.ui.sendNFTDialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.nearlabs.nftmarketplace.R
-import com.nearlabs.nftmarketplace.databinding.DialogCreateNftBinding
+import com.nearlabs.nftmarketplace.common.extensions.popBack
+import com.nearlabs.nftmarketplace.databinding.DialogSendNftResultBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 
 
-class CreateNFTDialog: BaseBottomSheetDialogFragment() {
+class SentNFTResultBottomSheetDialog : BaseBottomSheetDialogFragment() {
     override fun getTheme() = R.style.BottomSheetTransparentDialog
 
-    private lateinit var binding: DialogCreateNftBinding
+    private lateinit var binding: DialogSendNftResultBinding
 
+    private val viewModel by activityViewModels<SendNFTViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dialog?.setCancelable(true)
+        dialog?.setCancelable(false)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = DialogCreateNftBinding.inflate(inflater, container, false)
+        binding = DialogSendNftResultBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -33,13 +36,11 @@ class CreateNFTDialog: BaseBottomSheetDialogFragment() {
     }
 
     private fun initListeners() {
-        binding.tvCreateNFTDialog.setOnClickListener {
-
+        binding.btnClose.setOnClickListener {
+            popBack()
         }
 
-        binding.tvSendNFTDialog.setOnClickListener {
-
-        }
+        binding.btnOpenHistory.setOnClickListener { }
     }
 
 }

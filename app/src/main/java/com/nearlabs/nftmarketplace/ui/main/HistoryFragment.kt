@@ -2,14 +2,17 @@ package com.nearlabs.nftmarketplace.ui.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentHistoryBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.ui.create.CreateNftFragment
 import com.nearlabs.nftmarketplace.ui.main.transaction.TransactionFragment
 import com.nearlabs.nftmarketplace.ui.main.transaction.adapter.TransactionPagerAdapter
+import com.nearlabs.nftmarketplace.ui.sendNFTDialog.SendNFTBottomSheetDialog
 
 class HistoryFragment : BaseFragment(R.layout.fragment_history) {
 
@@ -20,6 +23,7 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        initListeners()
     }
 
     private fun initViews() {
@@ -45,6 +49,13 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
         tabLayoutMediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = titles[position]
         }.apply { attach() }
+    }
+
+    private fun initListeners() {
+        binding.btnSendNft.setOnClickListener {
+            val sendNft = SendNFTBottomSheetDialog()
+            sendNft.show(childFragmentManager, sendNft.tag)
+        }
     }
 
     override fun onDestroyView() {

@@ -39,6 +39,7 @@
             android:textSize="30sp" />
 
         <TextView
+            android:id="@+id/btnSendNft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"

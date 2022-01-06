@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NearLabs</string>
+    <string name="app_name">NFT Creation</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="send_nft">Send NFT</string>
@@ -28,8 +28,9 @@
     <string name="request_access">NEAR Labs is requesting to access your account.</string>
     <string name="does_not_allow_app">This does not allow the app to transfer any tokens.</string>
     <string name="more_info">More Info</string>
-    <string name="deny">Allow</string>
-    <string name="allow">Deny</string>
+    <string name="deny">Deny</string>
+    <string name="allow">Allow</string>
+    <string name="ntf_sent_success">NFT Vecotry Illustartion sent successfully to</string>
 
 
     <string name="setting_title">Settings</string>
@@ -51,4 +52,6 @@
     <string name="transaction_all">All</string>
     <string name="transaction_sent">Sent</string>
     <string name="transaction_recv">Recv</string>
+    <string name="open_history">Open History</string>
+    <string name="send_nft_back">Back</string>
 </resources>

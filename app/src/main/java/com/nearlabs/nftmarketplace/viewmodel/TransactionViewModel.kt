@@ -10,18 +10,18 @@ import javax.inject.Inject
 class TransactionViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     fun getRecentTransactions() = resultFlow {
-        repository.getRecentTransactions()
+        repository.getDummyTransactions()
     }
 
     fun getTransactions() = resultFlow {
-        repository.getTransactions()
+        repository.getDummyTransactions()
     }
 
     fun getSentTransactions() = resultFlow {
-        repository.getSentTransactions()
+        repository.getDummySentTransactions()
     }
 
     fun getRecvTransactions() = resultFlow {
-        repository.getRecvTransactions()
+        repository.getDummyRecvTransactions()
     }
 }

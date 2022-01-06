@@ -6,7 +6,7 @@ import android.view.ViewGroup
 
 import androidx.recyclerview.widget.RecyclerView
 import com.nearlabs.nftmarketplace.databinding.ItemContactsBinding
-import com.nearlabs.nftmarketplace.util.models.Contact
+import com.nearlabs.nftmarketplace.domain.model.Contact
 
 
 class ContactListAdapter(private val items: List<Contact>, private val context : Context) :
@@ -22,9 +22,9 @@ class ContactListAdapter(private val items: List<Contact>, private val context :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.nameShort.text = items[position].nameShort
-        holder.binding.nameLong.text = items[position].nameLong
-        holder.binding.username.text = items[position].username
+        holder.binding.nameShort.text = items[position].name.take(2)
+        holder.binding.nameLong.text = items[position].name
+        holder.binding.username.text = items[position].name
         //holder.binding.checkStatus.setImageDrawable(text)
 
     }
