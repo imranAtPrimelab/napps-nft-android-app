@@ -78,13 +78,21 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            val items = peopleAdapter.selectedPosition.map { peopleAdapter.getItemAtPosition(it) }
+            val selectedRecipientId = peopleAdapter.selectedPosition.mapNotNull { peopleAdapter.getItemAtPosition(it) }
+
+            if (selectedRecipientId.isEmpty()) {
+                // error select empty people
+                return@setOnClickListener
+            }
+
+            viewModel.recipientId = selectedRecipientId
+
             findNavController().navigate(R.id.toConsent)
         }
     }
 
     private fun initObserve() {
-        observeResultFlow(viewModel.getPeople(),
+        observeResultFlow(viewModel.getContacts(),
             successHandler = {
                 peopleAdapter.setData(it)
             })

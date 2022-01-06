@@ -9,6 +9,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
+import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentLoginBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
@@ -32,7 +33,15 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     private fun initListeners() {
         binding.btnLogin.setOnClickListener {
             AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME,it.context)
-            findNavController().navigate(R.id.toOtp)
+            observeResultFlow(
+                userViewModel.loginUser(
+                    binding.etEmailPhoneLogin.text.toString()
+                ), successHandler = {
+                    findNavController().navigate(R.id.toOtp)
+                }, errorHandler = {
+                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
+                        .show()
+                })
         }
 
         binding.btnGetStarted.setOnClickListener {
@@ -43,6 +52,13 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         binding.tvPhoneLogin.setOnClickListener {
             AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
+            binding.etEmailPhone.hint = requireActivity().getString(R.string.phone_example)
+        }
+
+        binding.tvEmailLogin.setOnClickListener {
+            AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
+            binding.etEmailPhone.hint = requireActivity().getString(R.string.email_example)
+
         }
 
         binding.etEmailPhone.doAfterTextChanged {

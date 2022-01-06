@@ -10,6 +10,7 @@ import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.databinding.DialogSendConsentNtfBinding
+import com.nearlabs.nftmarketplace.domain.model.Wallet
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.WalletAdapter
 
@@ -44,9 +45,11 @@ class ConsentBottomSheetDialog : BaseBottomSheetDialogFragment() {
         binding.btnDeny.setOnClickListener { popBack() }
 
         binding.btnAllow.setOnClickListener {
-            findNavController().navigate(R.id.toResultSendNft)
+            val selectedWallet =
+                binding.spinner.selectedItem as? Wallet ?: return@setOnClickListener
+            viewModel.wallet = selectedWallet
+            sendTransaction()
         }
-
     }
 
     private fun initObserve() {
@@ -56,4 +59,10 @@ class ConsentBottomSheetDialog : BaseBottomSheetDialogFragment() {
             })
     }
 
+    private fun sendTransaction() {
+        observeResultFlow(viewModel.sendTransaction(),
+            successHandler = {
+                findNavController().navigate(R.id.toResultSendNft)
+            })
+    }
 }

@@ -43,8 +43,8 @@ object DummyDataGenerator {
         val names = contactNames()
         return (0..100).map {
             Contact(
-                name = names[it % names.size],
-                nick = "@johndoe",
+                firstName = names[it % names.size],
+                lastName = "@johndoe",
             )
         }
     }
@@ -99,13 +99,4 @@ object DummyDataGenerator {
         )
     }
 
-    fun peoples(): List<Contact> {
-        return listOf(
-            Contact("DR", "Darlene Robertson"),
-            Contact("JW", "Jenny Wilson"),
-            Contact("CW", "Cameron Williamson"),
-            Contact("DS", "Darrell Steward"),
-            Contact("CH", "Courtney Henry")
-        )
-    }
 }

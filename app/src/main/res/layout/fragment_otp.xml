@@ -14,136 +14,227 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:orientation="vertical">
+
 
             <RelativeLayout
-                android:id="@+id/rlTopBarOTPFrag"
                 android:layout_width="match_parent"
-                android:layout_height="56dp">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Verification"
-                    android:fontFamily="@font/inter_medium"
-                    android:textSize="28sp"
-                    android:textColor="@color/black"
-                    android:gravity="center"/>
+                android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_arrow_back"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="15dp"/>
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="89.5dp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/verification"
+                    android:textColor="@color/black"
+                    android:textSize="21sp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="105dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_close"
+                    android:id="@+id/close_signup">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/fg_close" />
+                </RelativeLayout>
 
             </RelativeLayout>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+
+
+            <TextView
+                android:id="@+id/sentCodeText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/rlTopBarOTPFrag"
-
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="26dp"
+                android:layout_marginTop="47dp"
+                android:fontFamily="@font/inter_regular"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:text="We have sent a 6-digit verification code to the email address"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="26dp"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/inter_regular"
-                    android:gravity="center"
-                    android:text="We have sent a 6-digit verification code to the email address"
+            <TextView
+                android:id="@+id/sentCodeTypeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:text="johndoe@gmail.com"
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                android:layout_gravity="center_horizontal"/>
 
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/etOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:hint="@string/enter_verification_code"
+                android:textColor="@color/black"
+                android:textColorHint="#808080"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="johndoe@gmail.com"
-                    android:textColor="@color/blue"
-                    android:textSize="20sp" />
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="6"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="26dp"
+                android:layout_marginTop="32dp">
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/etOtp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/inter_regular"
-                    android:gravity="center"
-                    android:hint="Enter Verification code"
-                    android:textColor="@color/black"
-                    android:textColorHint="#808080"
-                    android:textSize="14sp" />
-
-
-                <RelativeLayout
-                    android:id="@+id/btnContinue"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="46dp"
-                    android:layout_below="@+id/etEmailPhone"
-                    android:layout_marginHorizontal="36dp"
-                    android:layout_marginTop="14dp"
-                    android:background="@drawable/box_selected_bg"
-                    android:backgroundTint="@color/btndisabled_color"
+                    android:background="@drawable/bg_edittext_fill_selected"
+                    android:layout_marginEnd="12dp"
+                    android:id="@+id/edt1"
+                    android:cursorVisible="false"
                     android:gravity="center"
-                    android:paddingHorizontal="26dp">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_arrow_forward"
-                        android:fontFamily="@font/inter_medium"
-                        android:gravity="center"
-                        android:text="Continue"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginHorizontal="26dp"
-                    android:layout_marginTop="16dp"
-                    android:background="#E9E6E6"
-
+                    android:nextFocusForward="@id/edt2"
+                    android:maxLines="1"
+                    />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_edittext_fill_selected"
+                    android:layout_marginEnd="12dp"
+                    android:id="@+id/edt2"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:nextFocusForward="@id/edt3"
+                    android:maxLines="1"
+                    />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_edittext_fill_selected"
+                    android:layout_marginEnd="12dp"
+                    android:id="@+id/edt3"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:nextFocusForward="@id/edt4"
+                    android:maxLines="1"
+                    />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_edittext_fill_selected"
+                    android:layout_marginEnd="12dp"
+                    android:id="@+id/edt4"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:nextFocusForward="@id/edt5"
+                    android:maxLines="1"
+                    />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_edittext_fill_selected"
+                    android:layout_marginEnd="12dp"
+                    android:id="@+id/edt5"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:nextFocusForward="@id/edt6"
+                    android:maxLines="1"
+                    />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_edittext_fill_selected"
+                    android:id="@+id/edt6"
+                    android:gravity="center"
+                    android:cursorVisible="false"
+                    android:maxLines="1"
                     />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:fontFamily="@font/inter_regular"
-                    android:text="Didn't recieve your code?"
-                    android:textColor="@color/black" />
+            </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/inter_regular"
-                    android:text="Send to a different email address"
-                    android:textColor="@color/blue"
-                    android:textSize="14sp" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnContinue"
+                android:layout_width="wrap_content"
+                android:layout_height="46dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="36dp"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/box_selected_bg"
+                android:backgroundTint="@color/btndisabled_color"
+                android:gravity="center"
+                android:paddingHorizontal="26dp"
+                android:drawableEnd="@drawable/ic_arrow_forward"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/continueBtn"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textAllCaps="false"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/inter_regular"
-                    android:text="Resend your code"
-                    android:textColor="@color/blue"
-                    android:textSize="14sp" />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginHorizontal="26dp"
+                android:layout_marginTop="28dp"
+                android:background="#E9E6E6"
 
-        </RelativeLayout>
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/didnt_receive_code"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/resendCodeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="Send to a different email address"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/resend_code"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
 
     </ScrollView>
 
