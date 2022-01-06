@@ -4,6 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.578125" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/activity_main.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/dialog_create_nft.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/dialog_send_consent_ntf.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/dialog_send_nft.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_claim_nft.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_create_nft.xml" value="0.16304347826086957" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_create_nft_preview.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_gift_nft.xml" value="0.16304347826086957" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_home.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_nft_minted.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_send_nft.xml" value="0.23777173913043478" />
+        <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/fragment_signup.xml" value="0.23777173913043478" />
         <entry key="app/src/main/res/drawable/background_bottom_sheet.xml" value="0.5692708333333333" />
         <entry key="app/src/main/res/drawable/background_dash_rectangle.xml" value="0.7361111111111112" />
         <entry key="app/src/main/res/drawable/bg_bottom_dialog_round.xml" value="0.5692708333333333" />
