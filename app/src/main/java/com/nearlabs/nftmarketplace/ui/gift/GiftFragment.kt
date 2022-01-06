@@ -25,7 +25,6 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
     private fun initListeners() {
         binding.sendGift.setOnClickListener {
             AppConstants.logAppsFlyerEvent(SEND_GIFT_NFT_EVENT_NAME,requireContext())
-            Toast.makeText(requireContext(), "Send gift", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -44,7 +44,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         binding.tvPhoneLogin.setOnClickListener {
             AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,requireContext())
-            Toast.makeText(requireContext(), "Phone Click", Toast.LENGTH_SHORT).show()
         }
 
         binding.etEmailPhone.doAfterTextChanged {
