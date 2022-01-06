@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.common.extensions
 
+import android.webkit.MimeTypeMap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import kotlinx.coroutines.CoroutineDispatcher
@@ -9,6 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
 
 typealias ErrorHandler = (exception: Throwable?) -> Unit
 typealias SuccessHandler<T> = (value: T) -> Unit
@@ -150,5 +152,11 @@ fun <T> Fragment.observeResultFlow(
 
         }
     )
+}
+
+fun File.getMimeType(fallback: String = "image/*"): String {
+    return MimeTypeMap.getFileExtensionFromUrl(toString())
+        ?.run { MimeTypeMap.getSingleton().getMimeTypeFromExtension(toLowerCase()) }
+        ?: fallback // You might set it to */*
 }
 

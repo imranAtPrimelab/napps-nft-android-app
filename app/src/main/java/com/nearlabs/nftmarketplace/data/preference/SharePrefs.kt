@@ -7,9 +7,11 @@ import com.nearlabs.nftmarketplace.common.extensions.string
 class SharePrefs(private val sharePrefs: SharedPreferences) {
 
     var userId by sharePrefs.string()
+    var userName by sharePrefs.string()
     var accessToken by sharePrefs.string()
     var idToken by sharePrefs.string()
     var refreshToken by sharePrefs.string()
+    var userInfo by sharePrefs.string()
 
     fun registerKeyChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
         sharePrefs.registerOnSharedPreferenceChangeListener(listener)
