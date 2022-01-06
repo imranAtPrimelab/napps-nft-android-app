@@ -16,6 +16,8 @@ import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.PeopleAdapter
+import com.nearlabs.nftmarketplace.util.AppConstants
+import com.nearlabs.nftmarketplace.util.AppConstants.CONTACTS_PERMISSION_GRANTED_EVENT_NAME
 
 class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private lateinit var binding: DialogSendSelectPeopleNtfBinding
@@ -27,7 +29,7 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) {
-            // TODO AppsFlyer 7
+            AppConstants.logAppsFlyerEvent(CONTACTS_PERMISSION_GRANTED_EVENT_NAME,requireContext())
         }
     }
 
