@@ -40,14 +40,10 @@ class AddFragment : BaseBottomSheetDialogFragment() {
 
     private fun initListeners() {
         binding.btnCreateNft.setOnClickListener {
-            // TODO AppsFlyer 13
-            Toast.makeText(it.context, "13", Toast.LENGTH_SHORT).show()
             AppConstants.logAppsFlyerEvent(DASHBOARD_CREATE_NFT_EVENT_NAME,it.context)
         }
 
         binding.btnSendNft.setOnClickListener {
-            // TODO AppsFlyer 14
-            Toast.makeText(it.context, "14", Toast.LENGTH_SHORT).show()
             AppConstants.logAppsFlyerEvent(DASHBOARD_SEND_NFT_EVENT_NAME,it.context)
 
         }

@@ -29,7 +29,6 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) {
-            // TODO AppsFlyer 7
             AppConstants.logAppsFlyerEvent(CONTACTS_PERMISSION_GRANTED_EVENT_NAME,requireContext())
         }
     }

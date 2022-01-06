@@ -42,12 +42,10 @@ class ClaimNFTConnectWalletBottomSheetDialog : BaseBottomSheetDialogFragment() {
         }
 
         binding.btnCreateNewWallet.setOnClickListener {
-            // TODO AppsFlyer 11
             AppConstants.logAppsFlyerEvent(CLAIM_NFT_CREATE_NEAR_WALLET_ACCOUNT,it.context)
         }
 
         binding.btnLogin.setOnClickListener {
-            // TODO AppsFlyer 12
             AppConstants.logAppsFlyerEvent(CLAIM_NFT_LOGIN_WITH_NEAR_WALLET_EVENT_NAME,it.context)
         }
     }
