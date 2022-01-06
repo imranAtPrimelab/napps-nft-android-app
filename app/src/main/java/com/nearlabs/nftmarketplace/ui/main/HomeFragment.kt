@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -95,5 +96,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private fun doOnTransactionClicked(transaction: Transaction) {
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

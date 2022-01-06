@@ -4,15 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
-import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
-import com.nearlabs.nftmarketplace.common.extensions.popBack
-import com.nearlabs.nftmarketplace.common.extensions.showKeyboard
-import com.nearlabs.nftmarketplace.databinding.DialogChangeNameBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentNftMintedBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
-import com.nearlabs.nftmarketplace.ui.setting.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,7 +39,11 @@ class NftMintedSheetDialog : BaseBottomSheetDialogFragment() {
     }
 
     private fun initListeners() {
+        binding.btnOpen.setOnClickListener {
+            dismiss()
+            findNavController().navigate(R.id.toMyNFTs)
 
+        }
     }
 
 }
