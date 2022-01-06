@@ -37,6 +37,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 userViewModel.loginUser(
                     binding.etEmailPhoneLogin.text.toString()
                 ), successHandler = {
+                    userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()
                     findNavController().navigate(R.id.toOtp)
                 }, errorHandler = {
                     Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
@@ -47,6 +48,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         binding.btnGetStarted.setOnClickListener {
             AppConstants.logAppsFlyerEvent(GET_STARTED_EVENT_NAME,it.context)
             userViewModel.currentPhone = binding.etEmailPhone.text.toString()
+            userViewModel.currentEmail = binding.etEmailPhone.text.toString()
             findNavController().navigate(R.id.signupFragment)
         }
 
