@@ -54,4 +54,7 @@
     <string name="transaction_recv">Recv</string>
     <string name="open_history">Open History</string>
     <string name="send_nft_back">Back</string>
+    <string name="claim_nft">Claim NFT</string>
+    <string name="create_new_wallet">Creat new Wallet</string>
+    <string name="login_with_near_wallet">Login with NEAR wallet</string>
 </resources>
