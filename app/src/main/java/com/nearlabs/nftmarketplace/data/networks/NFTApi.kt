@@ -8,6 +8,6 @@ import retrofit2.http.Query
 
 interface NFTApi {
 
-    @GET("nfts/{user_id}")
-    suspend fun getAllNFTCollections(@Path("user_id") userId : String) : DtoBaseResponse<List<DtoNFTResponse>>
+    @GET("nfts")
+    suspend fun getAllNFTCollections(@Query("owner_id") userId : String) : DtoBaseResponse<List<DtoNFTResponse>>
 }
