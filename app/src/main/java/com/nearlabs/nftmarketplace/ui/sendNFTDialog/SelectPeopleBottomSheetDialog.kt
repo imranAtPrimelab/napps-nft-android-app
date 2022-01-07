@@ -89,7 +89,7 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
             }
 
             viewModel.recipientId = selectedRecipientId
-
+            dismiss()
             findNavController().navigate(R.id.toConsent)
         }
     }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.databinding.DialogSendNftResultBinding
@@ -40,7 +41,10 @@ class SentNFTResultBottomSheetDialog : BaseBottomSheetDialogFragment() {
             popBack()
         }
 
-        binding.btnOpenHistory.setOnClickListener { }
+        binding.btnOpenHistory.setOnClickListener {
+            dismiss()
+            findNavController().navigate(R.id.toHistoryFragment)
+        }
     }
 
 }
