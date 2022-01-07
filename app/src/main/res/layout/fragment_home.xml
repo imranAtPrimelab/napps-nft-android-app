@@ -113,6 +113,8 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             tools:itemCount="1"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_layout_send_nft_cell" />
 
         <androidx.appcompat.widget.LinearLayoutCompat

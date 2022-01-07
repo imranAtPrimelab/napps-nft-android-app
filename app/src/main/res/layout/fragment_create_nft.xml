@@ -43,17 +43,31 @@
             android:visibility="gone" />
     </FrameLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAction"
-        style="@style/Widget.MaterialComponents.Button"
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="12dp"
-        android:text="Next"
-        app:backgroundTint="@color/blue"
-        app:icon="@drawable/ic_arrow_forward"
-        app:iconGravity="end"
-        app:iconSize="12dp" />
+        android:layout_gravity="end">
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAction"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:text="Next"
+            android:visibility="visible"
+            app:backgroundTint="@color/blue"
+            app:icon="@drawable/ic_arrow_forward"
+            app:iconGravity="end"
+            app:iconSize="12dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:indeterminateTint="@color/blue"
+            android:layout_width="wrap_content"
+            android:layout_margin="12dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 </LinearLayout>

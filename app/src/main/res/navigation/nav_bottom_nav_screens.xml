@@ -9,21 +9,14 @@
         android:name="com.nearlabs.nftmarketplace.ui.main.HomeFragment"
         android:label="HomeFragment">
         <action
-            android:id="@+id/toMyNFTs"
-            app:destination="@id/myNFTsFragment"/>
+            android:id="@+id/toCreateNft"
+            app:destination="@id/createNFTBottomSheetDialog" />
     </fragment>
 
     <dialog
         android:id="@+id/addFragment"
         android:name="com.nearlabs.nftmarketplace.ui.main.AddFragment"
-        android:label="AddFragment">
-    </dialog>
-
-    <dialog
-        android:id="@+id/createNFTDialog"
-        android:name="com.nearlabs.nftmarketplace.ui.create.dialog.CreateNFTDialog"
-        android:label="Create NFT"
-        />
+        android:label="AddFragment" />
 
     <fragment
         android:id="@+id/historyFragment"
@@ -39,22 +32,20 @@
         android:id="@+id/myNFTsFragment"
         android:name="com.nearlabs.nftmarketplace.ui.mynfts.MyNFTsFragment"
         android:label="MyNFTsFragment">
+        <action
+            android:id="@+id/toCreateNft"
+            app:destination="@id/createNFTBottomSheetDialog" />
     </fragment>
 
     <action
         android:id="@+id/toSettings"
         app:destination="@+id/nav_setting" />
 
-
-    <action
-        android:id="@+id/toCreateNFTDialog"
-        app:destination="@+id/createNFTDialog"/>
-
     <include app:graph="@navigation/nav_setting" />
     <dialog
         android:id="@+id/selectPeopleBottomSheetDialog"
         android:name="com.nearlabs.nftmarketplace.ui.sendNFTDialog.SelectPeopleBottomSheetDialog"
-        android:label="SelectPeopleBottomSheetDialog" >
+        android:label="SelectPeopleBottomSheetDialog">
         <action
             android:id="@+id/toConsent"
             app:destination="@id/consentBottomSheetDialog" />
@@ -62,7 +53,7 @@
     <dialog
         android:id="@+id/consentBottomSheetDialog"
         android:name="com.nearlabs.nftmarketplace.ui.sendNFTDialog.ConsentBottomSheetDialog"
-        android:label="ConsentBottomSheetDialog" >
+        android:label="ConsentBottomSheetDialog">
         <action
             android:id="@+id/toResultSendNft"
             app:destination="@id/sentNFTResultBottomSheetDialog" />
@@ -77,4 +68,24 @@
         android:name="com.nearlabs.nftmarketplace.ui.sendNFTDialog.SendNFTBottomSheetDialog"
         android:label="SendNFTBottomSheetDialog" />
 
+    <dialog
+        android:id="@+id/createNFTBottomSheetDialog"
+        android:name="com.nearlabs.nftmarketplace.ui.create.CreateNftFragment"
+        android:label="CreateNftFragment">
+        <action
+            android:id="@+id/toNftMintedSheetDialog"
+            app:destination="@id/nftMintedSheetDialog" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/nftMintedSheetDialog"
+        android:name="com.nearlabs.nftmarketplace.ui.create.NftMintedSheetDialog"
+        android:label="NftMintedSheetDialog">
+        <action
+            android:id="@+id/toMyNFTs"
+            app:destination="@id/myNFTsFragment" />
+    </dialog>
+    <action
+        android:id="@+id/toMyNFTs"
+        app:destination="@id/myNFTsFragment" />
 </navigation>

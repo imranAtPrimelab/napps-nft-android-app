@@ -24,7 +24,6 @@ class CreateNftViewModel @Inject constructor(private val repository: Repository,
 
     var currentStep = STEP_UPLOAD
     val step = MutableStateFlow(currentStep)
-    val minted = MutableStateFlow(false)
     val userNameObservable = MutableLiveData<String>()
 
     init {
@@ -34,7 +33,11 @@ class CreateNftViewModel @Inject constructor(private val repository: Repository,
     fun nextStep() {
         currentStep = step.value + 1
         step.value = currentStep
-        if (isFinalStep()) minted.value = true
+    }
+
+    fun clearStep() {
+        currentStep = STEP_UPLOAD
+        step.value = 0
     }
 
     fun isFinalStep() = step.value == STEP_FINAL
