@@ -168,10 +168,9 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnLogin"
             android:layout_marginHorizontal="14dp"
             android:layout_marginTop="9dp"
-            android:text="by clicking agree you must agree to near labs Terms and Conditions and Privacy Policies"
+            android:text="@string/by_clicking_login"
             android:textAlignment="center"
             android:textColor="@color/light_black"
             android:layout_marginBottom="23dp"

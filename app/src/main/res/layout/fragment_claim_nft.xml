@@ -107,7 +107,7 @@
                         android:layout_toRightOf="@id/profile_pic"
                         android:fontFamily="@font/inter_regular"
                         android:paddingBottom="15dp"
-                        android:text="Creator"
+                        android:text="@string/creator"
                         android:textSize="12sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -235,7 +235,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="21dp"
+                                android:layout_marginStart="21dp"
                                 android:layout_marginEnd="30.42dp"
                                 android:fontFamily="@font/inter_regular"
                                 android:text="38493"
@@ -260,7 +260,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="21dp"
+                                android:layout_marginStart="21dp"
                                 android:fontFamily="@font/inter_regular"
                                 android:text="@string/contact_address"
                                 android:textColor="#808080"
@@ -272,7 +272,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
-                                android:layout_marginLeft="21dp"
+                                android:layout_marginStart="21dp"
                                 android:layout_marginEnd="30.42dp"
                                 android:fontFamily="@font/inter_regular"
                                 android:text="d0xkedek..89reke"

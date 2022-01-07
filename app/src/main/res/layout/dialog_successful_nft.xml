@@ -69,7 +69,7 @@
             android:layout_marginHorizontal="16dp"
             android:backgroundTint="@color/blue"
             android:fontFamily="@font/inter_medium"
-            android:text="open"
+            android:text="@string/open"
             app:cornerRadius="5dp"
             android:id="@+id/open_button"/>
 

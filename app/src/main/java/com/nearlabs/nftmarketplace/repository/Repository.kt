@@ -3,6 +3,8 @@ package com.nearlabs.nftmarketplace.repository
 import com.google.gson.Gson
 import com.nearlabs.nftmarketplace.common.extensions.getMimeType
 import com.nearlabs.nftmarketplace.common.extensions.safeCall
+import com.nearlabs.nftmarketplace.data.localcontact.ContactSource
+import com.nearlabs.nftmarketplace.data.localcontact.LocalContact
 import com.nearlabs.nftmarketplace.data.networks.*
 import com.nearlabs.nftmarketplace.data.networks.request.DtoLoginRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoSendTransactionRequest
@@ -26,7 +28,8 @@ class Repository(
     private val nftApi: NFTApi,
     private val userApi: UserApi,
     private val loginApi: LoginApi,
-    private val sharePrefs: SharePrefs
+    private val sharePrefs: SharePrefs,
+    private val localContact: ContactSource
 ) {
 
     fun isLoggedIn() = sharePrefs.accessToken.isNotEmpty()
@@ -146,5 +149,10 @@ class Repository(
         val nftInfoJsonString = Gson().toJson(nftCreateRequest.nftInformation)
         val dtoResponse = nftApi.createNft(nftInfoJsonString.toRequestBody(), filePart)
         dtoResponse.message
+    }
+
+    suspend fun postLocalContact() = safeCall {
+        val request = localContact.getAllContact().map {  }
+        contactApi.importContact()
     }
 }
