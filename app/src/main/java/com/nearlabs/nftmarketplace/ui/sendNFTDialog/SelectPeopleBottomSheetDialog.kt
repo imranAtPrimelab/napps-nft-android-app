@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.PeopleAdapter
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.CONTACTS_PERMISSION_GRANTED_EVENT_NAME
+import timber.log.Timber
 
 class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private lateinit var binding: DialogSendSelectPeopleNtfBinding
@@ -29,15 +31,14 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
         ActivityResultContracts.RequestPermission()
     ) { granted ->
         if (granted) {
-            AppConstants.logAppsFlyerEvent(CONTACTS_PERMISSION_GRANTED_EVENT_NAME,requireContext())
+            AppConstants.logAppsFlyerEvent(CONTACTS_PERMISSION_GRANTED_EVENT_NAME, requireContext())
         }
     }
 
     private val peopleAdapter by lazy {
         PeopleAdapter { contact, position ->
             selectContact(contact, position)
-        }
-            .setMode(MULTI)
+        }.setMode(MULTI)
     }
 
     private fun selectContact(contact: Contact, position: Int) {
@@ -94,10 +95,15 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
     }
 
     private fun initObserve() {
-        observeResultFlow(viewModel.getContacts(),
+        observeResultFlow(
+            viewModel.getContacts(),
             successHandler = {
                 peopleAdapter.setData(it)
-            })
+            }, errorHandler = {
+                Timber.e(it)
+                Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 
 }

@@ -10,10 +10,10 @@ data class DtoContact(
 	val address: List<DtoContactAddress>? = null,
 
 	@SerializedName("archived_date")
-	val archivedDate: Long? = null,
+	val archivedDate: String? = null,
 
 	@SerializedName("created")
-	val created: Long? = null,
+	val created: String? = null,
 
 	@SerializedName("last_name")
 	val lastName: String? = null,
@@ -49,7 +49,7 @@ data class DtoContact(
 	val appId: String? = null,
 
 	@SerializedName("updated")
-	val updated: Long? = null,
+	val updated: String? = null,
 
 	@SerializedName("email")
 	val email: List<DtoContactEmail>? = null,
