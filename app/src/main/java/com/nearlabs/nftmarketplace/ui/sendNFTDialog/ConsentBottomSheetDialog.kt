@@ -45,8 +45,7 @@ class ConsentBottomSheetDialog : BaseBottomSheetDialogFragment() {
         binding.btnDeny.setOnClickListener { popBack() }
 
         binding.btnAllow.setOnClickListener {
-            val selectedWallet =
-                binding.spinner.selectedItem as? Wallet ?: return@setOnClickListener
+            val selectedWallet = binding.spinner.selectedItem as? Wallet ?: return@setOnClickListener
             viewModel.wallet = selectedWallet
             sendTransaction()
         }
@@ -62,6 +61,7 @@ class ConsentBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private fun sendTransaction() {
         observeResultFlow(viewModel.sendTransaction(),
             successHandler = {
+                dismiss()
                 findNavController().navigate(R.id.toResultSendNft)
             })
     }
