@@ -12,4 +12,8 @@ class ContactViewModel @Inject constructor(private val repository: Repository) :
     fun getContacts() = resultFlow {
         repository.getContacts()
     }
+
+    fun postLocalContact() = resultFlow {
+        repository.postLocalContact()
+    }
 }
