@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
@@ -58,6 +59,9 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
     }
 
     private fun initViews() {
+        viewModel.clearStep()
+        binding.rootUpload.root.visibility = View.VISIBLE
+        binding.rootPreview.root.visibility = View.GONE
         setFullHeight()
     }
 
@@ -73,6 +77,7 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
                 }
                 CreateNftViewModel.STEP_PREVIEW -> {
                     selectedFile?.let { file ->
+                        handleActionButtonVisibility(false)
                         observeResultFlow(
                             viewModel.createNft(
                                 file,
@@ -81,8 +86,10 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
                                 binding.rootUpload.attributeNameEditText.text.toString(),
                                 binding.rootUpload.attributeValueEditText.text.toString()
                             ), successHandler = {
+                                handleActionButtonVisibility(true)
                                 viewModel.nextStep()
                             }, errorHandler = {
+                                handleActionButtonVisibility(true)
                                 Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
                             }
                         )
@@ -124,6 +131,17 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
 
         if (viewModel.isFinalStep()) {
             dismiss()
+            requireParentFragment().findNavController().navigate(R.id.toNftMintedSheetDialog)
+        }
+    }
+
+    private fun handleActionButtonVisibility(isVisible: Boolean) {
+        if (isVisible) {
+            binding.btnAction.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.GONE
+        } else {
+            binding.btnAction.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
         }
     }
 

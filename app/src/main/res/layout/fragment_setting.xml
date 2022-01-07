@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:id="@+id/btnBack"
         app:layout_constraintBottom_toBottomOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvTitle"
@@ -58,10 +58,10 @@
         android:background="@drawable/bg_round_rectangle_stroke"
         android:paddingHorizontal="16dp"
         android:paddingVertical="24dp"
-        tools:cswv_name="john.near"
         app:layout_constraintEnd_toEndOf="@id/tvConnectedWallet"
         app:layout_constraintStart_toStartOf="@id/tvConnectedWallet"
-        app:layout_constraintTop_toBottomOf="@id/tvConnectedWallet" />
+        app:layout_constraintTop_toBottomOf="@id/tvConnectedWallet"
+        tools:cswv_name="john.near" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvProfile"
@@ -135,5 +135,16 @@
         app:layout_constraintEnd_toEndOf="@id/tvSecurity"
         app:layout_constraintStart_toStartOf="@id/tvSecurity"
         app:layout_constraintTop_toBottomOf="@id/tvSecurity" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logoutButtonView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Logout"
+        app:backgroundTint="@color/blue"
+        app:layout_constraintEnd_toEndOf="@id/csiv_security"
+        app:layout_constraintStart_toStartOf="@id/csiv_security"
+        app:layout_constraintTop_toBottomOf="@id/csiv_security" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

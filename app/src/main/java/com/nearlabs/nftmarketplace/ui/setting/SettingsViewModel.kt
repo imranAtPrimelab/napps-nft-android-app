@@ -28,4 +28,8 @@ class SettingsViewModel @Inject constructor(private val settingsRepository: Sett
     fun getUserProfile() = resultFlow {
         settingsRepository.getUserProfile(sharePrefs.userId)
     }
+
+    fun clearPref() {
+        sharePrefs.clear()
+    }
 }

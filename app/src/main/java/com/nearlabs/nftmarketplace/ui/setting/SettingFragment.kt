@@ -39,6 +39,11 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
         binding.btnBack.setOnClickListener {
             popBack()
         }
+
+        binding.logoutButtonView.setOnClickListener {
+            viewModel.clearPref()
+            findNavController().navigate(R.id.action_settingFragment_to_LoginFragment)
+        }
     }
 
     private fun initObserve() {
