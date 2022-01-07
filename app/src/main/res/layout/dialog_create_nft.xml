@@ -22,11 +22,12 @@
             android:textColor="@color/white"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="Create NFT"
-            android:layout_alignParentTop="true"/>
+            android:text="@string/create_nft"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/inter_semibold"/>
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -37,13 +38,17 @@
             android:layout_marginHorizontal="20dp"
             android:gravity="center"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="45dp"
             android:drawableStart="@drawable/ic_send_nft_arrow"
             android:layout_below="@+id/tvCreateNFTDialog"
-            android:text="Send NFT"
+            android:text="@string/send_nft"
             android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/inter_semibold"
+            android:layout_marginBottom="20dp"
+            />
 
     </RelativeLayout>
 </FrameLayout>

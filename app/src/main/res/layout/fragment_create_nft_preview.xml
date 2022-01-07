@@ -5,47 +5,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="@color/white"
-            android:layout_alignParentTop="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="89.5dp"
+            android:text="@string/create_nft"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/black"
+            android:textSize="21sp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_close"
+            android:layout_marginStart="105dp"
+            android:layout_centerVertical="true"
+            >
+
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/fg_close" />
+        </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_marginStart="89.5dp"
-                    android:text="@string/create_nft_today"
-                    android:fontFamily="@font/inter_semibold"
-                    android:textColor="@color/black"
-                    android:textSize="21sp" />
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/bg_close"
-                    android:layout_marginStart="105dp"
-                    >
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/fg_close" />
-                </RelativeLayout>
-
-            </RelativeLayout>
-        </androidx.appcompat.widget.Toolbar>
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
@@ -145,8 +143,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Creator"
-                            android:layout_toRightOf="@id/profile_pic"
+                            android:text="@string/creator"
+                            android:layout_toEndOf="@id/profile_pic"
                             android:layout_marginStart="9dp"
                             android:paddingBottom="15dp"
                             android:textSize="12sp"
@@ -158,7 +156,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="9dp"
-                            android:layout_toRightOf="@id/profile_pic"
+                            android:layout_toEndOf="@id/profile_pic"
                             android:fontFamily="@font/inter_semibold"
                             android:paddingTop="25dp"
                             android:text="john_doe"
@@ -189,5 +187,7 @@
             />
 
 </RelativeLayout>
+
+
 
 

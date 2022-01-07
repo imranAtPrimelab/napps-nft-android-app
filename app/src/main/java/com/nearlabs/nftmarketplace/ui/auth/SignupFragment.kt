@@ -37,10 +37,10 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
         binding.fullName.doAfterTextChanged {
             checkContinue()
         }
+
         binding.walletId.doAfterTextChanged {
             checkContinue()
         }
-
 
         binding.btnCreateAccount.setOnClickListener {
             AppConstants.logAppsFlyerEvent(SIGN_UP_CREATE_ACCOUNT_EVENT_NAME,it.context)
@@ -54,8 +54,13 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
                 }, errorHandler = {
                     Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
                         .show()
-                })
+                }
+            )
         }
+
+        binding.closeSignup.setOnClickListener(View.OnClickListener {
+            findNavController().navigate(R.id.toAuth)
+        })
 
     }
 
@@ -67,4 +72,5 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
             )
         )
     }
+
 }
