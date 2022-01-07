@@ -10,10 +10,10 @@ import retrofit2.http.*
 interface NFTApi {
 
     @GET("nfts")
-    suspend fun getAllNFTCollections(@Query("owner_id") userId : String) : DtoBaseResponse<List<DtoNFTResponse>>
+    suspend fun getAllNFTCollections(@Query("user_id") userId : String) : DtoBaseResponse<List<DtoNFTResponse>>
 
     @Multipart
-    @POST("nfts/")
+    @POST("nfts")
     suspend fun createNft(
         @Part("data") nftInfo: RequestBody,
         @Part file: MultipartBody.Part? = null
