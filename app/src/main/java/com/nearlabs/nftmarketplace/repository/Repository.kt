@@ -1,6 +1,5 @@
 package com.nearlabs.nftmarketplace.repository
 
-import com.google.gson.JsonObject
 import com.google.gson.Gson
 import com.nearlabs.nftmarketplace.common.extensions.getMimeType
 import com.nearlabs.nftmarketplace.common.extensions.safeCall
@@ -30,7 +29,7 @@ class Repository(
     private val sharePrefs: SharePrefs
 ) {
 
-    fun isLoggedIn() = sharePrefs.idToken.isNotEmpty()
+    fun isLoggedIn() = sharePrefs.accessToken.isNotEmpty()
 
     suspend fun getContacts() = safeCall {
         val dtoContacts = contactApi.getContacts(sharePrefs.userId).data

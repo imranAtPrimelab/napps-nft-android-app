@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.databinding.DialogClaimNftConnectWalletBinding
@@ -45,7 +46,7 @@ class AddFragment : BaseBottomSheetDialogFragment() {
 
         binding.btnSendNft.setOnClickListener {
             AppConstants.logAppsFlyerEvent(DASHBOARD_SEND_NFT_EVENT_NAME,it.context)
-
+            findNavController().navigate(R.id.sendNFTBottomSheetDialog)
         }
     }
 }
