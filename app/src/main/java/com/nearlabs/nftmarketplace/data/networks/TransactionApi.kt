@@ -13,6 +13,6 @@ interface TransactionApi {
     @GET("transactions/list/{user_id}")
     suspend fun getTransaction(): List<DtoTransactionResponse>
 
-    @POST("transactions/list/{user_id}")
+    @POST("transactions")
     suspend fun sendTransaction(@Body request: DtoSendTransactionRequest): Response<ResponseBody>
 }

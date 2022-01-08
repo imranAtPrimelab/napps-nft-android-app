@@ -38,8 +38,8 @@ class Repository(
     fun isLoggedIn() = sharePrefs.accessToken.isNotEmpty()
 
     suspend fun getContacts() = safeCall {
-        val dtoContacts = contactApi.getContacts(sharePrefs.userId).data
-        dtoContacts.mapNotNull { it.toDomainModel() }
+        val dtoContacts = contactApi.getContacts(sharePrefs.userId)
+        dtoContacts.data.mapNotNull { it.toDomainModel() }
     }
 
     suspend fun getTransactions() = safeCall {

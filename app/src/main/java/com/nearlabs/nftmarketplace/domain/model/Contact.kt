@@ -54,8 +54,8 @@ fun DtoContact?.toDomainModel() = this?.run {
     Contact(
         birthday = birthday,
         address = address?.mapNotNull { it.toDomainModel() },
-        archivedDate = archivedDate,
-        created = created,
+        archivedDate = archivedDate?.toLongOrNull(),
+        created = created?.toLongOrNull(),
         lastName = lastName,
         groups = groups,
         companies = companies,
@@ -67,7 +67,7 @@ fun DtoContact?.toDomainModel() = this?.run {
         firstName = firstName,
         jobTitle = jobTitle,
         appId = appId,
-        updated = updated,
+        updated = updated?.toLongOrNull(),
         email = email?.mapNotNull { it.toDomainModel() },
         status = status
     )
