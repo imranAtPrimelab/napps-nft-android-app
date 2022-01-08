@@ -23,7 +23,7 @@ data class Contact(
     val jobTitle: String? = null,
     val appId: String? = null,
     val updated: Long? = null,
-    val email: List<ContactEmail>? = null,
+    var email: List<ContactEmail>? = null,
     val status: String? = null,
     var user_id: String? = null
 )

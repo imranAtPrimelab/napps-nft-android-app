@@ -162,6 +162,7 @@ class ImportPeopleDialog : BaseBottomSheetDialogFragment() {
                         contacts_phones.add(ContactPhone(number = phoneNo))
                         Log.i(TAG, "Name: $name")
                         Log.i(TAG, "Phone Number: $phoneNo")
+                        ContactsContract.CommonDataKinds.Email.ADDRESS
                     }
                     pCur.close()
                 }
