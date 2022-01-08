@@ -6,14 +6,12 @@ import com.nearlabs.nftmarketplace.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@HiltViewModel
+/*@HiltViewModel
 class ContactViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     fun getContacts() = resultFlow {
         repository.getContacts()
     }
 
-    fun postLocalContact() = resultFlow {
-        repository.postLocalContact()
-    }
-}
+
+}*/

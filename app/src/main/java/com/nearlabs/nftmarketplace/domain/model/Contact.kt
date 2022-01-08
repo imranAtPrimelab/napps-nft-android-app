@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.domain.model
 
+import com.google.gson.annotations.SerializedName
 import com.nearlabs.nftmarketplace.data.networks.response.DtoContact
 import com.nearlabs.nftmarketplace.data.networks.response.DtoContactAddress
 import com.nearlabs.nftmarketplace.data.networks.response.DtoContactEmail
@@ -23,8 +24,11 @@ data class Contact(
     val appId: String? = null,
     val updated: Long? = null,
     val email: List<ContactEmail>? = null,
-    val status: String? = null
+    val status: String? = null,
+    var user_id: String? = null
 )
+
+
 
 data class ContactEmail(
     val address: String? = null,

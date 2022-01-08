@@ -2,6 +2,7 @@ package com.nearlabs.nftmarketplace.ui.sendNFTDialog
 
 import android.Manifest
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,9 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
     ) { granted ->
         if (granted) {
             AppConstants.logAppsFlyerEvent(CONTACTS_PERMISSION_GRANTED_EVENT_NAME,requireContext())
+            Log.e("ERORR88888", " GRANTED")
+        }else{
+            Log.e("ERORR88888", " DENIED")
         }
     }
 
@@ -84,6 +88,7 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
 
             if (selectedRecipientId.isEmpty()) {
                 // error select empty people
+                findNavController().navigate(R.id.to_importPeopleDialog)
                 return@setOnClickListener
             }
 
@@ -96,8 +101,11 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private fun initObserve() {
         observeResultFlow(viewModel.getContacts(),
             successHandler = {
+                Log.e("ERORR88888", " SUCCESS ${it.size}")
                 peopleAdapter.setData(it)
             })
     }
+
+
 
 }

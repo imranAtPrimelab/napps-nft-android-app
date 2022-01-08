@@ -33,8 +33,8 @@ class ItemPeopleAdapterViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(data: Contact, selected: Boolean) {
-        binding.tvNameShort.text = ("${data.firstName?.get(0)?.toString()}${data.lastName?.get(0)?.toString()}")
-        binding.tvName.text = (data.firstName + data.lastName)
+        binding.tvNameShort.text = ("${data.firstName?.get(0)?.toString()} ${data.lastName?.get(0)?.toString()}")
+        binding.tvName.text = (data.firstName + " " + data.lastName)
         binding.tvDesc.text = data.email?.firstOrNull()?.address ?: ""
 
         binding.imageSelected.setImageResource(if (selected) R.drawable.ic_selected else R.drawable.ic_un_select)

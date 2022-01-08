@@ -27,7 +27,7 @@ class ChangeWalletBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private val viewModel by activityViewModels<SettingsViewModel>()
 
     private val walletAdapter by lazy {
-        SelectWalletAdapter() {
+        SelectWalletAdapter {
             selectWallet(it)
         }
     }

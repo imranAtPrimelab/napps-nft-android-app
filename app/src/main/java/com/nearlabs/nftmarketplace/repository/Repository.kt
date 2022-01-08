@@ -10,7 +10,10 @@ import com.nearlabs.nftmarketplace.data.networks.request.DtoLoginRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoSendTransactionRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
 import com.nearlabs.nftmarketplace.data.networks.request.NftCreateRequest
+import com.nearlabs.nftmarketplace.data.networks.response.DtoContact
+import com.nearlabs.nftmarketplace.data.networks.response.DtoContactPhone
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
+import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.domain.model.nft.toDomainModel
 import com.nearlabs.nftmarketplace.domain.model.toDomain
 import com.nearlabs.nftmarketplace.domain.model.toDomainModel
@@ -151,8 +154,15 @@ class Repository(
         dtoResponse.message
     }
 
-    suspend fun postLocalContact() = safeCall {
-        val request = localContact.getAllContact().map {  }
-        contactApi.importContact()
+    suspend fun postLocalContact(contacts : List<Contact>) = safeCall {
+        val dtoContacts = mutableListOf<DtoContact>()
+        for(i in contacts.indices){
+            val contactItem = contacts[i]
+            dtoContacts.add(DtoContact(firstName = contactItem.firstName,
+                user_id = contactItem.user_id,
+                lastName = contactItem.lastName,
+                phone = contactItem.phone as List<DtoContactPhone>))
+        }
+        contactApi.importContact(dtoContacts)
     }
 }

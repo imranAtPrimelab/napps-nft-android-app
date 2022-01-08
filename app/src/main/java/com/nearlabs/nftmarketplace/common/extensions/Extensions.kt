@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
+import java.util.*
 
 typealias ErrorHandler = (exception: Throwable?) -> Unit
 typealias SuccessHandler<T> = (value: T) -> Unit
@@ -156,7 +157,7 @@ fun <T> Fragment.observeResultFlow(
 
 fun File.getMimeType(fallback: String = "image/*"): String {
     return MimeTypeMap.getFileExtensionFromUrl(toString())
-        ?.run { MimeTypeMap.getSingleton().getMimeTypeFromExtension(toLowerCase()) }
+        ?.run { MimeTypeMap.getSingleton().getMimeTypeFromExtension(lowercase(Locale.getDefault())) }
         ?: fallback // You might set it to */*
 }
 

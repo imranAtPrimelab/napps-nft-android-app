@@ -29,6 +29,10 @@ class SendNFTViewModel @Inject constructor(
         repository.getContacts()
     }
 
+    fun postContacts() = resultFlow {
+        repository.postLocalContact(recipientId!!)
+    }
+
     fun getWallets() = resultFlow {
         repository.getDummyWallets()
     }
