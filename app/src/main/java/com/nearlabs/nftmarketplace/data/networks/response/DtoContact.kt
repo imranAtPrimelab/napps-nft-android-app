@@ -55,7 +55,10 @@ data class DtoContact(
 	val email: List<DtoContactEmail>? = null,
 
 	@SerializedName("status")
-	val status: String? = null
+	val status: String? = null,
+
+	@SerializedName("owner_id")
+	val ownerId: String? = null
 )
 
 data class DtoContactEmail(

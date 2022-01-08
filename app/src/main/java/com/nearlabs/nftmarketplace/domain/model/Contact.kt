@@ -22,9 +22,10 @@ data class Contact(
     val jobTitle: String? = null,
     val appId: String? = null,
     val updated: Long? = null,
-    val email: List<ContactEmail>? = null,
-    val status: String? = null
-)
+    var email: List<ContactEmail>? = null,
+    val status: String? = null,
+    var owner_id: String? = null,
+   )
 
 data class ContactEmail(
     val address: String? = null,
@@ -65,7 +66,8 @@ fun DtoContact?.toDomainModel() = this?.run {
         appId = appId,
         updated = updated?.toLongOrNull(),
         email = email?.mapNotNull { it.toDomainModel() },
-        status = status
+        status = status,
+        owner_id = ownerId
     )
 }
 
