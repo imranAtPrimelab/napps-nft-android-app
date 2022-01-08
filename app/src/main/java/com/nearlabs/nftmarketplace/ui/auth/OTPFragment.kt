@@ -1,9 +1,12 @@
 package com.nearlabs.nftmarketplace.ui.auth
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
@@ -38,6 +41,30 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
     }
 
     private fun initListeners() {
+        binding.edt1.doAfterTextChanged {
+            binding.edt2.requestFocus()
+        }
+        binding.edt2.doAfterTextChanged {
+            binding.edt3.requestFocus()
+        }
+        binding.edt3.doAfterTextChanged {
+            binding.edt4.requestFocus()
+        }
+        binding.edt4.doAfterTextChanged {
+            binding.edt5.requestFocus()
+        }
+        binding.edt5.doAfterTextChanged {
+            binding.edt6.requestFocus()
+        }
+        binding.edt6.doAfterTextChanged {
+            binding.edt6.clearFocus()
+            binding.btnContinue.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    requireContext(),
+                    if (it.isNullOrBlank()) R.color.btndisabled_color else R.color.blue
+                )
+            )
+        }
         binding.btnContinue.setOnClickListener {
             AppConstants.logAppsFlyerEvent(OTP_VERIFICATION_EVENT_NAME,it.context)
             val nonce = StringBuilder()
