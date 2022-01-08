@@ -15,7 +15,7 @@ data class DtoContact(
 	@SerializedName("created")
 	val created: String? = null,
 
-	@SerializedName("last_name")
+	@SerializedName("lastName")
 	val lastName: String? = null,
 
 	@SerializedName("groups")
@@ -33,13 +33,13 @@ data class DtoContact(
 	@SerializedName("is_imported")
 	val isImported: Boolean? = null,
 
-	@SerializedName("contact_user_id")
+	@SerializedName("contact_id")
 	val contactUserId: String? = null,
 
 	@SerializedName("import_source")
 	val importSource: String? = null,
 
-	@SerializedName("first_name")
+	@SerializedName("firstName")
 	val firstName: String? = null,
 
 	@SerializedName("job_title")
@@ -55,7 +55,10 @@ data class DtoContact(
 	val email: List<DtoContactEmail>? = null,
 
 	@SerializedName("status")
-	val status: String? = null
+	val status: String? = null,
+
+	@SerializedName("owner_id")
+	val ownerId: String? = null
 )
 
 data class DtoContactEmail(
