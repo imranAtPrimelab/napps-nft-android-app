@@ -33,7 +33,7 @@ data class DtoContact(
 	@SerializedName("is_imported")
 	val isImported: Boolean? = null,
 
-	@SerializedName("contact_user_id")
+	@SerializedName("contact_id")
 	val contactUserId: String? = null,
 
 	@SerializedName("import_source")
