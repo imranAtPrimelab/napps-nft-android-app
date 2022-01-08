@@ -83,6 +83,7 @@ class LocalContact(val context: Context) : ContactSource {
                 contact.email = listOf(
                     ContactEmail(email,"personal")
                 )
+                contact.user_id = cursor.getString(dataIndex)
 
                 if(contact.firstName.equals("null") || contact.lastName.equals("null") ||contact.lastName.isNullOrBlank() ||contact.firstName.isNullOrBlank()){
                     try {
