@@ -128,9 +128,13 @@ class Repository(
                 nonce = nonce
             )
             val dtoResponse = loginApi.verifyLogin(request).apply {
-
+                sharePrefs.userId = userInfo.id
+                sharePrefs.userName = userInfo.fullName ?: ""
+                sharePrefs.accessToken = accessToken
+                sharePrefs.idToken = idToken
+                sharePrefs.refreshToken = refreshToken
+                sharePrefs.userInfo = Gson().toJson(userInfo)
             }
-
         }
 
 
