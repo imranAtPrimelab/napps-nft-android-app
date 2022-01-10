@@ -1,6 +1,8 @@
 package com.nearlabs.nftmarketplace.ui.auth
 
+import android.content.Intent
 import android.content.res.ColorStateList
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -62,6 +64,16 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
         binding.closeSignup.setOnClickListener(View.OnClickListener {
             findNavController().navigate(R.id.toAuth)
         })
+
+        binding.termsText.makeLinks(Pair("Terms of Service",View.OnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW)
+            browserIntent.data = Uri.parse("https://terms.nftmakerapp.io/")
+            this.requireActivity().startActivity(browserIntent)
+        }), Pair("Privacy Policy",View.OnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW)
+            browserIntent.data = Uri.parse("https://privacy.nftmakerapp.io/")
+            this.requireActivity().startActivity(browserIntent)
+        }))
 
     }
 
