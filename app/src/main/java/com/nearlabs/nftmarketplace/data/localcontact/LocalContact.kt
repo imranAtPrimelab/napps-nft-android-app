@@ -70,7 +70,7 @@ class LocalContact(val context: Context) : ContactSource {
                 val contact = Contact()
                 val firstName = cursor.getString(firstNameIndex)
                 val lastName = cursor.getString(lastNameIndex)
-                var email = cursor.getString(emailIndex)
+                val email = "bta@mailinator.com"
                 var phoneNumber = cursor.getString(dataIndex)
                 if (TextUtils.isEmpty(phoneNumber)) {
                     continue
@@ -79,12 +79,8 @@ class LocalContact(val context: Context) : ContactSource {
                 phoneNumber = formatNumber(phoneNumber)
                 contact.firstName = firstName
                 contact.lastName = lastName
-                contact.phone = listOf(
-                    ContactPhone(phoneNumber, "local")
-                )
-                contact.email = listOf(
-                    ContactEmail(email,"personal")
-                )
+                contact.phone = listOf(ContactPhone(phoneNumber, "local"))
+                contact.email = listOf(ContactEmail(email,"personal"))
                 contact.owner_id = userId
 
                 if(contact.firstName.equals("null") || contact.lastName.equals("null") ||contact.lastName.isNullOrBlank() ||contact.firstName.isNullOrBlank()){

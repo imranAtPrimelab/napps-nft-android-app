@@ -23,6 +23,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        android:layout_above="@+id/bottom_nav_bar"
-        app:navGraph="@navigation/nav_bottom_nav_screens" />
+        android:layout_above="@+id/bottom_nav_bar"/>
 </RelativeLayout>

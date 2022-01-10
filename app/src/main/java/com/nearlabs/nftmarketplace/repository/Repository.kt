@@ -3,13 +3,10 @@ package com.nearlabs.nftmarketplace.repository
 import com.google.gson.Gson
 import com.nearlabs.nftmarketplace.common.extensions.getMimeType
 import com.nearlabs.nftmarketplace.common.extensions.safeCall
+import com.nearlabs.nftmarketplace.common.extensions.safeCallWithHttpError
 import com.nearlabs.nftmarketplace.data.localcontact.ContactSource
-import com.nearlabs.nftmarketplace.data.localcontact.LocalContact
 import com.nearlabs.nftmarketplace.data.networks.*
-import com.nearlabs.nftmarketplace.data.networks.request.DtoLoginRequest
-import com.nearlabs.nftmarketplace.data.networks.request.DtoSendTransactionRequest
-import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
-import com.nearlabs.nftmarketplace.data.networks.request.NftCreateRequest
+import com.nearlabs.nftmarketplace.data.networks.request.*
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.domain.model.nft.toDomainModel
 import com.nearlabs.nftmarketplace.domain.model.toDomain
@@ -90,7 +87,7 @@ class Repository(
     }
 
     suspend fun createUser(name: String, walletId: String, phone: String, email: String) =
-        safeCall {
+        safeCallWithHttpError {
             val request = DtoUserCreateRequest(
                 fullName = name,
                 walletName = walletId,
@@ -119,9 +116,9 @@ class Repository(
                 sharePrefs.walletName = walletName
             }
 
-    }
+        }
 
-    suspend fun verifyLogin(walletName: String, nonce : String) =
+    suspend fun verifyLogin(walletName: String, nonce: String) =
         safeCall {
             val request = DtoLoginRequest(
                 walletName = walletName,
@@ -136,7 +133,6 @@ class Repository(
                 sharePrefs.userInfo = Gson().toJson(userInfo)
             }
         }
-
 
 
     suspend fun sendTransaction(request: DtoSendTransactionRequest) = safeCall {
@@ -158,5 +154,20 @@ class Repository(
     suspend fun postLocalContact() = safeCall {
         val request = localContact.getAllContact(sharePrefs.userId)
         contactApi.importContact(request)
+    }
+
+    suspend fun getNFTDetails(nftId: String) = safeCall {
+        val nftDetailsResponse = nftApi.getNFTDetails(nftId)
+        nftDetailsResponse.data.toDomainModel()
+    }
+
+    suspend fun claimNFT(nftId: String) = safeCallWithHttpError {
+        val climNftResponse = nftApi.claimNFT(nftId, ClimNFTRequest(sharePrefs.userId))
+        climNftResponse.message
+    }
+
+    suspend fun getUserProfile(userId: String) = safeCall {
+        val dtoResponse = api.getUserProfile(userId)
+        dtoResponse.dtoUserInfo.toDomain()
     }
 }

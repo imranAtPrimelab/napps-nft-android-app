@@ -3,6 +3,7 @@ package com.nearlabs.nftmarketplace.common.extensions
 import android.webkit.MimeTypeMap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,7 +11,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import timber.log.Timber
 import java.io.File
+import java.io.IOException
 
 typealias ErrorHandler = (exception: Throwable?) -> Unit
 typealias SuccessHandler<T> = (value: T) -> Unit
@@ -29,6 +33,36 @@ suspend fun <T> safeCall(
         } catch (throwable: Throwable) {
             State.GenericError(throwable)
         }
+    }
+}
+
+suspend fun <T> safeCallWithHttpError(
+    dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    dataOperation: suspend () -> T
+): State<T> {
+    return withContext(dispatcher) {
+        try {
+            State.Success(dataOperation.invoke())
+        } catch (httpException: HttpException) {
+            val errorBody = getErrorMessageFromGenericResponse(httpException)
+            if (errorBody != null) {
+                State.HttpError(errorBody)
+            } else {
+                State.GenericError(Throwable(httpException))
+            }
+        } catch (throwable: Throwable) {
+            State.GenericError(throwable)
+        }
+    }
+}
+
+private fun getErrorMessageFromGenericResponse(httpException: HttpException): ErrorBody? {
+    return try {
+        val body = httpException.response()?.errorBody()
+        Gson().fromJson(body?.string(), ErrorBody::class.java)
+    } catch (e: IOException) {
+        e.printStackTrace()
+        null
     }
 }
 
@@ -133,6 +167,7 @@ fun <T> ViewModel.pagingFlow(
 fun <T> Fragment.observeResultFlow(
     stateFlow: StateFlow<State<T>>,
     errorHandler: ErrorHandler = { },
+    httpErrorHandler: HttpErrorHandler = { },
     successHandler: SuccessHandler<T>
 ) {
     lifecycleScope.collect(
@@ -146,7 +181,7 @@ fun <T> Fragment.observeResultFlow(
             errorHandler.invoke(it)
         },
         httpErrorHandler = {
-
+            httpErrorHandler.invoke(it)
         },
         loadingHandler = {
 

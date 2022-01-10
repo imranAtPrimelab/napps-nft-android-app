@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.nearlabs.nftmarketplace.R
+import com.nearlabs.nftmarketplace.ui.detailnft.ClaimNFTFragment.Companion.CLIM_NFT_ID
 import com.nearlabs.nftmarketplace.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +25,21 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val navGraph = navController.navInflater.inflate(R.navigation.nav_launch)
         if (authViewModel.isLoggedIn()) {
             navGraph.startDestination = R.id.nav_main
-            navController.graph = navGraph
+            val uri = intent?.data
+            when  {
+                uri == null -> {
+                    navController.graph = navGraph
+                }
+                uri.toString().contains("dev.nftmakerapp.io/nft/detail/claim") -> {
+                    val nftId = uri.lastPathSegment
+                    val bundle = Bundle()
+                    bundle.putString(CLIM_NFT_ID, nftId)
+                    navController.setGraph(navGraph, bundle)
+                }
+                else -> {
+                    navController.graph = navGraph
+                }
+            }
         } else {
             navGraph.startDestination = R.id.nav_auth
             navController.graph = navGraph
