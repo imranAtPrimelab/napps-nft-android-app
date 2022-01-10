@@ -5,6 +5,7 @@ import com.nearlabs.nftmarketplace.data.networks.request.DtoLoginRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
 import com.nearlabs.nftmarketplace.data.networks.response.DtoLoginResponse
 import com.nearlabs.nftmarketplace.data.networks.response.DtoUserInfoResponse
+import com.nearlabs.nftmarketplace.data.networks.response.DtoVerifyLoginResponse
 import retrofit2.http.*
 
 interface LoginApi {
@@ -12,5 +13,5 @@ interface LoginApi {
     suspend fun login(@Body walletName : DtoLoginRequest): DtoLoginResponse
 
     @POST("login/verify")
-    suspend fun verifyLogin(@Body walletName : DtoLoginRequest): DtoLoginResponse
+    suspend fun verifyLogin(@Body walletName : DtoLoginRequest): DtoVerifyLoginResponse
 }
