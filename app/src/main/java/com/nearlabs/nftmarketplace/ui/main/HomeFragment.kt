@@ -2,6 +2,7 @@ package com.nearlabs.nftmarketplace.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.databinding.FragmentHomeBinding
 import com.nearlabs.nftmarketplace.domain.model.transaction.Transaction
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.ui.detailnft.ClaimNFTFragment.Companion.CLIM_NFT_ID
 import com.nearlabs.nftmarketplace.ui.main.transaction.adapter.TransactionAdapter
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.SendNFTAdapter
 import com.nearlabs.nftmarketplace.viewmodel.NFTViewModel
@@ -26,6 +28,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val nftViewModel: NFTViewModel by viewModels()
     private val transactionViewModel: TransactionViewModel by viewModels()
+    private var climNftId: String? = null
 
     @Inject
     lateinit var sharePrefs: SharePrefs
@@ -37,6 +40,11 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         )
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        climNftId = arguments?.getString(CLIM_NFT_ID)
+    }
+
     private val nftAdapter by lazy { SendNFTAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,6 +52,17 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         initViews()
         initListeners()
         initObservers()
+        checkClimNft()
+    }
+
+    private fun checkClimNft() {
+        if (!climNftId.isNullOrEmpty()) {
+            Handler().postDelayed({
+                climNftId = null
+                findNavController().navigate(R.id.toClaimNFTFragment, arguments)
+            }, 1000)
+
+        }
     }
 
     private fun initViews() {

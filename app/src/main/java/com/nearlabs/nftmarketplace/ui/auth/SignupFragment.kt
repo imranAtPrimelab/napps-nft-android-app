@@ -52,8 +52,9 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
                 ), successHandler = {
                     findNavController().navigate(R.id.toContactNFT)
                 }, errorHandler = {
-                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                }, httpErrorHandler = {
+                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
                 }
             )
         }

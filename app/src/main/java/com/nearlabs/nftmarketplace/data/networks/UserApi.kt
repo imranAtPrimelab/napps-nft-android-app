@@ -2,11 +2,12 @@ package com.nearlabs.nftmarketplace.data.networks
 
 import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
 import com.nearlabs.nftmarketplace.data.networks.response.DtoUserInfoResponse
+import com.nearlabs.nftmarketplace.data.networks.response.DtoUserProfileResponse
 import retrofit2.http.*
 
 interface UserApi {
-    @GET("{user_id}")//
-    suspend fun getUser(@Path("user_id") userId: String): DtoUserInfoResponse
+    @GET("users/{user_id}")
+    suspend fun getUserProfile(@Path("user_id") userId: String): DtoUserProfileResponse
 
     @PUT("{user_id}")
     suspend fun modifyUser(@Path("user_id") userId: String): DtoUserInfoResponse

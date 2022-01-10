@@ -2,11 +2,6 @@ package com.nearlabs.nftmarketplace.ui.main
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.get
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -24,12 +19,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val navHostFragment =
-            childFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
-
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
-
+        val navGraph = navController.navInflater.inflate(R.navigation.nav_bottom_nav_screens)
+        navController.setGraph(navGraph, arguments)
         binding.bottomNavBar.setupWithNavController(navController)
     }
 }
