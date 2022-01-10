@@ -33,6 +33,17 @@
                     android:textColor="@color/black"
                     android:textSize="21sp" />
 
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="50dp"
+                    android:maxHeight="2dp"
+                    android:minHeight="2dp"
+                    android:progress="66"
+                    android:progressTint="@color/blue" />
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -121,13 +132,14 @@
                 android:layout_marginTop="33dp"
                 android:backgroundTint="@color/btndisabled_color"
                 android:gravity="center"
-                android:paddingHorizontal="26dp"
+                android:paddingHorizontal="15dp"
                 android:drawableEnd="@drawable/ic_arrow_forward"
                 android:fontFamily="@font/inter_medium"
                 android:text="@string/create_an_account"
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textAllCaps="false"
+                app:cornerRadius="7dp"
                 android:layout_gravity="center_horizontal"/>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -164,15 +176,17 @@
                 android:layout_marginHorizontal="36dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="@color/blue"
-                android:paddingHorizontal="24dp"
+                android:paddingHorizontal="15dp"
                 android:drawableEnd="@drawable/ic_arrow_forward"
                 android:fontFamily="@font/inter_medium"
                 android:gravity="center"
                 android:text="@string/login_with_NEAR"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:layout_gravity="center_horizontal"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false"
+                app:cornerRadius="7dp"
+                />
 
         </LinearLayout>
 

@@ -35,6 +35,17 @@
                     android:textColor="@color/black"
                     android:textSize="21sp" />
 
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="50dp"
+                    android:maxHeight="2dp"
+                    android:minHeight="2dp"
+                    android:progress="33"
+                    android:progressTint="@color/blue" />
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -113,6 +124,8 @@
                     android:gravity="center"
                     android:nextFocusForward="@id/edt2"
                     android:maxLines="1"
+                    android:maxLength="1"
+                    android:inputType="number"
                     />
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="0dp"
@@ -125,6 +138,8 @@
                     android:gravity="center"
                     android:nextFocusForward="@id/edt3"
                     android:maxLines="1"
+                    android:maxLength="1"
+                    android:inputType="number"
                     />
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="0dp"
@@ -137,6 +152,8 @@
                     android:gravity="center"
                     android:nextFocusForward="@id/edt4"
                     android:maxLines="1"
+                    android:maxLength="1"
+                    android:inputType="number"
                     />
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="0dp"
@@ -149,6 +166,8 @@
                     android:gravity="center"
                     android:nextFocusForward="@id/edt5"
                     android:maxLines="1"
+                    android:maxLength="1"
+                    android:inputType="number"
                     />
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="0dp"
@@ -161,6 +180,8 @@
                     android:gravity="center"
                     android:nextFocusForward="@id/edt6"
                     android:maxLines="1"
+                    android:maxLength="1"
+                    android:inputType="number"
                     />
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="0dp"
@@ -171,6 +192,8 @@
                     android:gravity="center"
                     android:cursorVisible="false"
                     android:maxLines="1"
+                    android:maxLength="1"
+                    android:inputType="number"
                     />
 
             </LinearLayout>

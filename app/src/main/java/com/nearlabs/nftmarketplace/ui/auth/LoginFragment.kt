@@ -1,7 +1,9 @@
 package com.nearlabs.nftmarketplace.ui.auth
 
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -26,7 +28,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initListeners()
     }
 
@@ -57,13 +58,19 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         binding.tvPhoneLogin.setOnClickListener {
             AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
+            binding.tvPhoneLogin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_grey))
+            binding.tvEmailLogin.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
             binding.etEmailPhone.hint = requireActivity().getString(R.string.phone_example)
+            binding.etEmailPhone.inputType = InputType.TYPE_CLASS_PHONE
             userViewModel.usesPhone = true
         }
 
         binding.tvEmailLogin.setOnClickListener {
             AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
+            binding.tvPhoneLogin.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
+            binding.tvEmailLogin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_grey))
             binding.etEmailPhone.hint = requireActivity().getString(R.string.email_example)
+            binding.etEmailPhone.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
             userViewModel.usesPhone = false
 
         }

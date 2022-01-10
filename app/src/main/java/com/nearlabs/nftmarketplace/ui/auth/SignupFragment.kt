@@ -68,7 +68,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
         binding.btnCreateAccount.backgroundTintList = ColorStateList.valueOf(
             ContextCompat.getColor(
                 requireContext(),
-                if (binding.fullName.text.isNullOrBlank() || binding.walletId.text.isNullOrBlank()) R.color.btndisabled_color else R.color.blue
+                if (binding.fullName.text.isNullOrBlank() || binding.walletId.text.isNullOrBlank()) R.color.btndisabled_color else R.color.black
             )
         )
     }
