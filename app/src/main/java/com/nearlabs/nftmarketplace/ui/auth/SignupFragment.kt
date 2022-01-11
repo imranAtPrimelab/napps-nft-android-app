@@ -33,6 +33,13 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if(!userViewModel.currentEmail.isEmpty()){
+            binding.walletId.hint = userViewModel.currentEmail
+        }else{
+            binding.walletId.hint = userViewModel.currentPhone
+        }
+
         initListeners()
     }
 
@@ -63,11 +70,15 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
 
         binding.btnCreateAccount.setOnClickListener {
             AppConstants.logAppsFlyerEvent(SIGN_UP_CREATE_ACCOUNT_EVENT_NAME,it.context)
-
+            val accountId = binding.walletId.text.toString().apply {
+                this.replace(" ","")
+                this.toLowerCase()
+                
+            }
             observeResultFlow(
                 userViewModel.createUser(
                     binding.fullName.text.toString(),
-                    binding.walletId.text.toString()
+                    accountId
                 ), successHandler = {
                     findNavController().navigate(R.id.toContactNFT)
                 }, errorHandler = {
