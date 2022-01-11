@@ -31,10 +31,10 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
 
         if(userViewModel.loginType == "phone"){
             binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_phone)
-            binding.resendCodeText.text = requireActivity().getString(R.string.send_different_phone)
+            binding.resendDifferentText.text = requireActivity().getString(R.string.send_different_phone)
         }else{
             binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_email)
-            binding.resendCodeText.text = requireActivity().getString(R.string.send_different_email)
+            binding.resendDifferentText.text = requireActivity().getString(R.string.send_different_email)
         }
 
         initListeners()
@@ -86,8 +86,14 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
                         .show()
                 })
         }
+
         binding.closeSignup.setOnClickListener(View.OnClickListener {
             findNavController().navigate(R.id.toAuth)
         })
+
+        binding.resendCodeText.setOnClickListener {
+            userViewModel.loginUser(userViewModel.walletName)
+            Toast.makeText(requireContext(), getString(R.string.email_error), Toast.LENGTH_SHORT).show()
+        }
     }
 }

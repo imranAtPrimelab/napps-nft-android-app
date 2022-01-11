@@ -49,6 +49,7 @@
     <string name="sent_code_phone">We have sent a 6-digit authentication code to your phone</string>
     <string name="send_different_email">Send to a different email address</string>
     <string name="send_different_phone">Send to a different phone number</string>
+    <string name="resend_code_confirmation">Authentication Code Resent</string>
 
 
     <string name="send">Send</string>
