@@ -35,7 +35,7 @@
     <string name="create_an_account">Create an account</string>
     <string name="by_creating_account">By creating a NEAR account, you agree to the NEAR Wallet\n Terms of Service and Privacy Policy.\n</string>
     <string name="login_with_NEAR">Login with NEAR</string>
-    <string name="wallet_id"> WALLET ID</string>
+    <string name="wallet_id"> ACCOUNT ID</string>
 
 
     <string name="verification">Verification</string>
