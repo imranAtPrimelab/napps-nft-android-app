@@ -34,7 +34,8 @@
                 android:layout_marginStart="105dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:background="@drawable/bg_close">
+                android:background="@drawable/bg_close"
+                android:id="@+id/btnClose">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
