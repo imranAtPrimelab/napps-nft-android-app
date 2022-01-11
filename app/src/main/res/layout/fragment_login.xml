@@ -104,7 +104,7 @@
                 android:background="@drawable/input_field_bg"
                 android:fontFamily="@font/inter_regular"
                 android:hint="@string/email_example"
-                android:inputType="phone"
+                android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:paddingHorizontal="14dp"
                 android:textColor="@color/black"
