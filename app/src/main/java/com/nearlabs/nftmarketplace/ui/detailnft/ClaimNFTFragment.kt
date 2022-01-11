@@ -26,6 +26,7 @@ class ClaimNFTFragment : BaseFragment(R.layout.fragment_claim_nft) {
     private val binding by viewBinding(FragmentClaimNftBinding::bind)
     private val nftViewModel: NFTViewModel by viewModels()
     private lateinit var nftId: String
+    private var claimNftInfo: NFT? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,16 +50,8 @@ class ClaimNFTFragment : BaseFragment(R.layout.fragment_claim_nft) {
         observeResultFlow(
             nftViewModel.getNftDetails(nftId),
             successHandler = {
-                loadNftCreatorDetail(it.author.name)
+                claimNftInfo = it
                 setUpNftDetails(it)
-            })
-    }
-
-    private fun loadNftCreatorDetail(userId: String) {
-        observeResultFlow(
-            nftViewModel.getNftCreator(userId),
-            successHandler = {
-                binding.nftCreatorName.text = it.name
             })
     }
 
@@ -66,6 +59,7 @@ class ClaimNFTFragment : BaseFragment(R.layout.fragment_claim_nft) {
         binding.sendNftTitle.text = nft.name
         binding.sendNftDescription.text = nft.description
         binding.sendNftId.text = nft.id
+        binding.nftCreatorName.text = nft.owner?.name
     }
 
     private fun claimNft() {

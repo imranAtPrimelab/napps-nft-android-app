@@ -25,7 +25,6 @@ import kotlinx.coroutines.flow.collect
 import me.rosuh.filepicker.config.FilePickerManager
 import timber.log.Timber
 import java.io.File
-import java.lang.Exception
 
 @AndroidEntryPoint
 class CreateNftFragment : BaseBottomSheetDialogFragment() {
@@ -89,7 +88,6 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
                             ), successHandler = {
                                 handleActionButtonVisibility(true)
                                 viewModel.nextStep()
-
                             }, errorHandler = {
                                 handleActionButtonVisibility(true)
                                 Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
@@ -133,9 +131,9 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
 
         if (viewModel.isFinalStep()) {
             dismiss()
-            try{
+            try {
                 requireParentFragment().findNavController().navigate(R.id.toNftMintedSheetDialog)
-            }catch (notBottomFlow : Exception){
+            } catch (notBottomFlow : Exception){
                 requireParentFragment().findNavController().navigate(R.id.toMain)
             }
         }

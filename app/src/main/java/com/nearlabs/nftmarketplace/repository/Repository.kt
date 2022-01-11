@@ -152,7 +152,7 @@ class Repository(
     }
 
     suspend fun postLocalContact() = safeCall {
-        val request = localContact.getAllContact(sharePrefs.userId)
+        val request = localContact.getAllContactWithEmail(sharePrefs.userId)
         contactApi.importContact(request)
     }
 

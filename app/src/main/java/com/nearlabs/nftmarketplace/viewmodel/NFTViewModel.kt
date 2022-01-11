@@ -24,8 +24,4 @@ class NFTViewModel @Inject constructor(private val repository: Repository) : Vie
     fun claimNft(nftId: String) = resultFlow {
         repository.claimNFT(nftId)
     }
-
-    fun getNftCreator(userId: String) = resultFlow {
-        repository.getUserProfile(userId)
-    }
 }

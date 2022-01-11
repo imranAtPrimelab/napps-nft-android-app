@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.database.Cursor
 import android.provider.ContactsContract
-import android.text.TextUtils
+import android.util.Patterns
 import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.domain.model.ContactEmail
 import com.nearlabs.nftmarketplace.domain.model.ContactPhone
 import timber.log.Timber
-import java.lang.Exception
+import java.util.*
 
 class LocalContact(val context: Context) : ContactSource {
 
@@ -29,6 +29,15 @@ class LocalContact(val context: Context) : ContactSource {
             COL_NUMBER,
             EMAIL,
             DISPLAY_NAME
+        )
+
+        private val CONTACTS_PROJECTION = arrayOf(
+            ContactsContract.Contacts._ID,
+            ContactsContract.Contacts.DISPLAY_NAME_PRIMARY,
+            ContactsContract.Contacts.HAS_PHONE_NUMBER
+        )
+        private val CONTACTS_KINDS_PROJECTION = arrayOf(
+            ContactsContract.CommonDataKinds.Phone.NUMBER
         )
     }
 
@@ -70,9 +79,9 @@ class LocalContact(val context: Context) : ContactSource {
                 val contact = Contact()
                 val firstName = cursor.getString(firstNameIndex)
                 val lastName = cursor.getString(lastNameIndex)
-                val email = "bta@mailinator.com"
+                val email = ""
                 var phoneNumber = cursor.getString(dataIndex)
-                if (TextUtils.isEmpty(phoneNumber)) {
+                if (phoneNumber.isNullOrEmpty()) {
                     continue
                 }
                 phoneNumber = phoneNumber.replace("[^0-9]".toRegex(), "")
@@ -80,14 +89,14 @@ class LocalContact(val context: Context) : ContactSource {
                 contact.firstName = firstName
                 contact.lastName = lastName
                 contact.phone = listOf(ContactPhone(phoneNumber, "local"))
-                contact.email = listOf(ContactEmail(email,"personal"))
+                //contact.email = listOf(ContactEmail(email, "personal"))
                 contact.owner_id = userId
 
-                if(contact.firstName.equals("null") || contact.lastName.equals("null") ||contact.lastName.isNullOrBlank() ||contact.firstName.isNullOrBlank()){
+                if (contact.firstName.equals("null") || contact.lastName.equals("null") || contact.lastName.isNullOrBlank() || contact.firstName.isNullOrBlank()) {
                     try {
                         contact.firstName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)).split(" ")[0]
                         contact.lastName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)).split(" ")[1]
-                    }catch (noLastName : Exception){
+                    } catch (noLastName: Exception) {
                         contact.firstName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
                         contact.lastName = " "
 
@@ -102,5 +111,68 @@ class LocalContact(val context: Context) : ContactSource {
 
     private fun formatNumber(input: String): String {
         return input
+    }
+
+    @SuppressLint("Range")
+    override suspend fun getAllContactWithEmail(userId: String): List<Contact> {
+        val contactList = mutableListOf<Contact>()
+        val cursor: Cursor = context.contentResolver.query(
+            ContactsContract.Contacts.CONTENT_URI,
+            CONTACTS_PROJECTION,
+            null,
+            null,
+            null
+        ) ?: return contactList
+        if (cursor.count > 0) {
+            while (cursor.moveToNext()) {
+                val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+                val name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY))
+                val phones: MutableList<String> = ArrayList()
+                val emails: MutableList<String> = ArrayList()
+                if (cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
+                    val contactCursor: Cursor? = context.contentResolver.query(
+                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                        CONTACTS_KINDS_PROJECTION,
+                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", arrayOf(id), null
+                    )
+                    while (contactCursor != null && contactCursor.moveToNext()) {
+                        val phoneNo = contactCursor.getString(contactCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                        if (!phoneNo.isNullOrEmpty()) {
+                            var phoneNumber = phoneNo.replace("[^0-9]".toRegex(), "")
+                            phoneNumber = formatNumber(phoneNumber)
+                            phones.add(phoneNumber)
+                        }
+                    }
+                    contactCursor?.close()
+                }
+                val crEmails: Cursor? = context.contentResolver.query(
+                    ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, ContactsContract.CommonDataKinds.Email.CONTACT_ID
+                            + " = ?", arrayOf(id), null
+                )
+                while (crEmails != null && crEmails.moveToNext()) {
+                    val email = crEmails.getString(
+                        crEmails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)
+                    )
+                    // Checking validation of email
+                    if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                        emails.add(email)
+                    }
+                }
+                val contact = Contact()
+                contact.firstName = name?.split(" ")?.firstOrNull() ?: " "
+                contact.lastName = name?.split(" ")?.getOrNull(1) ?: " "
+                contact.owner_id = userId
+                if (emails.isNotEmpty()) {
+                    contact.email = listOf(ContactEmail(emails.first(), "personal"))
+                }
+                if (phones.isNotEmpty()) {
+                    contact.phone = listOf(ContactPhone(phones.first(), "local"))
+                }
+                contactList.add(contact)
+                crEmails?.close()
+            }
+        }
+        cursor.close()
+        return contactList
     }
 }
