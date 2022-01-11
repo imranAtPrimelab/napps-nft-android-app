@@ -68,17 +68,23 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     private fun initListeners() {
         binding.ccp.registerCarrierNumberEditText(binding.etEmailPhone)
         binding.btnLogin.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME,it.context)
-            observeResultFlow(
-                userViewModel.loginUser(
-                    binding.etEmailPhoneLogin.text.toString()
-                ), successHandler = {
-                    userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()
-                    findNavController().navigate(R.id.toOtp)
-                }, errorHandler = {
-                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
-                        .show()
-                })
+            if (!binding.etEmailPhoneLogin.text.toString().isNullOrBlank()) {
+                AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME, it.context)
+                observeResultFlow(
+                    userViewModel.loginUser(
+                        binding.etEmailPhoneLogin.text.toString()
+                    ), successHandler = {
+                        userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()
+                        findNavController().navigate(R.id.toOtp)
+                    }, errorHandler = {
+                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
+                            .show()
+                    })
+            }
+            else
+            {
+                Toast.makeText(requireContext(), getString(R.string.login_text_error), Toast.LENGTH_SHORT).show()
+            }
         }
         binding.btnGetStarted.setOnClickListener {
             val usesEmail = !userViewModel.usesPhone
