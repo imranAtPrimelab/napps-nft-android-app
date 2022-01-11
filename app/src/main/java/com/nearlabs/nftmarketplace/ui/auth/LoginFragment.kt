@@ -61,10 +61,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.ccp.setCountryForPhoneCode(1)
         initListeners()
     }
 
     private fun initListeners() {
+        binding.ccp.registerCarrierNumberEditText(binding.etEmailPhone)
         binding.btnLogin.setOnClickListener {
             AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME,it.context)
             observeResultFlow(
@@ -78,15 +80,28 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                         .show()
                 })
         }
-
         binding.btnGetStarted.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(GET_STARTED_EVENT_NAME,it.context)
-            if(userViewModel.usesPhone){
-                userViewModel.currentPhone = binding.etEmailPhone.text.toString()
-            }else{
-                userViewModel.currentEmail = binding.etEmailPhone.text.toString()
+            val usesEmail = !userViewModel.usesPhone
+            if (checkEmailPhone(binding.etEmailPhone.text.toString(), usesEmail)) {
+                AppConstants.logAppsFlyerEvent(GET_STARTED_EVENT_NAME, it.context)
+                if (userViewModel.usesPhone) {
+                    userViewModel.currentPhone = binding.ccp.fullNumber
+                } else {
+                    userViewModel.currentEmail = binding.etEmailPhone.text.toString()
+                }
+                findNavController().navigate(R.id.signupFragment)
             }
-            findNavController().navigate(R.id.signupFragment)
+            else
+            {
+                if (usesEmail)
+                {
+                    Toast.makeText(requireContext(), getString(R.string.email_error), Toast.LENGTH_SHORT).show()
+                }
+                else
+                {
+                    Toast.makeText(requireContext(), getString(R.string.phone_error), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.tvPhoneLogin.setOnClickListener {
@@ -96,6 +111,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             binding.etEmailPhone.hint = requireActivity().getString(R.string.phone_example)
             binding.etEmailPhone.inputType = InputType.TYPE_CLASS_PHONE
             userViewModel.usesPhone = true
+            binding.ccp.visibility = View.VISIBLE
         }
 
         binding.tvEmailLogin.setOnClickListener {
@@ -105,11 +121,20 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             binding.etEmailPhone.hint = requireActivity().getString(R.string.email_example)
             binding.etEmailPhone.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
             userViewModel.usesPhone = false
-
+            binding.ccp.visibility = View.GONE
         }
 
         binding.etEmailPhone.doAfterTextChanged {
             binding.btnGetStarted.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    requireContext(),
+                    if (it.isNullOrBlank()) R.color.btndisabled_color else R.color.blue
+                )
+            )
+        }
+
+        binding.etEmailPhoneLogin.doAfterTextChanged {
+            binding.btnLogin.backgroundTintList = ColorStateList.valueOf(
                 ContextCompat.getColor(
                     requireContext(),
                     if (it.isNullOrBlank()) R.color.btndisabled_color else R.color.blue
@@ -126,5 +151,19 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             browserIntent.data = Uri.parse("https://privacy.nftmakerapp.io/")
             this.requireActivity().startActivity(browserIntent)
         }))
+
+    }
+
+    private fun checkEmailPhone(text: String, usingEmail: Boolean): Boolean {
+        if (usingEmail)
+        {
+            val isLegitEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(text).matches()
+            return (!text.isBlank() && isLegitEmail)
+        }
+        else
+        {
+            val isLegitNumber = android.util.Patterns.PHONE.matcher(text).matches()
+            return (!text.isBlank() && isLegitNumber)
+        }
     }
 }
