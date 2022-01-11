@@ -24,9 +24,9 @@
     <string name="email_example">Ex. abc@yourmail.org</string>
     <string name="get_started">Get Started</string>
     <string name="already_have_account">Already have a near account?</string>
-    <string name="by_clicking_login">by clicking continue you must agree to near labs Terms &amp; Conditions ans Privacy Policy</string>
     <string name="email_error">Please Enter a Valid Email Address</string>
     <string name="phone_error">Please Enter a Valid Phone Number</string>
+    <string name="by_clicking_login">by clicking continue you must agree to near labs\n Terms &amp; Conditions and Privacy Policy</string>
 
     <string name="create_account">Create NEAR Account</string>
     <string name="create_account_text">Enter an Account ID to use with your NEAR account. Your Account ID will be used for all NEAR operations, including sending and receiving assets.\n</string>
@@ -34,8 +34,9 @@
     <string name="suggestion_full_name">Ex John Doe</string>
     <string name="suggestion_wallet_name">yourname.near</string>
     <string name="create_an_account">Create an account</string>
-    <string name="by_creating_account">By creating a NEAR account, you agree to the NEAR Wallet Terms of Service and Privacy Policy.\n</string>
+    <string name="by_creating_account">By creating a NEAR account, you agree to the NEAR Wallet\n Terms of Service and Privacy Policy.\n</string>
     <string name="login_with_NEAR">Login with NEAR</string>
+    <string name="wallet_id"> WALLET ID</string>
 
 
     <string name="verification">Verification</string>

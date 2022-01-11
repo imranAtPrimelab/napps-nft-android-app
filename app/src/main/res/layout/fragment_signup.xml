@@ -108,8 +108,8 @@
                 android:layout_marginTop="26dp"
                 android:drawableEnd="@drawable/ic_more_info"
                 android:drawablePadding="10dp"
-                android:text="@string/suggestion_full_name"
-                android:textColor="#808080"
+                android:text="@string/wallet_id"
+                android:textColor="@color/blue"
                 android:textSize="12sp" />
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -150,7 +150,9 @@
                 android:text="@string/by_creating_account"
                 android:textColor="@color/gray"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:id="@+id/termsText"
+                android:textColorLink="@color/blue"/>
 
             <View
                 android:layout_width="match_parent"

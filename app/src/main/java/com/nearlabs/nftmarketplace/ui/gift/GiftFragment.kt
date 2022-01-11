@@ -64,6 +64,10 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
     private fun initListeners() {
 
         binding.sendGift.setOnClickListener {
+            findNavController().navigate(R.id.toCreateNft)
+        }
+
+        binding.btnClose.setOnClickListener {
             findNavController().navigate(R.id.toMain)
         }
 
