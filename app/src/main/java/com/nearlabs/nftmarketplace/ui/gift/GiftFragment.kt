@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -54,6 +55,21 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        view.isFocusableInTouchMode = true
+        view.requestFocus()
+
+        view.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
+                if (event.action === KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        findNavController().navigate(R.id.toMain)
+                        return true
+                    }
+                }
+                return false
+            }
+        })
         initListeners()
         initViews()
     }
@@ -89,4 +105,6 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
             }
         )
     }
+
+
 }
