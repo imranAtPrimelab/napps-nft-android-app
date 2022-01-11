@@ -91,7 +91,7 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
 
         binding.resendCodeText.setOnClickListener {
             userViewModel.loginUser(userViewModel.walletName)
-            Toast.makeText(requireContext(), getString(R.string.email_error), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.resend_code_confirmation), Toast.LENGTH_SHORT).show()
         }
     }
 }
