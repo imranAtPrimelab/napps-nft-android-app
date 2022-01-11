@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.ui.auth
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -34,6 +35,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
         initListeners()
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun initListeners() {
 
         binding.fullName.doAfterTextChanged {
@@ -42,6 +44,20 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
 
         binding.walletId.doAfterTextChanged {
             checkContinue()
+        }
+
+        binding.fullName.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                binding.fullNameText.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+            else
+                binding.fullNameText.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+        }
+
+        binding.walletId.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                binding.accountIdText.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+            else
+                binding.accountIdText.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
         }
 
         binding.btnCreateAccount.setOnClickListener {
