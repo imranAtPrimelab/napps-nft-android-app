@@ -62,23 +62,30 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.ccp.setCountryForPhoneCode(1)
+        userViewModel.usesPhone = false
         initListeners()
     }
 
     private fun initListeners() {
         binding.ccp.registerCarrierNumberEditText(binding.etEmailPhone)
         binding.btnLogin.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME,it.context)
-            observeResultFlow(
-                userViewModel.loginUser(
-                    binding.etEmailPhoneLogin.text.toString()
-                ), successHandler = {
-                    userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()
-                    findNavController().navigate(R.id.toOtp)
-                }, errorHandler = {
-                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
-                        .show()
-                })
+            if (!binding.etEmailPhoneLogin.text.toString().isNullOrBlank()) {
+                AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME, it.context)
+                observeResultFlow(
+                    userViewModel.loginUser(
+                        binding.etEmailPhoneLogin.text.toString()
+                    ), successHandler = {
+                        userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()
+                        findNavController().navigate(R.id.toOtp)
+                    }, errorHandler = {
+                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
+                            .show()
+                    })
+            }
+            else
+            {
+                Toast.makeText(requireContext(), getString(R.string.login_text_error), Toast.LENGTH_SHORT).show()
+            }
         }
         binding.btnGetStarted.setOnClickListener {
             val usesEmail = !userViewModel.usesPhone
@@ -105,6 +112,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
 
         binding.tvPhoneLogin.setOnClickListener {
+            binding.etEmailPhone.text?.clear()
             AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
             binding.tvPhoneLogin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_grey))
             binding.tvEmailLogin.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
@@ -115,6 +123,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
 
         binding.tvEmailLogin.setOnClickListener {
+            binding.etEmailPhone.text?.clear()
             AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
             binding.tvPhoneLogin.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
             binding.tvEmailLogin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_grey))

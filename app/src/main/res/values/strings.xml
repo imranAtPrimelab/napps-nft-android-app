@@ -26,6 +26,7 @@
     <string name="already_have_account">Already have a near account?</string>
     <string name="email_error">Please Enter a Valid Email Address</string>
     <string name="phone_error">Please Enter a Valid Phone Number</string>
+    <string name="login_text_error">Please Enter Valid Login Credentials</string>
     <string name="by_clicking_login">by clicking continue you must agree to near labs\n Terms &amp; Conditions and Privacy Policy</string>
 
     <string name="create_account">Create NEAR Account</string>
