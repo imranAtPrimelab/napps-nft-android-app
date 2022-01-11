@@ -39,13 +39,13 @@
     <string name="wallet_id"> ACCOUNT ID</string>
 
 
-    <string name="verification">Verification</string>
-    <string name="enter_verification_code">Enter verification code</string>
+    <string name="authentication">Authentication</string>
+    <string name="enter_authentication_code">Enter authentication code</string>
     <string name="didnt_receive_code">Didn\'t receive your code?</string>
     <string name="resend_code">Resend your code</string>
     <string name="continueBtn">Continue</string>
-    <string name="sent_code_email">We have sent a 6-digit verification code to the email address</string>
-    <string name="sent_code_phone">We have sent a 6-digit verification code to your phone</string>
+    <string name="sent_code_email">We have sent a 6-digit authentication code to the email address</string>
+    <string name="sent_code_phone">We have sent a 6-digit authentication code to your phone</string>
     <string name="send_different_email">Send to a different email address</string>
     <string name="send_different_phone">Send to a different phone number</string>
 
