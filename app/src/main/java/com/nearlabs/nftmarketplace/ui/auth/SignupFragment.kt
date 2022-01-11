@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
+import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentOtpBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentSignupBinding
@@ -90,6 +91,10 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
             browserIntent.data = Uri.parse("https://privacy.nftmakerapp.io/")
             this.requireActivity().startActivity(browserIntent)
         }))
+
+        binding.loginbtn.setOnClickListener {
+            popBack()
+        }
 
     }
 
