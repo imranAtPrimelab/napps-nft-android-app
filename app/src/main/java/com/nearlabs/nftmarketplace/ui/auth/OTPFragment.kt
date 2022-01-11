@@ -84,8 +84,14 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
                         .show()
                 })
         }
+
         binding.closeSignup.setOnClickListener(View.OnClickListener {
             findNavController().navigate(R.id.toAuth)
         })
+
+        binding.resendCodeText.setOnClickListener {
+            userViewModel.loginUser(userViewModel.walletName)
+            Toast.makeText(requireContext(), getString(R.string.email_error), Toast.LENGTH_SHORT).show()
+        }
     }
 }
