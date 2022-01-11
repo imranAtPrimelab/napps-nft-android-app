@@ -62,6 +62,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.ccp.setCountryForPhoneCode(1)
+        userViewModel.usesPhone = false
         initListeners()
     }
 
@@ -111,6 +112,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
 
         binding.tvPhoneLogin.setOnClickListener {
+            binding.etEmailPhone.text?.clear()
             AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
             binding.tvPhoneLogin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_grey))
             binding.tvEmailLogin.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
@@ -121,6 +123,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
 
         binding.tvEmailLogin.setOnClickListener {
+            binding.etEmailPhone.text?.clear()
             AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
             binding.tvPhoneLogin.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
             binding.tvEmailLogin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_grey))
