@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class DtoNFTResponse(
     @SerializedName("collection_id")
-    val collectionId : String,
+    val collectionId: String,
     @SerializedName("nft_id")
-    val nftId : String,
+    val nftId: String,
     @SerializedName("title")
     val title: String?,
     @SerializedName("description")
@@ -25,7 +25,9 @@ data class DtoNFTResponse(
     @SerializedName("owner_id")
     val ownerId: String?,
     @SerializedName("attributes")
-    val attributes : List<JsonObject>,
+    val attributes: List<JsonObject>,
     @SerializedName("action_type")
-    val actionType : String
+    val actionType: String,
+    @SerializedName("owner")
+    val owner: DtoUserResponse? = null,
 )

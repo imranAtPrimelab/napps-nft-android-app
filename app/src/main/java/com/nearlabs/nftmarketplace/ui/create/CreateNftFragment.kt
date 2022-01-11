@@ -131,7 +131,11 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
 
         if (viewModel.isFinalStep()) {
             dismiss()
-            requireParentFragment().findNavController().navigate(R.id.toNftMintedSheetDialog)
+            try {
+                requireParentFragment().findNavController().navigate(R.id.toNftMintedSheetDialog)
+            } catch (notBottomFlow : Exception){
+                requireParentFragment().findNavController().navigate(R.id.toMain)
+            }
         }
     }
 
