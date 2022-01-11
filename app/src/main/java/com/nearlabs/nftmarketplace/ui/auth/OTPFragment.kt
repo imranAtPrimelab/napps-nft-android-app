@@ -29,12 +29,10 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(userViewModel.loginType == "phone"){
-            binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_phone)
-            binding.resendCodeText.text = requireActivity().getString(R.string.send_different_phone)
-        }else{
+        if(userViewModel.loginType == "email"){
             binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_email)
-            binding.resendCodeText.text = requireActivity().getString(R.string.send_different_email)
+        }else{
+            binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_phone)
         }
 
         initListeners()
