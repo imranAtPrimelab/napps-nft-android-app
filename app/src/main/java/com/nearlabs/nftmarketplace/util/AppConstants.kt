@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.util
 
+import android.accounts.Account
 import android.content.Context
 import com.appsflyer.AppsFlyerLib
 
@@ -26,4 +27,7 @@ object AppConstants {
     const val DASHBOARD_CREATE_NFT_EVENT_NAME = "dashboard_create_nft"
     const val DASHBOARD_SEND_NFT_EVENT_NAME = "dashboard_send_nft"
     const val SEND_NFT_BUTTON_EVENT_NAME = "send_nft"
+
+    //Suffix .near
+    const val ACCOUNT_NAME_NEAR_SUFFIX = ".near"
 }
