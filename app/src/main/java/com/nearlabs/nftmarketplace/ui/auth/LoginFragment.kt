@@ -11,6 +11,7 @@ import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
@@ -55,6 +56,52 @@ fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>
     this.setText(spannableString, TextView.BufferType.SPANNABLE)
 }
 
+
+fun AppCompatEditText.addSuffix(suffix: String) {
+    val editText = this
+    val formattedSuffix = "$suffix"
+    var text = ""
+    var isSuffixModified = false
+
+    val setCursorPosition: () -> Unit =
+        { Selection.setSelection(editableText, editableText.length - formattedSuffix.length) }
+
+    val setEditText: () -> Unit = {
+        editText.setText(text)
+        setCursorPosition()
+    }
+
+    this.addTextChangedListener(object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun afterTextChanged(editable: Editable?) {
+            val newText = editable.toString()
+
+            if (isSuffixModified) {
+                // user tried to modify suffix
+                isSuffixModified = false
+                setEditText()
+            } else if (text.isNotEmpty() && newText.length < text.length && !newText.contains(
+                    formattedSuffix
+                )
+            ) {
+                // user tried to delete suffix
+                setEditText()
+            } else if (!newText.contains(formattedSuffix)) {
+                // new input, add suffix
+                text = "$newText$formattedSuffix"
+                setEditText()
+            } else {
+                text = newText
+            }
+        }
+    })
+}
+
 class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private val binding by viewBinding(FragmentLoginBinding::bind)
@@ -63,6 +110,10 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.ccp.setCountryForPhoneCode(1)
+        binding.etEmailPhoneLogin.addSuffix(".near")
+        binding.etEmailPhoneLogin.setText(" ", TextView.BufferType.EDITABLE)
+        binding.etEmailPhoneLogin.setText("", TextView.BufferType.EDITABLE)
+
         userViewModel.usesPhone = false
         initListeners()
     }

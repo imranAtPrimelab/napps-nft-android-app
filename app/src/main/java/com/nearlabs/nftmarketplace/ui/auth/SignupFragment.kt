@@ -6,6 +6,7 @@ import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
@@ -35,11 +36,14 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(!userViewModel.currentEmail.isEmpty()){
-            binding.walletId.hint = userViewModel.currentEmail
+        binding.walletId.addSuffix(".near")
+        if(userViewModel.currentEmail.isNotEmpty()){
+            binding.walletId.setText(userViewModel.currentEmail.split("@")[0].replace(".",""), TextView.BufferType.EDITABLE)
         }else{
-            binding.walletId.hint = userViewModel.currentPhone
+            binding.walletId.setText(userViewModel.currentPhone, TextView.BufferType.EDITABLE)
         }
+
+
 
         initListeners()
     }
