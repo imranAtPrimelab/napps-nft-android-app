@@ -50,13 +50,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="15dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/light_grey"
                 android:elevation="0dp"
                 android:fontFamily="@font/inter_medium"
                 android:gravity="center"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="5dp"
                 android:text="@string/email"
+                android:focusedByDefault="true"
                 android:textAllCaps="false"
                 android:textColor="@color/text_selected"
                 android:textSize="18sp" />
@@ -65,9 +66,8 @@
                 android:id="@+id/tvPhoneLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/light_grey"
+                android:backgroundTint="@color/white"
                 android:elevation="0dp"
-                android:focusedByDefault="true"
                 android:fontFamily="@font/inter_medium"
                 android:gravity="center"
                 android:paddingHorizontal="10dp"
@@ -80,22 +80,37 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etEmailPhone"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="14dp"
-            android:layout_marginEnd="14dp"
-            android:background="@drawable/input_field_bg"
-            android:fontFamily="@font/inter_regular"
-            android:inputType="phone"
-            android:hint="@string/phone_example"
-            android:paddingHorizontal="14dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/hint_color"
-            android:maxLines="1"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_marginEnd="14dp">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                app:ccp_countryPreference="us"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etEmailPhone"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_toEndOf="@id/ccp"
+                android:background="@drawable/input_field_bg"
+                android:fontFamily="@font/inter_regular"
+                android:hint="@string/email_example"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingHorizontal="14dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint_color" />
+
+        </RelativeLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGetStarted"
@@ -156,7 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/btndisabled_color"
             android:paddingHorizontal="15dp"
             android:drawableEnd="@drawable/ic_arrow_forward"
             android:fontFamily="@font/inter_medium"

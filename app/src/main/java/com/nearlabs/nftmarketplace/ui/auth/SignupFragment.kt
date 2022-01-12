@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.ui.auth
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -13,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
+import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentOtpBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentSignupBinding
@@ -22,6 +24,7 @@ import com.nearlabs.nftmarketplace.util.AppConstants.SIGN_UP_CREATE_ACCOUNT_EVEN
 import com.nearlabs.nftmarketplace.viewmodel.TransactionViewModel
 import com.nearlabs.nftmarketplace.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class SignupFragment : BaseFragment(R.layout.fragment_signup) {
@@ -31,9 +34,17 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if(!userViewModel.currentEmail.isEmpty()){
+            binding.walletId.hint = userViewModel.currentEmail
+        }else{
+            binding.walletId.hint = userViewModel.currentPhone
+        }
+
         initListeners()
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun initListeners() {
 
         binding.fullName.doAfterTextChanged {
@@ -44,21 +55,41 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
             checkContinue()
         }
 
+        binding.fullName.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                binding.fullNameText.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+            else
+                binding.fullNameText.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+        }
+
+        binding.walletId.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                binding.accountIdText.setTextColor(ContextCompat.getColor(requireContext(), R.color.blue))
+            else
+                binding.accountIdText.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray))
+        }
+
         binding.btnCreateAccount.setOnClickListener {
             AppConstants.logAppsFlyerEvent(SIGN_UP_CREATE_ACCOUNT_EVENT_NAME,it.context)
+            val pattern = Pattern.compile("^[a-z0-9_-]+$")
 
-            observeResultFlow(
-                userViewModel.createUser(
-                    binding.fullName.text.toString(),
-                    binding.walletId.text.toString()
-                ), successHandler = {
-                    findNavController().navigate(R.id.toContactNFT)
-                }, errorHandler = {
-                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
-                }, httpErrorHandler = {
-                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
-                }
-            )
+            if(pattern.matcher(binding.walletId.text.toString()).matches())
+                observeResultFlow(
+                    userViewModel.createUser(
+                        binding.fullName.text.toString(),
+                        binding.walletId.text.toString()
+                    ), successHandler = {
+                        findNavController().navigate(R.id.toContactNFT)
+                    }, errorHandler = {
+                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                    }, httpErrorHandler = {
+                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                )
+            else
+                Toast.makeText(requireContext(), "Account id should only contain : lowercase alphanumeric characters with " +
+                        "only dash or underscore special characters and no spaces", Toast.LENGTH_SHORT).show()
+
         }
 
         binding.closeSignup.setOnClickListener(View.OnClickListener {
@@ -74,6 +105,10 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
             browserIntent.data = Uri.parse("https://privacy.nftmakerapp.io/")
             this.requireActivity().startActivity(browserIntent)
         }))
+
+        binding.loginbtn.setOnClickListener {
+            popBack()
+        }
 
     }
 

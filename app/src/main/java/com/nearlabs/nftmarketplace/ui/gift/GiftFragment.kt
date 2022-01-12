@@ -55,7 +55,6 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
                 Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
             }
         )
-
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

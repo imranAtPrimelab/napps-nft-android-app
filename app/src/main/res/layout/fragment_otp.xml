@@ -31,7 +31,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginStart="89.5dp"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="@string/verification"
+                    android:text="@string/authentication"
                     android:textColor="@color/black"
                     android:textSize="21sp" />
 
@@ -79,32 +79,11 @@
                 android:layout_marginTop="47dp"
                 android:fontFamily="@font/inter_regular"
                 android:gravity="center"
-                android:text="We have sent a 6-digit verification code to the email address"
+                android:text="@string/sent_code_email"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/sentCodeTypeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium"
-                android:text="johndoe@gmail.com"
-                android:textColor="@color/blue"
-                android:textSize="20sp"
-                android:layout_gravity="center_horizontal"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/etOtp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="21dp"
-                android:fontFamily="@font/inter_regular"
-                android:gravity="center"
-                android:hint="@string/enter_verification_code"
-                android:textColor="@color/black"
-                android:textColorHint="#808080"
-                android:textSize="14sp"
-                android:layout_gravity="center_horizontal"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -238,16 +217,6 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/resendCodeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:fontFamily="@font/inter_regular"
-                android:text="Send to a different email address"
-                android:textColor="@color/blue"
-                android:textSize="14sp"
-                android:layout_gravity="center_horizontal"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"

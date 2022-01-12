@@ -26,6 +26,7 @@ import com.nearlabs.nftmarketplace.util.AppConstants.CLICK_LOGIN_WITH_PHONE_EVEN
 import com.nearlabs.nftmarketplace.util.AppConstants.GET_STARTED_EVENT_NAME
 import com.nearlabs.nftmarketplace.util.AppConstants.LOGIN_WITH_PHONE_EVENT_NAME
 import com.nearlabs.nftmarketplace.viewmodel.UserViewModel
+import timber.log.Timber
 
 fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
     val spannableString = SpannableString(this.text)
@@ -61,51 +62,73 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.ccp.setCountryForPhoneCode(1)
+        userViewModel.usesPhone = false
         initListeners()
     }
 
     private fun initListeners() {
-        binding.btnLogin.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME,it.context)
-            observeResultFlow(
-                userViewModel.loginUser(
-                    binding.etEmailPhoneLogin.text.toString()
-                ), successHandler = {
-                    userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()
-                    findNavController().navigate(R.id.toOtp)
-                }, errorHandler = {
-                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
-                        .show()
-                })
-        }
-
-        binding.btnGetStarted.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(GET_STARTED_EVENT_NAME,it.context)
-            if(userViewModel.usesPhone){
-                userViewModel.currentPhone = binding.etEmailPhone.text.toString()
-            }else{
-                userViewModel.currentEmail = binding.etEmailPhone.text.toString()
+        binding.ccp.registerCarrierNumberEditText(binding.etEmailPhone)
+        binding.btnLogin.setOnClickListener { view ->
+            if (binding.etEmailPhoneLogin.text.toString().isNotBlank()) {
+                AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME, view.context)
+                observeResultFlow(
+                    userViewModel.loginUser(
+                        binding.etEmailPhoneLogin.text.toString()
+                    ), successHandler = {
+                        userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()
+                        val bundle = Bundle()
+                        bundle.putString(OTPFragment.LOGIN_TYPE, it.type)
+                        findNavController().navigate(R.id.toOtp, bundle)
+                    }, errorHandler = {
+                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                    }, httpErrorHandler = {
+                        Timber.e(it.toString())
+                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                    })
+            } else {
+                Toast.makeText(requireContext(), getString(R.string.login_text_error), Toast.LENGTH_SHORT).show()
             }
-            findNavController().navigate(R.id.signupFragment)
+        }
+        binding.btnGetStarted.setOnClickListener {
+            val usesEmail = !userViewModel.usesPhone
+            if (checkEmailPhone(binding.etEmailPhone.text.toString(), usesEmail)) {
+                AppConstants.logAppsFlyerEvent(GET_STARTED_EVENT_NAME, it.context)
+                if (userViewModel.usesPhone) {
+                    userViewModel.currentPhone = binding.ccp.fullNumber
+                } else {
+                    userViewModel.currentEmail = binding.etEmailPhone.text.toString()
+                }
+                findNavController().navigate(R.id.signupFragment)
+            } else {
+                if (usesEmail) {
+                    Toast.makeText(requireContext(), getString(R.string.email_error), Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.phone_error), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.tvPhoneLogin.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
+            binding.etEmailPhone.text?.clear()
+            AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME, it.context)
             binding.tvPhoneLogin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_grey))
             binding.tvEmailLogin.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
             binding.etEmailPhone.hint = requireActivity().getString(R.string.phone_example)
             binding.etEmailPhone.inputType = InputType.TYPE_CLASS_PHONE
             userViewModel.usesPhone = true
+            binding.ccp.visibility = View.VISIBLE
         }
 
         binding.tvEmailLogin.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
+            binding.etEmailPhone.text?.clear()
+            AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME, it.context)
             binding.tvPhoneLogin.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
             binding.tvEmailLogin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_grey))
             binding.etEmailPhone.hint = requireActivity().getString(R.string.email_example)
             binding.etEmailPhone.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
             userViewModel.usesPhone = false
-
+            binding.ccp.visibility = View.GONE
         }
 
         binding.etEmailPhone.doAfterTextChanged {
@@ -117,14 +140,34 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             )
         }
 
-        binding.termsText.makeLinks(Pair("Terms & Conditions",View.OnClickListener {
+        binding.etEmailPhoneLogin.doAfterTextChanged {
+            binding.btnLogin.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    requireContext(),
+                    if (it.isNullOrBlank()) R.color.btndisabled_color else R.color.blue
+                )
+            )
+        }
+
+        binding.termsText.makeLinks(Pair("Terms & Conditions", View.OnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
             browserIntent.data = Uri.parse("https://terms.nftmakerapp.io/")
             this.requireActivity().startActivity(browserIntent)
-        }), Pair("Privacy Policy",View.OnClickListener {
+        }), Pair("Privacy Policy", View.OnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
             browserIntent.data = Uri.parse("https://privacy.nftmakerapp.io/")
             this.requireActivity().startActivity(browserIntent)
         }))
+
+    }
+
+    private fun checkEmailPhone(text: String, usingEmail: Boolean): Boolean {
+        return if (usingEmail) {
+            val isLegitEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(text).matches()
+            (text.isNotBlank() && isLegitEmail)
+        } else {
+            val isLegitNumber = android.util.Patterns.PHONE.matcher(text).matches()
+            (text.isNotBlank() && isLegitNumber)
+        }
     }
 }

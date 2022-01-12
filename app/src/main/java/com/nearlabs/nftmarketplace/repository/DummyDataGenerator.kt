@@ -43,8 +43,8 @@ object DummyDataGenerator {
         val names = contactNames()
         return (0..100).map {
             Contact(
-                firstName = names[it % names.size],
-                lastName = "@johndoe",
+                first_name = names[it % names.size],
+                last_name = "@johndoe",
             )
         }
     }
