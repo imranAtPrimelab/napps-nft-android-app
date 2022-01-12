@@ -8,6 +8,7 @@ import com.nearlabs.nftmarketplace.data.localcontact.ContactSource
 import com.nearlabs.nftmarketplace.data.networks.*
 import com.nearlabs.nftmarketplace.data.networks.request.*
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
+import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.domain.model.nft.toDomainModel
 import com.nearlabs.nftmarketplace.domain.model.toDomain
 import com.nearlabs.nftmarketplace.domain.model.toDomainModel
@@ -148,9 +149,14 @@ class Repository(
         dtoResponse.message
     }
 
-    suspend fun postLocalContact() = safeCall {
+    suspend fun postLocalContact(contacts : List<Contact>) = safeCall {
         val request = localContact.getAllContactWithEmail(sharePrefs.userId)
-        contactApi.importContact(request)
+        contactApi.importContact(contacts)
+    }
+
+    suspend fun getLocalContact() = safeCall {
+        localContact.getAllContactWithEmail(sharePrefs.userId)
+
     }
 
     suspend fun getNFTDetails(nftId: String) = safeCall {

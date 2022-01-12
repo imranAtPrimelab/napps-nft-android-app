@@ -43,6 +43,7 @@ rootProject.ext.gson = '2.8.8'
 rootProject.ext.appsflyer = '6.3.2'
 rootProject.ext.filePicker = '0.75'
 rootProject.ext.circularImageView = '3.1.0'
+rootProject.ext.countryCodePicker = '2.5.4'
 
 rootProject.ext.stetho = '1.6.0'
 
@@ -119,5 +120,8 @@ rootProject.ext.deps = [
         filePicker             : "me.rosuh:AndroidFilePicker:$filePicker",
 
         //Circular Image view
-        circularImageView       : "de.hdodenhof:circleimageview:$circularImageView"
+        circularImageView       : "de.hdodenhof:circleimageview:$circularImageView",
+
+        //country code picker
+        countryCodePicker       : "com.hbb20:ccp:$countryCodePicker"
 ]

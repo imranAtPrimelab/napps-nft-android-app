@@ -41,7 +41,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
         if(userViewModel.currentEmail.isNotEmpty()){
             binding.walletId.setText(userViewModel.currentEmail.split("@")[0].replace(".",""), TextView.BufferType.EDITABLE)
         }else{
-            binding.walletId.setText(userViewModel.currentPhone, TextView.BufferType.EDITABLE)
+            binding.walletId.setText(userViewModel.currentPhone.replace("+",""), TextView.BufferType.EDITABLE)
         }
 
 
@@ -76,7 +76,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
 
         binding.btnCreateAccount.setOnClickListener {
             AppConstants.logAppsFlyerEvent(SIGN_UP_CREATE_ACCOUNT_EVENT_NAME,it.context)
-            val pattern = Pattern.compile("^[a-z0-9_-]+$")
+            val pattern = Pattern.compile("^[a-z0-9._-]+$")
 
             val enteredWalletId = binding.walletId.text?.trim().toString().replace(AppConstants.ACCOUNT_NAME_NEAR_SUFFIX, "")
 

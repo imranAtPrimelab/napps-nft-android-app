@@ -26,6 +26,7 @@ data class Contact(
     var email: List<ContactEmail>? = null,
     val status: String? = null,
     var owner_id: String? = null,
+    var id: String? = null,
     var imageUri: Uri? = null,
    )
 
