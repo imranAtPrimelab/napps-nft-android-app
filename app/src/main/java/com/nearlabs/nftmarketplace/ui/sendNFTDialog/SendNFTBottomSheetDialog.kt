@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.databinding.DialogSendNftBinding
+import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.domain.model.nft.NFT
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.SendNFTAdapter
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.SEND_NFT_DIALOG_NEXT_EVENT_NAME
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SendNFTBottomSheetDialog : BaseBottomSheetDialogFragment() {
@@ -73,7 +76,20 @@ class SendNFTBottomSheetDialog : BaseBottomSheetDialogFragment() {
 
             viewModel.transactionItem = selectedNFt
 
-            findNavController().navigate(R.id.toSelectPeople)
+            observeResultFlow(
+                viewModel.getContacts(),
+                successHandler = { it ->
+                    if(it.isEmpty()){
+                        Toast.makeText(requireContext(), "no contacts imported, please import contacts!", Toast.LENGTH_SHORT).show()
+                    }else{
+                        findNavController().navigate(R.id.toSelectPeople)
+                    }
+                }, errorHandler = {
+                    Timber.e(it)
+                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+            )
+
         }
     }
 
