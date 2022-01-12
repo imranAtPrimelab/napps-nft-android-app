@@ -103,6 +103,9 @@ dependencies {
     // For File Picker
     implementation rootProject.deps.filePicker
 
+    //Circular Image View
+    implementation rootProject.deps.circularImageView
+
 }
 
 kapt {

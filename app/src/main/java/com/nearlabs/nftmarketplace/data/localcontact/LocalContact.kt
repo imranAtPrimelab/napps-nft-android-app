@@ -10,6 +10,9 @@ import com.nearlabs.nftmarketplace.domain.model.ContactEmail
 import com.nearlabs.nftmarketplace.domain.model.ContactPhone
 import timber.log.Timber
 import java.util.*
+import android.content.ContentUris
+import android.net.Uri
+
 
 class LocalContact(val context: Context) : ContactSource {
 
@@ -75,6 +78,8 @@ class LocalContact(val context: Context) : ContactSource {
                 cursor.getColumnIndex(EMAIL)
             val idIndex =
                 cursor.getColumnIndex(COL_ID)
+            val person: Uri =
+                ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, idIndex.toLong())
             do {
                 val contact = Contact()
                 val firstName = cursor.getString(firstNameIndex)
@@ -91,6 +96,7 @@ class LocalContact(val context: Context) : ContactSource {
                 contact.phone = listOf(ContactPhone(phoneNumber, "local"))
                 //contact.email = listOf(ContactEmail(email, "personal"))
                 contact.owner_id = userId
+                contact.imageUri = Uri.withAppendedPath(person, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
 
                 if (contact.first_name.equals("null") || contact.last_name.equals("null") || contact.last_name.isNullOrBlank() || contact.first_name.isNullOrBlank()) {
                     try {

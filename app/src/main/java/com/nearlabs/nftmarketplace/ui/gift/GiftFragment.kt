@@ -1,11 +1,7 @@
 package com.nearlabs.nftmarketplace.ui.gift
 
 import android.Manifest
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
@@ -15,15 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
-import com.nearlabs.nftmarketplace.data.localcontact.LocalContact
 import com.nearlabs.nftmarketplace.databinding.FragmentGiftNftBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
-import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.SendNFTAdapter
-import com.nearlabs.nftmarketplace.util.AppConstants
-import com.nearlabs.nftmarketplace.util.AppConstants.SEND_GIFT_NFT_EVENT_NAME
 import com.nearlabs.nftmarketplace.util.adapters.ContactListAdapter
 import com.nearlabs.nftmarketplace.viewmodel.ContactViewModel
-import com.nearlabs.nftmarketplace.viewmodel.CreateNftViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.content.Intent
 import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity

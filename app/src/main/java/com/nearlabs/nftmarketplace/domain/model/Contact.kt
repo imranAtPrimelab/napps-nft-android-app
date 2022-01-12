@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.domain.model
 
+import android.net.Uri
 import com.nearlabs.nftmarketplace.data.networks.response.DtoContact
 import com.nearlabs.nftmarketplace.data.networks.response.DtoContactAddress
 import com.nearlabs.nftmarketplace.data.networks.response.DtoContactEmail
@@ -25,6 +26,7 @@ data class Contact(
     var email: List<ContactEmail>? = null,
     val status: String? = null,
     var owner_id: String? = null,
+    var imageUri: Uri? = null,
    )
 
 data class ContactEmail(
