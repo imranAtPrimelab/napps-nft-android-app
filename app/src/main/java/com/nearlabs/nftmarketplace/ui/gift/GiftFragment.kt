@@ -27,6 +27,7 @@ import com.nearlabs.nftmarketplace.viewmodel.CreateNftViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.content.Intent
 import com.nearlabs.nftmarketplace.domain.model.Contact
+import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity
 import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
 
 
@@ -104,6 +105,8 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
         }
 
         binding.importContact.setOnClickListener {
+            (this.activity as BaseActivity).showProgressDialog()
+
             val selectedContacts = contactListAdapter.selectedPosition.mapNotNull { contactListAdapter.getItemAtPosition(it) }
 
             if (selectedContacts.isEmpty()) {
@@ -116,6 +119,7 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
                         selectedContacts
                     ), successHandler = {
                         Toast.makeText(requireContext(), "contacts imported successfully", Toast.LENGTH_SHORT).show()
+                        (this.activity as BaseActivity).dismissProgressDialog()
 
                     }, errorHandler = {
                         Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
