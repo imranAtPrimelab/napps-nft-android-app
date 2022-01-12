@@ -26,6 +26,7 @@ import com.nearlabs.nftmarketplace.util.AppConstants.CLICK_LOGIN_WITH_PHONE_EVEN
 import com.nearlabs.nftmarketplace.util.AppConstants.GET_STARTED_EVENT_NAME
 import com.nearlabs.nftmarketplace.util.AppConstants.LOGIN_WITH_PHONE_EVENT_NAME
 import com.nearlabs.nftmarketplace.viewmodel.UserViewModel
+import timber.log.Timber
 
 fun AppCompatTextView.makeLinks(vararg links: Pair<String, View.OnClickListener>) {
     val spannableString = SpannableString(this.text)
@@ -68,22 +69,24 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private fun initListeners() {
         binding.ccp.registerCarrierNumberEditText(binding.etEmailPhone)
-        binding.btnLogin.setOnClickListener {
-            if (!binding.etEmailPhoneLogin.text.toString().isNullOrBlank()) {
-                AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME, it.context)
+        binding.btnLogin.setOnClickListener { view ->
+            if (binding.etEmailPhoneLogin.text.toString().isNotBlank()) {
+                AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME, view.context)
                 observeResultFlow(
                     userViewModel.loginUser(
                         binding.etEmailPhoneLogin.text.toString()
                     ), successHandler = {
                         userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()
-                        findNavController().navigate(R.id.toOtp)
+                        val bundle = Bundle()
+                        bundle.putString(OTPFragment.LOGIN_TYPE, it.type)
+                        findNavController().navigate(R.id.toOtp, bundle)
                     }, errorHandler = {
-                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                    }, httpErrorHandler = {
+                        Timber.e(it.toString())
+                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
                     })
-            }
-            else
-            {
+            } else {
                 Toast.makeText(requireContext(), getString(R.string.login_text_error), Toast.LENGTH_SHORT).show()
             }
         }
@@ -97,15 +100,10 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                     userViewModel.currentEmail = binding.etEmailPhone.text.toString()
                 }
                 findNavController().navigate(R.id.signupFragment)
-            }
-            else
-            {
-                if (usesEmail)
-                {
+            } else {
+                if (usesEmail) {
                     Toast.makeText(requireContext(), getString(R.string.email_error), Toast.LENGTH_SHORT).show()
-                }
-                else
-                {
+                } else {
                     Toast.makeText(requireContext(), getString(R.string.phone_error), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -113,7 +111,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         binding.tvPhoneLogin.setOnClickListener {
             binding.etEmailPhone.text?.clear()
-            AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
+            AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME, it.context)
             binding.tvPhoneLogin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_grey))
             binding.tvEmailLogin.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
             binding.etEmailPhone.hint = requireActivity().getString(R.string.phone_example)
@@ -124,7 +122,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         binding.tvEmailLogin.setOnClickListener {
             binding.etEmailPhone.text?.clear()
-            AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME,it.context)
+            AppConstants.logAppsFlyerEvent(CLICK_LOGIN_WITH_PHONE_EVENT_NAME, it.context)
             binding.tvPhoneLogin.backgroundTintList = ColorStateList.valueOf(Color.WHITE)
             binding.tvEmailLogin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_grey))
             binding.etEmailPhone.hint = requireActivity().getString(R.string.email_example)
@@ -151,11 +149,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             )
         }
 
-        binding.termsText.makeLinks(Pair("Terms & Conditions",View.OnClickListener {
+        binding.termsText.makeLinks(Pair("Terms & Conditions", View.OnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
             browserIntent.data = Uri.parse("https://terms.nftmakerapp.io/")
             this.requireActivity().startActivity(browserIntent)
-        }), Pair("Privacy Policy",View.OnClickListener {
+        }), Pair("Privacy Policy", View.OnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
             browserIntent.data = Uri.parse("https://privacy.nftmakerapp.io/")
             this.requireActivity().startActivity(browserIntent)
@@ -164,15 +162,12 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     }
 
     private fun checkEmailPhone(text: String, usingEmail: Boolean): Boolean {
-        if (usingEmail)
-        {
+        return if (usingEmail) {
             val isLegitEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(text).matches()
-            return (!text.isBlank() && isLegitEmail)
-        }
-        else
-        {
+            (text.isNotBlank() && isLegitEmail)
+        } else {
             val isLegitNumber = android.util.Patterns.PHONE.matcher(text).matches()
-            return (!text.isBlank() && isLegitNumber)
+            (text.isNotBlank() && isLegitNumber)
         }
     }
 }
