@@ -106,16 +106,13 @@ class Repository(
         }
 
     suspend fun login(walletName: String) =
-        safeCall {
-            val request = DtoLoginRequest(
-                walletName = walletName
-            )
-
+        safeCallWithHttpError {
+            val request = DtoLoginRequest(walletName = walletName)
             val dtoResponse = loginApi.login(request).apply {
                 sharePrefs.loginType = type
                 sharePrefs.walletName = walletName
             }
-
+            dtoResponse
         }
 
     suspend fun verifyLogin(walletName: String, nonce: String) =

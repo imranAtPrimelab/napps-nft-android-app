@@ -2,7 +2,6 @@ package com.nearlabs.nftmarketplace.ui.auth
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -12,29 +11,31 @@ import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
-import com.nearlabs.nftmarketplace.databinding.FragmentLoginBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentOtpBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.OTP_VERIFICATION_EVENT_NAME
 import com.nearlabs.nftmarketplace.viewmodel.UserViewModel
-import kotlin.text.StringBuilder
+import dagger.hilt.android.AndroidEntryPoint
 
-class OTPFragment: BaseFragment(R.layout.fragment_otp) {
+@AndroidEntryPoint
+class OTPFragment : BaseFragment(R.layout.fragment_otp) {
 
     private val binding by viewBinding(FragmentOtpBinding::bind)
     private val userViewModel: UserViewModel by activityViewModels()
 
+    companion object {
+        const val LOGIN_TYPE = "login_type"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if(userViewModel.loginType == "email"){
+        val loginType = arguments?.getString(LOGIN_TYPE) ?: "phone"
+        if (loginType == "email") {
             binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_email)
-        }else{
+        } else {
             binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_phone)
         }
-
         initListeners()
     }
 
@@ -64,7 +65,7 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
             )
         }
         binding.btnContinue.setOnClickListener {
-            AppConstants.logAppsFlyerEvent(OTP_VERIFICATION_EVENT_NAME,it.context)
+            AppConstants.logAppsFlyerEvent(OTP_VERIFICATION_EVENT_NAME, it.context)
             val nonce = StringBuilder()
                 .append(binding.edt1.text.toString())
                 .append(binding.edt2.text.toString())
@@ -84,8 +85,14 @@ class OTPFragment: BaseFragment(R.layout.fragment_otp) {
                         .show()
                 })
         }
+
         binding.closeSignup.setOnClickListener(View.OnClickListener {
             findNavController().navigate(R.id.toAuth)
         })
+
+        binding.resendCodeText.setOnClickListener {
+            userViewModel.loginUser(userViewModel.walletName)
+            Toast.makeText(requireContext(), getString(R.string.resend_code_confirmation), Toast.LENGTH_SHORT).show()
+        }
     }
 }
