@@ -25,6 +25,10 @@ import com.nearlabs.nftmarketplace.util.adapters.ContactListAdapter
 import com.nearlabs.nftmarketplace.viewmodel.ContactViewModel
 import com.nearlabs.nftmarketplace.viewmodel.CreateNftViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import android.content.Intent
+
+
+
 
 
 @AndroidEntryPoint
@@ -60,9 +64,12 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
 
         view.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
-                if (event.action === KeyEvent.ACTION_DOWN) {
+                if (event.action == KeyEvent.ACTION_DOWN) {
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        findNavController().navigate(R.id.toMain)
+                        val i = Intent()
+                        i.action = Intent.ACTION_MAIN
+                        i.addCategory(Intent.CATEGORY_HOME)
+                        view.context.startActivity(i)
                         return true
                     }
                 }
