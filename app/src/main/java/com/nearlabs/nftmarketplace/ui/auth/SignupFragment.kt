@@ -37,7 +37,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.walletId.addSuffix(".near")
+        binding.walletId.addSuffix(AppConstants.ACCOUNT_NAME_NEAR_SUFFIX)
         if(userViewModel.currentEmail.isNotEmpty()){
             binding.walletId.setText(userViewModel.currentEmail.split("@")[0].replace(".",""), TextView.BufferType.EDITABLE)
         }else{
@@ -78,12 +78,16 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
             AppConstants.logAppsFlyerEvent(SIGN_UP_CREATE_ACCOUNT_EVENT_NAME,it.context)
             val pattern = Pattern.compile("^[a-z0-9._-]+$")
 
-            if(pattern.matcher(binding.walletId.text.toString()).matches()) {
+            val enteredWalletId = binding.walletId.text?.trim().toString().replace(AppConstants.ACCOUNT_NAME_NEAR_SUFFIX, "")
+
+//            if(pattern.matcher(binding.walletId.text.toString()).matches()) {
+            if(pattern.matcher(enteredWalletId).matches()) {
                 (this.activity as BaseActivity).showProgressDialog()
                 observeResultFlow(
                     userViewModel.createUser(
                         binding.fullName.text.toString(),
-                        binding.walletId.text.toString()
+//                        binding.walletId.text.toString()
+                                enteredWalletId
                     ), successHandler = {
                         findNavController().navigate(R.id.toContactNFT)
                         (this.activity as BaseActivity).dismissProgressDialog()
