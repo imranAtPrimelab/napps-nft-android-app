@@ -26,9 +26,7 @@ import com.nearlabs.nftmarketplace.viewmodel.ContactViewModel
 import com.nearlabs.nftmarketplace.viewmodel.CreateNftViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.content.Intent
-
-
-
+import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity
 
 
 @AndroidEntryPoint
@@ -46,13 +44,15 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
         }
 
     private fun syncContact() {
+        (this.activity as BaseActivity).showProgressDialog()
         observeResultFlow(
             viewModel.postLocalContact(
             ), successHandler = {
                 getContactList()
-
+                (this.activity as BaseActivity).dismissProgressDialog()
             }, errorHandler = {
                 Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                (this.activity as BaseActivity).dismissProgressDialog()
             }
         )
     }
