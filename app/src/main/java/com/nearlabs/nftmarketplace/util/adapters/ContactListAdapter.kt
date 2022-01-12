@@ -2,6 +2,7 @@ package com.nearlabs.nftmarketplace.util.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.ItemContactsBinding
 import com.nearlabs.nftmarketplace.domain.model.Contact
@@ -38,5 +39,8 @@ class ItemContactHolder(
     fun bind(data: Contact, selected: Boolean) {
         binding.nameLong.text = "${data.first_name} ${data.last_name}"
         binding.username.text = data.phone?.firstOrNull()?.number ?: data.email?.firstOrNull()?.address ?: ""
+        binding.imageSelected.setImageResource(if (selected) R.drawable.ic_selected else R.drawable.ic_un_select)
+        binding.root.setOnClickListener { onItemClicked?.invoke(data, adapterPosition) }
+
     }
 }

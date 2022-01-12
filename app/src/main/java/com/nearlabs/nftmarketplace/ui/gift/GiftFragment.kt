@@ -26,7 +26,9 @@ import com.nearlabs.nftmarketplace.viewmodel.ContactViewModel
 import com.nearlabs.nftmarketplace.viewmodel.CreateNftViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.content.Intent
+import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity
+import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
 
 
 @AndroidEntryPoint
@@ -35,27 +37,23 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
     private val binding by viewBinding(FragmentGiftNftBinding::bind)
     private val viewModel by activityViewModels<ContactViewModel>()
 
-    private val contactListAdapter by lazy {ContactListAdapter()  }
+    private val contactListAdapter by lazy {
+        ContactListAdapter { contact, position ->
+            selectContact(contact, position)
+    }.setMode(MULTI)  }
+
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (granted) {
-                syncContact()
+                getContactList()
             }
         }
 
-    private fun syncContact() {
-        (this.activity as BaseActivity).showProgressDialog()
-        observeResultFlow(
-            viewModel.postLocalContact(
-            ), successHandler = {
-                getContactList()
-                (this.activity as BaseActivity).dismissProgressDialog()
-            }, errorHandler = {
-                Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
-                (this.activity as BaseActivity).dismissProgressDialog()
-            }
-        )
+
+    private fun selectContact(contact: Contact, position: Int) {
+        contactListAdapter.toggleSelection(position)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -81,12 +79,25 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
     }
     private fun initViews() {
         binding.contactList.adapter = contactListAdapter
-
+        binding.contactList.callOnClick()
     }
+
+
     private fun initListeners() {
 
         binding.sendGift.setOnClickListener {
-            findNavController().navigate(R.id.toCreateNft)
+            observeResultFlow(
+                viewModel.getContacts()
+                , successHandler = {
+                   if(it.isNotEmpty()){
+                       findNavController().navigate(R.id.toCreateNft)
+                   }else{
+                       Toast.makeText(requireContext(), "please import contacts first", Toast.LENGTH_SHORT).show()
+                   }
+                }, errorHandler = {
+                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+            )
         }
 
         binding.btnClose.setOnClickListener {
@@ -94,15 +105,37 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
         }
 
         binding.importContact.setOnClickListener {
-            syncContact()
+            (this.activity as BaseActivity).showProgressDialog()
+
+            val selectedContacts = contactListAdapter.selectedPosition.mapNotNull { contactListAdapter.getItemAtPosition(it) }
+
+            if (selectedContacts.isEmpty()) {
+                // error select empty people
+                Toast.makeText(requireContext(),"no contacts selected!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }else{
+                observeResultFlow(
+                    viewModel.postLocalContact(
+                        selectedContacts
+                    ), successHandler = {
+                        Toast.makeText(requireContext(), "contacts imported successfully", Toast.LENGTH_SHORT).show()
+                        (this.activity as BaseActivity).dismissProgressDialog()
+
+                    }, errorHandler = {
+                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                )
+            }
+
         }
         requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
 
     }
 
+
     private fun getContactList() {
         observeResultFlow(
-            viewModel.getContacts(
+            viewModel.getLocalContacts(
             ), successHandler = {
                 contactListAdapter.setData(it)
             }, errorHandler = {
