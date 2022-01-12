@@ -86,19 +86,19 @@ class LocalContact(val context: Context) : ContactSource {
                 }
                 phoneNumber = phoneNumber.replace("[^0-9]".toRegex(), "")
                 phoneNumber = formatNumber(phoneNumber)
-                contact.firstName = firstName
-                contact.lastName = lastName
+                contact.first_name = firstName
+                contact.last_name = lastName
                 contact.phone = listOf(ContactPhone(phoneNumber, "local"))
                 //contact.email = listOf(ContactEmail(email, "personal"))
                 contact.owner_id = userId
 
-                if (contact.firstName.equals("null") || contact.lastName.equals("null") || contact.lastName.isNullOrBlank() || contact.firstName.isNullOrBlank()) {
+                if (contact.first_name.equals("null") || contact.last_name.equals("null") || contact.last_name.isNullOrBlank() || contact.first_name.isNullOrBlank()) {
                     try {
-                        contact.firstName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)).split(" ")[0]
-                        contact.lastName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)).split(" ")[1]
+                        contact.first_name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)).split(" ")[0]
+                        contact.last_name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)).split(" ")[1]
                     } catch (noLastName: Exception) {
-                        contact.firstName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-                        contact.lastName = " "
+                        contact.first_name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                        contact.last_name = " "
 
                     }
                 }
@@ -159,8 +159,8 @@ class LocalContact(val context: Context) : ContactSource {
                     }
                 }
                 val contact = Contact()
-                contact.firstName = name?.split(" ")?.firstOrNull() ?: " "
-                contact.lastName = name?.split(" ")?.getOrNull(1) ?: " "
+                contact.first_name = name?.split(" ")?.firstOrNull() ?: " "
+                contact.last_name = name?.split(" ")?.getOrNull(1) ?: " "
                 contact.owner_id = userId
                 if (emails.isNotEmpty()) {
                     contact.email = listOf(ContactEmail(emails.first(), "personal"))

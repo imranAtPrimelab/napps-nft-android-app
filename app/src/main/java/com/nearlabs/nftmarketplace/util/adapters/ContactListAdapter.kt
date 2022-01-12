@@ -16,7 +16,8 @@ class ContactListAdapter(
     }
 
     override fun createViewHolderInternal(parent: ViewGroup, viewType: Int): ItemContactHolder {
-        return ItemContactHolder(parent.viewBinding(ItemContactsBinding::inflate),
+        return ItemContactHolder(
+            parent.viewBinding(ItemContactsBinding::inflate),
             onItemClicked
         )
     }
@@ -35,7 +36,7 @@ class ItemContactHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(data: Contact, selected: Boolean) {
-        binding.nameLong.text = data.firstName
+        binding.nameLong.text = "${data.first_name} ${data.last_name}"
         binding.username.text = data.phone?.firstOrNull()?.number ?: data.email?.firstOrNull()?.address ?: ""
     }
 }
