@@ -20,6 +20,7 @@ import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentOtpBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentSignupBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.SIGN_UP_CREATE_ACCOUNT_EVENT_NAME
 import com.nearlabs.nftmarketplace.viewmodel.TransactionViewModel
@@ -77,19 +78,24 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
             AppConstants.logAppsFlyerEvent(SIGN_UP_CREATE_ACCOUNT_EVENT_NAME,it.context)
             val pattern = Pattern.compile("^[a-z0-9_-]+$")
 
-            if(pattern.matcher(binding.walletId.text.toString()).matches())
+            if(pattern.matcher(binding.walletId.text.toString()).matches()) {
+                (this.activity as BaseActivity).showProgressDialog()
                 observeResultFlow(
                     userViewModel.createUser(
                         binding.fullName.text.toString(),
                         binding.walletId.text.toString()
                     ), successHandler = {
                         findNavController().navigate(R.id.toContactNFT)
+                        (this.activity as BaseActivity).dismissProgressDialog()
                     }, errorHandler = {
                         Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                        (this.activity as BaseActivity).dismissProgressDialog()
                     }, httpErrorHandler = {
                         Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                        (this.activity as BaseActivity).dismissProgressDialog()
                     }
                 )
+            }
             else
                 Toast.makeText(requireContext(), "Account id should only contain : lowercase alphanumeric characters with " +
                         "only dash or underscore special characters and no spaces", Toast.LENGTH_SHORT).show()
