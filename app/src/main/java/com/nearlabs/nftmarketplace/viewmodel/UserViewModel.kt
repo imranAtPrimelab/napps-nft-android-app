@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class UserViewModel @Inject constructor(private val repository: Repository,private val sharePrefsRepository: SharePrefs) : ViewModel() {
+class UserViewModel @Inject constructor(private val repository: Repository, sharePrefsRepository: SharePrefs) : ViewModel() {
     var currentEmail: String = ""
     var currentPhone: String = ""
     var usesPhone: Boolean = true
@@ -19,11 +19,11 @@ class UserViewModel @Inject constructor(private val repository: Repository,priva
         repository.createUser(name, walletId, currentPhone, currentEmail)
     }
 
-    fun loginUser(walletName : String) = resultFlow {
+    fun loginUser(walletName: String) = resultFlow {
         repository.login(walletName)
     }
 
-    fun verifyUser(walletName : String, nonce :String) = resultFlow {
+    fun verifyUser(walletName: String, nonce: String) = resultFlow {
         repository.verifyLogin(walletName, nonce)
     }
 
