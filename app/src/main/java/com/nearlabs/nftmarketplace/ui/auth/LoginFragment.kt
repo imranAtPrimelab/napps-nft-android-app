@@ -146,7 +146,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             if (checkEmailPhone(binding.etEmailPhone.text.toString(), usesEmail)) {
                 AppConstants.logAppsFlyerEvent(GET_STARTED_EVENT_NAME, it.context)
                 if (userViewModel.usesPhone) {
-                    userViewModel.currentPhone = binding.ccp.fullNumber
+                    userViewModel.currentPhone = binding.ccp.getFullNumberWithPlus()
                 } else {
                     userViewModel.currentEmail = binding.etEmailPhone.text.toString()
                 }
