@@ -39,25 +39,25 @@ class Repository(
 
     suspend fun getTransactions() = safeCall {
         val dtoTransactions = transactionApi.getTransaction(sharePrefs.userId)
-        dtoTransactions.map { it.toDomainModel() }
+        dtoTransactions.data.map { it.toDomainModel() }
     }
 
     suspend fun getSentTransactions() = safeCall {
         val dtoTransactions = transactionApi.getTransaction(sharePrefs.userId)
-        dtoTransactions
+        dtoTransactions.data
             .map { it.toDomainModel() }
             .filter { it.direction == TransactionDirection.Outgoing }
     }
 
     suspend fun getRecvTransactions() = safeCall {
         val dtoTransactions = transactionApi.getTransaction(sharePrefs.userId)
-        dtoTransactions
+        dtoTransactions.data
             .map { it.toDomainModel() }
             .filter { it.direction == TransactionDirection.Incoming }
     }
 
     suspend fun getRecentTransactions() = safeCall {
-        val dtoTransactions = transactionApi.getTransaction(sharePrefs.userId).take(20)
+        val dtoTransactions = transactionApi.getTransaction(sharePrefs.userId).data.take(20)
         dtoTransactions.map { it.toDomainModel() }
     }
 
