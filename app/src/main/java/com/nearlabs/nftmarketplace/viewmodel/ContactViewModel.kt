@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.nearlabs.nftmarketplace.common.extensions.resultFlow
 import com.nearlabs.nftmarketplace.domain.model.Contact
@@ -22,4 +23,10 @@ class ContactViewModel @Inject constructor(private val repository: Repository) :
     fun postLocalContact(contacts : List<Contact>) = resultFlow {
         repository.postLocalContact(contacts)
     }
+
+    var itemsCopy : List<Contact>? = null
+
+    var selectedHashSet: MutableList<Int>? = mutableListOf()
+
+
 }

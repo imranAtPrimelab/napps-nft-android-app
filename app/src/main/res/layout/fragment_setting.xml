@@ -111,30 +111,6 @@
             tools:csiv_value="+1 748 485 9494" />
     </LinearLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvSecurity"
-        style="@style/Setting.Category"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="start"
-        android:text="@string/setting_security"
-        app:layout_constraintEnd_toEndOf="@id/tvConnectedWallet"
-        app:layout_constraintStart_toStartOf="@id/tvConnectedWallet"
-        app:layout_constraintTop_toBottomOf="@id/layout_profile" />
-
-    <com.nearlabs.nftmarketplace.ui.custom.CustomSettingItemView
-        android:id="@+id/csiv_security"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/bg_round_rectangle_stroke"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="24dp"
-        app:csiv_value="@string/setting_add_2fa_auth"
-        app:layout_constraintEnd_toEndOf="@id/tvSecurity"
-        app:layout_constraintStart_toStartOf="@id/tvSecurity"
-        app:layout_constraintTop_toBottomOf="@id/tvSecurity" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logoutButtonView"
@@ -143,8 +119,8 @@
         android:layout_marginTop="10dp"
         android:text="Logout"
         app:backgroundTint="@color/blue"
-        app:layout_constraintEnd_toEndOf="@id/csiv_security"
-        app:layout_constraintStart_toStartOf="@id/csiv_security"
-        app:layout_constraintTop_toBottomOf="@id/csiv_security" />
+        app:layout_constraintEnd_toEndOf="@id/layout_profile"
+        app:layout_constraintStart_toStartOf="@id/layout_profile"
+        app:layout_constraintTop_toBottomOf="@id/layout_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

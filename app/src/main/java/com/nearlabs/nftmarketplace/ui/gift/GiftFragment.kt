@@ -18,9 +18,16 @@ import com.nearlabs.nftmarketplace.util.adapters.ContactListAdapter
 import com.nearlabs.nftmarketplace.viewmodel.ContactViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.widget.SearchView
 import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity
 import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
+import java.lang.Exception
 
 
 @AndroidEntryPoint
@@ -45,6 +52,7 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
 
     private fun selectContact(contact: Contact, position: Int) {
         contactListAdapter.toggleSelection(position)
+        viewModel.selectedHashSet!!.add(position)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,6 +85,39 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
 
 
     private fun initListeners() {
+
+        binding.searchView.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val currentData = (binding.contactList.adapter as ContactListAdapter).getData()!!
+                for(i in viewModel.selectedHashSet!!.indices){
+                    if(currentData.contains(viewModel.itemsCopy!![viewModel.selectedHashSet!![i]])){
+                        for (y in currentData.indices){
+                            selectContact(currentData[currentData.indexOf(viewModel.itemsCopy!![viewModel.selectedHashSet!![i]])],
+                                currentData.indexOf(viewModel.itemsCopy!![viewModel.selectedHashSet!![i]]))
+                        }
+                    }
+                }
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                (binding.contactList.adapter as ContactListAdapter).filter(s.toString(),
+                    viewModel.itemsCopy!!
+                )
+
+            }
+        })
+
+        /*binding.searchView.setOnKeyListener { _, keyCode, _ ->
+            if (keyCode == KeyEvent.KEYCODE_DEL) {
+                (binding.contactList.adapter as ContactListAdapter).filter(binding.searchView.text.toString())
+            }
+            false
+        }*/
 
         binding.sendGift.setOnClickListener {
             observeResultFlow(
@@ -132,6 +173,7 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
             viewModel.getLocalContacts(
             ), successHandler = {
                 contactListAdapter.setData(it)
+                viewModel.itemsCopy = it
                 (this.activity as BaseActivity).dismissProgressDialog()
             }, errorHandler = {
                 Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
@@ -140,6 +182,8 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
             }
         )
     }
+
+
 
 
 }
