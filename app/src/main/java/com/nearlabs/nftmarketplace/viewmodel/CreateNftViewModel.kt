@@ -42,11 +42,15 @@ class CreateNftViewModel @Inject constructor(private val repository: Repository,
 
     fun isFinalStep() = step.value == STEP_FINAL
 
-    fun createNft(selectedFile: File, title: String, description: String, attributeName: String, attributeValue: String) = resultFlow {
+    fun createNft(selectedFile: File, title: String, description: String, attributeName: List<String>, attributeValue: List<String>) = resultFlow {
         val nftCreateRequest = NftCreateRequest(selectedFile, NftInformation(title = title, description = description))
         nftCreateRequest.nftInformation.ownerId = sharePrefs.userId
         if (attributeName.isNotEmpty() && attributeValue.isNotEmpty()) {
-            nftCreateRequest.nftInformation.attributes = listOf(AttributesItem(attrName = attributeName, attrValue = attributeValue))
+            val attributes = mutableListOf<AttributesItem>()
+            for (i in attributeName.indices){
+                attributes.add(AttributesItem(attrName = attributeName[i], attrValue = attributeValue[i]))
+            }
+            nftCreateRequest.nftInformation.attributes = attributes
         }
         repository.createNft(nftCreateRequest)
     }

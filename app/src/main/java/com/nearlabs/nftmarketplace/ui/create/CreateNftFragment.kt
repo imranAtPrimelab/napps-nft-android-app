@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ import com.nearlabs.nftmarketplace.databinding.FragmentCreateNftBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.CREATE_NFT_NEXT_BUTTON_EVENT_NAME
+import com.nearlabs.nftmarketplace.util.adapters.NFTPropertiesAdapter
 import com.nearlabs.nftmarketplace.viewmodel.CreateNftViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -41,6 +43,12 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
     private var isDecAdded: Boolean = false
     private val checkValidation: Boolean
         get() = selectedFile != null && isTitleAdded && isDecAdded
+    private var size = 0
+    private var container = mutableListOf<Int>(size)
+    private val propertiesAdapter by lazy{
+        return@lazy NFTPropertiesAdapter(requireContext(), container)
+    }
+
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         if (granted) {
@@ -73,6 +81,8 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
         binding.rootUpload.root.visibility = View.VISIBLE
         binding.rootPreview.root.visibility = View.GONE
         setFullHeight()
+        binding.rootUpload.layoutProperties.adapter = propertiesAdapter
+
     }
 
     private fun initListeners() {
@@ -93,8 +103,8 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
                                 file,
                                 binding.rootUpload.titleEditText.text.toString(),
                                 binding.rootUpload.descriptionEditText.text.toString(),
-                                binding.rootUpload.attributeNameEditText.text.toString(),
-                                binding.rootUpload.attributeValueEditText.text.toString()
+                                propertiesAdapter.getProperties()[0].values.toList(),
+                                propertiesAdapter.getProperties()[1].values.toList()
                             ), successHandler = {
                                 handleActionButtonVisibility(true)
                                 viewModel.nextStep()
@@ -125,6 +135,10 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
         binding.rootUpload.descriptionEditText.doAfterTextChanged {
             isDecAdded = it.toString().isNotEmpty()
             manageNextButtonEnable(checkValidation)
+        }
+        binding.rootUpload.addMore.setOnClickListener{
+            container.add(size++)
+            propertiesAdapter.notifyItemChanged(size)
         }
     }
 
