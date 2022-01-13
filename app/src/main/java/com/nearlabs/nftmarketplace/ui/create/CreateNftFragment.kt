@@ -1,11 +1,11 @@
 package com.nearlabs.nftmarketplace.ui.create
 
 import android.Manifest
+import android.R.attr
 import android.app.Activity
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,13 +25,23 @@ import com.nearlabs.nftmarketplace.databinding.FragmentCreateNftBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.CREATE_NFT_NEXT_BUTTON_EVENT_NAME
-import com.nearlabs.nftmarketplace.util.adapters.NFTPropertiesAdapter
 import com.nearlabs.nftmarketplace.viewmodel.CreateNftViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import droidninja.filepicker.FilePickerBuilder
+import droidninja.filepicker.FilePickerBuilder.Companion.instance
 import kotlinx.coroutines.flow.collect
-import me.rosuh.filepicker.config.FilePickerManager
 import timber.log.Timber
 import java.io.File
+import java.util.concurrent.Executors
+import droidninja.filepicker.FilePickerConst
+
+import android.R.attr.data
+import android.net.Uri
+import com.nearlabs.nftmarketplace.util.adapters.NFTPropertiesAdapter
+import droidninja.filepicker.FilePickerConst.KEY_SELECTED_MEDIA
+import droidninja.filepicker.utils.ContentUriUtils
+import droidninja.filepicker.utils.ContentUriUtils.getFilePath
+
 
 @AndroidEntryPoint
 class CreateNftFragment : BaseBottomSheetDialogFragment() {
@@ -43,22 +53,26 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
     private var isDecAdded: Boolean = false
     private val checkValidation: Boolean
         get() = selectedFile != null && isTitleAdded && isDecAdded
+
+    private val REQUEST_CODE =  1101
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) {
+                //PNG, JPG, JPEG, GIF, MP4, MP3, WEBP or WEBP <-- File types
+                //Max file size : 50mb
+                instance
+                    .setMaxCount(1)
+                    .pickPhoto(this, REQUEST_CODE)
+            }
+        }
     private var size = 0
     private var container = mutableListOf<Int>(size)
+
     private val propertiesAdapter by lazy{
         return@lazy NFTPropertiesAdapter(requireContext(), container)
     }
 
-
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-        if (granted) {
-            FilePickerManager
-                .from(this)
-                .maxSelectable(1)
-                .showCheckBox(false)
-                .forResult(FilePickerManager.REQUEST_CODE)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +96,6 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
         binding.rootPreview.root.visibility = View.GONE
         setFullHeight()
         binding.rootUpload.layoutProperties.adapter = propertiesAdapter
-
     }
 
     private fun initListeners() {
@@ -110,11 +123,16 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
                                 viewModel.nextStep()
                             }, errorHandler = {
                                 handleActionButtonVisibility(true)
-                                Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    requireContext(),
+                                    it?.message.toString(),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         )
                     } ?: run {
-                        Toast.makeText(requireContext(), "Please select file!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Please select file!", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
@@ -140,6 +158,7 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
             container.add(size++)
             propertiesAdapter.notifyItemChanged(size)
         }
+
     }
 
     private fun initObservers() {
@@ -155,7 +174,8 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
             if (step == CreateNftViewModel.STEP_UPLOAD) View.VISIBLE else View.GONE
         binding.rootPreview.root.visibility =
             if (step == CreateNftViewModel.STEP_PREVIEW) {
-                binding.rootPreview.tvNftName.text = binding.rootUpload.titleEditText.text.toString()
+                binding.rootPreview.tvNftName.text =
+                    binding.rootUpload.titleEditText.text.toString()
                 View.VISIBLE
             } else {
                 View.GONE
@@ -165,7 +185,7 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
             dismiss()
             try {
                 requireParentFragment().findNavController().navigate(R.id.toNftMintedSheetDialog)
-            } catch (notBottomFlow : Exception){
+            } catch (notBottomFlow: Exception) {
                 requireParentFragment().findNavController().navigate(R.id.toMain)
             }
         }
@@ -184,20 +204,35 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            FilePickerManager.REQUEST_CODE -> {
+            REQUEST_CODE -> {
                 if (resultCode == Activity.RESULT_OK) {
-                    val list = FilePickerManager.obtainData()
-                    list.firstOrNull()?.let { filePath ->
-                        Timber.i("File %s", filePath)
-                        binding.rootUpload.selectedFilePath.text = filePath
-                        selectedFile = File(filePath)
-                        Glide.with(requireContext())
-                            .load(selectedFile)
-                            .into(binding.rootPreview.ivThumbnail)
-                        manageNextButtonEnable(checkValidation)
+                    if (resultCode == Activity.RESULT_OK && data != null) {
+                        val filePaths = ArrayList<Uri>()
+                        data.getParcelableArrayListExtra<Uri>(KEY_SELECTED_MEDIA)?.let {
+                            filePaths.addAll(
+                                it
+                            )
+                            val fileUri = filePaths[0]
+                            fileUri.let {
+                                //make sure to use this getFilePath method from worker thread
+                                val filePath = getFilePath(requireContext(), it)
+                                Timber.i("File %s", filePath)
+                                binding.rootUpload.selectedFilePath.text = filePath
+                                selectedFile = File(filePath)
+                                Glide.with(requireContext())
+                                    .load(selectedFile)
+                                    .into(binding.rootPreview.ivThumbnail)
+                                manageNextButtonEnable(checkValidation)
+                            }
+
+                        }
                     }
                 } else {
-                    Toast.makeText(requireActivity(), "You didn't choose anything~", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        "You didn't choose anything~",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
