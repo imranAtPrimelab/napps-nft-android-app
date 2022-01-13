@@ -47,7 +47,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="380dp"
             android:layout_marginStart="6dp"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="6dp"
@@ -57,7 +57,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/btnNext"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnBack"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleSendNFT"
             tools:listitem="@layout/item_sent_nft_people" />
 
         <com.google.android.material.button.MaterialButton
