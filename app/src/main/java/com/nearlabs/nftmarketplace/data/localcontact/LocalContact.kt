@@ -10,6 +10,9 @@ import com.nearlabs.nftmarketplace.domain.model.ContactEmail
 import com.nearlabs.nftmarketplace.domain.model.ContactPhone
 import timber.log.Timber
 import java.util.*
+import android.content.ContentUris
+import android.net.Uri
+
 
 class LocalContact(val context: Context) : ContactSource {
 
@@ -21,6 +24,7 @@ class LocalContact(val context: Context) : ContactSource {
         private const val COL_NUMBER = ContactsContract.CommonDataKinds.Contactables.DATA
         private const val EMAIL = ContactsContract.CommonDataKinds.Email.ADDRESS
         private const val DISPLAY_NAME = ContactsContract.Contacts.DISPLAY_NAME
+        private const val PHOTO_URI = ContactsContract.Contacts.PHOTO_URI
 
         private val projection = arrayOf(
             COL_ID,
@@ -28,13 +32,16 @@ class LocalContact(val context: Context) : ContactSource {
             FAMILY_NAME,
             COL_NUMBER,
             EMAIL,
-            DISPLAY_NAME
+            DISPLAY_NAME,
+            PHOTO_URI
         )
 
         private val CONTACTS_PROJECTION = arrayOf(
             ContactsContract.Contacts._ID,
             ContactsContract.Contacts.DISPLAY_NAME_PRIMARY,
-            ContactsContract.Contacts.HAS_PHONE_NUMBER
+            ContactsContract.Contacts.HAS_PHONE_NUMBER,
+            ContactsContract.Contacts.PHOTO_URI
+//            ContactsContract.Data.MIMETYPE + "='" + ContactsContract.CommonDataKinds.Photo.CONTENT_ITEM_TYPE + "'"
         )
         private val CONTACTS_KINDS_PROJECTION = arrayOf(
             ContactsContract.CommonDataKinds.Phone.NUMBER
@@ -75,6 +82,10 @@ class LocalContact(val context: Context) : ContactSource {
                 cursor.getColumnIndex(EMAIL)
             val idIndex =
                 cursor.getColumnIndex(COL_ID)
+            val person =
+                cursor.getColumnIndex(PHOTO_URI)
+//            val person: Uri =
+//                ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, idIndex.toLong())
             do {
                 val contact = Contact()
                 val firstName = cursor.getString(firstNameIndex)
@@ -91,6 +102,8 @@ class LocalContact(val context: Context) : ContactSource {
                 contact.phone = listOf(ContactPhone(phoneNumber, "local"))
                 //contact.email = listOf(ContactEmail(email, "personal"))
                 contact.owner_id = userId
+//                contact.imageUri = Uri.withAppendedPath(person, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
+                contact.imageUri = Uri.withAppendedPath(Uri.parse(cursor.getString(person)), ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
 
                 if (contact.first_name.equals("null") || contact.last_name.equals("null") || contact.last_name.isNullOrBlank() || contact.first_name.isNullOrBlank()) {
                     try {
@@ -162,6 +175,7 @@ class LocalContact(val context: Context) : ContactSource {
                 contact.first_name = name?.split(" ")?.firstOrNull() ?: " "
                 contact.last_name = name?.split(" ")?.getOrNull(1) ?: " "
                 contact.owner_id = userId
+                contact.id = id
                 if (emails.isNotEmpty()) {
                     contact.email = listOf(ContactEmail(emails.first(), "personal"))
                 }

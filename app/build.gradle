@@ -102,8 +102,12 @@ dependencies {
     // For File Picker
     implementation rootProject.deps.filePicker
 
+    //Circular Image View
+    implementation rootProject.deps.circularImageView
+
     // Country Code Picker
     implementation rootProject.deps.countryCodePicker
+
 
 }
 
