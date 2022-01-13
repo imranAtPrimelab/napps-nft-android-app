@@ -1,6 +1,7 @@
 package com.nearlabs.nftmarketplace.ui.setting
 
 import android.app.ProgressDialog.show
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentSettingBinding
 import com.nearlabs.nftmarketplace.domain.model.User
+import com.nearlabs.nftmarketplace.ui.MainActivity
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,7 +44,9 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
 
         binding.logoutButtonView.setOnClickListener {
             viewModel.clearPref()
-            findNavController().navigate(R.id.action_settingFragment_to_LoginFragment)
+            val intent = Intent(this.activity, MainActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
         }
     }
 
