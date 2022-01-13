@@ -24,6 +24,7 @@ class OTPFragment : BaseFragment(R.layout.fragment_otp) {
     private val binding by viewBinding(FragmentOtpBinding::bind)
     private val userViewModel: UserViewModel by activityViewModels()
     private var fromSettings = false
+    private var firstVerificationDone = false
     private var id = ""
     companion object {
         const val LOGIN_TYPE = "login_type"
@@ -90,8 +91,16 @@ class OTPFragment : BaseFragment(R.layout.fragment_otp) {
                 ), successHandler = {
                     if (fromSettings)
                     {
-                        userViewModel.updateUser(id)
-                        findNavController().navigate(R.id.toSettings)
+                        if (!firstVerificationDone)
+                        {
+                            userViewModel.updateUser(id)
+                            //send another verification code for new phone/email
+                            userViewModel.loginUser(userViewModel.walletName)
+                            firstVerificationDone = true
+                        }
+                        else {
+                            findNavController().navigate(R.id.toSettings)
+                        }
                     }
                     else {
                         findNavController().navigate(R.id.toMain)
