@@ -64,6 +64,7 @@
         <entry key="app/src/main/res/layout/fragment_import.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/fragment_my_nfts.xml" value="0.10526315789473684" />
         <entry key="app/src/main/res/layout/fragment_nft_minted.xml" value="0.4233576642335766" />
         <entry key="app/src/main/res/layout/fragment_otp.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_recieved_history.xml" value="0.1" />
@@ -78,7 +79,9 @@
         <entry key="app/src/main/res/layout/item_sent_nft_people.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_history_tabs.xml" value="0.8890625" />
         <entry key="app/src/main/res/layout/list_item_progress.xml" value="0.4306256306760848" />
+        <entry key="app/src/main/res/layout/list_item_properties.xml" value="0.165" />
         <entry key="app/src/main/res/layout/list_item_transaction.xml" value="0.4306256306760848" />
+        <entry key="app/src/main/res/layout/list_item_wallet.xml" value="0.10526315789473684" />
         <entry key="app/src/main/res/menu/main_bottom_nav.xml" value="0.17708333333333334" />
       </map>
     </option>

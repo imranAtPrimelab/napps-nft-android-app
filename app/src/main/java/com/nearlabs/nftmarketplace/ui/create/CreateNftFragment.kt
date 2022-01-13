@@ -37,6 +37,7 @@ import droidninja.filepicker.FilePickerConst
 
 import android.R.attr.data
 import android.net.Uri
+import com.nearlabs.nftmarketplace.util.adapters.NFTPropertiesAdapter
 import droidninja.filepicker.FilePickerConst.KEY_SELECTED_MEDIA
 import droidninja.filepicker.utils.ContentUriUtils
 import droidninja.filepicker.utils.ContentUriUtils.getFilePath
@@ -65,6 +66,13 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
                     .pickPhoto(this, REQUEST_CODE)
             }
         }
+    private var size = 0
+    private var container = mutableListOf<Int>(size)
+
+    private val propertiesAdapter by lazy{
+        return@lazy NFTPropertiesAdapter(requireContext(), container)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,6 +95,7 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
         binding.rootUpload.root.visibility = View.VISIBLE
         binding.rootPreview.root.visibility = View.GONE
         setFullHeight()
+        binding.rootUpload.layoutProperties.adapter = propertiesAdapter
     }
 
     private fun initListeners() {
@@ -107,8 +116,8 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
                                 file,
                                 binding.rootUpload.titleEditText.text.toString(),
                                 binding.rootUpload.descriptionEditText.text.toString(),
-                                binding.rootUpload.attributeNameEditText.text.toString(),
-                                binding.rootUpload.attributeValueEditText.text.toString()
+                                propertiesAdapter.getProperties()[0].values.toList(),
+                                propertiesAdapter.getProperties()[1].values.toList()
                             ), successHandler = {
                                 handleActionButtonVisibility(true)
                                 viewModel.nextStep()
@@ -144,6 +153,10 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
         binding.rootUpload.descriptionEditText.doAfterTextChanged {
             isDecAdded = it.toString().isNotEmpty()
             manageNextButtonEnable(checkValidation)
+        }
+        binding.rootUpload.addMore.setOnClickListener{
+            container.add(size++)
+            propertiesAdapter.notifyItemChanged(size)
         }
 
     }
