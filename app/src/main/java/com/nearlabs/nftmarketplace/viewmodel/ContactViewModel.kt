@@ -26,7 +26,7 @@ class ContactViewModel @Inject constructor(private val repository: Repository) :
 
     var itemsCopy : List<Contact>? = null
 
-    var selectedHashSet: MutableList<Int>? = mutableListOf()
+    var selectedHashSet: HashMap<Contact,Int>? = HashMap()
 
 
 }

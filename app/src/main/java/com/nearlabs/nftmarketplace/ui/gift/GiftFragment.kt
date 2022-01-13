@@ -18,6 +18,7 @@ import com.nearlabs.nftmarketplace.util.adapters.ContactListAdapter
 import com.nearlabs.nftmarketplace.viewmodel.ContactViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.content.Intent
+import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -52,7 +53,8 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
 
     private fun selectContact(contact: Contact, position: Int) {
         contactListAdapter.toggleSelection(position)
-        viewModel.selectedHashSet!!.add(position)
+        if(!viewModel.selectedHashSet!!.containsKey(contact))
+        viewModel.selectedHashSet!![contact] = position
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,34 +83,43 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
     private fun initViews() {
         binding.contactList.adapter = contactListAdapter
         binding.contactList.callOnClick()
+        binding.searchView.findViewById<View>(androidx.appcompat.R.id.search_plate)
+            .setBackgroundColor(Color.TRANSPARENT)
     }
 
 
     private fun initListeners() {
 
-        binding.searchView.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val currentData = (binding.contactList.adapter as ContactListAdapter).getData()!!
-                for(i in viewModel.selectedHashSet!!.indices){
-                    if(currentData.contains(viewModel.itemsCopy!![viewModel.selectedHashSet!![i]])){
-                        for (y in currentData.indices){
-                            selectContact(currentData[currentData.indexOf(viewModel.itemsCopy!![viewModel.selectedHashSet!![i]])],
-                                currentData.indexOf(viewModel.itemsCopy!![viewModel.selectedHashSet!![i]]))
-                        }
-                    }
-                }
 
+        binding.searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                //
+                return true
             }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                (binding.contactList.adapter as ContactListAdapter).filter(s.toString(),
+            override fun onQueryTextChange(newText: String?): Boolean {
+                (binding.contactList.adapter as ContactListAdapter).filter(newText!!,
                     viewModel.itemsCopy!!
                 )
+                /*!(binding.contactList.adapter as ContactListAdapter).
+                    selectedPosition.contains(viewModel.selectedHashSet!!.values.indices.elementAt(i))
+                    && */
+                val contacts = mutableListOf<Contact>()
+                val currentData = (binding.contactList.adapter as ContactListAdapter).getData()!!
+                for(i in 0 until viewModel.selectedHashSet!!.size)
+                if(currentData.contains(viewModel.selectedHashSet!!.keys.elementAt(i))){
+                    contacts.add(viewModel.selectedHashSet!!.keys.elementAt(i))
+                    /*selectContact(viewModel.selectedHashSet!!.keys.elementAt(i),
+                        viewModel.selectedHashSet!![viewModel.selectedHashSet!!.keys.elementAt(i)]!!
+                    )*/
+                }
 
+                for(i in currentData.indices){
+                    if(contacts.contains(currentData[i]))
+                        selectContact(currentData[i],i)
+                }
+
+                return true
             }
         })
 
@@ -163,6 +174,8 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
 
         }
         requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
+
+        binding.cvSearch.setOnClickListener { binding.searchView.onActionViewExpanded(); }
 
     }
 
