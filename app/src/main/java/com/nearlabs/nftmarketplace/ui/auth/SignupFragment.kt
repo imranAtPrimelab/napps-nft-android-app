@@ -37,14 +37,11 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.walletId.addSuffix(AppConstants.ACCOUNT_NAME_NEAR_SUFFIX)
         if(userViewModel.currentEmail.isNotEmpty()){
             binding.walletId.setText(userViewModel.currentEmail.split("@")[0].replace(".",""), TextView.BufferType.EDITABLE)
         }else{
             binding.walletId.setText(userViewModel.currentPhone.replace("+",""), TextView.BufferType.EDITABLE)
         }
-
-
 
         initListeners()
     }

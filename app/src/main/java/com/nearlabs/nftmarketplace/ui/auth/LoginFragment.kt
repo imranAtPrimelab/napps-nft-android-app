@@ -110,10 +110,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.ccp.setCountryForPhoneCode(1)
-        binding.etEmailPhoneLogin.addSuffix(".near")
-        binding.etEmailPhoneLogin.setText(" ", TextView.BufferType.EDITABLE)
-        binding.etEmailPhoneLogin.setText("", TextView.BufferType.EDITABLE)
-
         userViewModel.usesPhone = false
         initListeners()
     }
@@ -127,7 +123,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                     userViewModel.loginUser(
                         binding.etEmailPhoneLogin.text.toString()
                     ), successHandler = {
-                        userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()
+                        userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()+".near"
                         val bundle = Bundle()
                         bundle.putString(OTPFragment.LOGIN_TYPE, it.type)
                         findNavController().navigate(R.id.toOtp, bundle)

@@ -92,14 +92,15 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/fullName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="46dp"
                 android:layout_marginHorizontal="26dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/input_field_bg"
                 android:hint="@string/suggestion_full_name"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                android:textColorHint="#808080" />
+                android:textColorHint="#808080"
+                android:textSize="15sp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -112,17 +113,41 @@
                 android:textSize="12sp"
                 android:id="@+id/accountIdText"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/walletId"
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/input_field_bg"
                 android:layout_marginHorizontal="26dp"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/input_field_bg"
-                android:hint="@string/suggestion_wallet_name"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray" />
+                >
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/walletId"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:background="@null"
+                    android:hint="@string/suggestion_wallet_name"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/gray"
+                    android:textSize="15sp"
+                    android:layout_toLeftOf="@id/near_text"
+                    android:inputType="text"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=".near"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="18dp"
+                    android:id="@+id/near_text"/>
+            </RelativeLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCreateAccount"
