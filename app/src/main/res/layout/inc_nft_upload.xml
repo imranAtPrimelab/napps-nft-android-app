@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_create_nft_host"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -145,56 +146,17 @@
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintTop_toBottomOf="@id/etDescription" />
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/layout_properties"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginTop="4dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        tools:listitem="@layout/list_item_properties"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/tvProperties">
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:hintAnimationEnabled="false"
-            app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="@id/glEnd"
-            app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintTop_toBottomOf="@id/etTitle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/attributeNameEditText"
-                android:layout_width="match_parent"
-                android:hint="Ex. Size"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="12dp"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:hintEnabled="false"
-            app:hintAnimationEnabled="false"
-            app:layout_constraintEnd_toEndOf="@id/glEnd"
-            app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintTop_toBottomOf="@id/etTitle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/attributeValueEditText"
-                android:layout_width="match_parent"
-                android:hint="Ex. 40"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/tvProperties"/>
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -207,7 +169,8 @@
         android:textAllCaps="false"
         android:textColor="@color/blue"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/layout_properties" />
+        app:layout_constraintTop_toBottomOf="@id/layout_properties"
+        android:id="@+id/addMore"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
