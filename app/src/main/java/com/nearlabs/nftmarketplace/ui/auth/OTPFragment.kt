@@ -23,14 +23,23 @@ class OTPFragment : BaseFragment(R.layout.fragment_otp) {
 
     private val binding by viewBinding(FragmentOtpBinding::bind)
     private val userViewModel: UserViewModel by activityViewModels()
-
+    private var fromSettings = false
+    private var id = ""
     companion object {
         const val LOGIN_TYPE = "login_type"
+        const val FROM_SETTINGS = "from_settings"
+        const val PHONE = "phone"
+        const val EMAIL = "email"
+        const val ID = "id"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val loginType = arguments?.getString(LOGIN_TYPE) ?: "phone"
+        fromSettings = arguments?.getBoolean(FROM_SETTINGS) ?: false
+        userViewModel.currentEmail = arguments?.getString(EMAIL) ?: ""
+        userViewModel.currentPhone = arguments?.getString(PHONE) ?: ""
+        id = arguments?.getString(id) ?: ""
         if (loginType == "email") {
             binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_email)
         } else {
@@ -79,7 +88,14 @@ class OTPFragment : BaseFragment(R.layout.fragment_otp) {
                     userViewModel.walletName,
                     nonce
                 ), successHandler = {
-                    findNavController().navigate(R.id.toMain)
+                    if (fromSettings)
+                    {
+                        userViewModel.updateUser(id)
+                        findNavController().navigate(R.id.toSettings)
+                    }
+                    else {
+                        findNavController().navigate(R.id.toMain)
+                    }
                 }, errorHandler = {
                     Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
                         .show()
@@ -87,7 +103,13 @@ class OTPFragment : BaseFragment(R.layout.fragment_otp) {
         }
 
         binding.closeSignup.setOnClickListener(View.OnClickListener {
-            findNavController().navigate(R.id.toAuth)
+            if (fromSettings)
+            {
+                findNavController().navigate(R.id.toSettings)
+            }
+            else {
+                findNavController().navigate(R.id.toAuth)
+            }
         })
 
         binding.resendCodeText.setOnClickListener {

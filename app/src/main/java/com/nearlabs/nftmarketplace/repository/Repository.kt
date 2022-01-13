@@ -173,4 +173,9 @@ class Repository(
         val dtoResponse = api.getUserProfile(userId)
         dtoResponse.dtoUserInfo.toDomain()
     }
+
+    suspend fun modifyUser(userId: String, currentPhone: String, currentEmail: String) = safeCall {
+        val dToUser = DtoUserCreateRequest(sharePrefs.userName, sharePrefs.walletName, currentPhone, currentEmail)
+        api.modifyUser(sharePrefs.userId, dToUser)
+    }
 }

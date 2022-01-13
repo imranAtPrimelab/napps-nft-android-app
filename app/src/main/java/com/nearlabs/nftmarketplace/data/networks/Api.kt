@@ -3,6 +3,7 @@ package com.nearlabs.nftmarketplace.data.networks
 import com.google.gson.JsonObject
 import com.nearlabs.nftmarketplace.data.networks.request.DtoAddWalletRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoChangeWalletRequest
+import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
 import com.nearlabs.nftmarketplace.data.networks.response.*
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -25,5 +26,11 @@ interface Api {
 
     @GET("users/{user_id}")
     suspend fun getUserProfile(@Path("user_id") userId: String): DtoUserProfileResponse
+
+    @PUT("users/{user_id}")
+    suspend fun modifyUser(@Path("user_id") userId: String, @Body request: DtoUserCreateRequest): DtoUserInfoResponse
+
+    @GET("user/{user_id}/resend_code")
+    suspend fun resendCode(@Path("user_id") userId: String): DtoUserInfoResponse
 
 }
