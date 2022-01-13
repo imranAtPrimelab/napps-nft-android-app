@@ -18,6 +18,7 @@ import com.nearlabs.nftmarketplace.util.adapters.ContactListAdapter
 import com.nearlabs.nftmarketplace.viewmodel.ContactViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import android.content.Intent
+import android.graphics.Color
 import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity
 import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
@@ -73,8 +74,9 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
     private fun initViews() {
         binding.contactList.adapter = contactListAdapter
         binding.contactList.callOnClick()
+        binding.searchView.findViewById<View>(androidx.appcompat.R.id.search_plate)
+            .setBackgroundColor(Color.TRANSPARENT)
     }
-
 
     private fun initListeners() {
 
@@ -119,10 +121,14 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
                     }
                 )
             }
-
         }
         requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
 
+        binding.cvSearch.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                binding.searchView.onActionViewExpanded();
+            }
+        })
     }
 
 

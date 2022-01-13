@@ -55,19 +55,40 @@
         android:weightSum="5">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
             android:layout_weight="4"
             app:cardCornerRadius="10dp">
 
+            <RelativeLayout
+                android:background="@color/light_grey"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
+                android:contentDescription="@string/app_name"
+                android:id="@+id/iv_search"
+                android:layout_width="20dp"
+                android:layout_marginStart="7dp"
+                android:scaleType="fitCenter"
+                android:layout_height="match_parent"
+                android:src="@android:drawable/ic_search_category_default"/>
+
             <androidx.appcompat.widget.SearchView
+                android:layout_toEndOf="@+id/iv_search"
+                android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@color/light_grey"
-                app:defaultQueryHint="Search People"
-                app:queryHint="Search People" />
+                android:layout_marginStart="-10dp"
+                android:focusable="true"
+                app:iconifiedByDefault="false"
+                app:searchIcon="@null"
+                app:theme="@style/AppSearchView"
+                app:defaultQueryHint="Search Current Contacts"
+                app:queryHint="Search Current Contacts" />
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
 
@@ -81,7 +102,7 @@
             android:gravity="center"
             android:text="Import"
             android:textColor="#1976D2"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 
