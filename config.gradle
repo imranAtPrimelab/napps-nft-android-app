@@ -41,7 +41,8 @@ rootProject.ext.glide = '4.12.0'
 rootProject.ext.timber_log = '4.7.1'
 rootProject.ext.gson = '2.8.8'
 rootProject.ext.appsflyer = '6.3.2'
-rootProject.ext.filePicker = '0.75'
+//rootProject.ext.filePicker = '0.75'
+rootProject.ext.filePicker = '2.2.5'
 rootProject.ext.circularImageView = '3.1.0'
 rootProject.ext.countryCodePicker = '2.5.4'
 
@@ -117,11 +118,14 @@ rootProject.ext.deps = [
         appsflyer              : "com.appsflyer:af-android-sdk:$appsflyer",
 
         // For selecting file
-        filePicker             : "me.rosuh:AndroidFilePicker:$filePicker",
+//        filePicker             : "me.rosuh:AndroidFilePicker:$filePicker",
 
         //Circular Image view
         circularImageView       : "de.hdodenhof:circleimageview:$circularImageView",
 
         //country code picker
-        countryCodePicker       : "com.hbb20:ccp:$countryCodePicker"
+        countryCodePicker       : "com.hbb20:ccp:$countryCodePicker",
+
+        //File picker - working library
+        filePicker              : "com.droidninja:filepicker:$filePicker"
 ]
