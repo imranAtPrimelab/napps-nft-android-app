@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:paddingBottom="48dp"
+    android:paddingBottom="50dp"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,7 +12,7 @@
         android:background="@drawable/bg_bottom_dialog_round"
         android:backgroundTint="@color/black"
         android:paddingHorizontal="32dp"
-        android:paddingVertical="8dp">
+        android:paddingVertical="12dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
@@ -27,7 +27,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="18dp"
             android:background="@android:color/transparent"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -58,7 +57,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnCreateNft" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
