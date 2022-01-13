@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
@@ -24,6 +25,7 @@ class ChangeNameBottomSheetDialog : BaseBottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dialog?.setCancelable(false)
+        initObserve()
     }
 
     override fun onCreateView(
@@ -54,5 +56,15 @@ class ChangeNameBottomSheetDialog : BaseBottomSheetDialogFragment() {
 
     private fun requestKeyboard() {
         binding.editName.post { showKeyboard(binding.editName) }
+    }
+
+    private fun initObserve() {
+        observeResultFlow(
+            viewModel.getUserProfile(), successHandler = {
+                binding.editName.hint = it.name
+            }, errorHandler = {
+                Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
+                    .show()
+            })
     }
 }
