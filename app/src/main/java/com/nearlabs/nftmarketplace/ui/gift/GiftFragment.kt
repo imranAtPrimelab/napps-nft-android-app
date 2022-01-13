@@ -101,17 +101,12 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
                 (binding.contactList.adapter as ContactListAdapter).filter(newText!!,
                     viewModel.itemsCopy!!
                 )
-                /*!(binding.contactList.adapter as ContactListAdapter).
-                    selectedPosition.contains(viewModel.selectedHashSet!!.values.indices.elementAt(i))
-                    && */
+
                 val contacts = mutableListOf<Contact>()
                 val currentData = (binding.contactList.adapter as ContactListAdapter).getData()!!
                 for(i in 0 until viewModel.selectedHashSet!!.size)
                 if(currentData.contains(viewModel.selectedHashSet!!.keys.elementAt(i))){
                     contacts.add(viewModel.selectedHashSet!!.keys.elementAt(i))
-                    /*selectContact(viewModel.selectedHashSet!!.keys.elementAt(i),
-                        viewModel.selectedHashSet!![viewModel.selectedHashSet!!.keys.elementAt(i)]!!
-                    )*/
                 }
 
                 for(i in currentData.indices){
