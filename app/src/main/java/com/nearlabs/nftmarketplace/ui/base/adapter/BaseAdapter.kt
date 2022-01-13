@@ -24,4 +24,8 @@ abstract class BaseAdapter<DATA, VH : RecyclerView.ViewHolder>(
         this.items.addAll(newItems ?: emptyList())
         notifyDataSetChanged()
     }
+
+    open fun getData() : List<DATA>? {
+        return this.items as List<DATA>?
+    }
 }

@@ -7,18 +7,25 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
+import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.databinding.FragmentHistoryBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
 import com.nearlabs.nftmarketplace.ui.create.CreateNftFragment
 import com.nearlabs.nftmarketplace.ui.main.transaction.TransactionFragment
 import com.nearlabs.nftmarketplace.ui.main.transaction.adapter.TransactionPagerAdapter
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.SendNFTBottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HistoryFragment : BaseFragment(R.layout.fragment_history) {
 
     private val binding by viewBinding(FragmentHistoryBinding::bind)
     private var tabLayoutMediator: TabLayoutMediator? = null
     private var viewPager: ViewPager2? = null
+
+    @Inject
+    lateinit var sharePrefs: SharePrefs
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,6 +34,7 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
     }
 
     private fun initViews() {
+
         val types = listOf(
             TransactionFragment.ALL,
             TransactionFragment.SENT,
@@ -49,12 +57,19 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
         tabLayoutMediator = TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = titles[position]
         }.apply { attach() }
+
+        binding.username.text = sharePrefs.userName
+
     }
 
     private fun initListeners() {
         binding.btnSendNft.setOnClickListener {
             val sendNft = SendNFTBottomSheetDialog()
             sendNft.show(childFragmentManager, sendNft.tag)
+        }
+
+        binding.username.setOnClickListener {
+            findNavController().navigate(R.id.nav_setting)
         }
     }
 

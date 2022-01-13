@@ -17,19 +17,24 @@ import android.content.Context
 
 import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
 import androidx.annotation.Nullable
 import java.io.InputStream
 import java.lang.Exception
+import java.util.*
 
 
 class ContactListAdapter(
     private val context: Context,
-    private val onItemClicked: ((Contact, Int) -> Unit)? = null
+    private val onItemClicked: ((Contact, Int) -> Unit)? = null,
 ) :
     BaseSelectionAdapter<Contact, ItemContactHolder>() {
     inner class MyViewHolder(b: ItemContactsBinding) : RecyclerView.ViewHolder(b.root) {
         var binding: ItemContactsBinding = b
     }
+
+
+
 
     override fun createViewHolderInternal(parent: ViewGroup, viewType: Int): ItemContactHolder {
         return ItemContactHolder(
@@ -39,9 +44,34 @@ class ContactListAdapter(
         )
     }
 
+
     override fun onBindViewHolder(holder: ItemContactHolder, position: Int) {
         val item = getItemAtPosition(position) ?: return
         holder.bind(item, isSelected(position))
+
+    }
+
+
+    fun filter(query : String, itemsCopy : List<Contact>){
+        val newItems : MutableList<Contact> = mutableListOf()
+
+        if(query.isEmpty()){
+            this.setData(itemsCopy)
+            notifyDataSetChanged()
+        }else{
+            val lowercaseQuery = query.lowercase(Locale.getDefault())
+            for(i in itemsCopy.indices){
+                if(itemsCopy[i].first_name!!.lowercase(Locale.getDefault()).contains(lowercaseQuery)||
+                    itemsCopy[i].last_name!!.lowercase(Locale.getDefault()).contains(lowercaseQuery)){
+                      newItems.add(itemsCopy[i])
+                }
+            }
+
+            this.setData(newItems)
+
+            notifyDataSetChanged()
+        }
+
     }
 
 
@@ -83,6 +113,8 @@ class ItemContactHolder(
         binding.imageSelected.setImageResource(if (selected) R.drawable.ic_selected else R.drawable.ic_un_select)
         binding.root.setOnClickListener { onItemClicked?.invoke(data, adapterPosition) }
     }
+
+
 
     @Nullable
     fun getContactPhotoThumbnail(context: Context, contactIdString: String): Bitmap? {

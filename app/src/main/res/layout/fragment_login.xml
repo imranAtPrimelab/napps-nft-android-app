@@ -149,23 +149,41 @@
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etEmailPhoneLogin"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_field_bg"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="14dp"
-            android:background="@drawable/input_field_bg"
-            android:fontFamily="@font/inter_regular"
-            android:hint="walletName.near"
-            android:paddingHorizontal="14dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/hint_color"
-            android:maxLines="1"
-            android:layout_gravity="center_horizontal"
-            android:inputType="text"
-            />
+            >
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etEmailPhoneLogin"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_toLeftOf="@id/near_text"
+                android:fontFamily="@font/inter_regular"
+                android:hint="walletName.near"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingHorizontal="14dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/hint_color"
+                android:background="@null"
+                android:textSize="15sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=".near"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="18dp"
+                android:id="@+id/near_text"/>
+        </RelativeLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"

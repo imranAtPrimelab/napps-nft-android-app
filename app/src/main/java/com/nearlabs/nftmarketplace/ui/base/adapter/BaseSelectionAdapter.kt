@@ -26,6 +26,10 @@ abstract class BaseSelectionAdapter<DATA, VH : RecyclerView.ViewHolder>(
         super.setData(newItems)
     }
 
+    override fun getData() : List<DATA>?{
+        return super.getData()
+    }
+
     fun toggleSelection(position: Int) {
         when (selectionMode) {
             SINGLE -> {
