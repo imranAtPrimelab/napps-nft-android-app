@@ -7,11 +7,12 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface TransactionApi {
 
     @GET("transactions/list/{user_id}")
-    suspend fun getTransaction(): List<DtoTransactionResponse>
+    suspend fun getTransaction(@Path("user_id") user_id :String): List<DtoTransactionResponse>
 
     @POST("transactions")
     suspend fun sendTransaction(@Body request: DtoSendTransactionRequest): Response<ResponseBody>
