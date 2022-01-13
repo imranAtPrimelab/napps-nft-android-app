@@ -31,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="start"
-        android:text="Upload Files"
+        android:text="@string/nft_upload_files"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
@@ -70,37 +70,65 @@
             android:text="PNG, GIF, WEBP, MP4 or MP3. Max 100mb." />
     </LinearLayout>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleHintTextView"
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        android:text="@string/nft_title"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        app:layout_constraintTop_toBottomOf="@id/layout_upload" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etTitle"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="Title"
+        android:layout_marginTop="6dp"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/layout_upload">
+        app:layout_constraintTop_toBottomOf="@id/titleHintTextView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/titleEditText"
             android:layout_width="match_parent"
+            android:hint="Ex. Redeemable Art"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/decHintTextView"
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        android:text="@string/nft_description"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        app:layout_constraintTop_toBottomOf="@id/etTitle" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etDescription"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="6dp"
         android:hint="Description"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/etTitle">
+        app:layout_constraintTop_toBottomOf="@id/decHintTextView">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/descriptionEditText"
             android:layout_width="match_parent"
+            android:hint="Ex. Redeemable Art"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +149,7 @@
         android:id="@+id/layout_properties"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintStart_toStartOf="@id/glStart"
@@ -132,7 +160,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Ex. Size"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@id/etTitle">
@@ -140,6 +169,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/attributeNameEditText"
                 android:layout_width="match_parent"
+                android:hint="Ex. Size"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -152,7 +182,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Ex. 40"
+            app:hintEnabled="false"
+            app:hintAnimationEnabled="false"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@id/etTitle">
@@ -160,6 +191,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/attributeValueEditText"
                 android:layout_width="match_parent"
+                android:hint="Ex. 40"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -168,9 +200,9 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:drawableStart="@drawable/ic_add"
-        android:gravity="start"
+        android:gravity="center"
         android:text="+ Add More"
         android:textAllCaps="false"
         android:textColor="@color/blue"

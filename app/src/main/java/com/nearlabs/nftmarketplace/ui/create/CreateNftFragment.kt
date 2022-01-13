@@ -3,15 +3,20 @@ package com.nearlabs.nftmarketplace.ui.create
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
@@ -32,6 +37,10 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
     private val binding by viewBinding(FragmentCreateNftBinding::bind)
     private val viewModel by activityViewModels<CreateNftViewModel>()
     private var selectedFile: File? = null
+    private var isTitleAdded: Boolean = false
+    private var isDecAdded: Boolean = false
+    private val checkValidation: Boolean
+        get() = selectedFile != null && isTitleAdded && isDecAdded
 
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         if (granted) {
@@ -59,6 +68,7 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
     }
 
     private fun initViews() {
+        manageNextButtonEnable(checkValidation)
         viewModel.clearStep()
         binding.rootUpload.root.visibility = View.VISIBLE
         binding.rootPreview.root.visibility = View.GONE
@@ -107,6 +117,14 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
         }
         viewModel.userNameObservable.observeForever {
             binding.rootPreview.tvAuthor.text = it
+        }
+        binding.rootUpload.titleEditText.doAfterTextChanged {
+            isTitleAdded = it.toString().isNotEmpty()
+            manageNextButtonEnable(checkValidation)
+        }
+        binding.rootUpload.descriptionEditText.doAfterTextChanged {
+            isDecAdded = it.toString().isNotEmpty()
+            manageNextButtonEnable(checkValidation)
         }
     }
 
@@ -159,11 +177,26 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
                         Timber.i("File %s", filePath)
                         binding.rootUpload.selectedFilePath.text = filePath
                         selectedFile = File(filePath)
+                        Glide.with(requireContext())
+                            .load(selectedFile)
+                            .into(binding.rootPreview.ivThumbnail)
+                        manageNextButtonEnable(checkValidation)
                     }
                 } else {
                     Toast.makeText(requireActivity(), "You didn't choose anything~", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+
+    private fun manageNextButtonEnable(isEnable: Boolean) {
+        binding.btnAction.isEnabled = isEnable
+        binding.btnAction.isClickable = isEnable
+        binding.btnAction.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(
+                requireContext(),
+                if (isEnable) R.color.blue else R.color.btndisabled_color
+            )
+        )
     }
 }

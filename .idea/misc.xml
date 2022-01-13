@@ -53,6 +53,7 @@
         <entry key="app/src/main/res/layout/dialog_send_nft_result.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_send_select_people_ntf.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_successful_nft.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_add.xml" value="0.23802083333333332" />
         <entry key="app/src/main/res/layout/fragment_claim_nft.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_consent.xml" value="0.2914285714285714" />
         <entry key="app/src/main/res/layout/fragment_create_nft.xml" value="0.22" />

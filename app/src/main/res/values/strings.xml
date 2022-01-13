@@ -45,7 +45,7 @@
     <string name="didnt_receive_code">Didn\'t receive your code?</string>
     <string name="resend_code">Resend your code</string>
     <string name="continueBtn">Continue</string>
-    <string name="sent_code_email">We have sent a 6-digit authentication code to the email address</string>
+    <string name="sent_code_email">We have sent a 6-digit authentication code to your email address</string>
     <string name="sent_code_phone">We have sent a 6-digit authentication code to your phone</string>
     <string name="send_different_email">Send to a different email address</string>
     <string name="send_different_phone">Send to a different phone number</string>
@@ -74,7 +74,7 @@
 
     <string name="setting_title">Settings</string>
     <string name="setting_connected_wallet">Connected Wallet</string>
-    <string name="setting_profile">Profile Setting</string>
+    <string name="setting_profile">Profile Settings</string>
     <string name="setting_security">Security</string>
     <string name="setting_add_2fa_auth">Add 2FA authentication</string>
     <string name="setting_select_wallet">Select connected wallet</string>
@@ -97,4 +97,7 @@
     <string name="claim_nft">Claim NFT</string>
     <string name="create_new_wallet">Creat new Wallet</string>
     <string name="login_with_near_wallet">Login with NEAR wallet</string>
+    <string name="nft_upload_files">Upload Files <font fgcolor='#FF0000'>*</font></string>
+    <string name="nft_title">Title <font fgcolor='#FF0000'>*</font></string>
+    <string name="nft_description">Description <font fgcolor='#FF0000'>*</font></string>
 </resources>
