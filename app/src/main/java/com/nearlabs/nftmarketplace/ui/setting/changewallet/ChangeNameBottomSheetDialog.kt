@@ -20,7 +20,8 @@ class ChangeNameBottomSheetDialog : BaseBottomSheetDialogFragment() {
     override fun getTheme() = R.style.BottomSheetTransparentDialog
 
     private lateinit var binding: DialogChangeNameBinding
-
+    var currentEmail = ""
+    var currentPhone = ""
     private val viewModel by activityViewModels<SettingsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +50,7 @@ class ChangeNameBottomSheetDialog : BaseBottomSheetDialogFragment() {
 
         binding.btnAddNewWallet.setOnClickListener {
             val name = binding.editName.text.toString()
-            observeResultFlow(viewModel.addWallet(name), successHandler = {
+            observeResultFlow(viewModel.changeName(name, currentPhone, currentEmail), successHandler = {
                 popBack()
             })
         }
@@ -63,6 +64,8 @@ class ChangeNameBottomSheetDialog : BaseBottomSheetDialogFragment() {
         observeResultFlow(
             viewModel.getUserProfile(), successHandler = {
                 binding.editName.setText(it.name, TextView.BufferType.EDITABLE)
+                currentPhone = it.phone
+                currentEmail = it.email
             }, errorHandler = {
                 Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
                     .show()

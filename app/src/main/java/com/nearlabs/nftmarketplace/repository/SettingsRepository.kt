@@ -42,6 +42,12 @@ class SettingsRepository(private val api: Api, private val sharePrefs: SharePref
         dtoResponse.dtoUserInfo.toDomain()
     }
 
+    suspend fun changeName(name: String, phone: String, email:String ) = safeCall {
+        val dToUser = DtoUserCreateRequest(name, sharePrefs.walletName, phone, email)
+        sharePrefs.userName = name
+        api.modifyUser(sharePrefs.userId, dToUser)
+    }
+
     suspend fun changeEmail(email: String, currentPhone: String, frag: BaseBottomSheetDialogFragment) = safeCall {
 
         val dToUser = DtoUserCreateRequest(sharePrefs.userName, sharePrefs.walletName, currentPhone, email)

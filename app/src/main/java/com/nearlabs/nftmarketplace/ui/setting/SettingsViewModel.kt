@@ -36,6 +36,10 @@ class SettingsViewModel @Inject constructor(private val settingsRepository: Sett
         sharePrefs.clear()
     }
 
+    fun changeName(name: String, phone: String, email: String) = resultFlow {
+        settingsRepository.changeName(name, phone, email)
+    }
+
     fun changeEmail(email: String, currentPhone: String, frag: BaseBottomSheetDialogFragment) = resultFlow {
         settingsRepository.changeEmail(email, currentPhone, frag)
     }
