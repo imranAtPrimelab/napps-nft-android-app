@@ -111,4 +111,14 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+    override fun onResume() {
+        observeResultFlow(
+            nftViewModel.getAllNFTCollection(),
+            successHandler = {
+                myNftsAdapter.setData(it)
+            })
+        myNftsAdapter.notifyDataSetChanged()
+        super.onResume()
+    }
 }
