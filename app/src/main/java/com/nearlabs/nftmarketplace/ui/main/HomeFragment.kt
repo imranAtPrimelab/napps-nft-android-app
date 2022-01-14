@@ -83,6 +83,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         binding.seeAllNFTs.setOnClickListener {
             findNavController().navigate(R.id.toMyNFTs)
         }
+
+        binding.seeAllTransactions.setOnClickListener {
+            findNavController().navigate(R.id.toHistoryFragment)
+        }
     }
 
     private fun initObservers() {
