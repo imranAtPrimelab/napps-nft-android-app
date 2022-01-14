@@ -56,12 +56,7 @@ object DummyDataGenerator {
             NFT(
                 id = it.toString(),
                 name = assetName,
-                type = when (it % 4) {
-                    0L -> NFTType.DigitalArt
-                    1L -> NFTType.Collectibles
-                    2L -> NFTType.Music
-                    else -> NFTType.DigitalArt
-                },
+                type = "",
                 image = "",
                 author = NFTAuthor(
                     name = "john_doe",
