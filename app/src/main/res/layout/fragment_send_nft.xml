@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/astroid_vectorzy" />
+        />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -61,7 +61,8 @@
                     android:text="@string/digital_art"
                     android:textColor="@color/white"
                     android:textSize="14sp"
-                    app:cornerRadius="7dp" />
+                    app:cornerRadius="7dp"
+                    android:id="@+id/category"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/send_nft_title"
@@ -71,21 +72,9 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/inter_semibold"
                     android:gravity="center"
-                    android:text="Astroid Vectorzy"
                     android:textColor="@color/black"
                     android:textSize="21sp" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/send_nft_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/inter_medium"
-                    android:gravity="center"
-                    android:text="#63738"
-                    android:textColor="@color/blue"
-                    android:textSize="16sp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -118,9 +107,9 @@
                         android:layout_toEndOf="@id/profile_pic"
                         android:fontFamily="@font/inter_semibold"
                         android:paddingTop="25dp"
-                        android:text="john_doe"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:id="@+id/nftCreatorName"/>
                 </RelativeLayout>
 
                 <com.google.android.material.button.MaterialButton
@@ -169,7 +158,6 @@
                             android:layout_marginEnd="27.08dp"
                             android:layout_marginBottom="31dp"
                             android:fontFamily="@font/inter_regular"
-                            android:text="Having returned home to Rathleigh House near Macroom, Cork, Ireland, the hot-tempered Art became involved in a feud with a protestant landowner and magistrate, "
                             android:textColor="#808080"
                             android:textSize="14sp" />
 
@@ -240,7 +228,6 @@
                                 android:layout_marginStart="21dp"
                                 android:layout_marginEnd="30.42dp"
                                 android:fontFamily="@font/inter_regular"
-                                android:text="38493"
                                 android:textColor="@color/blue"
                                 android:textSize="14sp" />
                         </RelativeLayout>
@@ -277,7 +264,6 @@
                                 android:layout_marginStart="21dp"
                                 android:layout_marginEnd="30.42dp"
                                 android:fontFamily="@font/inter_regular"
-                                android:text="d0xkedek..89reke"
                                 android:textColor="#0072CE"
                                 android:textSize="14sp" />
                         </RelativeLayout>
