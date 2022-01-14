@@ -15,7 +15,8 @@
         android:background="@color/white"
         app:itemIconTint="@color/bottom_nav_style"
         app:itemTextColor="@color/bottom_nav_style"
-        app:menu="@menu/main_bottom_nav" />
+        app:menu="@menu/main_bottom_nav"
+        android:paddingTop="20dp"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
