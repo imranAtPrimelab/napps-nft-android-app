@@ -121,7 +121,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME, view.context)
                 observeResultFlow(
                     userViewModel.loginUser(
-                        binding.etEmailPhoneLogin.text.toString()
+                        binding.etEmailPhoneLogin.text.toString()+".near"
                     ), successHandler = {
                         userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()+".near"
                         val bundle = Bundle()

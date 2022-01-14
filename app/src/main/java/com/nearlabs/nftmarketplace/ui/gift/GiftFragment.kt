@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentGiftNftBinding
@@ -25,10 +24,18 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.widget.SearchView
+import com.google.android.material.button.MaterialButton
 import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity
 import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
 import java.lang.Exception
+import java.lang.ref.WeakReference
+
+import androidx.core.content.ContextCompat
+
+import android.graphics.drawable.Drawable
+import androidx.core.view.ViewCompat
+import com.nearlabs.nftmarketplace.R
 
 
 @AndroidEntryPoint
@@ -36,6 +43,7 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
 
     private val binding by viewBinding(FragmentGiftNftBinding::bind)
     private val viewModel by activityViewModels<ContactViewModel>()
+
 
     private val contactListAdapter by lazy {
         return@lazy ContactListAdapter(activity as Context) { contact, position ->
@@ -55,6 +63,22 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
         contactListAdapter.toggleSelection(position)
         if(!viewModel.selectedHashSet!!.containsKey(contact))
         viewModel.selectedHashSet!![contact] = position
+        validateSendGiftBtn()
+    }
+
+    private fun validateSendGiftBtn(){
+        val selectedContacts = contactListAdapter.selectedPosition.mapNotNull { contactListAdapter.getItemAtPosition(it) }
+        if (selectedContacts.isEmpty()) {
+            binding.sendGift.isEnabled = false
+            val background: Drawable = binding.sendGift.getBackground()
+            background.setTint(ContextCompat.getColor(requireContext(), R.color.light_grey))
+            ViewCompat.setBackground(binding.sendGift, background)
+        } else {
+            binding.sendGift.isEnabled = true
+            val background: Drawable = binding.sendGift.getBackground()
+            background.setTint(ContextCompat.getColor(requireContext(), R.color.blue))
+            ViewCompat.setBackground(binding.sendGift, background)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -85,12 +109,11 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
         binding.contactList.callOnClick()
         binding.searchView.findViewById<View>(androidx.appcompat.R.id.search_plate)
             .setBackgroundColor(Color.TRANSPARENT)
+        validateSendGiftBtn()
     }
 
 
     private fun initListeners() {
-
-
         binding.searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

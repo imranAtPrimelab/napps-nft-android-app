@@ -62,17 +62,6 @@
             app:layout_constraintStart_toStartOf="@id/glStart"
             app:layout_constraintTop_toBottomOf="@id/ivThumbnail" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvNftId"
-            style="@style/TextAppearance.MaterialComponents.Caption"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="#17654"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/glEnd"
-            app:layout_constraintStart_toStartOf="@id/glStart"
-            app:layout_constraintTop_toBottomOf="@id/tvNftName" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivProfile"
@@ -94,7 +83,7 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@id/glEnd"
             app:layout_constraintStart_toEndOf="@id/ivProfile"
-            app:layout_constraintTop_toBottomOf="@id/tvNftId" />
+            app:layout_constraintTop_toBottomOf="@id/tvNftName" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvAuthor"
