@@ -15,7 +15,7 @@ import com.nearlabs.nftmarketplace.domain.model.transaction.Transaction
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
 import com.nearlabs.nftmarketplace.ui.detailnft.ClaimNFTFragment.Companion.CLIM_NFT_ID
 import com.nearlabs.nftmarketplace.ui.main.transaction.adapter.TransactionAdapter
-import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.SendNFTAdapter
+import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.myNftsAdapter
 import com.nearlabs.nftmarketplace.viewmodel.NFTViewModel
 import com.nearlabs.nftmarketplace.viewmodel.TransactionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +45,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         climNftId = arguments?.getString(CLIM_NFT_ID)
     }
 
-    private val nftAdapter by lazy { SendNFTAdapter() }
+    private val myNftsAdapter by lazy { myNftsAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,7 +66,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     }
 
     private fun initViews() {
-        binding.myNFTsRv.adapter = nftAdapter
+        binding.myNFTsRv.adapter = myNftsAdapter
         binding.recentTransactionsRv.adapter = transactionAdapter
         binding.username.text = sharePrefs.userName
     }
@@ -89,7 +89,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         observeResultFlow(
             nftViewModel.getAllNFTCollection(),
             successHandler = {
-                nftAdapter.setData(it)
+                myNftsAdapter.setData(it)
             })
 
         observeResultFlow(

@@ -7,7 +7,7 @@ import com.nearlabs.nftmarketplace.domain.model.toDomain
 data class NFT(
     val id: String,
     val name: String,
-    val type: NFTType,
+    val type: String,
     val image: String,
     val author: NFTAuthor,
     val description: String,
@@ -19,7 +19,7 @@ fun DtoNFTResponse.toDomainModel() = NFT(
     id = nftId,
     name = title.orEmpty(),
     image = fileUrl.orEmpty(),
-    type = NFTType.DigitalArt,
+    type = category.orEmpty(),
     author = NFTAuthor(ownerId.orEmpty(), "image"),
     description = description.orEmpty(),
     info = NFTInfo("token", "contact"),

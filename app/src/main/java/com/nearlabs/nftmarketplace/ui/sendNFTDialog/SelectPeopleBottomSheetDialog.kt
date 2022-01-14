@@ -98,18 +98,7 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
         observeResultFlow(
             viewModel.getContacts(),
             successHandler = {
-                var test = mutableListOf<Contact>()
-                test.addAll(it)
-                test.addAll(it)
-                test.addAll(it)
-                test.addAll(it)
-                test.addAll(it)
-                test.addAll(it)
-                test.addAll(it)
-                test.addAll(it)
-                test.addAll(it)
-
-                peopleAdapter.setData(test)
+                peopleAdapter.setData(it)
             }, errorHandler = {
                 Timber.e(it)
                 Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
