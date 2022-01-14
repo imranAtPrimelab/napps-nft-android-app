@@ -93,8 +93,6 @@ class SendNFTFragment : BaseFragment(R.layout.fragment_send_nft) {
                         binding.sendNftTitle.text = nft.name
                         binding.nftCreatorName.text = nft.owner!!.name
                         binding.sendNftDescription.text = nft.description
-                        binding.nftTokenId.text = nft.id
-                        binding.nftContactAddress.text = nft.info.contract
                     }
                 )
 

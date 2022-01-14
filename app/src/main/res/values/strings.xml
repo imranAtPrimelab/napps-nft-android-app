@@ -53,7 +53,7 @@
 
 
     <string name="send">Send</string>
-    <string name="descriptions">Descriptions</string>
+    <string name="descriptions">Description</string>
     <string name="nft_info">NFT Info</string>
     <string name="token_id">Token ID</string>
     <string name="contact_address">Contact Address</string>
