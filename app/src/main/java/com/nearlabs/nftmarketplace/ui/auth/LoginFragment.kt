@@ -117,13 +117,18 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
     private fun initListeners() {
         binding.ccp.registerCarrierNumberEditText(binding.etEmailPhone)
         binding.btnLogin.setOnClickListener { view ->
+            var loginStr = binding.etEmailPhoneLogin.text.toString()
+            if (!loginStr.contains(".near"))
+            {
+                loginStr += ".near"
+            }
             if (binding.etEmailPhoneLogin.text.toString().isNotBlank()) {
                 AppConstants.logAppsFlyerEvent(LOGIN_WITH_PHONE_EVENT_NAME, view.context)
                 observeResultFlow(
                     userViewModel.loginUser(
-                        binding.etEmailPhoneLogin.text.toString()
+                        loginStr
                     ), successHandler = {
-                        userViewModel.walletName = binding.etEmailPhoneLogin.text.toString()+".near"
+                        userViewModel.walletName = loginStr
                         val bundle = Bundle()
                         bundle.putString(OTPFragment.LOGIN_TYPE, it.type)
                         findNavController().navigate(R.id.toOtp, bundle)
