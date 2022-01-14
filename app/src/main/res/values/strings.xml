@@ -81,6 +81,8 @@
     <string name="setting_add_new_wallet">Add new wallet</string>
     <string name="setting_change_name_wallet">Change name</string>
     <string name="setting_change_name_submit">Submit</string>
+    <string name="setting_change_email">Change email</string>
+    <string name="setting_change_phone">Change phone number</string>
     <string name="setting_hint_name">Name</string>
     <string name="create_nft_today">Start Creating your <b>NFTs</b> Today</string>
     <string name="create_nft">Create NFT</string>

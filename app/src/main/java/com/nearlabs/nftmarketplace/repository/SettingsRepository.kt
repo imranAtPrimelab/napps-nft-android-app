@@ -10,6 +10,7 @@ import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.safeCall
 import com.nearlabs.nftmarketplace.data.networks.Api
 import com.nearlabs.nftmarketplace.data.networks.request.DtoChangeWalletRequest
+import com.nearlabs.nftmarketplace.data.networks.request.DtoLoginRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.domain.model.User
@@ -52,7 +53,8 @@ class SettingsRepository(private val api: Api, private val sharePrefs: SharePref
         else
         {
             //send OTP Request then change
-            api.resendCode(sharePrefs.userId)
+            val request = DtoLoginRequest(sharePrefs.walletName)
+            api.login(request)
             val bundle = Bundle()
             bundle.putString(OTPFragment.LOGIN_TYPE, sharePrefs.loginType)
             bundle.putBoolean(OTPFragment.FROM_SETTINGS, true)
@@ -69,7 +71,8 @@ class SettingsRepository(private val api: Api, private val sharePrefs: SharePref
         if (sharePrefs.loginType == "phone")
         {
             //send OTP Request then change
-            api.resendCode(sharePrefs.userId)
+            val request = DtoLoginRequest(sharePrefs.walletName)
+            api.login(request)
             val bundle = Bundle()
             bundle.putString(OTPFragment.LOGIN_TYPE, sharePrefs.loginType)
             bundle.putBoolean(OTPFragment.FROM_SETTINGS, true)

@@ -32,6 +32,8 @@ class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = DialogChangeNameBinding.inflate(inflater, container, false)
+        binding.editName.hint = getString(R.string.phone_example)
+        binding.textTitle.text = getString(R.string.setting_change_phone)
         return binding.root
     }
 

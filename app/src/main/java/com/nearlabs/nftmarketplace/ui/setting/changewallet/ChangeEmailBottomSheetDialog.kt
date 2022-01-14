@@ -33,6 +33,8 @@ class ChangeEmailBottomSheetDialog : BaseBottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = DialogChangeNameBinding.inflate(inflater, container, false)
+        binding.editName.hint = getString(R.string.email_example)
+        binding.textTitle.text = getString(R.string.setting_change_email)
         return binding.root
     }
 
