@@ -7,7 +7,7 @@ data class DtoUserResponse(
     val id: String,
     @SerializedName("wallet_status")
     val walletStatus: String?,
-    @SerializedName("full_name")
+    @SerializedName("fullName")
     val fullName: String?,
     @SerializedName("email")
     val email: String?,

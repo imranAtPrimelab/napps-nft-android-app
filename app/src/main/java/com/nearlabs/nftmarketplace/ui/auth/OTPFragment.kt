@@ -8,8 +8,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
+import com.nearlabs.nftmarketplace.common.extensions.popBack
+import com.nearlabs.nftmarketplace.common.extensions.popBackTo
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentOtpBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
@@ -26,6 +29,7 @@ class OTPFragment : BaseFragment(R.layout.fragment_otp) {
     private var fromSettings = false
     private var firstVerificationDone = false
     private var id = ""
+    private var loginType = ""
     companion object {
         const val LOGIN_TYPE = "login_type"
         const val FROM_SETTINGS = "from_settings"
@@ -36,16 +40,29 @@ class OTPFragment : BaseFragment(R.layout.fragment_otp) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val loginType = arguments?.getString(LOGIN_TYPE) ?: "phone"
+        loginType = arguments?.getString(LOGIN_TYPE) ?: "phone"
         fromSettings = arguments?.getBoolean(FROM_SETTINGS) ?: false
         userViewModel.currentEmail = arguments?.getString(EMAIL) ?: ""
         userViewModel.currentPhone = arguments?.getString(PHONE) ?: ""
         id = arguments?.getString(id) ?: ""
         if (loginType == "email") {
-            binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_email)
+            if (fromSettings)
+            {
+                binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_email_current)
+            }
+            else {
+                binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_email)
+            }
         } else {
-            binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_phone)
+            if (fromSettings)
+            {
+                binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_phone_current)
+            }
+            else {
+                binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_phone)
+            }
         }
+        activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_bar)?.visibility = View.GONE
         initListeners()
     }
 
@@ -93,13 +110,43 @@ class OTPFragment : BaseFragment(R.layout.fragment_otp) {
                     {
                         if (!firstVerificationDone)
                         {
-                            userViewModel.updateUser(id)
-                            //send another verification code for new phone/email
-                            userViewModel.loginUser(userViewModel.walletName)
-                            firstVerificationDone = true
+                            observeResultFlow(
+                                userViewModel.updateUser(id
+                                ), successHandler = {
+                                    userViewModel.loginUser(userViewModel.walletName)
+                                    firstVerificationDone = true
+                                    binding.edt1.text?.clear()
+                                    binding.edt2.text?.clear()
+                                    binding.edt3.text?.clear()
+                                    binding.edt4.text?.clear()
+                                    binding.edt5.text?.clear()
+                                    binding.edt6.text?.clear()
+                                    binding.edt1.requestFocus()
+                                    if (loginType == "phone")
+                                    {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            getString(R.string.sent_code_phone_new),
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                        binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_phone_new)
+
+                                    }
+                                    else {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            getString(R.string.sent_code_email_new),
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                        binding.sentCodeText.text = requireActivity().getString(R.string.sent_code_email_new)
+
+                                    }
+                                })
                         }
                         else {
-                            findNavController().navigate(R.id.toSettings)
+                            popBackTo(R.id.settingFragment)
                         }
                     }
                     else {

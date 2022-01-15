@@ -3,6 +3,7 @@ package com.nearlabs.nftmarketplace.repository
 import android.app.Activity
 import android.os.Bundle
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
@@ -18,6 +19,8 @@ import com.nearlabs.nftmarketplace.domain.model.toDomain
 import com.nearlabs.nftmarketplace.domain.model.toDomainModel
 import com.nearlabs.nftmarketplace.ui.auth.OTPFragment
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
+import com.nearlabs.nftmarketplace.ui.setting.changewallet.ChangeEmailBottomSheetDialog
+import com.nearlabs.nftmarketplace.ui.setting.changewallet.ChangePhoneBottomSheetDialog
 
 class SettingsRepository(private val api: Api, private val sharePrefs: SharePrefs) {
 
@@ -42,13 +45,13 @@ class SettingsRepository(private val api: Api, private val sharePrefs: SharePref
         dtoResponse.dtoUserInfo.toDomain()
     }
 
-    suspend fun changeName(name: String, phone: String, email:String ) = safeCall {
+    suspend fun changeName(name: String, phone: String, email:String) = safeCall {
         val dToUser = DtoUserCreateRequest(name, sharePrefs.walletName, phone, email)
         sharePrefs.userName = name
         api.modifyUser(sharePrefs.userId, dToUser)
     }
 
-    suspend fun changeEmail(email: String, currentPhone: String, frag: BaseBottomSheetDialogFragment) = safeCall {
+    suspend fun changeEmail(email: String, currentPhone: String) = safeCall {
 
         val dToUser = DtoUserCreateRequest(sharePrefs.userName, sharePrefs.walletName, currentPhone, email)
         //if uses phone, just update it
@@ -61,17 +64,10 @@ class SettingsRepository(private val api: Api, private val sharePrefs: SharePref
             //send OTP Request then change
             val request = DtoLoginRequest(sharePrefs.walletName)
             api.login(request)
-            val bundle = Bundle()
-            bundle.putString(OTPFragment.LOGIN_TYPE, sharePrefs.loginType)
-            bundle.putBoolean(OTPFragment.FROM_SETTINGS, true)
-            bundle.putString(OTPFragment.EMAIL, email)
-            bundle.putString(OTPFragment.PHONE, currentPhone)
-            bundle.putString(OTPFragment.ID, sharePrefs.userId)
-            findNavController(frag).navigate(R.id.toOtp, bundle)
         }
     }
 
-    suspend fun changePhone(phone: String, currentEmail: String, frag: BaseBottomSheetDialogFragment) = safeCall {
+    suspend fun changePhone(phone: String, currentEmail: String) = safeCall {
         //if uses phone, have to do 2 factor
         val dToUser = DtoUserCreateRequest(sharePrefs.userName, sharePrefs.walletName, phone, currentEmail)
         if (sharePrefs.loginType == "phone")
@@ -79,13 +75,6 @@ class SettingsRepository(private val api: Api, private val sharePrefs: SharePref
             //send OTP Request then change
             val request = DtoLoginRequest(sharePrefs.walletName)
             api.login(request)
-            val bundle = Bundle()
-            bundle.putString(OTPFragment.LOGIN_TYPE, sharePrefs.loginType)
-            bundle.putBoolean(OTPFragment.FROM_SETTINGS, true)
-            bundle.putString(OTPFragment.EMAIL, currentEmail)
-            bundle.putString(OTPFragment.PHONE, phone)
-            bundle.putString(OTPFragment.ID, sharePrefs.userId)
-            findNavController(frag).navigate(R.id.toOtp, bundle)
         }
         else
         {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.popBack
@@ -13,10 +14,12 @@ import com.nearlabs.nftmarketplace.common.extensions.showKeyboard
 import com.nearlabs.nftmarketplace.databinding.DialogChangeNameBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.setting.SettingsViewModel
+import com.nearlabs.nftmarketplace.util.Helpers
 
 
 class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
     override fun getTheme() = R.style.BottomSheetTransparentDialog
+    var currentPhone = ""
     var currentEmail = ""
     private lateinit var binding: DialogChangeNameBinding
 
@@ -50,9 +53,31 @@ class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
 
         binding.btnAddNewWallet.setOnClickListener {
             val newPhone = binding.editName.text.toString()
-            observeResultFlow(viewModel.changePhone(newPhone, currentEmail, this), successHandler = {
-                popBack()
-            })
+            if (newPhone == currentPhone)
+            {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.phone_error_same),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else {
+                if (Helpers.checkEmailPhone(newPhone, usingEmail = false)) {
+                    val bundle = viewModel.checkShouldChangePhone(newPhone, currentEmail)
+                    //if bundle == null that means that phone is not the primary OTP method so we can just change it
+                    if (bundle == null) {
+                        popBack()
+                    } else {
+                        findNavController().navigate(R.id.toOtpFromPhone, bundle)
+                    }
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.phone_error),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
@@ -64,6 +89,7 @@ class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
         observeResultFlow(
             viewModel.getUserProfile(), successHandler = {
                 binding.editName.setText(it.phone)
+                currentPhone = it.phone
                 currentEmail = it.email
             }, errorHandler = {
                 Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)

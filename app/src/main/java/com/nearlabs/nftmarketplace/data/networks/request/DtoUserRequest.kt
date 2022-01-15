@@ -3,7 +3,7 @@ package com.nearlabs.nftmarketplace.data.networks.request
 import com.google.gson.annotations.SerializedName
 
 data class DtoUserCreateRequest(
-    @SerializedName("full_name")
+    @SerializedName("fullName")
     val fullName: String?,
     @SerializedName("walletName")
     val walletName: String?,
