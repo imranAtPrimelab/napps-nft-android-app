@@ -27,5 +27,9 @@ class UserViewModel @Inject constructor(private val repository: Repository, shar
         repository.verifyLogin(walletName, nonce)
     }
 
+    fun updateUser(userId: String) = resultFlow {
+        repository.modifyUser(userId, currentPhone, currentEmail)
+    }
+
 
 }

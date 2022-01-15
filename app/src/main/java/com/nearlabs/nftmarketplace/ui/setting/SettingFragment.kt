@@ -45,6 +45,14 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
             findNavController().navigate(R.id.toChangeName)
         }
 
+        binding.csivEmail.setOnClickListener {
+            findNavController().navigate(R.id.toChangeEmail)
+        }
+
+        binding.csivPhone.setOnClickListener {
+            findNavController().navigate(R.id.toChangePhone)
+        }
+
         binding.btnBack.setOnClickListener {
             popBack()
         }

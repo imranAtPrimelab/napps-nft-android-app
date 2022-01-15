@@ -26,6 +26,8 @@
     <string name="already_have_account">Already have a near account?</string>
     <string name="email_error">Please Enter a Valid Email Address</string>
     <string name="phone_error">Please Enter a Valid Phone Number</string>
+    <string name="email_error_same">Please Enter a Different Email Address Than Your Current Email</string>
+    <string name="phone_error_same">Please Enter a Different Phone Number Than Your Current Phone Number</string>
     <string name="login_text_error">Please Enter Valid Login Credentials</string>
     <string name="by_clicking_login">by clicking continue you must agree to near labs\n Terms &amp; Conditions and Privacy Policy</string>
 
@@ -46,7 +48,11 @@
     <string name="resend_code">Resend your code</string>
     <string name="continueBtn">Continue</string>
     <string name="sent_code_email">We have sent a 6-digit authentication code to your email address</string>
+    <string name="sent_code_email_current">We have sent a 6-digit authentication code to your current email address</string>
+    <string name="sent_code_email_new">We have sent a 6-digit authentication code to your new email address</string>
     <string name="sent_code_phone">We have sent a 6-digit authentication code to your phone</string>
+    <string name="sent_code_phone_current">We have sent a 6-digit authentication code to your current email address</string>
+    <string name="sent_code_phone_new">We have sent a 6-digit authentication code to your new email address</string>
     <string name="send_different_email">Send to a different email address</string>
     <string name="send_different_phone">Send to a different phone number</string>
     <string name="resend_code_confirmation">Authentication Code Resent</string>
@@ -81,6 +87,8 @@
     <string name="setting_add_new_wallet">Add new wallet</string>
     <string name="setting_change_name_wallet">Change name</string>
     <string name="setting_change_name_submit">Submit</string>
+    <string name="setting_change_email">Change email</string>
+    <string name="setting_change_phone">Change phone number</string>
     <string name="setting_hint_name">Name</string>
     <string name="create_nft_today">Start Creating your <b>NFTs</b> Today</string>
     <string name="create_nft">Create NFT</string>

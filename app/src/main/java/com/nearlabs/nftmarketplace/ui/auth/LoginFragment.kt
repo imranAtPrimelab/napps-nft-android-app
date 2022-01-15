@@ -26,6 +26,7 @@ import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.CLICK_LOGIN_WITH_PHONE_EVENT_NAME
 import com.nearlabs.nftmarketplace.util.AppConstants.GET_STARTED_EVENT_NAME
 import com.nearlabs.nftmarketplace.util.AppConstants.LOGIN_WITH_PHONE_EVENT_NAME
+import com.nearlabs.nftmarketplace.util.Helpers
 import com.nearlabs.nftmarketplace.viewmodel.UserViewModel
 import timber.log.Timber
 
@@ -139,7 +140,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
         binding.btnGetStarted.setOnClickListener {
             val usesEmail = !userViewModel.usesPhone
-            if (checkEmailPhone(binding.etEmailPhone.text.toString(), usesEmail)) {
+            if (Helpers.checkEmailPhone(binding.etEmailPhone.text.toString(), usesEmail)) {
                 AppConstants.logAppsFlyerEvent(GET_STARTED_EVENT_NAME, it.context)
                 if (userViewModel.usesPhone) {
                     userViewModel.currentPhone = binding.ccp.getFullNumberWithPlus()
@@ -206,15 +207,5 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             this.requireActivity().startActivity(browserIntent)
         }))
 
-    }
-
-    private fun checkEmailPhone(text: String, usingEmail: Boolean): Boolean {
-        return if (usingEmail) {
-            val isLegitEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(text).matches()
-            (text.isNotBlank() && isLegitEmail)
-        } else {
-            val isLegitNumber = android.util.Patterns.PHONE.matcher(text).matches()
-            (text.isNotBlank() && isLegitNumber)
-        }
     }
 }

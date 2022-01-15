@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.popBack
@@ -14,14 +14,15 @@ import com.nearlabs.nftmarketplace.common.extensions.showKeyboard
 import com.nearlabs.nftmarketplace.databinding.DialogChangeNameBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.setting.SettingsViewModel
+import com.nearlabs.nftmarketplace.util.Helpers
 
 
-class ChangeNameBottomSheetDialog : BaseBottomSheetDialogFragment() {
+class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
     override fun getTheme() = R.style.BottomSheetTransparentDialog
-
-    private lateinit var binding: DialogChangeNameBinding
-    var currentEmail = ""
     var currentPhone = ""
+    var currentEmail = ""
+    private lateinit var binding: DialogChangeNameBinding
+
     private val viewModel by activityViewModels<SettingsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,8 @@ class ChangeNameBottomSheetDialog : BaseBottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = DialogChangeNameBinding.inflate(inflater, container, false)
+        binding.editName.hint = getString(R.string.phone_example)
+        binding.textTitle.text = getString(R.string.setting_change_phone)
         return binding.root
     }
 
@@ -49,10 +52,32 @@ class ChangeNameBottomSheetDialog : BaseBottomSheetDialogFragment() {
         }
 
         binding.btnAddNewWallet.setOnClickListener {
-            val name = binding.editName.text.toString()
-            observeResultFlow(viewModel.changeName(name, currentPhone, currentEmail), successHandler = {
-                popBack()
-            })
+            val newPhone = binding.editName.text.toString()
+            if (newPhone == currentPhone)
+            {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.phone_error_same),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else {
+                if (Helpers.checkEmailPhone(newPhone, usingEmail = false)) {
+                    val bundle = viewModel.checkShouldChangePhone(newPhone, currentEmail)
+                    //if bundle == null that means that phone is not the primary OTP method so we can just change it
+                    if (bundle == null) {
+                        popBack()
+                    } else {
+                        findNavController().navigate(R.id.toOtpFromPhone, bundle)
+                    }
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.phone_error),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
         }
     }
 
@@ -63,7 +88,7 @@ class ChangeNameBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private fun initObserve() {
         observeResultFlow(
             viewModel.getUserProfile(), successHandler = {
-                binding.editName.setText(it.name, TextView.BufferType.EDITABLE)
+                binding.editName.setText(it.phone)
                 currentPhone = it.phone
                 currentEmail = it.email
             }, errorHandler = {
