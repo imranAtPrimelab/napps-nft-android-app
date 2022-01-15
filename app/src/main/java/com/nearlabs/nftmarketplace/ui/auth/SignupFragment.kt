@@ -75,7 +75,11 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
             AppConstants.logAppsFlyerEvent(SIGN_UP_CREATE_ACCOUNT_EVENT_NAME,it.context)
             val pattern = Pattern.compile("^[a-z0-9._-]+$")
 
-            val enteredWalletId = binding.walletId.text?.trim().toString().replace(AppConstants.ACCOUNT_NAME_NEAR_SUFFIX, "")
+            var enteredWalletId = binding.walletId.text?.trim().toString().replace(AppConstants.ACCOUNT_NAME_NEAR_SUFFIX, "")
+
+            if (!enteredWalletId.contains(".near"))
+            { enteredWalletId += ".near"
+            }
 
 //            if(pattern.matcher(binding.walletId.text.toString()).matches()) {
             if(pattern.matcher(enteredWalletId).matches()) {
