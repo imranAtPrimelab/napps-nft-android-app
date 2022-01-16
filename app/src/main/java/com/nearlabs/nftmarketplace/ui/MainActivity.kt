@@ -6,10 +6,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.nearlabs.nftmarketplace.R
+import com.nearlabs.nftmarketplace.data.preference.SharePrefs
 import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity
 import com.nearlabs.nftmarketplace.ui.detailnft.ClaimNFTFragment.Companion.CLIM_NFT_ID
 import com.nearlabs.nftmarketplace.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity(R.layout.activity_main) {
@@ -17,6 +19,8 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     private val navController by lazy { findNavController(R.id.nav_host) }
     private val authViewModel by viewModels<AuthViewModel>()
 
+    @Inject
+    lateinit var sharePrefs: SharePrefs
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initNavGraph()
@@ -24,10 +28,11 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     private fun initNavGraph() {
         val navGraph = navController.navInflater.inflate(R.navigation.nav_launch)
+        val uri = intent?.data
+        sharePrefs.redirectedUrl = uri.toString()
         if (authViewModel.isLoggedIn()) {
             navGraph.startDestination = R.id.nav_main
-            val uri = intent?.data
-            when  {
+            when {
                 uri == null -> {
                     navController.graph = navGraph
                 }

@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.data.networks
 
+import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateNFTRequest
 import com.nearlabs.nftmarketplace.data.networks.request.DtoUserCreateRequest
 import com.nearlabs.nftmarketplace.data.networks.response.DtoUserInfoResponse
 import com.nearlabs.nftmarketplace.data.networks.response.DtoUserProfileResponse
@@ -20,6 +21,9 @@ interface UserApi {
 
     @POST("user/create")
     suspend fun createUser(@Body request: DtoUserCreateRequest): DtoUserInfoResponse
+
+    @POST("user/create")
+    suspend fun createUser(@Body request: DtoUserCreateNFTRequest): DtoUserInfoResponse
 
     @POST("user/suggest/?walletName=moisesmarques.near&suggestionCount=10")
     suspend fun suggestWalletName(@Body request: DtoUserCreateRequest): DtoUserInfoResponse
