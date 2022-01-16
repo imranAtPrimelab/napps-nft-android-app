@@ -12,6 +12,7 @@ import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.common.extensions.showKeyboard
 import com.nearlabs.nftmarketplace.databinding.DialogChangeNameBinding
+import com.nearlabs.nftmarketplace.databinding.DialogChangePhoneBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.setting.SettingsViewModel
 import com.nearlabs.nftmarketplace.util.Helpers
@@ -21,7 +22,7 @@ class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
     override fun getTheme() = R.style.BottomSheetTransparentDialog
     var currentPhone = ""
     var currentEmail = ""
-    private lateinit var binding: DialogChangeNameBinding
+    private lateinit var binding: DialogChangePhoneBinding
 
     private val viewModel by activityViewModels<SettingsViewModel>()
 
@@ -29,12 +30,13 @@ class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
         super.onCreate(savedInstanceState)
         dialog?.setCancelable(false)
         initObserve()
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = DialogChangeNameBinding.inflate(inflater, container, false)
+        binding = DialogChangePhoneBinding.inflate(inflater, container, false)
         binding.editName.hint = getString(R.string.phone_example)
         binding.textTitle.text = getString(R.string.setting_change_phone)
         return binding.root
@@ -47,12 +49,13 @@ class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
     }
 
     private fun initListeners() {
+        binding.ccp.registerCarrierNumberEditText(binding.editName)
         binding.btnClose.setOnClickListener {
             popBack()
         }
 
         binding.btnAddNewWallet.setOnClickListener {
-            val newPhone = binding.editName.text.toString()
+            val newPhone = binding.ccp.fullNumber
             if (newPhone == currentPhone)
             {
                 Toast.makeText(
@@ -64,6 +67,7 @@ class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
             else {
                 if (Helpers.checkEmailPhone(newPhone, usingEmail = false)) {
                     val bundle = viewModel.checkShouldChangePhone(newPhone, currentEmail)
+                    viewModel.settingFragment?.binding?.csivPhone?.setValue(newPhone)
                     //if bundle == null that means that phone is not the primary OTP method so we can just change it
                     if (bundle == null) {
                         popBack()
@@ -88,9 +92,11 @@ class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private fun initObserve() {
         observeResultFlow(
             viewModel.getUserProfile(), successHandler = {
-                binding.editName.setText(it.phone)
-                currentPhone = it.phone
+                binding.editName.setText(it.phone.subSequence(3, it.phone.length))
                 currentEmail = it.email
+                val currentPhoneCode = it.phone.subSequence(0, 3).toString().toInt()
+                binding.ccp.setCountryForPhoneCode(currentPhoneCode)
+                currentPhone = binding.ccp.fullNumber
             }, errorHandler = {
                 Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
                     .show()

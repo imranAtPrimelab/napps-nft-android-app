@@ -5,11 +5,6 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.11875" />
         <entry key="../../../../layout/custom_preview.xml" value="0.578125" />
-        <entry key="..\:/Amit/napps-nft-android-app/napps-nft-android-app/app/src/main/res/layout/activity_splash.xml" value="0.13020833333333334" />
-        <entry key="..\:/Amit/napps-nft-android-app/napps-nft-android-app/app/src/main/res/layout/fragment_create_nft.xml" value="0.18802083333333333" />
-        <entry key="..\:/Amit/napps-nft-android-app/napps-nft-android-app/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
-        <entry key="..\:/Amit/napps-nft-android-app/napps-nft-android-app/app/src/main/res/layout/fragment_login.xml" value="0.18802083333333333" />
-        <entry key="..\:/Amit/napps-nft-android-app/napps-nft-android-app/app/src/main/res/layout/fragment_signup.xml" value="0.18802083333333333" />
         <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/activity_main.xml" value="0.23777173913043478" />
         <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/dialog_create_nft.xml" value="0.23777173913043478" />
         <entry key="..\:/testprojects/naps_nft/app/src/main/res/layout/dialog_send_consent_ntf.xml" value="0.23777173913043478" />
@@ -50,6 +45,7 @@
         <entry key="app/src/main/res/layout/custom_setting_item_view.xml" value="0.75" />
         <entry key="app/src/main/res/layout/custom_setting_wallet_view.xml" value="0.5489583333333333" />
         <entry key="app/src/main/res/layout/dialog_change_name.xml" value="0.2898032200357782" />
+        <entry key="app/src/main/res/layout/dialog_change_phone.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_change_wallet.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_claim_nft_connect_wallet.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_create_nft.xml" value="0.2709030100334448" />

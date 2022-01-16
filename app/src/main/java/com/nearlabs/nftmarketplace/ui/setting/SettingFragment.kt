@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SettingFragment : BaseFragment(R.layout.fragment_setting) {
-    private val binding by viewBinding(FragmentSettingBinding::bind)
+    val binding by viewBinding(FragmentSettingBinding::bind)
     private val viewModel by activityViewModels<SettingsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,6 +29,7 @@ class SettingFragment : BaseFragment(R.layout.fragment_setting) {
         initListeners()
         initObserve()
         activity?.findViewById<BottomNavigationView>(R.id.bottom_nav_bar)?.visibility = View.GONE
+        viewModel.settingFragment = this
     }
 
     override fun onPause() {

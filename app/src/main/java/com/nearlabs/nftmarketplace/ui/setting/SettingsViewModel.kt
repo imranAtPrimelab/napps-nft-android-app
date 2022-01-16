@@ -20,6 +20,8 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(private val settingsRepository: SettingsRepository, private val sharePrefs: SharePrefs) :
     ViewModel() {
 
+    var settingFragment: SettingFragment? = null
+
     fun getWallets() = resultFlow {
         settingsRepository.getWallets()
     }

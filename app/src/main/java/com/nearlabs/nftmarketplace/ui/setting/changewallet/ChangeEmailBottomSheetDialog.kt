@@ -64,6 +64,7 @@ class ChangeEmailBottomSheetDialog : BaseBottomSheetDialogFragment() {
             else {
                 if (Helpers.checkEmailPhone(newEmail, usingEmail = true)) {
                     val bundle = viewModel.checkShouldChangeEmail(newEmail, currentPhone)
+                    viewModel.settingFragment?.binding?.csivEmail?.setValue(newEmail)
                     //if bundle == null that means that email is not the primary OTP method so we can just change it
                     if (bundle == null) {
                         popBack()
