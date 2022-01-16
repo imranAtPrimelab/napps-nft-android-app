@@ -67,6 +67,7 @@
     <string name="claim">Claim</string>
     <string name="digital_art">Digital Art</string>
     <string name="creator">Creator</string>
+    <string name="send_import">import</string>
 
     <string name="open">open</string>
 
