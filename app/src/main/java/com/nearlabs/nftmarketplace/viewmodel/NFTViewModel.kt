@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nearlabs.nftmarketplace.common.extensions.resultFlow
 import com.nearlabs.nftmarketplace.repository.Repository
@@ -24,4 +25,9 @@ class NFTViewModel @Inject constructor(private val repository: Repository) : Vie
     fun claimNft(nftId: String) = resultFlow {
         repository.claimNFT(nftId)
     }
+
+    val shouldRefresh : MutableLiveData<Boolean> =  MutableLiveData<Boolean>().apply {
+        postValue(false)
+    }
+
 }
