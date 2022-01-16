@@ -61,7 +61,7 @@ class ItemMyNFTViewHolder(
         binding.tvTitleSendNFT.text = data.type.toString()
         binding.tvTitleSendNFT.text = data.name
         binding.tvUIDSendNFT.text = data.id.toString()
-        getBitmapFromURL(data.image, binding.ivThumbnailSendNFT)
+        context?.let { Glide.with(it).load(data.image).into(binding.ivThumbnailSendNFT) }
         binding.NftContainer.setOnClickListener{
             val bundle = Bundle()
             bundle.putInt("NftPosition",this.layoutPosition)
@@ -70,10 +70,4 @@ class ItemMyNFTViewHolder(
 
         //binding.root.setOnClickListener { onItemClicked?.invoke(data, adapterPosition) }
     }
-
-
-    private fun getBitmapFromURL(src: String, imageView: AppCompatImageView) {
-
-    }
-
 }
