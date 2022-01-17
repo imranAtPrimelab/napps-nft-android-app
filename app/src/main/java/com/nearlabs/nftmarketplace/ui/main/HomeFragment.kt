@@ -116,6 +116,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         observeResultFlow(
             nftViewModel.getAllNFTCollection(),
             successHandler = {
+                myNftsAdapter.token = sharePrefs.accessToken
+                myNftsAdapter.context = context
                 myNftsAdapter.setData(it)
             })
         myNftsAdapter.notifyDataSetChanged()
