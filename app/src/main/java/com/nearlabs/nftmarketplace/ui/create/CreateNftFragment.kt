@@ -90,6 +90,10 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
     }
 
     private fun initViews() {
+        if(arguments!= null){
+            binding.btnClose.visibility = requireArguments().getInt("onBoarding")
+            requireArguments().clear()
+        }
         manageNextButtonEnable(checkValidation)
         viewModel.clearStep()
         binding.rootUpload.root.visibility = View.VISIBLE
