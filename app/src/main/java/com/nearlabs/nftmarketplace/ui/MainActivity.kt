@@ -3,7 +3,6 @@ package com.nearlabs.nftmarketplace.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.data.preference.SharePrefs
@@ -29,9 +28,11 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
     private fun initNavGraph() {
         val navGraph = navController.navInflater.inflate(R.navigation.nav_launch)
         val uri = intent?.data
-        sharePrefs.redirectedUrl = uri.toString()
         if (authViewModel.isLoggedIn()) {
             navGraph.startDestination = R.id.nav_main
+            navController.graph = navGraph
+        } else {
+            navGraph.startDestination = R.id.nav_auth
             when {
                 uri == null -> {
                     navController.graph = navGraph
@@ -46,9 +47,6 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
                     navController.graph = navGraph
                 }
             }
-        } else {
-            navGraph.startDestination = R.id.nav_auth
-            navController.graph = navGraph
         }
     }
 

@@ -143,11 +143,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             if (Helpers.checkEmailPhone(binding.etEmailPhone.text.toString(), usesEmail)) {
                 AppConstants.logAppsFlyerEvent(GET_STARTED_EVENT_NAME, it.context)
                 if (userViewModel.usesPhone) {
-                    userViewModel.currentPhone = binding.ccp.fullNumberWithPlus
+                    userViewModel.currentPhone = binding.ccp.fullNumber
                 } else {
                     userViewModel.currentEmail = binding.etEmailPhone.text.toString()
                 }
-                findNavController().navigate(R.id.signupFragment)
+                findNavController().navigate(R.id.signupFragment, arguments)
             } else {
                 if (usesEmail) {
                     Toast.makeText(requireContext(), getString(R.string.email_error), Toast.LENGTH_SHORT).show()
