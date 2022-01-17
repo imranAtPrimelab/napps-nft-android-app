@@ -37,6 +37,7 @@ import droidninja.filepicker.FilePickerConst
 
 import android.R.attr.data
 import android.net.Uri
+import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity
 import com.nearlabs.nftmarketplace.util.adapters.NFTPropertiesAdapter
 import droidninja.filepicker.FilePickerConst.KEY_SELECTED_MEDIA
 import droidninja.filepicker.utils.ContentUriUtils
@@ -94,6 +95,7 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
             binding.btnClose.visibility = requireArguments().getInt("onBoarding")
             requireArguments().clear()
         }
+        (this.activity as BaseActivity).dismissProgressDialog()
         manageNextButtonEnable(checkValidation)
         viewModel.clearStep()
         binding.rootUpload.root.visibility = View.VISIBLE

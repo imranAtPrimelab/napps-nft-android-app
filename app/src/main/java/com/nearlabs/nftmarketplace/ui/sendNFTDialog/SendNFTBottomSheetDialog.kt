@@ -97,6 +97,7 @@ class SendNFTBottomSheetDialog : BaseBottomSheetDialogFragment() {
         observeResultFlow(viewModel.getNFT(),
             successHandler = {
                 nftAdapter.setData(it)
+                nftAdapter.context = this.context
             })
     }
 
