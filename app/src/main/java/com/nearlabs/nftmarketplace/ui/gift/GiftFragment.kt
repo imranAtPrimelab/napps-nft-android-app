@@ -156,7 +156,7 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
                    if(it.isNotEmpty()){
                        val bundle = Bundle()
                        bundle.putInt("onBoarding", View.GONE)
-                       findNavController().navigate(R.id.toCreateNft, bundle)
+                       findNavController().navigate(R.id.action_createNftFragment_to_mainFragment, bundle)
                    }else{
                        Toast.makeText(requireContext(), "please import contacts first", Toast.LENGTH_SHORT).show()
                    }

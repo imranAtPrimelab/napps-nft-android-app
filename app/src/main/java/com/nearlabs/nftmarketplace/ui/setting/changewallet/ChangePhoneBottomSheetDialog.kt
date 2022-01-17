@@ -56,13 +56,17 @@ class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
 
         binding.btnAddNewWallet.setOnClickListener {
             val newPhone = binding.ccp.fullNumber
-            if (newPhone == currentPhone)
+            if (newPhone == currentPhone && !newPhone.isEmpty())
             {
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.phone_error_same),
                     Toast.LENGTH_SHORT
                 ).show()
+            }
+            else if (binding.editName.text?.isEmpty() == true && currentPhone.isEmpty()) {
+                viewModel.settingFragment?.binding?.csivPhone?.setValue("")
+                popBack()
             }
             else {
                 if (Helpers.checkEmailPhone(newPhone, usingEmail = false)) {
@@ -92,11 +96,19 @@ class ChangePhoneBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private fun initObserve() {
         observeResultFlow(
             viewModel.getUserProfile(), successHandler = {
-                binding.editName.setText(it.phone.subSequence(3, it.phone.length))
+                if (it.phone.length >= 3) {
+                    binding.editName.setText(it.phone.subSequence(3, it.phone.length))
+                    val currentPhoneCode = it.phone.subSequence(0, 3).toString().toInt()
+                    binding.ccp.setCountryForPhoneCode(currentPhoneCode)
+                    currentPhone = binding.ccp.fullNumber
+                }
+                else
+                {
+                    binding.editName.setText("")
+                    binding.ccp.setCountryForPhoneCode(1)
+                    currentPhone = ""
+                }
                 currentEmail = it.email
-                val currentPhoneCode = it.phone.subSequence(0, 3).toString().toInt()
-                binding.ccp.setCountryForPhoneCode(currentPhoneCode)
-                currentPhone = binding.ccp.fullNumber
             }, errorHandler = {
                 Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
                     .show()
