@@ -36,6 +36,7 @@ import androidx.core.content.ContextCompat
 import android.graphics.drawable.Drawable
 import androidx.core.view.ViewCompat
 import com.nearlabs.nftmarketplace.R
+import com.nearlabs.nftmarketplace.ui.auth.OTPFragment
 
 
 @AndroidEntryPoint
@@ -153,7 +154,9 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
                 viewModel.getContacts()
                 , successHandler = {
                    if(it.isNotEmpty()){
-                       findNavController().navigate(R.id.toCreateNft)
+                       val bundle = Bundle()
+                       bundle.putInt("onBoarding", View.GONE)
+                       findNavController().navigate(R.id.toCreateNft, bundle)
                    }else{
                        Toast.makeText(requireContext(), "please import contacts first", Toast.LENGTH_SHORT).show()
                    }
@@ -163,9 +166,9 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
             )
         }
 
-        binding.btnClose.setOnClickListener {
+        /*binding.btnClose.setOnClickListener {
             findNavController().navigate(R.id.toMain)
-        }
+        }*/
 
         binding.importContact.setOnClickListener {
             val selectedContacts = contactListAdapter.selectedPosition.mapNotNull { contactListAdapter.getItemAtPosition(it) }
