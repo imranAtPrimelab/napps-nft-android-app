@@ -15,6 +15,6 @@ data class DtoUserCreateNFTRequest(
     @SerializedName("email")
     val email: String?,
 
-    @SerializedName("nftID ")
+    @SerializedName("nftID")
     val nftID: String?
 )

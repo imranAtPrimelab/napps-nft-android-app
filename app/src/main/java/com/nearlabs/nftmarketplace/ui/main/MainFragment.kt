@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.nearlabs.nftmarketplace.R
+import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.FragmentMainBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
+import com.nearlabs.nftmarketplace.ui.detailnft.ClaimNFTFragment
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.SendNFTViewModel
 import com.nearlabs.nftmarketplace.viewmodel.NFTViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
-import androidx.navigation.NavOptions
-import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 
 @AndroidEntryPoint
 class MainFragment : BaseFragment(R.layout.fragment_main) {
@@ -33,8 +33,9 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         observeResultFlow(
             nftViewModel.getAllNFTCollection(),
             successHandler = { nftList ->
-                if(nftList.isEmpty()){
-                    findNavController().navigate(R.id.toGiftNft,savedInstanceState,navOptions)
+                val claimNFTID = arguments?.getString(ClaimNFTFragment.CLIM_NFT_ID)
+                if (claimNFTID == null && nftList.isEmpty()) {
+                    findNavController().navigate(R.id.toGiftNft, savedInstanceState, navOptions)
                 }
             }
         )
