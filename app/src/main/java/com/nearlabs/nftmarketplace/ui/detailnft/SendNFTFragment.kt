@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.ui.detailnft
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -29,6 +30,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.http.Url
 import timber.log.Timber
+import java.lang.Exception
 import java.net.URL
 
 @AndroidEntryPoint
@@ -45,6 +47,7 @@ class SendNFTFragment : BaseFragment(R.layout.fragment_send_nft) {
         if(arguments!= null){
             nftPosition = requireArguments().getInt("NftPosition",0)
         }
+        viewModel.bottomVisibility.value = View.GONE
         initListeners()
         initObserve()
         initViews()
@@ -98,11 +101,18 @@ class SendNFTFragment : BaseFragment(R.layout.fragment_send_nft) {
                         binding.nftTokenId.text = nft.id
                         val attributes = HashMap<String,String>()
                         val attributesResponse = nft.attributes
-                        for(i in attributesResponse!!.indices){
-                            attributes[attributesResponse[i].get("attr_name").toString().replace("\"", "")] =
-                                attributesResponse[i].get("attr_value").toString().replace("\"", "")
+                        try {
+                            for (i in attributesResponse!!.indices) {
+                                attributes[attributesResponse[i].get("attr_name").toString()
+                                    .replace("\"", "")] =
+                                    attributesResponse[i].get("attr_value").toString()
+                                        .replace("\"", "")
+                            }
+                            binding.attributesList.adapter =
+                                NftAttributesAdapter(requireContext(), attributes)
+                        }catch (noAttributes : Exception){
+
                         }
-                        binding.attributesList.adapter = NftAttributesAdapter(requireContext(),attributes)
                     }
                 )
 
@@ -112,6 +122,23 @@ class SendNFTFragment : BaseFragment(R.layout.fragment_send_nft) {
 
 
     }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        if(hidden) viewModel.bottomVisibility.value = View.VISIBLE
+        super.onHiddenChanged(hidden)
+    }
+
+    override fun onDetach() {
+        viewModel.bottomVisibility.value = View.VISIBLE
+        super.onDetach()
+    }
+
+
+    override fun onAttach(context: Context) {
+        viewModel.bottomVisibility.value = View.GONE
+        super.onAttach(context)
+    }
+
 
     private fun initViews(){
 
