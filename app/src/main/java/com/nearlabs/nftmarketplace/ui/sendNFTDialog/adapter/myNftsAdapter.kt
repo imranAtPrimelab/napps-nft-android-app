@@ -1,5 +1,7 @@
 package com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter
 
+import android.R.attr
+import android.content.Context
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -9,15 +11,35 @@ import com.nearlabs.nftmarketplace.common.extensions.viewBinding
 import com.nearlabs.nftmarketplace.databinding.ItemLayoutSendNftCellBinding
 import com.nearlabs.nftmarketplace.domain.model.nft.NFT
 import com.nearlabs.nftmarketplace.ui.base.adapter.BaseSelectionAdapter
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
+import android.os.Handler
+import android.os.Looper
+
+import androidx.appcompat.widget.AppCompatImageView
+import okhttp3.*
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URL
+import com.bumptech.glide.Glide
+
+import android.graphics.Bitmap
+import java.lang.Exception
+
 
 class myNftsAdapter(private val onItemClicked: ((NFT, Int) -> Unit)? = null) :
     BaseSelectionAdapter<NFT, ItemMyNFTViewHolder>() {
 
+    var token = ""
+    var context: Context? = null
     override fun createViewHolderInternal(parent: ViewGroup, viewType: Int): ItemMyNFTViewHolder {
-        return ItemMyNFTViewHolder(
+        var viewHolder = ItemMyNFTViewHolder(
             parent.viewBinding(ItemLayoutSendNftCellBinding::inflate),
             onItemClicked
         )
+        viewHolder.token = token
+        viewHolder.context = context
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ItemMyNFTViewHolder, position: Int) {
@@ -32,11 +54,14 @@ class ItemMyNFTViewHolder(
     private val onItemClicked: ((NFT, Int) -> Unit)?
 ) : RecyclerView.ViewHolder(binding.root) {
 
+    var context: Context? = null
+    var token = ""
+
     fun bind(data: NFT, selected: Boolean) {
         binding.tvTitleSendNFT.text = data.type.toString()
         binding.tvTitleSendNFT.text = data.name
         binding.tvUIDSendNFT.text = data.id.toString()
-
+        context?.let { Glide.with(it).load(data.image).into(binding.ivThumbnailSendNFT) }
         binding.NftContainer.setOnClickListener{
             val bundle = Bundle()
             bundle.putInt("NftPosition",this.layoutPosition)

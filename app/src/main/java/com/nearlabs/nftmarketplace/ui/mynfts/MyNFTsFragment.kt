@@ -33,6 +33,7 @@ class MyNFTsFragment : BaseFragment(R.layout.fragment_my_nfts) {
         observeResultFlow(
             nftViewModel.getAllNFTCollection(),
             successHandler = {
+                nftAdapter.context = this.context
                 nftAdapter.setData(it)
             })
     }
