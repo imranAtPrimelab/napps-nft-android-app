@@ -18,6 +18,7 @@ import com.nearlabs.nftmarketplace.databinding.FragmentOtpBinding
 import com.nearlabs.nftmarketplace.ui.base.BaseFragment
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.OTP_VERIFICATION_EVENT_NAME
+import com.nearlabs.nftmarketplace.viewmodel.NFTViewModel
 import com.nearlabs.nftmarketplace.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +27,7 @@ class OTPFragment : BaseFragment(R.layout.fragment_otp) {
 
     private val binding by viewBinding(FragmentOtpBinding::bind)
     private val userViewModel: UserViewModel by activityViewModels()
+    private val nftViewModel by activityViewModels<NFTViewModel>()
     private var fromSettings = false
     private var firstVerificationDone = false
     private var id = ""
@@ -150,7 +152,15 @@ class OTPFragment : BaseFragment(R.layout.fragment_otp) {
                         }
                     }
                     else {
-                        findNavController().navigate(R.id.toMain)
+                        observeResultFlow(
+                            nftViewModel.getAllNFTCollection(),
+                            successHandler = { nftList ->
+                                if(nftList.isEmpty()){
+                                    findNavController().navigate(R.id.otpToGift)
+                                }else{
+                                    findNavController().navigate(R.id.toMain)
+                                }
+                            })
                     }
                 }, errorHandler = {
                     Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)

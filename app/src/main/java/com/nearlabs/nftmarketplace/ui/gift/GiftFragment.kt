@@ -163,9 +163,9 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
             )
         }
 
-        binding.btnClose.setOnClickListener {
+        /*binding.btnClose.setOnClickListener {
             findNavController().navigate(R.id.toMain)
-        }
+        }*/
 
         binding.importContact.setOnClickListener {
             val selectedContacts = contactListAdapter.selectedPosition.mapNotNull { contactListAdapter.getItemAtPosition(it) }

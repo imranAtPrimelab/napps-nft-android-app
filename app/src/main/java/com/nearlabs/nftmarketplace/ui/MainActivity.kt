@@ -32,6 +32,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
         sharePrefs.redirectedUrl = uri.toString()
         if (authViewModel.isLoggedIn()) {
             navGraph.startDestination = R.id.nav_main
+            navGraph.startDestination
             when {
                 uri == null -> {
                     navController.graph = navGraph
