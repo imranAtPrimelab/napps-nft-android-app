@@ -45,7 +45,7 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
 
     private val binding by viewBinding(FragmentGiftNftBinding::bind)
     private val viewModel by activityViewModels<ContactViewModel>()
-
+    private var permissionGranted = false
 
     private val contactListAdapter by lazy {
         return@lazy ContactListAdapter(activity as Context) { contact, position ->
@@ -56,6 +56,7 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (granted) {
+                permissionGranted = granted
                 AppConstants.logAppsFlyerEvent(AppConstants.CONTACTS_PERMISSION_GRANTED_EVENT_NAME, requireContext())
                 getContactList()
             }
@@ -124,23 +125,32 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
-                (binding.contactList.adapter as ContactListAdapter).filter(newText!!,
-                    viewModel.itemsCopy!!
-                )
+                if (permissionGranted) {
+                    (binding.contactList.adapter as ContactListAdapter).filter(
+                        newText!!,
+                        viewModel.itemsCopy!!
+                    )
 
-                val contacts = mutableListOf<Contact>()
-                val currentData = (binding.contactList.adapter as ContactListAdapter).getData()!!
-                for(i in 0 until viewModel.selectedHashSet!!.size)
-                if(currentData.contains(viewModel.selectedHashSet!!.keys.elementAt(i))){
-                    contacts.add(viewModel.selectedHashSet!!.keys.elementAt(i))
+                    val contacts = mutableListOf<Contact>()
+                    val currentData =
+                        (binding.contactList.adapter as ContactListAdapter).getData()!!
+                    for (i in 0 until viewModel.selectedHashSet!!.size)
+                        if (currentData.contains(viewModel.selectedHashSet!!.keys.elementAt(i))) {
+                            contacts.add(viewModel.selectedHashSet!!.keys.elementAt(i))
+                        }
+
+                    for (i in currentData.indices) {
+                        if (contacts.contains(currentData[i]))
+                            selectContact(currentData[i], i)
+                    }
+
+                    return true
                 }
-
-                for(i in currentData.indices){
-                    if(contacts.contains(currentData[i]))
-                        selectContact(currentData[i],i)
+                else
+                {
+                    requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
+                    return true
                 }
-
-                return true
             }
         })
 
@@ -180,7 +190,9 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
         }*/
         requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
 
-        binding.cvSearch.setOnClickListener { binding.searchView.onActionViewExpanded(); }
+        binding.cvSearch.setOnClickListener {
+            binding.searchView.onActionViewExpanded()
+        }
 
     }
 

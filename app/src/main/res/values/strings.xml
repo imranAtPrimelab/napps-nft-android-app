@@ -41,7 +41,8 @@
     <string name="by_creating_account">By creating a NEAR account, you agree to the NEAR Wallet\n Terms of Service and Privacy Policy.\n</string>
     <string name="login_with_NEAR">Login with NEAR</string>
     <string name="wallet_id"> ACCOUNT ID</string>
-
+    <string name="full_name_error">Please enter your full name</string>
+    <string name="wallet_name_error">Account id should only contain : lowercase alphanumeric characters with only dash or underscore special characters and no spaces</string>
 
     <string name="authentication">Authentication</string>
     <string name="enter_authentication_code">Enter authentication code</string>
@@ -76,7 +77,8 @@
     <string name="more_info">More Info</string>
     <string name="deny">Deny</string>
     <string name="allow">Allow</string>
-    <string name="ntf_sent_success">NFT Vecotry Illustartion sent successfully to</string>
+    <string name="ntf_sent_success">NFT sent successfully to</string>
+    <string name="nft_mint_success">%s successfully minted</string>
 
 
     <string name="setting_title">Settings</string>
