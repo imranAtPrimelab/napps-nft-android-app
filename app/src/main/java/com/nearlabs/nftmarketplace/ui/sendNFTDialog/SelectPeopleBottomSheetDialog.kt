@@ -1,12 +1,15 @@
 package com.nearlabs.nftmarketplace.ui.sendNFTDialog
 
 import android.Manifest
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
@@ -14,8 +17,10 @@ import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
 import com.nearlabs.nftmarketplace.common.extensions.popBack
 import com.nearlabs.nftmarketplace.databinding.DialogSendSelectPeopleNtfBinding
 import com.nearlabs.nftmarketplace.domain.model.Contact
+import com.nearlabs.nftmarketplace.ui.auth.OTPFragment
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
+import com.nearlabs.nftmarketplace.ui.gift.GiftFragment
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.PeopleAdapter
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.CONTACTS_PERMISSION_GRANTED_EVENT_NAME
@@ -91,6 +96,16 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
             viewModel.recipientId = selectedRecipientId
             dismiss()
             findNavController().navigate(R.id.toConsent)
+        }
+
+        binding.btnImport.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putBoolean(GiftFragment.FROM_SEND, true)
+            findNavController().navigate(R.id.toContacts, bundle)
+        }
+
+        binding.etContactSearch.doAfterTextChanged {
+
         }
     }
 

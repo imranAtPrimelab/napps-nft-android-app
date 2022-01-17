@@ -44,6 +44,47 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/btnImport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="@string/send_import"
+            android:textColor="@color/blue"
+            android:textSize="17sp"
+            app:layout_constraintTop_toTopOf="@id/etContactSearch"
+            app:layout_constraintBottom_toBottomOf="@id/etContactSearch"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <SearchView
+            android:clickable="false"
+            android:id="@+id/searchImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/etContactSearch"
+            app:layout_constraintBottom_toBottomOf="@id/etContactSearch"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etContactSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/input_field_bg"
+            android:fontFamily="@font/inter_regular"
+            android:hint="@string/email_example"
+            android:layout_marginTop="12dp"
+            android:paddingStart="50dp"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingHorizontal="14dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint_color"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleSendNFT"
+            app:layout_constraintStart_toStartOf="@id/searchImg"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
@@ -57,7 +98,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/btnNext"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTitleSendNFT"
+            app:layout_constraintTop_toBottomOf="@id/etContactSearch"
             tools:listitem="@layout/item_sent_nft_people" />
 
         <com.google.android.material.button.MaterialButton
@@ -76,17 +117,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/btnImport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="6dp"
-            android:text="@string/send_import"
-            android:textColor="@color/blue"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="@id/btnNext"
-            app:layout_constraintTop_toTopOf="@id/btnNext"
-            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

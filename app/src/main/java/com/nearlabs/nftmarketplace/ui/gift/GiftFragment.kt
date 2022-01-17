@@ -36,6 +36,8 @@ import androidx.core.content.ContextCompat
 import android.graphics.drawable.Drawable
 import androidx.core.view.ViewCompat
 import com.nearlabs.nftmarketplace.R
+import com.nearlabs.nftmarketplace.ui.auth.OTPFragment
+import com.nearlabs.nftmarketplace.ui.sendNFTDialog.SendNFTViewModel
 
 
 @AndroidEntryPoint
@@ -43,7 +45,11 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
 
     private val binding by viewBinding(FragmentGiftNftBinding::bind)
     private val viewModel by activityViewModels<ContactViewModel>()
-
+    private val sendViewModel by activityViewModels<SendNFTViewModel>()
+    private var fromSend = false
+    companion object {
+        const val FROM_SEND = "from_send"
+    }
 
     private val contactListAdapter by lazy {
         return@lazy ContactListAdapter(activity as Context) { contact, position ->
@@ -83,7 +89,7 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        fromSend = arguments?.getBoolean(GiftFragment.FROM_SEND) ?: false
         view.isFocusableInTouchMode = true
         view.requestFocus()
 
@@ -149,18 +155,36 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
         }*/
 
         binding.sendGift.setOnClickListener {
-            observeResultFlow(
-                viewModel.getContacts()
-                , successHandler = {
-                   if(it.isNotEmpty()){
-                       findNavController().navigate(R.id.toCreateNft)
-                   }else{
-                       Toast.makeText(requireContext(), "please import contacts first", Toast.LENGTH_SHORT).show()
-                   }
-                }, errorHandler = {
-                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
+            if (fromSend)
+            {
+                /*val selectedRecipientId = peopleAdapter.selectedPosition.mapNotNull { peopleAdapter.getItemAtPosition(it) }
+
+                if (selectedRecipientId.isEmpty()) {
+                    // error select empty people
+                    return@setOnClickListener
                 }
-            )
+
+                viewModel.recipientId = selectedRecipientId
+                findNavController().navigate(R.id.toConsent)*/
+            }
+            else {
+                observeResultFlow(
+                    viewModel.getContacts(), successHandler = {
+                        if (it.isNotEmpty()) {
+                            findNavController().navigate(R.id.toCreateNft)
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "please import contacts first",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }, errorHandler = {
+                        Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                )
+            }
         }
 
         binding.btnClose.setOnClickListener {

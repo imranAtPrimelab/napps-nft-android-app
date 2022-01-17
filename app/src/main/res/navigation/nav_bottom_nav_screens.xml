@@ -61,6 +61,9 @@
         <action
             android:id="@+id/toConsent"
             app:destination="@id/consentBottomSheetDialog" />
+        <action
+            android:id="@+id/toContacts"
+            app:destination="@id/giftFragment"/>
     </dialog>
     <dialog
         android:id="@+id/consentBottomSheetDialog"
