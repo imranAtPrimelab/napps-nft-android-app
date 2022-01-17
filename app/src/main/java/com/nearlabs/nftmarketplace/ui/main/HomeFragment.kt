@@ -54,7 +54,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("E/create","aca")
         initViews()
         initListeners()
         initObservers()
@@ -134,8 +133,18 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     }
 
-    private fun doOnTransactionClicked(transaction: Transaction) {
+    private fun doOnTransactionClicked(transaction: Transaction) {}
 
+    override fun onResume() {
+        observeResultFlow(
+            nftViewModel.getAllNFTCollection(),
+            successHandler = {
+                myNftsAdapter.token = sharePrefs.accessToken
+                myNftsAdapter.context = context
+                myNftsAdapter.setData(it)
+            })
+        myNftsAdapter.notifyDataSetChanged()
+        super.onResume()
     }
 
 }

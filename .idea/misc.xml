@@ -45,6 +45,7 @@
         <entry key="app/src/main/res/layout/custom_setting_item_view.xml" value="0.75" />
         <entry key="app/src/main/res/layout/custom_setting_wallet_view.xml" value="0.5489583333333333" />
         <entry key="app/src/main/res/layout/dialog_change_name.xml" value="0.2898032200357782" />
+        <entry key="app/src/main/res/layout/dialog_change_phone.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_change_wallet.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_claim_nft_connect_wallet.xml" value="0.22" />
         <entry key="app/src/main/res/layout/dialog_create_nft.xml" value="0.2709030100334448" />
