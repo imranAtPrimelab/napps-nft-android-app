@@ -56,9 +56,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_search"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_weight="4"
             app:cardCornerRadius="10dp">
 
@@ -75,34 +76,23 @@
                 android:layout_height="match_parent"
                 android:src="@android:drawable/ic_search_category_default"/>
 
-            <androidx.appcompat.widget.SearchView
-                android:layout_toEndOf="@+id/iv_search"
-                android:id="@+id/search_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginStart="-10dp"
-                android:focusable="true"
-                app:iconifiedByDefault="false"
-                app:searchIcon="@null"
-                app:theme="@style/AppSearchView"
-                app:defaultQueryHint="Search Current Contacts"
-                app:queryHint="Search Current Contacts" />
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="-10dp"
+                    android:layout_toEndOf="@+id/iv_search"
+                    android:focusable="true"
+                    app:defaultQueryHint="Search Current Contacts"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="Search Current Contacts"
+                    app:searchIcon="@null"
+                    app:theme="@style/AppSearchView" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
 
-        <TextView
-            android:id="@+id/import_contact"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Import"
-            android:textColor="#1976D2"
-            android:textSize="14sp" />
     </LinearLayout>
 
 

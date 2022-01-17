@@ -152,27 +152,6 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
         }*/
 
         binding.sendGift.setOnClickListener {
-            observeResultFlow(
-                viewModel.getContacts()
-                , successHandler = {
-                   if(it.isNotEmpty()){
-                       val bundle = Bundle()
-                       bundle.putInt("onBoarding", View.GONE)
-                       findNavController().navigate(R.id.toCreateNft, bundle)
-                   }else{
-                       Toast.makeText(requireContext(), "please import contacts first", Toast.LENGTH_SHORT).show()
-                   }
-                }, errorHandler = {
-                    Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
-                }
-            )
-        }
-
-        /*binding.btnClose.setOnClickListener {
-            findNavController().navigate(R.id.toMain)
-        }*/
-
-        binding.importContact.setOnClickListener {
             val selectedContacts = contactListAdapter.selectedPosition.mapNotNull { contactListAdapter.getItemAtPosition(it) }
 
             if (selectedContacts.isEmpty()) {
@@ -185,16 +164,20 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
                     viewModel.postLocalContact(
                         selectedContacts
                     ), successHandler = {
-                        Toast.makeText(requireContext(), "contacts imported successfully", Toast.LENGTH_SHORT).show()
-                        (this.activity as BaseActivity).dismissProgressDialog()
+                        val bundle = Bundle()
+                        bundle.putInt("onBoarding", View.GONE)
+                        findNavController().navigate(R.id.toCreateNft, bundle)
                     }, errorHandler = {
                         Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
                         (this.activity as BaseActivity).dismissProgressDialog()
                     }
                 )
             }
-
         }
+
+        /*binding.btnClose.setOnClickListener {
+            findNavController().navigate(R.id.toMain)
+        }*/
         requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
 
         binding.cvSearch.setOnClickListener { binding.searchView.onActionViewExpanded(); }
