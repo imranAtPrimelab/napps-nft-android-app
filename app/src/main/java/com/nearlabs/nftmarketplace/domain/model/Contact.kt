@@ -15,7 +15,7 @@ data class Contact(
     val groups: List<String>? = null,
     val companies: List<String>? = null,
     var phone: List<ContactPhone>? = null,
-    val dob: String? = null,
+    val dob: String = "",
     val isImported: Boolean? = null,
     val contactUserId: String? = null,
     val importSource: String? = null,
@@ -28,7 +28,7 @@ data class Contact(
     var owner_id: String? = null,
     var id: String? = null,
     var imageUri: Uri? = null,
-   )
+)
 
 data class ContactEmail(
     val address: String? = null,
@@ -60,7 +60,7 @@ fun DtoContact?.toDomainModel() = this?.run {
         groups = groups,
         companies = companies,
         phone = phone?.mapNotNull { it.toDomainModel() },
-        dob = dob,
+        dob = dob ?: "",
         isImported = isImported,
         contactUserId = contactUserId,
         importSource = importSource,
