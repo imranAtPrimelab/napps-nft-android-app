@@ -87,47 +87,24 @@ class Repository(
         dtoNft.data.map { it.toDomainModel() }
     }
 
-    suspend fun createUser(name: String, walletId: String, phone: String, email: String) =
+    suspend fun createUser(name: String, walletId: String, phone: String, email: String, claimNFTID: String? = null) =
         safeCallWithHttpError {
-            var redirectUrl = sharePrefs.redirectedUrl
-            var nftId = redirectUrl.replace("https://dev.nftmakerapp.io/nft/detail/claim/", "")
-            if (redirectUrl == null || redirectUrl.equals("") || redirectUrl.equals("null")) {
-                val request = DtoUserCreateRequest(
-                    fullName = name,
-                    walletName = walletId,
-                    phone = phone,
-                    email = email,
-                )
-                val dtoResponse = userApi.createUser(request).apply {
-                    sharePrefs.userId = userInfo.id
-                    sharePrefs.userName = userInfo.fullName ?: ""
-                    sharePrefs.accessToken = accessToken
-                    sharePrefs.idToken = idToken
-                    sharePrefs.refreshToken = refreshToken
-                    sharePrefs.userInfo = Gson().toJson(userInfo)
-                }
-                dtoResponse.userInfo.toDomain()
-
-            } else {
-                val request = DtoUserCreateNFTRequest(
-                    fullName = name,
-                    walletName = walletId,
-                    phone = phone,
-                    email = email,
-                    nftID = nftId
-                )
-                val dtoResponse = userApi.createUser(request).apply {
-                    sharePrefs.userId = userInfo.id
-                    sharePrefs.userName = userInfo.fullName ?: ""
-                    sharePrefs.accessToken = accessToken
-                    sharePrefs.idToken = idToken
-                    sharePrefs.refreshToken = refreshToken
-                    sharePrefs.userInfo = Gson().toJson(userInfo)
-                }
-                dtoResponse.userInfo.toDomain()
+            val request = DtoUserCreateNFTRequest(
+                fullName = name,
+                walletName = walletId,
+                phone = phone,
+                email = email,
+                nftID = claimNFTID
+            )
+            val dtoResponse = userApi.createUser(request).apply {
+                sharePrefs.userId = userInfo.id
+                sharePrefs.userName = userInfo.fullName ?: ""
+                sharePrefs.accessToken = accessToken
+                sharePrefs.idToken = idToken
+                sharePrefs.refreshToken = refreshToken
+                sharePrefs.userInfo = Gson().toJson(userInfo)
             }
-
-
+            dtoResponse.userInfo.toDomain()
         }
 
     suspend fun login(walletName: String) =
@@ -176,6 +153,10 @@ class Repository(
     suspend fun postLocalContact(contacts: List<Contact>) = safeCall {
         val request = localContact.getAllContactWithEmail(sharePrefs.userId)
         contactApi.importContact(contacts)
+    }
+
+    suspend fun postAddLocalContact(contacts: Contact) = safeCall {
+        contactApi.addContact(contacts)
     }
 
     suspend fun getLocalContact() = safeCall {

@@ -15,8 +15,8 @@ class UserViewModel @Inject constructor(private val repository: Repository, shar
     var walletName = sharePrefsRepository.walletName
     val loginType = sharePrefsRepository.loginType
 
-    fun createUser(name: String, walletId: String) = resultFlow {
-        repository.createUser(name, walletId, currentPhone, currentEmail)
+    fun createUser(name: String, walletId: String, claimNFTID: String? = null) = resultFlow {
+        repository.createUser(name, walletId, currentPhone, currentEmail, claimNFTID)
     }
 
     fun loginUser(walletName: String) = resultFlow {
