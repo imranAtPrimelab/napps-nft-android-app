@@ -1,5 +1,6 @@
 package com.nearlabs.nftmarketplace.domain.model.nft
 
+import com.google.gson.JsonObject
 import com.nearlabs.nftmarketplace.data.networks.response.DtoNFTResponse
 import com.nearlabs.nftmarketplace.domain.model.User
 import com.nearlabs.nftmarketplace.domain.model.toDomain
@@ -12,7 +13,8 @@ data class NFT(
     val author: NFTAuthor,
     val description: String,
     val info: NFTInfo,
-    val owner: User? = null
+    val owner: User? = null,
+    val attributes : List<JsonObject>? = null
 )
 
 fun DtoNFTResponse.toDomainModel() = NFT(
@@ -23,5 +25,6 @@ fun DtoNFTResponse.toDomainModel() = NFT(
     author = NFTAuthor(ownerId.orEmpty(), "image"),
     description = description.orEmpty(),
     info = NFTInfo("token", "contact"),
-    owner = owner?.toDomain()
+    owner = owner?.toDomain(),
+    attributes = attributes
 )

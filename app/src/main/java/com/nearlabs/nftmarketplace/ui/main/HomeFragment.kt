@@ -1,10 +1,14 @@
 package com.nearlabs.nftmarketplace.ui.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.common.extensions.observeResultFlow
@@ -26,7 +30,7 @@ import javax.inject.Inject
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
-    private val nftViewModel: NFTViewModel by viewModels()
+    private val nftViewModel by activityViewModels<NFTViewModel>()
     private val transactionViewModel: TransactionViewModel by viewModels()
     private var climNftId: String? = null
 
@@ -43,6 +47,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         climNftId = arguments?.getString(CLIM_NFT_ID)
+
     }
 
     private val myNftsAdapter by lazy { myNftsAdapter() }
@@ -53,6 +58,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         initListeners()
         initObservers()
         checkClimNft()
+
     }
 
     private fun checkClimNft() {
@@ -64,12 +70,19 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         }
     }
-
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+        } else if (!isVisibleToUser) {
+            Log.d("TAG", "Fragment not Visible ")
+        }
+    }
     private fun initViews() {
         binding.myNFTsRv.adapter = myNftsAdapter
         binding.recentTransactionsRv.adapter = transactionAdapter
         binding.username.text = sharePrefs.userName
     }
+
 
     private fun initListeners() {
         binding.btnCreateNft.setOnClickListener {
@@ -102,15 +115,25 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
                 transactionAdapter.setData(it)
             }
         )
+        nftViewModel.shouldRefresh.observe(viewLifecycleOwner, Observer {
+            Log.e("E/CALLED"," done")
+            if(it){
+                observeResultFlow(
+                    nftViewModel.getAllNFTCollection(),
+                    successHandler = {
+                        myNftsAdapter.setData(it)
+                    })
+                myNftsAdapter.notifyDataSetChanged()
+                nftViewModel.shouldRefresh.value = false
+            }
+        })
+
+
+
+
     }
 
-    private fun doOnTransactionClicked(transaction: Transaction) {
-
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-    }
+    private fun doOnTransactionClicked(transaction: Transaction) {}
 
     override fun onResume() {
         observeResultFlow(
@@ -123,4 +146,5 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         myNftsAdapter.notifyDataSetChanged()
         super.onResume()
     }
+
 }

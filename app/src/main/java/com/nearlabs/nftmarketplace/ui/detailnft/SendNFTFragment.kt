@@ -39,6 +39,7 @@ class SendNFTFragment : BaseFragment(R.layout.fragment_send_nft) {
 
     var nftPosition = 0
     var selectedNFt : NFT? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if(arguments!= null){
@@ -65,6 +66,7 @@ class SendNFTFragment : BaseFragment(R.layout.fragment_send_nft) {
                         findNavController().navigate(R.id.toSelectPeople)
                     }
                 }, errorHandler = {
+                    (this.activity as BaseActivity).dismissProgressDialog()
                     Timber.e(it)
                     Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
                 }
@@ -93,6 +95,14 @@ class SendNFTFragment : BaseFragment(R.layout.fragment_send_nft) {
                         binding.sendNftTitle.text = nft.name
                         binding.nftCreatorName.text = nft.owner!!.name
                         binding.sendNftDescription.text = nft.description
+                        binding.nftTokenId.text = nft.id
+                        val attributes = HashMap<String,String>()
+                        val attributesResponse = nft.attributes
+                        for(i in attributesResponse!!.indices){
+                            attributes[attributesResponse[i].get("attr_name").toString().replace("\"", "")] =
+                                attributesResponse[i].get("attr_value").toString().replace("\"", "")
+                        }
+                        binding.attributesList.adapter = NftAttributesAdapter(requireContext(),attributes)
                     }
                 )
 
