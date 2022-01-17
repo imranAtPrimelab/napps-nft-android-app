@@ -16,6 +16,7 @@ import com.nearlabs.nftmarketplace.databinding.DialogSendSelectPeopleNtfBinding
 import com.nearlabs.nftmarketplace.domain.model.Contact
 import com.nearlabs.nftmarketplace.ui.base.BaseBottomSheetDialogFragment
 import com.nearlabs.nftmarketplace.ui.base.adapter.MULTI
+import com.nearlabs.nftmarketplace.ui.base.adapter.SINGLE
 import com.nearlabs.nftmarketplace.ui.sendNFTDialog.adapter.PeopleAdapter
 import com.nearlabs.nftmarketplace.util.AppConstants
 import com.nearlabs.nftmarketplace.util.AppConstants.CONTACTS_PERMISSION_GRANTED_EVENT_NAME
@@ -25,20 +26,11 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private lateinit var binding: DialogSendSelectPeopleNtfBinding
     private val viewModel by activityViewModels<SendNFTViewModel>()
 
-    private val requestPermissionCallback = mutableMapOf<String, () -> Unit>()
-
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { granted ->
-        if (granted) {
-            AppConstants.logAppsFlyerEvent(CONTACTS_PERMISSION_GRANTED_EVENT_NAME, requireContext())
-        }
-    }
 
     private val peopleAdapter by lazy {
         PeopleAdapter { contact, position ->
             selectContact(contact, position)
-        }.setMode(MULTI)
+        }.setMode(SINGLE)
     }
 
     private fun selectContact(contact: Contact, position: Int) {
@@ -62,7 +54,6 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
         initAdapter()
         initListeners()
         initObserve()
-        requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS)
     }
 
     private fun initAdapter() {
