@@ -24,6 +24,10 @@ class ContactViewModel @Inject constructor(private val repository: Repository) :
         repository.postLocalContact(contacts)
     }
 
+    fun postAddLocalContact(contacts : Contact) = resultFlow {
+        repository.postAddLocalContact(contacts)
+    }
+
     var itemsCopy : List<Contact>? = null
 
     var selectedHashSet: HashMap<Contact,Int>? = HashMap()

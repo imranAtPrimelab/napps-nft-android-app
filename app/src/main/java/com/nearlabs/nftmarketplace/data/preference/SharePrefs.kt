@@ -14,7 +14,6 @@ class SharePrefs(private val sharePrefs: SharedPreferences) {
     var loginType by sharePrefs.string()
     var walletName by sharePrefs.string()
     var userInfo by sharePrefs.string()
-    var redirectedUrl by sharePrefs.string()
 
     fun registerKeyChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener) {
         sharePrefs.registerOnSharedPreferenceChangeListener(listener)

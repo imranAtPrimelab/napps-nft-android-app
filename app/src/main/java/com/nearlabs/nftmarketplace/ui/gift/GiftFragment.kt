@@ -185,7 +185,6 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
                     ), successHandler = {
                         Toast.makeText(requireContext(), "contacts imported successfully", Toast.LENGTH_SHORT).show()
                         (this.activity as BaseActivity).dismissProgressDialog()
-
                     }, errorHandler = {
                         Toast.makeText(requireContext(), it?.message.toString(), Toast.LENGTH_SHORT).show()
                         (this.activity as BaseActivity).dismissProgressDialog()
