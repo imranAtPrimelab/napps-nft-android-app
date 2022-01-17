@@ -37,6 +37,7 @@ import android.graphics.drawable.Drawable
 import androidx.core.view.ViewCompat
 import com.nearlabs.nftmarketplace.R
 import com.nearlabs.nftmarketplace.ui.auth.OTPFragment
+import com.nearlabs.nftmarketplace.util.AppConstants
 
 
 @AndroidEntryPoint
@@ -55,6 +56,7 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             if (granted) {
+                AppConstants.logAppsFlyerEvent(AppConstants.CONTACTS_PERMISSION_GRANTED_EVENT_NAME, requireContext())
                 getContactList()
             }
         }
@@ -205,7 +207,11 @@ class GiftFragment : BaseFragment(R.layout.fragment_gift_nft) {
         observeResultFlow(
             viewModel.getLocalContacts(
             ), successHandler = {
+                val currentData = it
                 contactListAdapter.setData(it)
+                for(i in currentData.indices){
+                    selectContact(currentData[i],i)
+                }
                 viewModel.itemsCopy = it
                 (this.activity as BaseActivity).dismissProgressDialog()
             }, errorHandler = {
