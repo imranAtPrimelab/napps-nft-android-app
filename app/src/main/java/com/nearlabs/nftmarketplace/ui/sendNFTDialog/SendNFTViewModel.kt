@@ -1,5 +1,7 @@
 package com.nearlabs.nftmarketplace.ui.sendNFTDialog
 
+import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.nearlabs.nftmarketplace.common.extensions.resultFlow
 import com.nearlabs.nftmarketplace.data.networks.request.DtoSendTransactionRequest
@@ -20,6 +22,7 @@ class SendNFTViewModel @Inject constructor(
     var transactionItem: NFT? = null
     var recipientId: List<Contact>? = null
     var wallet: Wallet? = null
+
 
     fun getNFT() = resultFlow {
         repository.getAllNFTCollection()
@@ -44,4 +47,9 @@ class SendNFTViewModel @Inject constructor(
 
         repository.sendTransaction(request)
     }
+
+    val bottomVisibility : MutableLiveData<Int> =  MutableLiveData<Int>().apply {
+        postValue(View.VISIBLE)
+    }
+
 }

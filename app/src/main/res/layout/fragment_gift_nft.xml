@@ -129,17 +129,6 @@
         app:icon="@drawable/ic_arrow_forward"
         app:iconGravity="textEnd" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:drawablePadding="7dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="@string/share_app"
-        android:textColor="@color/blue"
-        android:textSize="17sp"
-        app:drawableRightCompat="@drawable/ic_share_app" />
-
+    
 </LinearLayout>
 
