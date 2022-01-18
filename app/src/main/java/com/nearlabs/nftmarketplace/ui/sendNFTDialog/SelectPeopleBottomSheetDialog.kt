@@ -30,7 +30,7 @@ class SelectPeopleBottomSheetDialog : BaseBottomSheetDialogFragment() {
     private val peopleAdapter by lazy {
         PeopleAdapter { contact, position ->
             selectContact(contact, position)
-        }.setMode(SINGLE)
+        }.setMode(MULTI)
     }
 
     private fun selectContact(contact: Contact, position: Int) {
