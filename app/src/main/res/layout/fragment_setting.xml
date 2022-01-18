@@ -50,7 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider" />
 
-    <com.nearlabs.nftmarketplace.ui.custom.CustomSettingWalletView
+    <com.nft.maker.ui.custom.CustomSettingWalletView
         android:id="@+id/cswv_wallet"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -88,14 +88,14 @@
         app:layout_constraintStart_toStartOf="@id/tvProfile"
         app:layout_constraintTop_toBottomOf="@id/tvProfile">
 
-        <com.nearlabs.nftmarketplace.ui.custom.CustomSettingItemView
+        <com.nft.maker.ui.custom.CustomSettingItemView
             android:id="@+id/csiv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:csiv_title="Name"
             tools:csiv_value="John Doe" />
 
-        <com.nearlabs.nftmarketplace.ui.custom.CustomSettingItemView
+        <com.nft.maker.ui.custom.CustomSettingItemView
             android:id="@+id/csiv_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
             app:csiv_title="Email Address"
             tools:csiv_value="johndoe@gmail.com" />
 
-        <com.nearlabs.nftmarketplace.ui.custom.CustomSettingItemView
+        <com.nft.maker.ui.custom.CustomSettingItemView
             android:id="@+id/csiv_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

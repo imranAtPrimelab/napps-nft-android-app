@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.nearlabs.nftmarketplace.ui.main.MainFragment"
+        android:name="com.nft.maker.ui.main.MainFragment"
         android:label="MainFragment">
         <action
             android:id="@+id/toGiftNft"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/giftNftFragment"
-        android:name="com.nearlabs.nftmarketplace.ui.gift.GiftFragment"
+        android:name="com.nft.maker.ui.gift.GiftFragment"
         android:label="GiftNftFragment" >
         <action
             android:id="@+id/toCreateNft"
@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/createNftFragment"
-        android:name="com.nearlabs.nftmarketplace.ui.create.CreateNftFragment"
+        android:name="com.nft.maker.ui.create.CreateNftFragment"
         android:label="CreateNftFragment" >
         <action
             android:id="@+id/action_createNftFragment_to_mainFragment"
