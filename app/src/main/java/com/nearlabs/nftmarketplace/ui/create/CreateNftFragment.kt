@@ -155,11 +155,11 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
             binding.rootPreview.tvAuthor.text = it
         }
         binding.rootUpload.titleEditText.doAfterTextChanged {
-            isTitleAdded = it.toString().isNotEmpty()
+            isTitleAdded = it.toString().isNotEmpty() && it.toString().isNotBlank()
             manageNextButtonEnable(checkValidation)
         }
         binding.rootUpload.descriptionEditText.doAfterTextChanged {
-            isDecAdded = it.toString().isNotEmpty()
+            isDecAdded = it.toString().isNotEmpty() && it.toString().isNotBlank()
             manageNextButtonEnable(checkValidation)
         }
         binding.rootUpload.addMore.setOnClickListener{
