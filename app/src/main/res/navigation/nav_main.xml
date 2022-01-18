@@ -19,7 +19,7 @@
         android:name="com.nearlabs.nftmarketplace.ui.gift.GiftFragment"
         android:label="GiftNftFragment" >
         <action
-            android:id="@+id/action_createNftFragment_to_mainFragment"
+            android:id="@+id/toCreateNft"
             app:destination="@id/createNftFragment" />
     </fragment>
 
