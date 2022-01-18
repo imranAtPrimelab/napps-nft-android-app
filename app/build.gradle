@@ -16,7 +16,7 @@ android {
         targetSdk target_sdk
         versionCode version_code
         versionName version_name
-        buildConfigField 'String', 'AppsFlyer_Dev_Key', "\"nMiy3CHGxo75uXwXRHReBQ\""
+        buildConfigField 'String', 'AppsFlyer_Dev_Key', "\"eBwbZ6buu7Uqw8jFjv3iCa\""
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

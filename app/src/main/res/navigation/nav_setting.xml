@@ -7,7 +7,7 @@
     <include app:graph="@navigation/nav_auth" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.nearlabs.nftmarketplace.ui.setting.SettingFragment"
+        android:name="com.nft.maker.ui.setting.SettingFragment"
         android:label="SettingFragment">
         <action
             android:id="@+id/toChangeWallet"
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/otpFrag"
-        android:name="com.nearlabs.nftmarketplace.ui.auth.OTPFragment"
+        android:name="com.nft.maker.ui.auth.OTPFragment"
         android:label="OTPFragment"
         tools:layout="@layout/fragment_otp">
         <action
@@ -49,15 +49,15 @@
     </fragment>
     <dialog
         android:id="@+id/changeWalletBottomSheetDialog"
-        android:name="com.nearlabs.nftmarketplace.ui.setting.changewallet.ChangeWalletBottomSheetDialog"
+        android:name="com.nft.maker.ui.setting.changewallet.ChangeWalletBottomSheetDialog"
         android:label="ChangeWalletBottomSheetDialog" />
     <dialog
         android:id="@+id/addWalletBottomSheetDialog"
-        android:name="com.nearlabs.nftmarketplace.ui.setting.changewallet.ChangeNameBottomSheetDialog"
+        android:name="com.nft.maker.ui.setting.changewallet.ChangeNameBottomSheetDialog"
         android:label="AddWalletBottomSheetDialog" />
     <dialog
         android:id="@+id/changeEmailBottomSheetDialog"
-        android:name="com.nearlabs.nftmarketplace.ui.setting.changewallet.ChangeEmailBottomSheetDialog"
+        android:name="com.nft.maker.ui.setting.changewallet.ChangeEmailBottomSheetDialog"
         android:label="ChangeEmailBottomSheetDialog" >
         <action
             android:id="@+id/toOtpFromEmail"
@@ -65,7 +65,7 @@
     </dialog>
     <dialog
         android:id="@+id/changePhoneBottomSheetDialog"
-        android:name="com.nearlabs.nftmarketplace.ui.setting.changewallet.ChangePhoneBottomSheetDialog"
+        android:name="com.nft.maker.ui.setting.changewallet.ChangePhoneBottomSheetDialog"
         android:label="ChangePhoneBottomSheetDialog" >
         <action
             android:id="@+id/toOtpFromPhone"
