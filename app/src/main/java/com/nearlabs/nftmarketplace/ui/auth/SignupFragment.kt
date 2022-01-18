@@ -83,7 +83,7 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
             }
 
 //            if(pattern.matcher(binding.walletId.text.toString()).matches()) {
-            if (pattern.matcher(enteredWalletId).matches()) {
+            if (pattern.matcher(enteredWalletId).matches() && !binding.fullName.text?.trim()?.isEmpty()!!) {
                 (this.activity as BaseActivity).showProgressDialog()
                 observeResultFlow(
                     userViewModel.createUser(
@@ -105,10 +105,16 @@ class SignupFragment : BaseFragment(R.layout.fragment_signup) {
                         (this.activity as BaseActivity).dismissProgressDialog()
                     }
                 )
-            } else
+            }
+            else if (binding.fullName.text?.trim()?.isEmpty() == true)
+            {
                 Toast.makeText(
-                    requireContext(), "Account id should only contain : lowercase alphanumeric characters with " +
-                            "only dash or underscore special characters and no spaces", Toast.LENGTH_SHORT
+                    requireContext(), getString(R.string.full_name_error), Toast.LENGTH_SHORT
+                ).show()
+            }
+            else
+                Toast.makeText(
+                    requireContext(), getString(R.string.wallet_name_error), Toast.LENGTH_SHORT
                 ).show()
 
         }

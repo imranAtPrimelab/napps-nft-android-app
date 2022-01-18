@@ -37,6 +37,7 @@ import droidninja.filepicker.FilePickerConst
 
 import android.R.attr.data
 import android.net.Uri
+import com.nearlabs.nftmarketplace.ui.base.activity.BaseActivity
 import com.nearlabs.nftmarketplace.util.adapters.NFTPropertiesAdapter
 import droidninja.filepicker.FilePickerConst.KEY_SELECTED_MEDIA
 import droidninja.filepicker.utils.ContentUriUtils
@@ -55,6 +56,8 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
         get() = selectedFile != null && isTitleAdded && isDecAdded
 
     private val REQUEST_CODE =  1101
+
+    private var path = ""
 
     private val requestPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -94,6 +97,7 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
             binding.btnClose.visibility = requireArguments().getInt("onBoarding")
             requireArguments().clear()
         }
+        (this.activity as BaseActivity).dismissProgressDialog()
         manageNextButtonEnable(checkValidation)
         viewModel.clearStep()
         binding.rootUpload.root.visibility = View.VISIBLE
@@ -188,7 +192,10 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
         if (viewModel.isFinalStep()) {
             dismiss()
             try {
-                requireParentFragment().findNavController().navigate(R.id.toNftMintedSheetDialog)
+                var bundle = Bundle()
+                bundle.putString(NftMintedSheetDialog.NFT_NAME, binding.rootUpload.titleEditText.text.toString())
+                bundle.putString(NftMintedSheetDialog.NFT_PATH, path)
+                requireParentFragment().findNavController().navigate(R.id.toNftMintedSheetDialog, bundle)
             } catch (notBottomFlow: Exception) {
                 requireParentFragment().findNavController().navigate(R.id.toMain)
             }
@@ -220,6 +227,7 @@ class CreateNftFragment : BaseBottomSheetDialogFragment() {
                             fileUri.let {
                                 //make sure to use this getFilePath method from worker thread
                                 val filePath = getFilePath(requireContext(), it)
+                                path = filePath ?: ""
                                 Timber.i("File %s", filePath)
                                 binding.rootUpload.selectedFilePath.text = filePath
                                 selectedFile = File(filePath)
