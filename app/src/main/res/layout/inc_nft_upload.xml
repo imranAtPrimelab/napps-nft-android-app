@@ -1,176 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_create_nft_host"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="12dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="12dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="12dp" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvUpload"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:text="@string/nft_upload_files"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/glEnd"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toTopOf="@id/glTop" />
-
-    <LinearLayout
-        android:id="@+id/layout_upload"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/background_dash_rectangle"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="32dp"
-        app:layout_constraintEnd_toEndOf="@id/glEnd"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/tvUpload">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/selectFileButtonView"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose File"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            app:backgroundTint="@color/white" />
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="12dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="12dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="12dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/selectedFilePath"
-            android:layout_width="match_parent"
+            android:id="@+id/tvUpload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/nft_upload_files"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toTopOf="@id/glTop" />
+
+
+
+
+        <LinearLayout
+            android:id="@+id/layout_upload"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:background="@drawable/background_dash_rectangle"
             android:gravity="center"
-            android:text="PNG, GIF, WEBP, MP4 or MP3. Max 100mb." />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="32dp"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@id/tvUpload">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/titleHintTextView"
-        app:layout_constraintEnd_toEndOf="@id/glEnd"
-        android:text="@string/nft_title"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="12dp"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/layout_upload" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/selectFileButtonView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose File"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/white" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etTitle"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        app:hintAnimationEnabled="false"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@id/glEnd"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/titleHintTextView">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/selectedFilePath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="PNG, GIF, WEBP, MP4 or MP3. Max 100mb." />
+        </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/titleEditText"
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
-            android:hint="Ex. Redeemable Art"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/titleHintTextView"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            android:text="@string/nft_title"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@id/layout_upload" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/decHintTextView"
-        app:layout_constraintEnd_toEndOf="@id/glEnd"
-        android:text="@string/nft_description"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="12dp"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/etTitle" />
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etDescription"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:hint="Description"
-        app:hintAnimationEnabled="false"
-        app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@id/glEnd"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/decHintTextView">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etTitle"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@id/titleHintTextView">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/descriptionEditText"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titleEditText"
+                android:layout_width="match_parent"
+                android:hint="Ex. Redeemable Art"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
-            android:hint="Ex. Redeemable Art"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:id="@+id/decHintTextView"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            android:text="@string/nft_description"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@id/etTitle" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etDescription"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:hint="Description"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@id/decHintTextView">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="match_parent"
+                android:hint="Ex. Redeemable Art"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvProperties"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Properties"
-        android:textAllCaps="true"
-        android:textColor="@color/gray"
-        app:layout_constraintEnd_toEndOf="@id/glEnd"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/etDescription" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProperties"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Properties"
+            android:textAllCaps="true"
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@id/etDescription" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/layout_properties"
-        android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="4dp"
-        android:orientation="vertical"
-        tools:listitem="@layout/list_item_properties"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="@id/glEnd"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/tvProperties"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/layout_properties"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="4dp"
+            android:orientation="vertical"
+            tools:listitem="@layout/list_item_properties"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/glEnd"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@id/tvProperties"/>
 
-    <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:drawableStart="@drawable/ic_add"
-        android:gravity="center"
-        android:text="+ Add More"
-        android:textAllCaps="false"
-        android:textColor="@color/blue"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintTop_toBottomOf="@id/layout_properties"
-        android:id="@+id/addMore"/>
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:drawableStart="@drawable/ic_add"
+            android:gravity="center"
+            android:text="+ Add More"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            app:layout_constraintStart_toStartOf="@id/glStart"
+            app:layout_constraintTop_toBottomOf="@id/layout_properties"
+            android:id="@+id/addMore"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
