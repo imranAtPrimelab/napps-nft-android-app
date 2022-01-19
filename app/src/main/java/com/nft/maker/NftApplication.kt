@@ -17,7 +17,7 @@ class NftApplication : Application() {
         AppsFlyerLib.getInstance().init(BuildConfig.AppsFlyer_Dev_Key, null, this)
         AppsFlyerLib.getInstance().start(this, BuildConfig.AppsFlyer_Dev_Key)
         if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
+            //Timber.plant(Timber.DebugTree())
         }
     }
 }
